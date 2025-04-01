@@ -390,7 +390,7 @@ export const useCheckoutPage = (props = {}) => {
     useEffect(() => {
         if (isSignedIn && placeOrderData) {
             history.push('/order-confirmation', {
-                orderNumber: placeOrderData.placeOrder.order.order_number,
+                orderNumber: placeOrderData.placeOrder.orderV2.number,
                 items: cartItems
             });
         } else if (!isSignedIn && placeOrderData) {
@@ -418,7 +418,7 @@ export const useCheckoutPage = (props = {}) => {
         orderDetailsData,
         orderDetailsLoading,
         orderNumber:
-            (placeOrderData && placeOrderData.placeOrder.order.order_number) ||
+            (placeOrderData && placeOrderData.placeOrder.orderV2.number) ||
             null,
         placeOrderLoading,
         placeOrderButtonClicked,

@@ -18,7 +18,7 @@ export const usePaymentMethods = props => {
     } = operations;
 
     const PaymentOptions = useMemo(() => [
-        { code: 0, label: "Net30" },
+        { code: 5, label: "Net30" },
         { code: 2, label: "Net60" },
         { code: 3, label: "Net90" },
         { code: 4, label: "Net45" },
@@ -45,10 +45,10 @@ export const usePaymentMethods = props => {
 
         const userPaymentOption = PaymentOptions.find(
             (option) =>
-              option.code === userProfile.customattributes[0].paymentterms
+              option.code === userProfile?.customattributes?.[0]?.paymentterms
           );
 
-
+console.log("userPaymentOption", userPaymentOption);
 
           const availablePaymentMethods = userPaymentOption?availablePaymentMethodsLocal?.filter(
             (filterOptions) =>
