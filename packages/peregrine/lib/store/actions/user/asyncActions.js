@@ -43,6 +43,11 @@ export const getUserDetails = ({ fetchUserDetails }) =>
             try {
                 const { data } = await fetchUserDetails();
 
+                storage.setItem(
+                    'customer',
+                    data.customer
+                );
+
                 dispatch(actions.getDetails.receive(data.customer));
             } catch (error) {
                 dispatch(actions.getDetails.receive(error));
@@ -85,6 +90,7 @@ export const clearToken = () =>
 
         // Clear token from local storage
         storage.removeItem('signin_token');
+        storage.removeItem('customer');
 
         // Remove from store
         dispatch(actions.clearToken());

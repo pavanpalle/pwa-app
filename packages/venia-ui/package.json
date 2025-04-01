@@ -33,6 +33,8 @@
   },
   "homepage": "https://github.com/magento/pwa-studio/tree/main/packages/venia-ui#readme",
   "dependencies": {
+    "@cardknox/react-ifields": "~2.2.62",
+    "date-fns": "~4.1.0",
     "informed": "~3.29.0",
     "jarallax": "~1.11.1",
     "load-google-maps-api": "~2.0.1",

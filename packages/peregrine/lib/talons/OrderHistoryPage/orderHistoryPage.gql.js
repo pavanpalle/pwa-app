@@ -60,7 +60,7 @@ const CustomerOrdersFragment = gql`
             }
             shipping_method
             status
-            state
+            
             total {
                 discounts {
                     amount {

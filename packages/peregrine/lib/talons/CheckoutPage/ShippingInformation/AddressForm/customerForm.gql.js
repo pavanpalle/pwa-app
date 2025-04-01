@@ -40,6 +40,9 @@ export const GET_CUSTOMER_QUERY = gql`
             email
             firstname
             lastname
+            customattributes {
+                paymentterms
+            }
         }
     }
 `;

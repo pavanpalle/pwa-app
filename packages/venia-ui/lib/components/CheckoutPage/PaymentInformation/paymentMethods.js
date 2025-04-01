@@ -9,6 +9,7 @@ import RadioGroup from '@magento/venia-ui/lib/components/RadioGroup';
 import Radio from '@magento/venia-ui/lib/components/RadioGroup/radio';
 import defaultClasses from './paymentMethods.module.css';
 import payments from './paymentMethodCollection';
+import Cardknox from './cardKnox';
 
 const PaymentMethods = props => {
     const {
@@ -37,16 +38,23 @@ const PaymentMethods = props => {
         return null;
     }
 
+    console.log('availablePaymentMethods in class', availablePaymentMethods);
+
     const radios = availablePaymentMethods
         .map(({ code, title }) => {
+
+            console.log('payments', payments);
+
             // If we don't have an implementation for a method type, ignore it.
-            if (!Object.keys(payments).includes(code)) {
-                return;
-            }
+            // if (!Object.keys(payments).includes(code)) {
+            //     return;
+            // }
+
+            console.log('code', code);
 
             const id = `paymentMethod--${code}`;
             const isSelected = currentSelectedPaymentMethod === code;
-            const PaymentMethodComponent = payments[code];
+            const PaymentMethodComponent = code==="cardknox"?Cardknox:"cashondelivery";//payments[code];
             const renderedComponent = isSelected ? (
                 <PaymentMethodComponent
                     onPaymentSuccess={onPaymentSuccess}

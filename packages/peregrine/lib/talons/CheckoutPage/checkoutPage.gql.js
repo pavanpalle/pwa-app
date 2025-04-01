@@ -14,8 +14,9 @@ export const CREATE_CART = gql`
 export const PLACE_ORDER = gql`
     mutation placeOrder($cartId: String!) {
         placeOrder(input: { cart_id: $cartId }) {
-            order {
-                order_number
+            orderV2 {
+                id
+                number
             }
         }
     }
@@ -51,6 +52,9 @@ export const GET_CUSTOMER = gql`
         customer {
             default_shipping
             firstname
+            customattributes {
+                paymentterms
+            }
         }
     }
 `;

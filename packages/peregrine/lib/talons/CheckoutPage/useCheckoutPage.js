@@ -184,6 +184,7 @@ export const useCheckoutPage = (props = {}) => {
 
     const handleReviewOrder = useCallback(() => {
         setReviewOrderButtonClicked(true);
+        setCheckoutStep(CHECKOUT_STEP.REVIEW);
     }, []);
 
     const handleReviewOrderEnterKeyPress = useCallback(() => {
@@ -368,7 +369,7 @@ export const useCheckoutPage = (props = {}) => {
                     type: 'ORDER_CONFIRMATION_PAGE_VIEW',
                     payload: {
                         order_number:
-                            placeOrderData.placeOrder.order.order_number,
+                            placeOrderData.placeOrder.orderV2.number,
                         ...eventPayload
                     }
                 });

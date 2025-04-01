@@ -210,20 +210,22 @@ const CheckoutPage = props => {
 
         // If we have an implementation, or if this is a "zero" checkout,
         // we can allow checkout to proceed.
-        const isPaymentAvailable = !!availablePaymentMethods.find(
-            ({ code }) => code === 'free' || paymentMethods.includes(code)
-        );
+        // const isPaymentAvailable = !!availablePaymentMethods.find(
+        //     ({ code }) => code === 'cashondelivery' || paymentMethods.includes(code)
+        // );
 
-        if (!isPaymentAvailable) {
-            formErrors.push(
-                new Error(
-                    formatMessage({
-                        id: 'checkoutPage.noPaymentAvailable',
-                        defaultMessage: 'Payment is currently unavailable.'
-                    })
-                )
-            );
-        }
+       // const isPaymentAvailable = true;
+
+        // if (!isPaymentAvailable) {
+        //     formErrors.push(
+        //         new Error(
+        //             formatMessage({
+        //                 id: 'checkoutPage.noPaymentAvailable',
+        //                 defaultMessage: 'Payment is currently unavailable.'
+        //             })
+        //         )
+        //     );
+        // }
 
         const paymentInformationSection =
             checkoutStep >= CHECKOUT_STEP.PAYMENT ? (
@@ -261,8 +263,7 @@ const CheckoutPage = props => {
                     data-cy="CheckoutPage-reviewOrderButton"
                     disabled={
                         reviewOrderButtonClicked ||
-                        isUpdating ||
-                        !isPaymentAvailable
+                        isUpdating 
                     }
                 >
                     <FormattedMessage
