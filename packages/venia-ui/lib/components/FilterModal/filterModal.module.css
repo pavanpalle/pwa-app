@@ -3,7 +3,7 @@
     composes: bottom-0 from global;
     composes: grid from global;
     composes: h-full from global;
-    composes: left-0 from global;
+    composes: right-0 from global;
     composes: max-w-modal from global;
     composes: opacity-0 from global;
     composes: overflow-hidden from global;

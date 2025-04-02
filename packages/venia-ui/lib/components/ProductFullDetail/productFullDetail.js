@@ -18,6 +18,8 @@ import RichContent from '../RichContent/richContent';
 import { ProductOptionsShimmer } from '../ProductOptions';
 import CustomAttributes from './CustomAttributes';
 import defaultClasses from './productFullDetail.module.css';
+import addCartIcon from './shopping-cart.png'
+import Image from '../Image';
 
 const WishlistButton = React.lazy(() => import('../Wishlist/AddToListButton'));
 const Options = React.lazy(() => import('../ProductOptions'));
@@ -175,7 +177,7 @@ const ProductFullDetail = props => {
         !isEverythingOutOfStock || !isOutOfStock ? (
             <FormattedMessage
                 id="productFullDetail.addItemToCart"
-                defaultMessage="Add to Cart"
+                defaultMessage="Add to cart"
             />
         ) : (
             <FormattedMessage
@@ -202,6 +204,10 @@ const ProductFullDetail = props => {
                 priority="high"
                 type="submit"
             >
+                <Image src={addCartIcon} 
+                               width={24}
+                               height={24} 
+                            />
                 {cartCallToActionText}
             </Button>
         </section>
@@ -235,6 +241,7 @@ const ProductFullDetail = props => {
 
     return (
         <Fragment>
+            <div class="pdp-container">
             {breadcrumbs}
             <Form
                 className={classes.root}
@@ -244,19 +251,21 @@ const ProductFullDetail = props => {
                 <section className={classes.imageCarousel}>
                     <Carousel images={mediaGalleryEntries} />
                 </section>
+                <div className='productFullInformation-block'>
                 <section className={classes.title}>
                     <h1
                         aria-live="polite"
                         className={classes.productName}
                         data-cy="ProductFullDetail-productName"
                     >
-                        {productDetails.name}
+                        <span>{productDetails.name}</span>
+                        <div className="sku-value">{product.sku}</div>
                     </h1>
                     <p
                         data-cy="ProductFullDetail-productPrice"
                         className={classes.productPrice}
                     >
-                        <Price
+                        MSRP : <Price
                             currencyCode={productDetails.price.currency}
                             value={productDetails.price.value}
                         />
@@ -292,6 +301,7 @@ const ProductFullDetail = props => {
                         <WishlistButton {...wishlistButtonProps} />
                     </Suspense>
                 </section>
+                </div>
                 <section className={classes.description}>
                     <span
                         data-cy="ProductFullDetail-descriptionTitle"
@@ -320,6 +330,7 @@ const ProductFullDetail = props => {
                 </section>
                 {/* {pageBuilderAttributes} */}
             </Form>
+            </div>
         </Fragment>
     );
 };

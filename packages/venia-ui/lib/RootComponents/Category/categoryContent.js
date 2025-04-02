@@ -22,6 +22,7 @@ import SortedByContainer, {
 } from '../../components/SortedByContainer';
 import defaultClasses from './category.module.css';
 import NoProductsFound from './NoProductsFound';
+import categoryBg from './images/category-bg.png';
 
 const FilterModal = React.lazy(() => import('../../components/FilterModal'));
 const FilterSidebar = React.lazy(() =>
@@ -156,6 +157,13 @@ const CategoryContent = props => {
     return (
         <Fragment>
             <div>
+            <div className="category-banner-block">
+                <img src={categoryBg} 
+                                           width={1000}
+                                           height={90} 
+                                        />
+                <h2>{categoryTitle}</h2>
+                </div>
                 <Breadcrumbs categoryId={categoryId} />
                 <StoreTitle>{categoryName}</StoreTitle>
                 <article

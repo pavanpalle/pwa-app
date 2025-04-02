@@ -62,6 +62,20 @@ const Option = props => {
 
     return (
         <div className={classes.root} data-cy="ProductOptions-Option-root">
+            <dl className={classes.selection}>
+                <dt
+                    data-cy="ProductOptions-Option-selectedLabel"
+                    className={classes.selectionLabel}
+                    data-label={`${label}s :`}
+                >
+                    <FormattedMessage
+                        id="productOptions.selectedLabel"
+                        defaultMessage="{label}:"
+                        values={{ label }}
+                    />
+                </dt>
+                <dd>{selectedValueDescription}</dd>
+            </dl>
             <span className={classes.title}>{label}</span>
             <ValueList
                 getItemKey={getItemKey}
@@ -72,19 +86,7 @@ const Option = props => {
                 outOfStockVariants={outOfStockVariants}
                 attributeLabel={label}
             />
-            <dl className={classes.selection}>
-                <dt
-                    data-cy="ProductOptions-Option-selectedLabel"
-                    className={classes.selectionLabel}
-                >
-                    <FormattedMessage
-                        id="productOptions.selectedLabel"
-                        defaultMessage="Selected {label}:"
-                        values={{ label }}
-                    />
-                </dt>
-                <dd>{selectedValueDescription}</dd>
-            </dl>
+            
         </div>
     );
 };
