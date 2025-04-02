@@ -631,3 +631,15 @@ ul.social-icons li{
 .productFullDetail-descriptionTitle-9gA:after{
     @apply content-[""] w-[190px] h-[3px] bg-[#306E91] absolute left-[40px] bottom-[-1px]
 }
+.product-grid-table{
+    @apply p-[40px] bg-[#EEF3FE] rounded-r-[10px] flex gap-[2px] items-start
+}
+.product-grid-table ul{
+    @apply flex flex-col w-full
+}
+.product-grid-table ul li{
+    @apply border border-[#98C4E459] px-3 h-[47px] bg-white flex items-center
+}
+.product-grid-table ul li:first-child{
+    @apply bg-[#EEF3FE]
+}
