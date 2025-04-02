@@ -279,6 +279,20 @@ const ProductFullDetail = props => {
                     errors={errors.get('form') || []}
                 />
                 <section className={classes.options}>{options}</section>
+                <div className='product-grid-table'>
+                     <ul>
+                        <li>701- Navy Heather</li>
+                        <li>PRICE</li>
+                        <li>INVENTORY</li>  
+                        <li>ORDER QUANTITY</li>  
+                    </ul> 
+                    <ul>
+                        <li></li>    
+                        <li></li>    
+                        <li></li>    
+                        <li></li>    
+                    </ul>  
+                </div>
                 <section className={classes.quantity}>
                     <span
                         data-cy="ProductFullDetail-quantityTitle"

@@ -401,6 +401,12 @@ ul.social-icons li{
 .gallery-root-NtB .gallery-items-fmT .item-root-JAt{
     @apply mb-5
 }
+.gallery-root-NtB .gallery-items-fmT .item-root-JAt .option-root-pry{
+    @apply !px-0 !py-0 flex justify-center !border-b-0 h-0 overflow-hidden transition-all ease-in-out
+}
+.gallery-root-NtB .gallery-items-fmT .item-root-JAt:hover .option-root-pry{
+@apply !py-3 h-auto
+}
 .item-imageContainer-wrv{
     @apply bg-[#EBEBEB] !rounded-[12px] max-h-[406px]
 }
@@ -481,9 +487,20 @@ ul.social-icons li{
 .rangeSlider-thumb-kv7::-moz-range-thumb{
     @apply !bg-[#01A0BE] !border-[#01A0BE] !w-[18px] !h-[18px]
 }
-.pagination-root-cUK .navButton-root-Oje{
+.pagination-root-cUK{
+    @apply gap-2
+}
+
+.pagination-root-cUK button{
     @apply w-[42px] h-[42px] rounded-full bg-[#F3F3F3]
 }
+.pagination-root-cUK button:hover, .pagination-root-cUK button.tile-root_active-amd{
+    @apply bg-[#306E91] text-white border-[#306E91]
+}
+.pagination-root-cUK button:hover svg, .pagination-root-cUK button.tile-root_active-amd svg{
+    @apply !stroke-white
+}
+
 .category-banner-block{
     @apply w-full h-[90px] overflow-hidden relative flex items-center justify-center
 }

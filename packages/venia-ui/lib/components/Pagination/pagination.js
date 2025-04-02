@@ -51,7 +51,7 @@ const Pagination = props => {
 
     return (
         <div className={classes.root} data-cy="Pagination-root">
-            <NavButton
+            {/* <NavButton
                 name={navButtons.firstPage.name}
                 active={isActiveLeft}
                 onClick={handleLeftSkip}
@@ -59,8 +59,8 @@ const Pagination = props => {
                     id: 'pagination.firstPage',
                     defaultMessage: navButtons.firstPage.buttonLabel
                 })}
-            />
-            <NavButton
+            /> */}
+            {isActiveLeft && <NavButton
                 name={navButtons.prevPage.name}
                 active={isActiveLeft}
                 onClick={handleNavBack}
@@ -68,9 +68,9 @@ const Pagination = props => {
                     id: 'pagination.prevPage',
                     defaultMessage: navButtons.prevPage.buttonLabel
                 })}
-            />
+            />}
             {navigationTiles}
-            <NavButton
+            {isActiveRight && <NavButton
                 name={navButtons.nextPage.name}
                 active={isActiveRight}
                 onClick={handleNavForward}
@@ -78,8 +78,8 @@ const Pagination = props => {
                     id: 'pagination.nextPage',
                     defaultMessage: navButtons.nextPage.buttonLabel
                 })}
-            />
-            <NavButton
+            />}
+            {/* <NavButton
                 name={navButtons.lastPage.name}
                 active={isActiveRight}
                 onClick={handleRightSkip}
@@ -87,7 +87,7 @@ const Pagination = props => {
                     id: 'pagination.lastPage',
                     defaultMessage: navButtons.lastPage.buttonLabel
                 })}
-            />
+            /> */}
         </div>
     );
 };
