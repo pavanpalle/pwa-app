@@ -401,10 +401,13 @@ ul.social-icons li{
 .gallery-root-NtB .gallery-items-fmT .item-root-JAt{
     @apply mb-5
 }
-.gallery-root-NtB .gallery-items-fmT .item-root-JAt .option-root-pry{
+.item-root-JAt .option-root-pry{
     @apply !px-0 !py-0 flex justify-center !border-b-0 h-0 overflow-hidden transition-all ease-in-out
 }
-.gallery-root-NtB .gallery-items-fmT .item-root-JAt:hover .option-root-pry{
+.item-root-JAt .option-root-pry button{
+   @apply h-[30px] !w-[40px]
+}
+.item-root-JAt:hover .option-root-pry{
 @apply !py-3 h-auto
 }
 .item-imageContainer-wrv{
