@@ -1,0 +1,173 @@
+import { useCallback, useMemo, useState } from 'react';
+
+import { isProductConfigurable } from '../../util/isProductConfigurable';
+import { getOutOfStockVariants } from '@magento/peregrine/lib/util/getOutOfStockVariants';
+import { findMatchingVariant } from '@magento/peregrine/lib/util/findMatchingProductVariant';
+const INITIAL_OPTION_CODES = new Map();
+const INITIAL_OPTION_SELECTIONS = new Map();
+const OUT_OF_STOCK_CODE = 'OUT_OF_STOCK';
+const IN_STOCK_CODE = 'IN_STOCK';
+
+const deriveOptionCodesFromProduct = product => {
+    // If this is a simple product it has no option codes.
+    if (!isProductConfigurable(product)) {
+        return INITIAL_OPTION_CODES;
+    }
+
+    // Initialize optionCodes based on the options of the product.
+    const initialOptionCodes = new Map();
+    for (const {
+        attribute_id,
+        attribute_code
+    } of product.configurable_options) {
+        initialOptionCodes.set(attribute_id, attribute_code);
+    }
+
+    return initialOptionCodes;
+};
+
+// Similar to deriving the initial codes for each option.
+const deriveOptionSelectionsFromProduct = product => {
+    if (!isProductConfigurable(product)) {
+        return INITIAL_OPTION_SELECTIONS;
+    }
+
+    const initialOptionSelections = new Map();
+    for (const { attribute_id } of product.configurable_options) {
+        initialOptionSelections.set(attribute_id, undefined);
+    }
+
+    return initialOptionSelections;
+};
+
+const getIsAllOutOfStock = product => {
+    const { stock_status, variants } = product;
+    const isConfigurable = isProductConfigurable(product);
+
+    if (isConfigurable) {
+        const inStockItem = variants.find(item => {
+            return item.product.stock_status === IN_STOCK_CODE;
+        });
+        return !inStockItem;
+    }
+
+    return stock_status === OUT_OF_STOCK_CODE;
+};
+
+const getMediaGalleryEntries = (product, optionCodes, optionSelections) => {
+    let value = [];
+
+    const { media_gallery_entries, variants } = product;
+    const isConfigurable = isProductConfigurable(product);
+
+    // Selections are initialized to "code => undefined". Once we select a value, like color, the selections change. This filters out unselected options.
+    const optionsSelected =
+        Array.from(optionSelections.values()).filter(value => !!value).length >
+        0;
+
+    if (!isConfigurable || !optionsSelected) {
+        value = media_gallery_entries;
+    } else {
+        // If any of the possible variants matches the selection add that
+        // variant's image to the media gallery. NOTE: This _can_, and does,
+        // include variants such as size. If Magento is configured to display
+        // an image for a size attribute, it will render that image.
+        const item = findMatchingVariant({
+            optionCodes,
+            optionSelections,
+            variants
+        });
+
+        value = item
+            ? [...item.product.media_gallery_entries, ...media_gallery_entries]
+            : media_gallery_entries;
+    }
+
+    return value;
+};
+
+export const useGalleryOptions = props => {
+    const { product } = props;
+
+
+  
+
+    const derivedOptionSelections = useMemo(
+        () => deriveOptionSelectionsFromProduct(product),
+        [product]
+    );
+
+    const [optionSelections, setOptionSelections] = useState(
+        derivedOptionSelections
+    );
+
+    const derivedOptionCodes = useMemo(
+        () => deriveOptionCodesFromProduct(product),
+        [product]
+    );
+    const [optionCodes] = useState(derivedOptionCodes);
+
+    // Check if display out of stock products option is selected in the Admin Dashboard
+    const isOutOfStockProductDisplayed = useMemo(() => {
+        let totalVariants = 1;
+        const isConfigurable = isProductConfigurable(product);
+        if (product.configurable_options && isConfigurable) {
+            for (const option of product.configurable_options) {
+                const length = option.values.length;
+                totalVariants = totalVariants * length;
+            }
+            return product.variants.length === totalVariants;
+        }
+    }, [product]);
+
+    const [singleOptionSelection, setSingleOptionSelection] = useState();
+
+    const isEverythingOutOfStock = useMemo(() => getIsAllOutOfStock(product), [
+        product
+    ]);
+
+    const mediaGalleryEntries = useMemo(
+            () => getMediaGalleryEntries(product, optionCodes, optionSelections),
+            [product, optionCodes, optionSelections]
+        );
+
+    const outOfStockVariants = useMemo(
+        () =>
+            getOutOfStockVariants(
+                product,
+                optionCodes,
+                singleOptionSelection,
+                optionSelections,
+                isOutOfStockProductDisplayed
+            ),
+        [
+            product,
+            optionCodes,
+            singleOptionSelection,
+            optionSelections,
+            isOutOfStockProductDisplayed
+        ]
+    );
+
+    const handleSelectionChange = useCallback(
+        (optionId, selection) => {
+            // We must create a new Map here so that React knows that the value
+            // of optionSelections has changed.
+            const nextOptionSelections = new Map([...optionSelections]);
+            nextOptionSelections.set(optionId, selection);
+            setOptionSelections(nextOptionSelections);
+            // Create a new Map to keep track of single selections with key as String
+            const nextSingleOptionSelection = new Map();
+            nextSingleOptionSelection.set(optionId, selection);
+            setSingleOptionSelection(nextSingleOptionSelection);
+        },
+        [optionSelections]
+    );
+
+    return {
+        isEverythingOutOfStock,
+        outOfStockVariants,
+        handleSelectionChange,
+        mediaGalleryEntries
+    };
+};

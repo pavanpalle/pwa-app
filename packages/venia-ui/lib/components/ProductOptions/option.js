@@ -36,7 +36,8 @@ const Option = props => {
         selectedValue,
         values,
         isEverythingOutOfStock,
-        outOfStockVariants
+        outOfStockVariants,
+        from
     } = props;
 
     const talonProps = useOption({
@@ -62,7 +63,7 @@ const Option = props => {
 
     return (
         <div className={classes.root} data-cy="ProductOptions-Option-root">
-            <dl className={classes.selection}>
+            {from === 'productPage' && <dl className={classes.selection}>
                 <dt
                     data-cy="ProductOptions-Option-selectedLabel"
                     className={classes.selectionLabel}
@@ -75,8 +76,8 @@ const Option = props => {
                     />
                 </dt>
                 <dd>{selectedValueDescription}</dd>
-            </dl>
-            <span className={classes.title}>{label}</span>
+            </dl>}
+            {from === 'productPage' && <span className={classes.title}>{label}</span>}
             <ValueList
                 getItemKey={getItemKey}
                 selectedValue={initialSelection}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Info } from 'react-feather';
 import { string, number, shape } from 'prop-types';
@@ -7,6 +7,8 @@ import Price from '@magento/venia-ui/lib/components/Price';
 import { UNCONSTRAINED_SIZE_KEY } from '@magento/peregrine/lib/talons/Image/useImage';
 import { useGalleryItem } from '@magento/peregrine/lib/talons/Gallery/useGalleryItem';
 import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
+import { useGalleryOptions } from '@magento/peregrine/lib/talons/Gallery/useGalleryOptions';
+import { isProductConfigurable } from '@magento/peregrine/lib/util/isProductConfigurable';
 
 import { useStyle } from '../../classify';
 import Image from '../Image';
@@ -17,6 +19,9 @@ import WishlistGalleryButton from '../Wishlist/AddToListButton';
 import AddToCartButton from './addToCartButton';
 // eslint-disable-next-line no-unused-vars
 import Rating from '../Rating';
+import { ProductOptionsShimmer } from '../ProductOptions';
+const Options = React.lazy(() => import('../ProductOptions'));
+
 
 // The placeholder image is 4:5, so we should make sure to size our product
 // images appropriately.
@@ -37,6 +42,23 @@ const GalleryItem = props => {
         isSupportedProductType
     } = useGalleryItem(props);
 
+
+ 
+
+      const talonProps = useGalleryOptions({ product:item });
+    
+        const {
+           
+            handleSelectionChange,
+           
+            isEverythingOutOfStock,
+            outOfStockVariants,
+            mediaGalleryEntries
+           
+        } = talonProps;
+
+     
+
     const { storeConfig } = props;
 
     const productUrlSuffix = storeConfig && storeConfig.product_url_suffix;
@@ -48,10 +70,26 @@ const GalleryItem = props => {
     }
 
     // eslint-disable-next-line no-unused-vars
-    const { name, price_range, small_image, url_key, rating_summary } = item;
+    const { name, price_range, small_image, url_key, rating_summary ,configurable_options} = item;
 
     const { url: smallImageURL } = small_image;
     const productLink = resourceUrl(`/${url_key}${productUrlSuffix || ''}`);
+
+    
+
+
+
+     const options = isProductConfigurable(item) ? (
+            <Suspense fallback={<ProductOptionsShimmer />}>
+                <Options
+                    onSelectionChange={handleSelectionChange}
+                    options={configurable_options}
+                   isEverythingOutOfStock={isEverythingOutOfStock}
+                    outOfStockVariants={outOfStockVariants}
+                    from={'Gallery Item'}
+                />
+            </Suspense>
+        ) : null;
 
     const wishlistButton = wishlistButtonProps ? (
         <WishlistGalleryButton {...wishlistButtonProps} />
@@ -109,11 +147,12 @@ const GalleryItem = props => {
                         root: classes.imageContainer
                     }}
                     height={IMAGE_HEIGHT}
-                    resource={smallImageURL}
+                    resource={mediaGalleryEntries?.[0]?.file|| smallImageURL}
                     widths={IMAGE_WIDTHS}
                 />
                 {ratingAverage}
             </Link>
+            <section className={classes.options}>{options}</section>
             <Link
                 onClick={handleLinkClick}
                 to={productLink}
@@ -126,7 +165,7 @@ const GalleryItem = props => {
             <div data-cy="GalleryItem-price" className={classes.price}>
                 <Price value={priceSourceValue} currencyCode={currencyCode} />
             </div>
-
+           
             <div className={classes.actionsContainer}>
                 {' '}
                 {addButton}
