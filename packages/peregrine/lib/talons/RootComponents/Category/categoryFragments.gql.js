@@ -12,34 +12,139 @@ export const CategoryFragment = gql`
 
 export const ProductsFragment = gql`
     fragment ProductsFragment on Products {
-        items {
+         items {
+      id
+      uid
+      __typename
+
+      id
+      uid
+      media_gallery_entries {
+        id
+        uid
+        label
+        position
+        disabled
+        file
+        __typename
+      }
+      meta_description
+      name
+      price {
+        regularPrice {
+          amount {
+            currency
+            value
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      price_range {
+        maximum_price {
+          final_price {
+            currency
+            value
+            __typename
+          }
+          discount {
+            amount_off
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      sku
+      small_image {
+        url
+        __typename
+      }
+      stock_status
+      url_key
+
+      ... on ConfigurableProduct {
+        configurable_options {
+          id
+          attribute_code
+          attribute_id
+          uid
+          label
+          values {
+            uid
+            default_label
+            label
+            store_label
+            use_default_value
+            value_index
+            swatch_data {
+              ... on ImageSwatchData {
+                thumbnail
+                __typename
+              }
+              value
+              __typename
+            }
+            __typename
+          }
+          __typename
+        }
+        variants {
+          attributes {
+            code
+            value_index
+            __typename
+          }
+          product {
             id
             uid
-            name
-            price_range {
-                maximum_price {
-                    final_price {
-                        currency
-                        value
-                    }
-                    regular_price {
-                        currency
-                        value
-                    }
-                    discount {
-                        amount_off
-                    }
-                }
+            media_gallery_entries {
+              id
+              uid
+              disabled
+              file
+              label
+              position
+              __typename
             }
             sku
-            small_image {
-                url
-            }
             stock_status
-            rating_summary
+            price {
+              regularPrice {
+                amount {
+                  currency
+                  value
+                  __typename
+                }
+                __typename
+              }
+              __typename
+            }
+            price_range {
+              maximum_price {
+                final_price {
+                  currency
+                  value
+                  __typename
+                }
+                discount {
+                  amount_off
+                  __typename
+                }
+                __typename
+              }
+              __typename
+            }
+
             __typename
-            url_key
+          }
+          __typename
         }
+        __typename
+      }
+      __typename
+    }
         page_info {
             total_pages
         }
