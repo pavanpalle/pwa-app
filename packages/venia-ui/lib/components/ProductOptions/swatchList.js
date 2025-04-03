@@ -13,7 +13,8 @@ const SwatchList = props => {
         onSelectionChange,
         isEverythingOutOfStock,
         outOfStockVariants,
-        attributeLabel
+        attributeLabel,
+        getProductDetailsByColor
     } = props;
 
     const classes = useStyle(defaultClasses, props.classes);
@@ -37,6 +38,7 @@ const SwatchList = props => {
                         isEverythingOutOfStock={isEverythingOutOfStock}
                         isOptionOutOfStock={isOptionOutOfStock}
                         attributeLabel={attributeLabel}
+                        getProductDetailsByColor={getProductDetailsByColor}
                     />
                 );
             }),

@@ -12,7 +12,8 @@ const Options = props => {
         selectedValues = [],
         isEverythingOutOfStock,
         outOfStockVariants,
-        from = 'productPage'
+        from = 'productPage',
+        getProductDetailsByColor
     } = props;
 
     const talonProps = useOptions({
@@ -27,7 +28,7 @@ const Options = props => {
         ? options
               .filter(option => {
                   // Only apply filtering logic when from is "home" or "list"
-                  if (from === 'Gallery Item' || from === 'list') {
+                  if (from === 'Gallery Item' || from === 'productPage') {
                       // Check if both color and size options exist
                       const hasColor = options.some(
                           opt => opt.label?.toLowerCase() === 'color'
@@ -54,6 +55,7 @@ const Options = props => {
                       selectedValue={selectedValueMap.get(option.label)}
                       isEverythingOutOfStock={isEverythingOutOfStock}
                       outOfStockVariants={outOfStockVariants}
+                      getProductDetailsByColor={getProductDetailsByColor}
                       from={from}
                   />
               ))

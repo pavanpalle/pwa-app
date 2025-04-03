@@ -37,7 +37,8 @@ const Option = props => {
         values,
         isEverythingOutOfStock,
         outOfStockVariants,
-        from
+        from,
+        getProductDetailsByColor
     } = props;
 
     const talonProps = useOption({
@@ -86,6 +87,7 @@ const Option = props => {
                 isEverythingOutOfStock={isEverythingOutOfStock}
                 outOfStockVariants={outOfStockVariants}
                 attributeLabel={label}
+                getProductDetailsByColor={getProductDetailsByColor}
             />
             
         </div>

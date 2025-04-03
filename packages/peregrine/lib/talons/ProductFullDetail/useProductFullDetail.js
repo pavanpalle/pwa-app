@@ -313,6 +313,8 @@ export const useProductFullDetail = props => {
 
     const [singleOptionSelection, setSingleOptionSelection] = useState();
 
+    const [sizesTable, setSizesTable] = useState();
+
     const derivedOptionCodes = useMemo(
         () => deriveOptionCodesFromProduct(product),
         [product]
@@ -328,6 +330,8 @@ export const useProductFullDetail = props => {
         () => getIsOutOfStock(product, optionCodes, optionSelections),
         [product, optionCodes, optionSelections]
     );
+
+   
 
     // Check if display out of stock products option is selected in the Admin Dashboard
     const isOutOfStockProductDisplayed = useMemo(() => {
@@ -534,6 +538,8 @@ export const useProductFullDetail = props => {
 
     const handleSelectionChange = useCallback(
         (optionId, selection) => {
+
+            console.log("optionId,selection", optionId,selection);
             // We must create a new Map here so that React knows that the value
             // of optionSelections has changed.
             const nextOptionSelections = new Map([...optionSelections]);
@@ -543,9 +549,77 @@ export const useProductFullDetail = props => {
             const nextSingleOptionSelection = new Map();
             nextSingleOptionSelection.set(optionId, selection);
             setSingleOptionSelection(nextSingleOptionSelection);
+
+          
         },
         [optionSelections]
     );
+
+   
+
+    const  getProductDetailsByColor = useCallback((colorCode) =>{
+        // Convert colorCode to integer for comparison
+        const colorCodeInt = parseInt(colorCode);
+
+     
+        
+        // Find color information from configurable options
+        const colorOption = product.configurable_options.find(option => option.attribute_code === "color");
+        if (!colorOption) {
+          return { error: "Color option not found in product data" };
+        }
+        
+        const selectedColor = colorOption.values.find(value => value.value_index === colorCodeInt);
+        if (!selectedColor) {
+          return { error: "Selected color not found" };
+        }
+        
+        // Find size information from configurable options
+        const sizeOption = product?.configurable_options?.find(option => option.attribute_code === "size");
+        if (!sizeOption) {
+          return { error: "Size option not found in product data" };
+        }
+        
+        // Create result object with color information
+        const result = {
+         
+          sizes: {}
+        };
+        
+        // Process each size option
+        sizeOption.values.forEach(size => {
+          // Find variant for this color-size combination
+          const variant = product?.variants?.find(v => 
+            v.attributes.some(attr => attr.code === "color" && attr.value_index === colorCodeInt) &&
+            v.attributes.some(attr => attr.code === "size" && attr.value_index === size.value_index)
+          );
+          
+          // Default values in case variant isn't found
+          let price = null;
+          let sku = `Unknown-${size.default_label}-${selectedColor.default_label}`;
+          let stockStatus = "UNKNOWN";
+          
+          // If we found the variant, extract its details
+          if (variant) {
+            price = variant.product.price.regularPrice.amount.value;
+            sku = variant.product.sku;
+            stockStatus = variant.product.stock_status;
+          }
+          
+          // Add size details to result
+          result.sizes[size.default_label] = {
+            price: price,
+            sku: sku,
+            stock_status: stockStatus,
+            size_index: size.value_index,
+            inventory:100
+          };
+        });
+        console.log("result", result);
+        setSizesTable(result);
+       
+       
+      },[product.configurable_options, product?.variants]);
 
     // Normalization object for product details we need for rendering.
     const productDetails = {
@@ -624,6 +698,8 @@ export const useProductFullDetail = props => {
         productDetails,
         customAttributes,
         wishlistButtonProps,
-        wishlistItemOptions
+        wishlistItemOptions,
+        getProductDetailsByColor,
+        sizesTable
     };
 };

@@ -18,7 +18,7 @@ import RichContent from '../RichContent/richContent';
 import { ProductOptionsShimmer } from '../ProductOptions';
 import CustomAttributes from './CustomAttributes';
 import defaultClasses from './productFullDetail.module.css';
-import addCartIcon from './shopping-cart.png'
+import addCartIcon from './shopping-cart.png';
 import Image from '../Image';
 
 const WishlistButton = React.lazy(() => import('../Wishlist/AddToListButton'));
@@ -56,10 +56,14 @@ const ProductFullDetail = props => {
         mediaGalleryEntries,
         productDetails,
         customAttributes,
-        wishlistButtonProps
+        wishlistButtonProps,
+        getProductDetailsByColor,
+        sizesTable
     } = talonProps;
 
     const { formatMessage } = useIntl();
+
+   
 
     const classes = useStyle(defaultClasses, props.classes);
 
@@ -70,6 +74,8 @@ const ProductFullDetail = props => {
                 options={product.configurable_options}
                 isEverythingOutOfStock={isEverythingOutOfStock}
                 outOfStockVariants={outOfStockVariants}
+                getProductDetailsByColor={getProductDetailsByColor}
+                from={'productPage'}
             />
         </Suspense>
     ) : null;
@@ -204,10 +210,7 @@ const ProductFullDetail = props => {
                 priority="high"
                 type="submit"
             >
-                <Image src={addCartIcon} 
-                               width={24}
-                               height={24} 
-                            />
+                <Image src={addCartIcon} width={24} height={24} />
                 {cartCallToActionText}
             </Button>
         </section>
@@ -239,111 +242,136 @@ const ProductFullDetail = props => {
     //     </section>
     // ) : null;
 
+
+
     return (
         <Fragment>
             <div class="pdp-container">
-            {breadcrumbs}
-            <Form
-                className={classes.root}
-                data-cy="ProductFullDetail-root"
-                onSubmit={handleAddToCart}
-            >
-                <section className={classes.imageCarousel}>
-                    <Carousel images={mediaGalleryEntries} />
-                </section>
-                <div className='productFullInformation-block'>
-                <section className={classes.title}>
-                    <h1
-                        aria-live="polite"
-                        className={classes.productName}
-                        data-cy="ProductFullDetail-productName"
-                    >
-                        <span>{productDetails.name}</span>
-                        <div className="sku-value">{product.sku}</div>
-                    </h1>
-                    <p
-                        data-cy="ProductFullDetail-productPrice"
-                        className={classes.productPrice}
-                    >
-                        MSRP : <Price
-                            currencyCode={productDetails.price.currency}
-                            value={productDetails.price.value}
+                {breadcrumbs}
+                <Form
+                    className={classes.root}
+                    data-cy="ProductFullDetail-root"
+                    onSubmit={handleAddToCart}
+                >
+                    <section className={classes.imageCarousel}>
+                        <Carousel images={mediaGalleryEntries} />
+                    </section>
+                    <div className="productFullInformation-block">
+                        <section className={classes.title}>
+                            <h1
+                                aria-live="polite"
+                                className={classes.productName}
+                                data-cy="ProductFullDetail-productName"
+                            >
+                                <span>{productDetails.name}</span>
+                                <div className="sku-value">{product.sku}</div>
+                            </h1>
+                            <p
+                                data-cy="ProductFullDetail-productPrice"
+                                className={classes.productPrice}
+                            >
+                                MSRP :{' '}
+                                <Price
+                                    currencyCode={productDetails.price.currency}
+                                    value={productDetails.price.value}
+                                />
+                            </p>
+                            {shortDescription}
+                        </section>
+                        <FormError
+                            classes={{
+                                root: classes.formErrors
+                            }}
+                            errors={errors.get('form') || []}
                         />
-                    </p>
-                    {shortDescription}
-                </section>
-                <FormError
-                    classes={{
-                        root: classes.formErrors
-                    }}
-                    errors={errors.get('form') || []}
-                />
-                <section className={classes.options}>{options}</section>
-                <div className='product-grid-table'>
-                     <ul>
-                        <li>701- Navy Heather</li>
-                        <li>PRICE</li>
-                        <li>INVENTORY</li>  
-                        <li>ORDER QUANTITY</li>  
-                    </ul> 
-                    <ul>
-                        <li></li>    
-                        <li></li>    
-                        <li></li>    
-                        <li></li>    
-                    </ul>  
-                </div>
-                <section className={classes.quantity}>
-                    <span
-                        data-cy="ProductFullDetail-quantityTitle"
-                        className={classes.quantityTitle}
-                    >
-                        <FormattedMessage
-                            id={'global.quantity'}
-                            defaultMessage={'Quantity'}
-                        />
-                    </span>
-                    <QuantityStepper
-                        classes={{ root: classes.quantityRoot }}
-                        min={1}
-                        message={errors.get('quantity')}
-                    />
-                </section>
-                <section className={classes.actions}>
-                    {cartActionContent}
-                    <Suspense fallback={null}>
-                        <WishlistButton {...wishlistButtonProps} />
-                    </Suspense>
-                </section>
-                </div>
-                <section className={classes.description}>
-                    <span
-                        data-cy="ProductFullDetail-descriptionTitle"
-                        className={classes.descriptionTitle}
-                    >
-                        <FormattedMessage
-                            id={'productFullDetail.description'}
-                            defaultMessage={'Description'}
-                        />
-                    </span>
-                    <RichContent html={productDetails.description} />
-                </section>
-                <section className={classes.details}>
-                    <span
-                        data-cy="ProductFullDetail-detailsTitle"
-                        className={classes.detailsTitle}
-                    >
-                        <FormattedMessage
-                            id={'productFullDetail.details'}
-                            defaultMessage={'Details'}
-                        />
-                    </span>
-                    {/* <CustomAttributes
+                        <section className={classes.options}>{options}</section>
+                        <div className="product-grid-table">
+                            <ul>
+                                <li>{productDetails.sku}</li>
+                                <li>PRICE</li>
+                                <li>INVENTORY</li>
+                                <li>ORDER QUANTITY</li>
+                            </ul>
+
+                            <ul className="space-y-4">
+                                {sizesTable &&
+                                    Object.entries(sizesTable?.sizes).map(
+                                        ([size, details]) => (
+                                            <>
+                                                <li
+                                                    key={size}
+                                                    className="border p-4 rounded-lg shadow-md"
+                                                >
+                                                    {size}
+                                                </li>
+                                                <li
+                                                    key={size}
+                                                    className="border p-4 rounded-lg shadow-md"
+                                                >
+                                                    {details.price}
+                                                </li>
+                                                <li
+                                                    key={size}
+                                                    className="border p-4 rounded-lg shadow-md"
+                                                >
+                                                    {details.inventory}
+                                                </li>
+                                            </>
+                                        )
+                                    )}
+                            </ul>
+                        </div>
+                        <section className={classes.quantity}>
+                            <span
+                                data-cy="ProductFullDetail-quantityTitle"
+                                className={classes.quantityTitle}
+                            >
+                                <FormattedMessage
+                                    id={'global.quantity'}
+                                    defaultMessage={'Quantity'}
+                                />
+                            </span>
+                            <QuantityStepper
+                                classes={{ root: classes.quantityRoot }}
+                                min={1}
+                                message={errors.get('quantity')}
+                            />
+                        </section>
+                        <section className={classes.actions}>
+                            {cartActionContent}
+                            <Suspense fallback={null}>
+                                <WishlistButton {...wishlistButtonProps} />
+                            </Suspense>
+                        </section>
+                    </div>
+                    <section className={classes.description}>
+                        <span
+                            data-cy="ProductFullDetail-descriptionTitle"
+                            className={classes.descriptionTitle}
+                        >
+                            <FormattedMessage
+                                id={'productFullDetail.description'}
+                                defaultMessage={'Description'}
+                            />
+                        </span>
+                        <RichContent html={productDetails.description} />
+                    </section>
+                    <section className={classes.details}>
+                        <span
+                            data-cy="ProductFullDetail-detailsTitle"
+                            className={classes.detailsTitle}
+                        >
+                            <FormattedMessage
+                                id={'productFullDetail.details'}
+                                defaultMessage={'Details'}
+                            />
+                        </span>
+                        {/* <CustomAttributes
                         customAttributes={customAttributesDetails.list}
                     /> */}
-                </section>
-                {/* {pageBuilderAttributes} */}
-            </Form>
+                    </section>
+                    {/* {pageBuilderAttributes} */}
+                </Form>
             </div>
         </Fragment>
     );
