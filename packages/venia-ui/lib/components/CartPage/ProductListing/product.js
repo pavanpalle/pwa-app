@@ -45,7 +45,7 @@ const Product = props => {
         handleUpdateItemQuantity,
         isEditable,
         product,
-        isProductUpdating
+        isProductUpdating,
     } = talonProps;
 
     const {
@@ -57,7 +57,9 @@ const Product = props => {
         stockStatus,
         unitPrice,
         urlKey,
-        urlSuffix
+        urlSuffix,
+        prices,
+        configurable_options
     } = product;
 
     const classes = useStyle(defaultClasses, props.classes);
@@ -122,12 +124,13 @@ const Product = props => {
                     </div>
                     <ProductOptions
                         options={options}
+                        from={"productPages"}
                         classes={{
                             options: classes.options,
                             optionLabel: classes.optionLabel
                         }}
                     />
-                    
+                    <div className="sku-value">SKU : {item.product.sku}</div>
                     <span className={classes.stockStatusMessage}>
                         {stockStatusMessage}
                     </span>
@@ -162,7 +165,7 @@ const Product = props => {
                     </div>
                 </li>
                 <li data-label="Sub Total">
-                    
+                    <span className='row-total'>${item.prices.row_total.value.toFixed(2)}</span>
                 </li>
                 <li data-label="Action">
                 <Kebab

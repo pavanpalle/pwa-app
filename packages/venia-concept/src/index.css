@@ -678,11 +678,120 @@ ul.social-icons li{
     @apply w-[100%+6%] mx-[-3%] bg-[#F5F5F5] px-[3%] py-[20px]
 }
 .cart-inner{
-    @apply w-full p-[40px] mx-auto bg-white rounded-[10px]
+    @apply w-full p-[40px] pt-[60px] mx-auto bg-white rounded-[10px]
+}
+.cartPage-heading-eTN{
+    @apply !text-[24px] !font-bold text-[#111111]
 }
 .cartPage-root-sx8{
     @apply !max-w-full !p-0
 }
 .cartPage-body-Xti{
     @apply flex flex-col gap-4
+}
+.productListing-root-gIG{
+    @apply !gap-0
+}
+
+.cart-row-items{
+    @apply flex items-center border-b border-[#DCDCDC] w-full
+}
+.cart-row-items li{
+    @apply py-[20px] w-full flex items-center gap-6 justify-center text-[14px] text-[#6A6B6C] font-medium
+}
+.cart-row-items li:first-child{
+    @apply min-w-[40%] justify-start
+}
+.cart-row-items li:last-child{
+    @apply max-w-[120px]
+}
+.cartPage-items_container-lWC .product-item-c9D{
+    @apply grid-cols-1
+}
+.cart-row-items li .image-container-k-M{
+    @apply w-[88px] h-[100px] bg-[#EBEBEB] rounded-[12px] flex items-center justify-center
+}
+.cart-row-items li .image-container-k-M img{
+    @apply w-auto max-w-full h-full mix-blend-multiply border-none mx-auto
+}
+.cart-row-items li .product-details--F-{
+    @apply flex flex-col
+}
+.cart-row-items li .product-name-MN- a{
+    @apply text-[18px] font-bold text-[#3C4242]
+}
+.cart-row-items li .product-price-D1e, .cart-row-items li .row-total{
+    @apply text-[18px] font-bold text-[#111111] 
+}
+.cart-row-items li .quantityStepper-root-EOt{
+    @apply bg-[#F6F6F6] border border-[#DCDCDC] rounded-[6px]
+}
+.cart-row-items li .quantityStepper-root-EOt button{
+    @apply border-none bg-transparent
+}
+.cart-row-items li .quantityStepper-root-EOt input{
+    @apply !bg-transparent !p-0
+}
+.cart-row-items li .quantityStepper-root-EOt input:focus{
+    @apply !outline-none !border-none !shadow-none
+}
+.cart-row-items li .product-kebab-f9g .kebab-kebab-hRP{
+@apply !hidden
+}
+.cart-row-items li .product-kebab-f9g .kebab-dropdown-wAx{
+ @apply !flex !scale-100 !relative !right-0
+}
+.cart-row-items li .product-kebab-f9g .kebab-dropdown-wAx li{
+    @apply hidden
+}
+.cart-row-items li .product-kebab-f9g .kebab-dropdown-wAx li:nth-child(2){
+    @apply !flex !p-0 !border-none
+}
+.cart-row-items li .product-kebab-f9g .kebab-dropdown-wAx li:nth-child(2) .section-button-BpN{
+    @apply !border-none !shadow-none !p-0
+}
+.cart-row-items li .product-kebab-f9g .kebab-dropdown-wAx li:nth-child(2) .section-button-BpN svg{
+    @apply w-[24px] h-[24px] stroke-[#EE7C24]
+}
+.cart-row-items li .product-kebab-f9g .kebab-dropdown-wAx li:nth-child(2) .section-button-BpN .product-sectionText-knp{
+    @apply !hidden
+}
+.productListing-root-gIG .product-root-KDN:first-child .cart-row-items > li{
+    @apply  pt-[60px] relative min-h-[200px]
+}
+.productListing-root-gIG .product-root-KDN:first-child .cart-row-items > li:before{
+    @apply content-[attr(data-label)] bg-[#CBD9E1] flex items-center justify-center w-full h-[60px] text-[16px] font-semibold text-[#111111] uppercase absolute left-0 top-[-20px]
+}
+.productListing-root-gIG .product-root-KDN:first-child .cart-row-items > li:first-child:before{
+    @apply justify-start pl-[20px]
+}
+.cartPage-price_adjustments_container-Ivk{
+    @apply hidden
+}
+.cartPage-summary_container-P8l .cartPage-summary_contents-tVM .priceSummary-root-dth{
+    @apply flex py-[20px] bg-[#EEF3FE] rounded-[10px] justify-end px-[30px] pl-0 items-center
+}
+.cartPage-summary_container-P8l .cartPage-summary_contents-tVM{
+    @apply table ml-auto
+}
+.cartPage-summary_container-P8l .cartPage-summary_contents-tVM .priceSummary-root-dth ul{
+    @apply flex
+}
+.cartPage-summary_container-P8l .cartPage-summary_contents-tVM .priceSummary-root-dth ul li{
+    @apply flex flex-col px-[50px] border-r border-[#DCDCDC]
+}
+.priceSummary-checkoutButton_container-cmT{
+    @apply w-auto ml-10
+}
+.cartPage-summary_container-P8l .cartPage-summary_contents-tVM .priceSummary-root-dth ul li.discountSummary-discountLineItems-V-1{
+    @apply hidden
+}
+.cartPage-summary_container-P8l .cartPage-summary_contents-tVM .priceSummary-root-dth ul li:empty{
+    @apply !hidden
+}
+.cartPage-summary_container-P8l .cartPage-summary_contents-tVM .priceSummary-root-dth ul li > span{
+    @apply my-0 text-[20px] font-medium
+}
+.priceSummary-price-bhk{
+    @apply !text-[22px] !font-bold text-[#3C4242]
 }

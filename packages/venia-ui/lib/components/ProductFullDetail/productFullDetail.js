@@ -20,8 +20,6 @@ import CustomAttributes from './CustomAttributes';
 import defaultClasses from './productFullDetail.module.css';
 import addCartIcon from './shopping-cart.png';
 import Image from '../Image';
-import TextInput from '../TextInput';
-import RelatedProducts from '../RelatedProducts/relatedProducts';
 
 const WishlistButton = React.lazy(() => import('../Wishlist/AddToListButton'));
 const Options = React.lazy(() => import('../ProductOptions'));
@@ -244,17 +242,7 @@ const ProductFullDetail = props => {
     //     </section>
     // ) : null;
 
-    const ProductFullDetail = ({ product }) => {
-        return (
-            <div>
-                <h1>{product.name}</h1>
-                {/* Existing product details */}
-                
-                {/* Add Related Products Component */}
-                <RelatedProducts sku={product.sku} />
-            </div>
-        );
-    };
+   
 
     return (
         <Fragment>

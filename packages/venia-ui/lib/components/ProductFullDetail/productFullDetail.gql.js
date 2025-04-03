@@ -5,3 +5,5 @@ export {
     ADD_SIMPLE_MUTATION,
     ADD_CONFIGURABLE_MUTATION
 } from '@magento/peregrine/lib/talons/ProductFullDetail/productFullDetail.gql.ce';
+
+
