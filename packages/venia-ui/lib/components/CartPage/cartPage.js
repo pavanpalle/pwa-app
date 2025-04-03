@@ -91,40 +91,46 @@ const CartPage = props => {
     ) : null;
 
     return (
-        <div className={classes.root} data-cy="CartPage-root">
-            <StoreTitle>
-                {formatMessage({
-                    id: 'cartPage.title',
-                    defaultMessage: 'Cart'
-                })}
-            </StoreTitle>
+        <div className='cart-container'>
             <div className={classes.heading_container}>
-                <h1
-                    aria-live="polite"
-                    data-cy="CartPage-heading"
-                    className={classes.heading}
-                >
-                    <FormattedMessage
-                        id={'cartPage.heading'}
-                        defaultMessage={'Cart'}
-                    />
-                </h1>
-                <div className={classes.stockStatusMessageContainer}>
-                    <StockStatusMessage cartItems={cartItems} />
+                    <h1
+                        aria-live="polite"
+                        data-cy="CartPage-heading"
+                        className={classes.heading}
+                    >
+                        <FormattedMessage
+                            id={'cartPage.heading'}
+                            defaultMessage={'Shopping Cart'}
+                        />
+                    </h1>
+                    <div className={classes.stockStatusMessageContainer}>
+                        <StockStatusMessage cartItems={cartItems} />
+                    </div>
                 </div>
-            </div>
-            <div className={classes.body}>
-                <div className={classes.items_container}>{productListing}</div>
-                <div className={classes.price_adjustments_container}>
-                    {priceAdjustments}
-                </div>
-                <div className={classes.summary_container}>
-                    <div className={classes.summary_contents}>
-                        {priceSummary}
+        <div className='cart-inner'>
+            <div className={classes.root} data-cy="CartPage-root">
+                <StoreTitle>
+                    {formatMessage({
+                        id: 'cartPage.title',
+                        defaultMessage: 'Shopping Cart'
+                    })}
+                </StoreTitle>
+                
+                <div className={classes.body}>
+                    <div className={classes.items_container}>{productListing}</div>
+                    <div className={classes.price_adjustments_container}>
+                        {priceAdjustments}
+                    </div>
+                    <div className={classes.summary_container}>
+                        <div className={classes.summary_contents}>
+                            {priceSummary}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
+
     );
 };
 

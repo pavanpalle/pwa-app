@@ -28,7 +28,7 @@ const Options = props => {
         ? options
               .filter(option => {
                   // Only apply filtering logic when from is "home" or "list"
-                  if (from === 'Gallery Item' || from === 'productPage') {
+                  if (from === 'Gallery Item' || from === 'productPages') {
                       // Check if both color and size options exist
                       const hasColor = options.some(
                           opt => opt.label?.toLowerCase() === 'color'

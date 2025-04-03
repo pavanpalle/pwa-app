@@ -20,6 +20,8 @@ import CustomAttributes from './CustomAttributes';
 import defaultClasses from './productFullDetail.module.css';
 import addCartIcon from './shopping-cart.png';
 import Image from '../Image';
+import TextInput from '../TextInput';
+import RelatedProducts from '../RelatedProducts/relatedProducts';
 
 const WishlistButton = React.lazy(() => import('../Wishlist/AddToListButton'));
 const Options = React.lazy(() => import('../ProductOptions'));
@@ -242,7 +244,17 @@ const ProductFullDetail = props => {
     //     </section>
     // ) : null;
 
-
+    const ProductFullDetail = ({ product }) => {
+        return (
+            <div>
+                <h1>{product.name}</h1>
+                {/* Existing product details */}
+                
+                {/* Add Related Products Component */}
+                <RelatedProducts sku={product.sku} />
+            </div>
+        );
+    };
 
     return (
         <Fragment>
@@ -287,17 +299,17 @@ const ProductFullDetail = props => {
                         <section className={classes.options}>{options}</section>
                         <div className="product-grid-table">
                             <ul>
-                                <li>{productDetails.sku}</li>
+                                <li>{productDetails.sku}-{productDetails.selectedColorLabel}</li>
                                 <li>PRICE</li>
                                 <li>INVENTORY</li>
                                 <li>ORDER QUANTITY</li>
                             </ul>
-
-                            <ul className="space-y-4">
-                                {sizesTable &&
+                            {sizesTable &&
                                     Object.entries(sizesTable?.sizes).map(
                                         ([size, details]) => (
                                             <>
+                               
+                                            <ul className="space-y-4">
                                                 <li
                                                     key={size}
                                                     className="border p-4 rounded-lg shadow-md"
@@ -316,10 +328,12 @@ const ProductFullDetail = props => {
                                                 >
                                                     {details.inventory}
                                                 </li>
+                                                <li>
+                                                </li>
+                                            </ul>
                                             </>
                                         )
                                     )}
-                            </ul>
                         </div>
                         <section className={classes.quantity}>
                             <span
@@ -374,6 +388,7 @@ const ProductFullDetail = props => {
                 </Form>
             </div>
         </Fragment>
+        
     );
 };
 

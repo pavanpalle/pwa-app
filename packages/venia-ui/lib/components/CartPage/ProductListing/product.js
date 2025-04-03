@@ -98,6 +98,8 @@ const Product = props => {
         <li className={classes.root} data-cy="Product-root">
             <span className={classes.errorText}>{errorMessage}</span>
             <div className={itemClassName}>
+                <ul className='cart-row-items'>
+                    <li data-label="Product Details">
                 <Link
                     to={itemLink}
                     className={classes.imageContainer}
@@ -125,16 +127,32 @@ const Product = props => {
                             optionLabel: classes.optionLabel
                         }}
                     />
-                    <span className={classes.price} data-cy="Product-price">
+                    
+                    <span className={classes.stockStatusMessage}>
+                        {stockStatusMessage}
+                    </span>
+                    
+                </div>
+                </li>
+                <li data-label="Size">
+                     <ProductOptions
+                        options={options}
+                        classes={{
+                            options: classes.options,
+                            optionLabel: classes.optionLabel
+                        }}
+                    />
+                </li>
+                <li data-label="Price">
+                <span className={classes.price} data-cy="Product-price">
                         <Price currencyCode={currency} value={unitPrice} />
                         <FormattedMessage
                             id={'product.price'}
                             defaultMessage={' ea.'}
                         />
-                    </span>
-                    <span className={classes.stockStatusMessage}>
-                        {stockStatusMessage}
-                    </span>
+                    </span>    
+                </li>
+                <li data-label="Quantity">
                     <div className={classes.quantity}>
                         <Quantity
                             itemId={item.id}
@@ -142,7 +160,11 @@ const Product = props => {
                             onChange={handleUpdateItemQuantity}
                         />
                     </div>
-                </div>
+                </li>
+                <li data-label="Sub Total">
+                    
+                </li>
+                <li data-label="Action">
                 <Kebab
                     classes={{
                         root: classes.kebab
@@ -173,6 +195,8 @@ const Product = props => {
                         />
                     </li>
                 </Kebab>
+                </li>
+                </ul>
             </div>
         </li>
     );
