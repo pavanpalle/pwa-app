@@ -435,16 +435,29 @@ const CheckoutPage = props => {
     ) : null;
 
     return (
-        <div className={classes.root} data-cy="CheckoutPage-root">
-            <StoreTitle>
-                {formatMessage({
-                    id: 'checkoutPage.titleCheckout',
-                    defaultMessage: 'Checkout'
-                })}
-            </StoreTitle>
-            {checkoutContent}
-            {addressBookElement}
-            {signInElement}
+        <div className="checkout-container">
+            <div className={classes.heading_container}>
+                    <h1
+                        aria-live="polite"
+                        className={classes.heading}
+                        data-cy="ChekoutPage-heading"
+                    >
+                        {heading}
+                    </h1>
+                </div>
+            <div className='checkout-inner'>
+                <div className={classes.root} data-cy="CheckoutPage-root">
+                    <StoreTitle>
+                        {formatMessage({
+                            id: 'checkoutPage.titleCheckout',
+                            defaultMessage: 'Checkout'
+                        })}
+                    </StoreTitle>
+                    {checkoutContent}
+                    {addressBookElement}
+                    {signInElement}
+                </div>
+            </div>
         </div>
     );
 };

@@ -63,13 +63,17 @@ const ShippingInformation = props => {
 
     const shippingInformation = doneEditing ? (
         <Fragment>
+            <h3>SHIPPING ADDRESS</h3>  
+            <div className='shipping-adderss-card'>
+                      
+              
             <div className={classes.cardHeader}>
-                <h5 className={classes.cardTitle}>
+                {/* <h5 className={classes.cardTitle}>
                     <FormattedMessage
                         id={'shippingInformation.cardTitle'}
                         defaultMessage={'Shipping Information'}
                     />
-                </h5>
+                </h5> */}
                 <LinkButton
                     onClick={handleEditShipping}
                     className={classes.editButton}
@@ -90,6 +94,7 @@ const ShippingInformation = props => {
             </div>
             <Card shippingData={shippingData} />
             {editModal}
+            </div>
         </Fragment>
     ) : (
         <Fragment>
@@ -99,7 +104,7 @@ const ShippingInformation = props => {
             >
                 <FormattedMessage
                     id={'shippingInformation.editTitle'}
-                    defaultMessage={'1. Shipping Information'}
+                    defaultMessage={'Shipping Information'}
                 />
             </h3>
             <div className={classes.editWrapper}>

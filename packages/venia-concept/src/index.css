@@ -484,10 +484,10 @@ ul.social-icons li{
     @apply text-[#01A0BE]
 }
 .button-root_highPriority-yQe{
-    @apply bg-[#003E6B] border-[#003E6B] capitalize text-[18px] !py-3
+    @apply bg-[#003E6B] border-[#003E6B] normal-case text-[18px] !py-3
 }
 .button-root_highPriority-yQe:hover{
-    @apply !bg-[#01A0BE] !border-[#01A0BE]
+    @apply !bg-[#306e91] !border-[#306e91]
 }
 .multi-slide-input-container{
     @apply !w-full
@@ -706,7 +706,7 @@ ul.social-icons li{
     @apply max-w-[120px]
 }
 .cartPage-items_container-lWC .product-item-c9D{
-    @apply grid-cols-1
+    @apply grid-cols-1 gap-0
 }
 .cart-row-items li .image-container-k-M{
     @apply w-[88px] h-[100px] bg-[#EBEBEB] rounded-[12px] flex items-center justify-center
@@ -730,7 +730,7 @@ ul.social-icons li{
     @apply border-none bg-transparent
 }
 .cart-row-items li .quantityStepper-root-EOt input{
-    @apply !bg-transparent !p-0
+    @apply !bg-transparent !p-0 !border-0 h-[55px]
 }
 .cart-row-items li .quantityStepper-root-EOt input:focus{
     @apply !outline-none !border-none !shadow-none
@@ -768,8 +768,11 @@ ul.social-icons li{
 .cartPage-price_adjustments_container-Ivk{
     @apply hidden
 }
+.cartPage-summary_container-P8l{
+    @apply flex gap-6 items-center
+}
 .cartPage-summary_container-P8l .cartPage-summary_contents-tVM .priceSummary-root-dth{
-    @apply flex py-[20px] bg-[#EEF3FE] rounded-[10px] justify-end px-[30px] pl-0 items-center
+    @apply flex py-[20px] bg-[#EEF3FE] rounded-[10px] justify-end px-[30px] pl-0 items-center mt-2
 }
 .cartPage-summary_container-P8l .cartPage-summary_contents-tVM{
     @apply table ml-auto
@@ -778,10 +781,10 @@ ul.social-icons li{
     @apply flex
 }
 .cartPage-summary_container-P8l .cartPage-summary_contents-tVM .priceSummary-root-dth ul li{
-    @apply flex flex-col px-[50px] border-r border-[#DCDCDC]
+    @apply flex flex-col px-[50px] border-r border-[#DCDCDC] gap-0
 }
 .priceSummary-checkoutButton_container-cmT{
-    @apply w-auto ml-10
+    @apply w-auto ml-10 mt-0 !min-h-auto
 }
 .cartPage-summary_container-P8l .cartPage-summary_contents-tVM .priceSummary-root-dth ul li.discountSummary-discountLineItems-V-1{
     @apply hidden
@@ -790,8 +793,147 @@ ul.social-icons li{
     @apply !hidden
 }
 .cartPage-summary_container-P8l .cartPage-summary_contents-tVM .priceSummary-root-dth ul li > span{
-    @apply my-0 text-[20px] font-medium
+    @apply my-0 text-[20px] !font-medium text-[#3C4242]
 }
-.priceSummary-price-bhk{
+.cartPage-summary_container-P8l .cartPage-summary_contents-tVM .priceSummary-root-dth ul li > span.priceSummary-price-bhk{
     @apply !text-[22px] !font-bold text-[#3C4242]
+}
+.productListing-root-gIG .product-root-KDN:first-child .cart-row-items > li[data-label="Size"] .product-options-C2t .product-optionLabel-D6w{
+    @apply !text-[18px] font-medium text-[#111111]
+}
+.productListing-root-gIG .product-root-KDN:first-child .cart-row-items > li[data-label="Size"] .product-options-C2t .product-optionLabel-D6w:first-child{
+    @apply hidden
+}
+.cart-button{
+    @apply border border-[#BFC0BF] h-[56px] rounded-full px-[30px] py-[15px] flex items-center justify-center gap-[10px] text-[18px] text-[#212121] font-semibold
+}
+
+
+/*********checkout-container***********/
+.checkout-container{
+    @apply w-[100%+6%] mx-[-3%] bg-[#F5F5F5] px-[3%] py-[20px]
+}
+.checkout-inner{
+    @apply w-full p-[40px] pt-[60px] mx-auto bg-white rounded-[10px] mt-[20px]
+}
+.checkoutPage-heading-P-4{
+    @apply  text-[24px] font-bold text-[#111111]
+}
+.checkoutPage-root-OUA{
+    @apply max-w-full !p-0
+}
+.checkout-inner .checkoutPage-heading-P-4{
+    @apply !hidden
+}
+.checkout-inner  h3, .completedView-titleContainer--k5 h5{
+    @apply !text-[24px] font-bold text-[#111111] uppercase relative overflow-hidden pl-4 pb-6
+}
+.checkout-inner  h3:before, .completedView-titleContainer--k5 h5:before{
+ @apply content-[""] w-[6px] h-[20px] rounded-[10px] bg-[#01A0BE] absolute left-0 top-[8px] 
+ 
+}
+
+.fieldIcons-input-84o > input{
+    @apply bg-white border-[#BFC0BF] border rounded-[10px] h-[60px]
+}
+.guestForm-root-BPl{
+    @apply gap-x-8
+}
+.select-input-Y35{
+   @apply bg-white border-[#BFC0BF] border rounded-[10px] h-[60px]
+}
+.fieldIcons-after-NCQ{
+    @apply bg-transparent
+}
+.checkoutPage-signInLabel-rwm{
+    @apply text-[18px]
+}
+.checkoutPage-signInContainer-VuM{
+    @apply w-full flex justify-between
+}
+.checkoutPage-signInContainer-VuM .checkoutPage-signInButton-0z3{
+ @apply bg-[#003E6B] h-[45px] px-[20px] rounded-[23px] text-white border-[#003E6B] text-[18px] normal-case
+}
+.checkoutPage-signInContainer-VuM .checkoutPage-signInButton-0z3:hover{
+    @apply bg-[#306E91] text-white
+}
+.guestForm-buttons-c63 button{
+    @apply bg-[#003E6B] h-[45px] px-[20px] rounded-[23px] text-white border-[#003E6B] text-[18px] normal-case ml-auto mr-0
+
+}
+.shippingInformation-root-h-g{
+    @apply p-0 border-0 bg-white grid grid-cols-2
+}
+.shippingInformation-root-h-g h3{
+    @apply col-span-2
+}
+
+.shippingInformation-root-h-g .shipping-adderss-card{
+    @apply bg-[#F6F6F6] border border-[#306E91] p-[30px] rounded-[12px]
+}
+.shippingInformation-cardHeader-lxC{
+    @apply justify-end flex relative pt-0 pr-0 
+}
+.shippingInformation-editButton-FLz{
+    @apply h-[36px] py-0
+}
+.card-root-mfJ{
+    @apply flex flex-col mt-[-40px] gap-0 pt-0
+}
+.card-root-mfJ > span:nth-child(2){
+    @apply order-[-1] text-[20px] font-semibold text-[#3C4242] mb-1
+}
+.card-address-kdD{
+    @apply flex gap-1
+}
+.card-address-kdD span:after{
+    @apply content-[","]
+}
+.shippingInformation-editButton-FLz, .completedView-editButton-Ci3{
+    @apply  border border-[#306E91] h-[36px] rounded-[20px] px-4 flex items-center text-[#306E91] bg-transparent m-0
+}
+.shippingInformation-editButton-FLz svg, .completedView-editButton-Ci3 svg{
+    @apply stroke-[#306E91]
+}
+.shippingInformation-editButton-FLz:hover svg, .shippingInformation-editButton-FLz:hover, .completedView-editButton-Ci3:hover, .completedView-editButton-Ci3:hover svg{
+    @apply bg-[#306E91] text-white stroke-white
+}
+.editModal-header-Dlw .editModal-headerText-Ack{
+    @apply text-[24px] font-bold
+}
+.guestForm-buttons-c63 button{
+    @apply h-[60px] rounded-[30px]
+}
+.guestForm-buttons-c63 button:first-child{
+    @apply bg-white border border-[#306E91] text-[#306E91]
+}
+.guestForm-buttons-c63 button:first-child:hover{
+    @apply bg-[#BFC0BF]
+}
+.guestForm-buttons-c63 button:last-child:hover{
+    @apply bg-[#306E91]
+}
+.shippingMethod-done-J2o{
+    @apply border-0 p-0
+}
+.completedView-contents-7WG{
+    @apply border border-[#DCDCDC] bg-[#F6F6F6] rounded-[5px] px-[20px] grid grid-cols-5 py-[15px] text-[18px] text-[#111111] gap-0 mt-0
+}
+.completedView-contents-7WG div:last-child{
+    @apply order-[-1] font-bold
+}
+.orderSummary-root-vIZ{
+    @apply bg-[#F6F6F6] !border border-[#DCDCDC] p-[30px] rounded-[10px] !top-[15rem]
+}
+.orderSummary-title-XXG{
+    @apply text-[#000000] text-[24px] font-bold relative w-full h-auto pb-4 border-b border-[#DCDCDC] mb-4
+}
+.priceSummary-root-dth ul li{
+    @apply text-[18px] font-medium 
+}
+.priceSummary-root-dth ul li:first-child .priceSummary-price-bhk{
+    @apply text-[20px] font-bold
+}
+.priceSummary-root-dth ul li:last-child{
+    @apply text-[24px] !font-bold
 }

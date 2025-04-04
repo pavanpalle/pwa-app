@@ -10,6 +10,7 @@ import GiftCardSummary from './giftCardSummary';
 import GiftOptionsSummary from './giftOptionsSummary';
 import ShippingSummary from './shippingSummary';
 import TaxSummary from './taxSummary';
+import addCartIcon from './shopping-cart.png';
 
 /**
  * A child component of the CartPage component.
@@ -82,7 +83,7 @@ const PriceSummary = props => {
           })
         : formatMessage({
               id: 'priceSummary.estimatedTotal',
-              defaultMessage: 'Estimated Total'
+              defaultMessage: 'Order Total'
           });
 
     const proceedToCheckoutButton = !isCheckout ? (
@@ -95,6 +96,7 @@ const PriceSummary = props => {
                 onKeyDown={handleEnterKeyPress}
                 data-cy="PriceSummary-checkoutButton"
             >
+                <img src={addCartIcon} width={24} height={24} />
                 <FormattedMessage
                     id={'priceSummary.checkoutButton'}
                     defaultMessage={'Proceed to Checkout'}

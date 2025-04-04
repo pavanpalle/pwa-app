@@ -13,6 +13,9 @@ import PriceAdjustments from './PriceAdjustments';
 import PriceSummary from './PriceSummary';
 import ProductListing from './ProductListing';
 import defaultClasses from './cartPage.module.css';
+import angleRightIcon from './angle-arrow-right.svg';
+import timesIcon from './times-icon.svg';
+import Image from '../Image';
 
 const CheckIcon = <Icon size={20} src={Check} />;
 
@@ -34,6 +37,7 @@ const CheckIcon = <Icon size={20} src={Check} />;
  * import CartPage from "@magento/venia-ui/lib/components/CartPage";
  */
 const CartPage = props => {
+    
     const talonProps = useCartPage();
 
     const {
@@ -122,6 +126,8 @@ const CartPage = props => {
                         {priceAdjustments}
                     </div>
                     <div className={classes.summary_container}>
+                        <button type="button" className='cart-button'>Update Shopping Cart <Image src={angleRightIcon} width={8} height={16} /></button>
+                        <button type="button" className='cart-button'><Image src={timesIcon} width={24} height={24} /> Clear Cart</button>
                         <div className={classes.summary_contents}>
                             {priceSummary}
                         </div>
