@@ -937,3 +937,130 @@ ul.social-icons li{
 .priceSummary-root-dth ul li:last-child{
     @apply text-[24px] !font-bold
 }
+.steps-block{
+    @apply w-full table mt-[-20px] mb-[30px] pb-[30px] border-b border-[#DDDDDD] 
+}
+.steps-block ul{
+    @apply w-full flex flex-row
+}
+.steps-block ul li{
+    @apply w-full flex justify-end items-center
+}
+.steps-block ul li h4{
+    @apply mx-[10px] text-[21px] text-[#000000] font-semibold
+}
+.steps-block ul li .number{
+    @apply w-[40px] h-[40px] rounded-[20px] border-[5px] border-[#909090] flex items-center justify-center
+}
+.steps-block ul li .line{
+    @apply w-[100%] max-w-[265px] h-[5px] bg-[#BEBCBD]
+}
+.steps-block ul li:last-child{
+    @apply justify-start
+}
+.steps-block ul li.active .line{
+    @apply bg-[#306E91]
+}
+.steps-block ul li.active .number{
+    @apply border-[#306E91] text-[#306E91] relative
+}
+.steps-block ul li.active .number:before{
+    @apply content-[""] w-[14px] h-[8px] border-l-[2px] border-b-[2px] border-[#306E91] rotate-[-45deg] top-[9px]  bg-white absolute z-[2]
+}
+.steps-block ul li.active .number:after{
+    @apply content-[""] w-[30px] h-[30px] bg-white absolute rounded-[15px] z-0
+}
+.step-header{
+    @apply w-full flex items-center justify-between col-span-2
+}
+.step-header button{
+    @apply h-[45px] px-[20px] rounded-[25px] bg-[#003E6B] text-white  text-[18px] font-semibold
+}
+.step-header button svg{
+    @apply stroke-white
+}
+.step-header button:hover{
+    @apply bg-[#306E91]
+}
+.paymentMethods-radio_group-Lyv{
+    @apply flex gap-4
+}
+.paymentInformation-payment_info_container-OpK{
+    @apply border-none p-0
+}
+.paymentMethods-root-9-G{
+    @apply p-0 relative
+}
+.paymentMethods-payment_method-kXb{
+    @apply p-0  max-w-[240px] w-full
+}
+.paymentMethods-payment_method-kXb:nth-child(1), .paymentMethods-payment_method-kXb:nth-child(3), .paymentMethods-payment_method-kXb:last-child{
+    @apply hidden
+}
+.paymentMethods-payment_method-kXb .radio-root-sgH{
+    @apply relative h-[60px] w-full !px-0 !gap-0 border border-[#DCDCDC]
+}
+.paymentMethods-payment_method-kXb .radio-root-sgH .radio-input-JBj{
+    @apply !w-full h-full absolute left-0 top-0 opacity-0 !px-0 !py-0 gap-0 col-span-3 border-none
+}
+.paymentMethods-payment_method-kXb .radio-root-sgH .radio-icon-jct{
+    @apply !w-full !h-full absolute left-0 top-0 hidden
+}
+.paymentMethods-payment_method-kXb .radio-root-sgH .paymentMethods-radio_label-ujo{
+    @apply w-full px-5 whitespace-nowrap min-w-full col-span-3 text-center text-[18px] text-[#000000] h-[60px] flex items-center justify-center
+}
+
+.radio-input-JBj:checked + .radio-icon-jct + .paymentMethods-radio_label-ujo{
+    @apply bg-[#003E6B] text-white 
+}
+.paymentMethods-payment_method-kXb .radio-root-sgH + div{
+    @apply min-w-[59vw] py-5 relative z-[9]
+}
+.paymentMethods-payment_method-kXb .hero h1{
+    @apply text-[24px] font-bold
+}
+.paymentMethods-payment_method-kXb .hero .subtitle{
+    @apply mb-[20px]
+}
+.paymentMethods-payment_method-kXb .main #total{
+    @apply w-full text-right text-[20px] font-bold mt-[-50px]
+}
+.paymentMethods-payment_method-kXb .main .columns{
+    @apply mt-[20px] grid grid-cols-1 gap-5 max-w-[100%]
+}
+.paymentMethods-payment_method-kXb .main .columns .column{
+    @apply gap-4
+}
+.paymentMethods-payment_method-kXb .main .columns .column .box.card-box{
+    @apply grid grid-cols-3 gap-4
+}
+.paymentMethods-payment_method-kXb .main .columns .column .field.is-grouped{
+    @apply grid-cols-3 col-span-3 grid gap-6
+}
+.paymentMethods-payment_method-kXb .main .columns .column .field label{
+    @apply font-semibold mb-2 table w-full
+}
+.paymentMethods-payment_method-kXb .main .columns .column .field input, .paymentMethods-payment_method-kXb .main .columns .column .field select{
+    @apply w-full h-[60px] border border-[#BFC0BF] rounded-[10px] px-4 bg-white
+}
+.paymentMethods-payment_method-kXb .main .columns .column .field .control{
+    @apply mt-2
+}
+.paymentMethods-payment_method-kXb .main .columns .column .field:nth-child(3){
+    @apply col-span-3
+}
+.paymentMethods-payment_method-kXb .main .columns .column .field.is-grouped .field:nth-child(3){
+    @apply col-span-1
+}
+.paymentMethods-payment_method-kXb .main .columns .column .field.is-grouped:nth-child(2){
+    @apply grid-cols-2
+}
+.paymentMethods-payment_method-kXb .main .columns .column .field.is-grouped.mt-3{
+    @apply col-span-2
+}
+.paymentMethods-payment_method-kXb .main .columns .column .field:nth-child(7){
+    @apply col-span-3
+}
+.paymentMethods-payment_method-kXb .main .columns .column .field:nth-child(7) iframe{
+    @apply w-full
+}

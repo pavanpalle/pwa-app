@@ -9,6 +9,7 @@ import { useStyle } from '../../../classify';
 import Icon from '../../Icon';
 import defaultClasses from './completedView.module.css';
 import LinkButton from '../../LinkButton';
+import Select from '../../Select';
 
 const CompletedView = props => {
     const { selectedShippingMethod, showUpdateMode } = props;

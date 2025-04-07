@@ -59,11 +59,13 @@ const ShippingMethod = props => {
         contents = (
             <Fragment>
                 <div className={classes.done} data-cy="ShippingMethod-done">
+                
                     <CompletedView
                         selectedShippingMethod={selectedShippingMethod}
                         showUpdateMode={showUpdateMode}
                     />
                 </div>
+                
                 <UpdateModal
                     formErrors={Array.from(errors.values())}
                     formInitialValues={updateFormInitialValues}

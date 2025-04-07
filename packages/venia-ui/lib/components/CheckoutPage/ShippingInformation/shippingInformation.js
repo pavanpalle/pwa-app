@@ -1,7 +1,7 @@
 import React, { Fragment, Suspense } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { func, string, shape } from 'prop-types';
-import { Edit2 as EditIcon } from 'react-feather';
+import { Edit2 as EditIcon, Plus as PlusIcon  } from 'react-feather';
 import { useShippingInformation } from '@magento/peregrine/lib/talons/CheckoutPage/ShippingInformation/useShippingInformation';
 
 import { useStyle } from '../../../classify';
@@ -63,7 +63,22 @@ const ShippingInformation = props => {
 
     const shippingInformation = doneEditing ? (
         <Fragment>
-            <h3>SHIPPING ADDRESS</h3>  
+            <div className='step-header'>
+                <h3>SHIPPING ADDRESS</h3>
+                <LinkButton
+                    onClick={handleEditShipping}
+                    className={classes.editButton}
+                    data-cy="ShippingInformation-editButton"
+                >
+                    <Icon
+                        size={20}
+                        src={PlusIcon}
+                        classes={{ icon: classes.plusIcon }}
+                        
+                    />
+                    New Address
+                </LinkButton>
+            </div>
             <div className='shipping-adderss-card'>
                       
               

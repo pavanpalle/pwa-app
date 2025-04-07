@@ -446,6 +446,20 @@ const CheckoutPage = props => {
                     </h1>
                 </div>
             <div className='checkout-inner'>
+                <div class="steps-block">
+                    <ul>
+                        <li className='active'>
+                            <h4>Shipping</h4>
+                            <span className='number'>1</span>
+                            <span className='line'></span>
+                        </li>
+                        <li>
+                            <span className='line'></span>
+                            <span className='number'>2</span>
+                            <h4>Review & Payment</h4>
+                        </li>
+                    </ul>
+                </div>
                 <div className={classes.root} data-cy="CheckoutPage-root">
                     <StoreTitle>
                         {formatMessage({

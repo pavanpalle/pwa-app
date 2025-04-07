@@ -257,9 +257,11 @@ export default function CardKnox() {
                   <WrappedIfield ifieldType={CARD_TYPE} onIssuer={setIssuer} onToken={onCardToken} handle3DSResults={handle3DSResults} ref={cardRef} />
                 </div>
               </div>
+              <div className='button-group'>
               <button className="button is-info is-rounded is-small" onClick={focusCard}>Focus</button>
               <button className="button is-info is-rounded is-small" onClick={clearCard}>Clear</button>
               <button className="button is-info is-rounded is-small" onClick={getCardToken}>Submit</button>
+              </div>
               <div className="field is-grouped mt-3">
                 <div className='field'>
                   <p className="label">Month</p>

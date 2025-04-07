@@ -101,6 +101,7 @@ const PaymentMethods = props => {
 
     return (
         <div className={classes.root}>
+            <h3>Payment Method</h3>
             <RadioGroup
                 classes={{ root: classes.radio_group }}
                 field="selectedPaymentMethod"
