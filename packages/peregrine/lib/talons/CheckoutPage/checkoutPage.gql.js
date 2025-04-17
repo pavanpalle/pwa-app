@@ -51,6 +51,7 @@ export const GET_CUSTOMER = gql`
         # eslint-disable-next-line @graphql-eslint/require-id-when-available
         customer {
             default_shipping
+            default_billing
             firstname
             customattributes {
                 paymentterms

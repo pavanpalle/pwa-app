@@ -126,7 +126,17 @@ const CustomerForm = props => {
                 field="default_shipping"
                 label={formatMessage({
                     id: 'customerForm.defaultShipping',
-                    defaultMessage: 'Make this my default address'
+                    defaultMessage: 'Make this my default shipping address'
+                })}
+            />
+            <Checkbox
+                disabled={!!initialValues.default_billing}
+                id="default_billing"
+                data-cy="CustomerForm-defaultBilling"
+                field="default_billing"
+                label={formatMessage({
+                    id: 'customerForm.defaultBilling',
+                    defaultMessage: 'Make this my default billing address'
                 })}
             />
         </div>

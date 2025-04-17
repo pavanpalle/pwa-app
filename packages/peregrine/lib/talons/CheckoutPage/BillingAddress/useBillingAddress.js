@@ -119,10 +119,10 @@ export const useBillingAddress = props => {
     ] = useMutation(setBillingAddressMutation);
 
     const shippingAddressCountry = shippingAddressData
-        ? shippingAddressData.cart.shippingAddresses[0].country.code
+        ? shippingAddressData?.cart?.shippingAddresses?.[0]?.country.code
         : DEFAULT_COUNTRY_CODE;
-    const isBillingAddressSame = formState.values.isBillingAddressSame;
-
+    const isBillingAddressSame = formState?.values?.isBillingAddressSame;
+  
     const initialValues = useMemo(() => {
         const isBillingAddressSame = isBillingAddressSameData
             ? isBillingAddressSameData.cart.isBillingAddressSame

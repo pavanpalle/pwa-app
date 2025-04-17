@@ -11,7 +11,7 @@ import { useStyle } from '../../../classify';
 import Icon from '../../Icon';
 import Image from '../../Image';
 import Kebab from '../../LegacyMiniCart/kebab';
-import ProductOptions from '../../LegacyMiniCart/productOptions';
+//import ProductOptions from '../../LegacyMiniCart/productOptions';
 import Section from '../../LegacyMiniCart/section';
 import AddToListButton from '../../Wishlist/AddToListButton';
 import Quantity from './quantity';
@@ -20,7 +20,6 @@ import defaultClasses from './product.module.css';
 
 import { CartPageFragment } from '@magento/peregrine/lib/talons/CartPage/cartPageFragments.gql.js';
 import { AvailableShippingMethodsCartFragment } from '@magento/peregrine/lib/talons/CartPage/PriceAdjustments/ShippingMethods/shippingMethodsFragments.gql.js';
-
 const IMAGE_SIZE = 100;
 
 const HeartIcon = <Icon size={16} src={Heart} />;
@@ -67,6 +66,8 @@ const Product = props => {
     const itemClassName = isProductUpdating
         ? classes.item_disabled
         : classes.item;
+
+        const productName = name.split('-')[0]; 
 
     const editItemSection = isEditable ? (
         <Section
@@ -120,16 +121,12 @@ const Product = props => {
                 </Link>
                 <div className={classes.details}>
                     <div className={classes.name} data-cy="Product-name">
-                        <Link to={itemLink}>{name}</Link>
+                        <Link to={itemLink}>{productName}</Link>
                     </div>
-                    <ProductOptions
-                        options={options}
-                        from={"productPages"}
-                        classes={{
+                    <div  classes={{
                             options: classes.options,
                             optionLabel: classes.optionLabel
-                        }}
-                    />
+                        }}>Color : {name?.split("-")[2]}</div>
                     <div className="sku-value">SKU : {item.product.sku}</div>
                     <span className={classes.stockStatusMessage}>
                         {stockStatusMessage}
@@ -138,13 +135,17 @@ const Product = props => {
                 </div>
                 </li>
                 <li data-label="Size">
-                     <ProductOptions
-                        options={options}
+                <div  classes={{
+                            options: classes.options,
+                            optionLabel: classes.optionLabel
+                        }}>Size : {name?.split("-")[1]}</div>
+                     {/* <ProductOptions
+                        options={productOptionsByName(name)}
                         classes={{
                             options: classes.options,
                             optionLabel: classes.optionLabel
                         }}
-                    />
+                    /> */}
                 </li>
                 <li data-label="Price">
                 <span className={classes.price} data-cy="Product-price">

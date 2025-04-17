@@ -112,6 +112,7 @@ export const ProductDetailsFragment = gql`
                         position
                     }
                     sku
+                    qty
                     stock_status
                     price {
                         regularPrice {

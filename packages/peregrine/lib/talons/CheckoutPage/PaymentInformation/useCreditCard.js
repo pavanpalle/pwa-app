@@ -144,7 +144,7 @@ export const useCreditCard = props => {
     const [{ cartId }] = useCartContext();
 
     const isLoading =
-        isDropinLoading ||
+       
         recaptchaLoading ||
         (stepNumber >= 1 && stepNumber <= 3);
 
@@ -179,7 +179,7 @@ export const useCreditCard = props => {
     ] = useMutation(setCreditCardDetailsOnCartMutation);
 
     const shippingAddressCountry = shippingAddressData
-        ? shippingAddressData.cart.shippingAddresses[0].country.code
+        ? shippingAddressData?.cart?.shippingAddresses?.[0]?.country.code
         : DEFAULT_COUNTRY_CODE;
     const isBillingAddressSame = formState.values.isBillingAddressSame;
 
@@ -470,8 +470,12 @@ export const useCreditCard = props => {
                  * Billing address save mutation is successful
                  * we can initiate the braintree nonce request
                  */
-                setStepNumber(2);
-                setShouldRequestPaymentNonce(true);
+                if (onSuccess) {
+                                  onSuccess();
+                               }
+                resetShouldSubmit();
+                setStepNumber(4);
+                //setShouldRequestPaymentNonce(false);
             }
 
             if (
@@ -504,48 +508,48 @@ export const useCreditCard = props => {
      *
      * Credit card save mutation has completed
      */
-    useEffect(() => {
-        /**
-         * Saved billing address, payment method and payment nonce on cart.
-         *
-         * Time to call onSuccess.
-         */
+    // useEffect(() => {
+    //     /**
+    //      * Saved billing address, payment method and payment nonce on cart.
+    //      *
+    //      * Time to call onSuccess.
+    //      */
 
-        try {
-            const ccMutationCompleted = ccMutationCalled && !ccMutationLoading;
+    //     try {
+    //         const ccMutationCompleted = ccMutationCalled && !ccMutationLoading;
 
-            if (ccMutationCompleted && !ccMutationError) {
-                if (onSuccess) {
-                    onSuccess();
-                }
-                resetShouldSubmit();
-                setStepNumber(4);
-            }
+    //         if (ccMutationCompleted && !ccMutationError) {
+    //             if (onSuccess) {
+    //                 onSuccess();
+    //             }
+    //             resetShouldSubmit();
+    //             setStepNumber(4);
+    //         }
 
-            if (ccMutationCompleted && ccMutationError) {
-                /**
-                 * If credit card mutation failed, reset update button clicked so the
-                 * user can click again and set `stepNumber` to 0.
-                 */
-                throw new Error('Credit card nonce save mutation failed.');
-            }
-        } catch (err) {
-            if (process.env.NODE_ENV !== 'production') {
-                console.error(err);
-            }
-            setStepNumber(0);
-            resetShouldSubmit();
-            setShouldRequestPaymentNonce(false);
-            setShouldTeardownDropin(true);
-        }
-    }, [
-        ccMutationCalled,
-        ccMutationLoading,
-        onSuccess,
-        setShouldRequestPaymentNonce,
-        resetShouldSubmit,
-        ccMutationError
-    ]);
+    //         if (ccMutationCompleted && ccMutationError) {
+    //             /**
+    //              * If credit card mutation failed, reset update button clicked so the
+    //              * user can click again and set `stepNumber` to 0.
+    //              */
+    //             throw new Error('Credit card nonce save mutation failed.');
+    //         }
+    //     } catch (err) {
+    //         if (process.env.NODE_ENV !== 'production') {
+    //             console.error(err);
+    //         }
+    //         setStepNumber(0);
+    //         resetShouldSubmit();
+    //         setShouldRequestPaymentNonce(false);
+    //         setShouldTeardownDropin(true);
+    //     }
+    // }, [
+    //     ccMutationCalled,
+    //     ccMutationLoading,
+    //     onSuccess,
+    //     setShouldRequestPaymentNonce,
+    //     resetShouldSubmit,
+    //     ccMutationError
+    // ]);
 
     const errors = useMemo(
         () =>

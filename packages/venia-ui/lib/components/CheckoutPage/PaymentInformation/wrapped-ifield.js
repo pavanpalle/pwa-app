@@ -18,7 +18,7 @@ const WrappedIfield = React.forwardRef((props, ref) => {
 
   const { ifieldType, issuer, onIssuer, onToken, onError, handle3DSResults } = props;
   const account = {
-    xKey: "ifields_sparitydev94a34ccb795b4b22b4a9a77a480",
+    xKey: "ifields_malleshsofttechdev34aea0b8c23443c78fc",
     xSoftwareName: "react-cardknox-ifields",
     xSoftwareVersion: "1.0.0"
   };
@@ -31,8 +31,8 @@ const WrappedIfield = React.forwardRef((props, ref) => {
     blockNonNumericInput: true,
     iFieldstyle: {
       width: "50%",
-      "max-width": "100%",
-      "width" : "100%",
+      "max-width": "50%",
+    
       // "box-shadow": "inset 0 1px 2px rgba(10, 10, 10, 0.1)",
       "background-color": "white",
       border: "1px solid transparent",
@@ -77,6 +77,7 @@ const WrappedIfield = React.forwardRef((props, ref) => {
     ref={internalRef}
     onError={onError}
     issuer={issuer}
+    autoSubmit={true}
     className='ifields' />);
 });
 WrappedIfield.propTypes = {

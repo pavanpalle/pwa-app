@@ -30,6 +30,10 @@ import GoogleReCaptcha from '../GoogleReCaptcha';
 
 import defaultClasses from './checkoutPage.module.css';
 import ScrollAnchor from '../ScrollAnchor/scrollAnchor';
+import Checkbox from '../Checkbox';
+import BillingAddress from './BillingAddress/billingAddress';
+import { Form } from 'informed';
+import CreditCard from './PaymentInformation/creditCard';
 
 const errorIcon = <Icon src={AlertCircleIcon} size={20} />;
 
@@ -214,7 +218,7 @@ const CheckoutPage = props => {
         //     ({ code }) => code === 'cashondelivery' || paymentMethods.includes(code)
         // );
 
-       // const isPaymentAvailable = true;
+        // const isPaymentAvailable = true;
 
         // if (!isPaymentAvailable) {
         //     formErrors.push(
@@ -261,10 +265,7 @@ const CheckoutPage = props => {
                     priority="high"
                     className={classes.review_order_button}
                     data-cy="CheckoutPage-reviewOrderButton"
-                    disabled={
-                        reviewOrderButtonClicked ||
-                        isUpdating 
-                    }
+                    disabled={reviewOrderButtonClicked || isUpdating}
                 >
                     <FormattedMessage
                         id={'checkoutPage.reviewOrder'}
@@ -396,8 +397,18 @@ const CheckoutPage = props => {
                             toggleActiveContent={toggleAddressBookContent}
                             toggleSignInContent={toggleSignInContent}
                             setGuestSignInUsername={setGuestSignInUsername}
+                            resetShouldSubmit={resetReviewOrderButtonClicked}
+                            shouldSubmit={reviewOrderButtonClicked}
                         />
                     </ScrollAnchor>
+
+                    <Form>
+                        <CreditCard
+                            resetShouldSubmit={resetReviewOrderButtonClicked}
+                            shouldSubmit={reviewOrderButtonClicked}
+                            onPaymentSuccess={setPaymentInformationDone}
+                        />
+                    </Form>
                 </div>
                 <div className={classes.shipping_method_container}>
                     <ScrollAnchor ref={shippingMethodRef}>
@@ -437,25 +448,25 @@ const CheckoutPage = props => {
     return (
         <div className="checkout-container">
             <div className={classes.heading_container}>
-                    <h1
-                        aria-live="polite"
-                        className={classes.heading}
-                        data-cy="ChekoutPage-heading"
-                    >
-                        {heading}
-                    </h1>
-                </div>
-            <div className='checkout-inner'>
+                <h1
+                    aria-live="polite"
+                    className={classes.heading}
+                    data-cy="ChekoutPage-heading"
+                >
+                    {heading}
+                </h1>
+            </div>
+            <div className="checkout-inner">
                 <div class="steps-block">
                     <ul>
-                        <li className='active'>
+                        <li className="active">
                             <h4>Shipping</h4>
-                            <span className='number'>1</span>
-                            <span className='line'></span>
+                            <span className="number">1</span>
+                            <span className="line" />
                         </li>
                         <li>
-                            <span className='line'></span>
-                            <span className='number'>2</span>
+                            <span className="line" />
+                            <span className="number">2</span>
                             <h4>Review & Payment</h4>
                         </li>
                     </ul>

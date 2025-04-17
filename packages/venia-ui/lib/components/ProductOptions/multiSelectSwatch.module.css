@@ -1,0 +1,118 @@
+/* multiSelectSwatch.css */
+.root {
+    --venia-swatch-bg: var(--venia-global-color-gray-100);
+
+    composes: root from './tile.module.css';
+
+    @apply border-shaded-10;
+    composes: text-white from global;
+    background: var(--venia-swatch-bg);
+}
+
+.root_selected {
+    composes: root;
+
+    background: linear-gradient(-45deg, rgba(0, 0, 0, 0.2), transparent),
+        var(--venia-swatch-bg);
+}
+
+.root_focused {
+    composes: root;
+}
+
+.root_selected_focused {
+    composes: root_selected;
+}
+
+.root_outOfStock,
+.root_selected_outOfStock {
+    composes: root;
+    composes: opacity-40 from global;
+    composes: border-2 from global;
+    composes: border-solid from global;
+    @apply border-gray-400;
+
+    composes: after_absolute from global;
+    composes: after_border-t-2 from global;
+    composes: after_border-solid from global;
+    composes: after_border-swatch from global;
+    composes: after_w-swatch from global;
+    composes: after_-rotate-45 from global;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: var(--venia-global-fontWeight-semibold);
+    margin-bottom: 0.75rem;
+    color:black;
+}
+
+.clearButton {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    min-width: auto;
+}
+
+.swatchList {
+    display: flex;
+    
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+    text-indent: 0;
+}
+
+.swatchItem,
+.swatchItemSelected {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.swatchItemSelected .swatchButton {
+    border: 2px solid var(--venia-global-color-teal);
+}
+
+.swatchButton {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    border: 1px solid var(--venia-global-color-gray-400);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.checkmark {
+    color: white;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+    font-weight: bold;
+}
+
+.swatchLabel {
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+    text-align: center;
+    max-width: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.selectedInfo {
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    color: var(--venia-global-color-gray-700);
+}
+
+.selectedCount {
+    font-weight: var(--venia-global-fontWeight-semibold);
+    margin-right: 0.25rem;
+}
+
+.selectedLabels {
+    font-style: italic;
+}

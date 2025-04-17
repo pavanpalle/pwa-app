@@ -1,4 +1,5 @@
-import React, { useMemo, Fragment, Suspense } from 'react';
+/* eslint-disable react/jsx-no-literals */
+import React, { useMemo, Fragment, Suspense, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { arrayOf, bool, number, shape, string } from 'prop-types';
 import { Form } from 'informed';
@@ -58,12 +59,13 @@ const ProductFullDetail = props => {
         customAttributes,
         wishlistButtonProps,
         getProductDetailsByColor,
-        sizesTable
+        sizesTable,
+        quantities,
+        handleQuantityChange,
+        isSignedIn
     } = talonProps;
 
     const { formatMessage } = useIntl();
-
-   
 
     const classes = useStyle(defaultClasses, props.classes);
 
@@ -285,45 +287,68 @@ const ProductFullDetail = props => {
                             errors={errors.get('form') || []}
                         />
                         <section className={classes.options}>{options}</section>
-                        <div className="product-grid-table">
-                            <ul>
-                                <li>{productDetails.sku}-{productDetails.selectedColorLabel}</li>
-                                <li>PRICE</li>
-                                <li>INVENTORY</li>
-                                <li>ORDER QUANTITY</li>
-                            </ul>
-                            {sizesTable &&
-                                    Object.entries(sizesTable?.sizes).map(
-                                        ([size, details]) => (
-                                            <>
-                               
-                                            <ul className="space-y-4">
-                                                <li
-                                                    key={size}
-                                                    className="border p-4 rounded-lg shadow-md"
-                                                >
-                                                    {size}
-                                                </li>
-                                                <li
-                                                    key={size}
-                                                    className="border p-4 rounded-lg shadow-md"
-                                                >
-                                                    {details.price}
-                                                </li>
-                                                <li
-                                                    key={size}
-                                                    className="border p-4 rounded-lg shadow-md"
-                                                >
-                                                    {details.inventory}
-                                                </li>
+
+                        {isSignedIn &&
+                            sizesTable &&
+                            Object.entries(sizesTable || {}).map(
+                                ([colorId, tableData]) => {
+                                    return (
+                                        <div
+                                            className="product-grid-table "
+                                            key={colorId}
+                                        >
+                                            {/* Header row */}
+                                            <ul>
                                                 <li>
+                                                    {productDetails.sku} -{' '}
+                                                    {tableData?.color?.label}
                                                 </li>
+                                                <li>PRICE</li>
+                                                <li>INVENTORY</li>
+                                                <li>ORDER QUANTITY</li>
                                             </ul>
-                                            </>
-                                        )
-                                    )}
-                        </div>
-                        <section className={classes.quantity}>
+
+                                            {/* Product rows */}
+                                            {tableData &&
+                                                Object.entries(
+                                                    tableData?.sizes || {}
+                                                ).map(([size, details]) => (
+                                                    <ul
+                                                        className="space-y-4"
+                                                        key={size}
+                                                    >
+                                                        <li className="border p-4 rounded-lg shadow-md">
+                                                            {size}
+                                                        </li>
+                                                        <li className="border p-4 rounded-lg shadow-md">
+                                                            {details.price}
+                                                        </li>
+                                                        <li className="border p-4 rounded-lg shadow-md">
+                                                            {details.inventory}
+                                                        </li>
+                                                        <li className="border p-4 rounded-lg shadow-md">
+                                                            <input
+                                                                type="number"
+                                                                min="0"
+                                                                // value={quantities?.[details.sku] ?? 0}
+                                                                onChange={e =>
+                                                                    handleQuantityChange(
+                                                                        details.sku,
+                                                                        e.target
+                                                                            .value
+                                                                    )
+                                                                }
+                                                                className="w-16 p-1 border rounded"
+                                                            />
+                                                        </li>
+                                                    </ul>
+                                                ))}
+                                        </div>
+                                    );
+                                }
+                            )}
+
+                        {/* <section className={classes.quantity}>
                             <span
                                 data-cy="ProductFullDetail-quantityTitle"
                                 className={classes.quantityTitle}
@@ -338,7 +363,7 @@ const ProductFullDetail = props => {
                                 min={1}
                                 message={errors.get('quantity')}
                             />
-                        </section>
+                        </section> */}
                         <section className={classes.actions}>
                             {cartActionContent}
                             <Suspense fallback={null}>
@@ -376,7 +401,6 @@ const ProductFullDetail = props => {
                 </Form>
             </div>
         </Fragment>
-        
     );
 };
 

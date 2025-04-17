@@ -14,6 +14,8 @@ import Icon from '../../Icon';
 import { useStyle } from '../../../classify';
 import configuredVariant from '@magento/peregrine/lib/util/configuredVariant';
 
+import productOptionsByName from '@magento/peregrine/lib/util/productOptionsByName';
+
 import defaultClasses from './item.module.css';
 
 const Item = props => {
@@ -68,6 +70,9 @@ const Item = props => {
             ? 'There are ' + totalQuantity + ' items left in your cart'
             : 'There is only one item left in your cart';
 
+    const name = product.name.split('-')[0]; 
+    
+ 
     return (
         <div className={rootClass} data-cy="MiniCart-Item-root">
             <Link
@@ -98,10 +103,10 @@ const Item = props => {
                 onClick={closeMiniCart}
                 data-cy="item-name"
             >
-                {product.name}
+                {name}
             </Link>
             <ProductOptions
-                options={configurable_options}
+                options={productOptionsByName(product.name)}
                 classes={{
                     options: classes.options
                 }}

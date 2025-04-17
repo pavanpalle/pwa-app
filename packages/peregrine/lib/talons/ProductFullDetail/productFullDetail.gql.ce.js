@@ -4,8 +4,8 @@ import { CartTriggerFragment } from '../Header/cartTriggerFragments.gql';
 import { MiniCartFragment } from '../MiniCart/miniCartFragments.gql';
 
 export const ADD_PRODUCT_TO_CART = gql`
-    mutation AddProductToCart($cartId: String!, $product: CartItemInput!) {
-        addProductsToCart(cartId: $cartId, cartItems: [$product]) {
+    mutation AddProductToCart($cartId: String!, $product: [CartItemInput!]!) {
+        addProductsToCart(cartId: $cartId, cartItems: $product) {
             cart {
                 id
                 ...CartTriggerFragment

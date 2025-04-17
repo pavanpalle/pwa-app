@@ -51,7 +51,7 @@ const ShippingMethod = props => {
 
     let contents;
 
-    if (displayState === displayStates.DONE) {
+    if (displayState === displayStates.EDITING) {
         const updateFormInitialValues = {
             shipping_method: selectedShippingMethod.serializedValue
         };
@@ -82,7 +82,7 @@ const ShippingMethod = props => {
         // We're either initializing or editing.
         let bodyContents = initializingContents;
 
-        if (displayState === displayStates.EDITING) {
+        if (displayState === displayStates.DONE) {
             const lowestCostShippingMethodSerializedValue = shippingMethods.length
                 ? shippingMethods[0].serializedValue
                 : '';
@@ -94,13 +94,14 @@ const ShippingMethod = props => {
                 <Form
                     className={classes.form}
                     initialValues={lowestCostShippingMethod}
-                    onSubmit={handleSubmit}
+                onValueChange={handleSubmit}
+                    //onSubmit={handleSubmit}
                 >
                     <ShippingRadios
                         disabled={pageIsUpdating || isLoading}
                         shippingMethods={shippingMethods}
                     />
-                    <div className={classes.formButtons}>
+                    {/* <div className={classes.formButtons}>
                         <Button
                             data-cy="ShippingMethod-submitButton"
                             priority="normal"
@@ -114,7 +115,7 @@ const ShippingMethod = props => {
                                 }
                             />
                         </Button>
-                    </div>
+                    </div> */}
                 </Form>
             );
         }

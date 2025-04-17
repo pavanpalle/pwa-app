@@ -12,6 +12,8 @@ import Card from './card';
 import defaultClasses from './shippingInformation.module.css';
 import LinkButton from '../../LinkButton';
 
+import { Form } from 'informed';
+
 const EditModal = React.lazy(() => import('./editModal'));
 
 const ShippingInformation = props => {
@@ -21,7 +23,9 @@ const ShippingInformation = props => {
         onSuccess,
         toggleActiveContent,
         toggleSignInContent,
-        setGuestSignInUsername
+        setGuestSignInUsername,
+        resetShouldSubmit,
+        shouldSubmit
     } = props;
     const talonProps = useShippingInformation({
         onSave,
@@ -110,6 +114,7 @@ const ShippingInformation = props => {
             <Card shippingData={shippingData} />
             {editModal}
             </div>
+            
         </Fragment>
     ) : (
         <Fragment>
@@ -129,7 +134,9 @@ const ShippingInformation = props => {
                     toggleSignInContent={toggleSignInContent}
                     setGuestSignInUsername={setGuestSignInUsername}
                 />
+                 
             </div>
+           
         </Fragment>
     );
 

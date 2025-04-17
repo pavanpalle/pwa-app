@@ -184,7 +184,7 @@ export const useCheckoutPage = (props = {}) => {
 
     const handleReviewOrder = useCallback(() => {
         setReviewOrderButtonClicked(true);
-        setCheckoutStep(CHECKOUT_STEP.REVIEW);
+        //setCheckoutStep(CHECKOUT_STEP.REVIEW);
     }, []);
 
     const handleReviewOrderEnterKeyPress = useCallback(() => {

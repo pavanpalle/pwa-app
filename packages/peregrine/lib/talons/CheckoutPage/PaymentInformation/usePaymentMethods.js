@@ -41,14 +41,14 @@ export const usePaymentMethods = props => {
         return (data && data.cart.available_payment_methods) || [];
     }, [data]);
 
-        console.log('availablePaymentMethodsLocal', availablePaymentMethodsLocal);
+        
 
         const userPaymentOption = PaymentOptions.find(
             (option) =>
               option.code === userProfile?.customattributes?.[0]?.paymentterms
           );
 
-console.log("userPaymentOption", userPaymentOption);
+
 
           const availablePaymentMethods = userPaymentOption?availablePaymentMethodsLocal?.filter(
             (filterOptions) =>
@@ -71,7 +71,7 @@ console.log("userPaymentOption", userPaymentOption);
             ? selectedPaymentCode
             : defaultPaymentCode;
 
-            console.log('initialSelectedMethod', initialSelectedMethod);
+           
     const handlePaymentMethodSelection = useCallback(
         element => {
             const value = element.target.value;

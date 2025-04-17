@@ -17,6 +17,7 @@ import { useStyle } from '../../../classify';
 import defaultClasses from './creditCard.module.css';
 import FormError from '../../FormError';
 import GoogleReCaptcha from '../../GoogleReCaptcha';
+import CardKnox from './cardKnox';
 
 const STEP_DESCRIPTIONS = [
     { defaultMessage: 'Loading Payment', id: 'checkoutPage.step0' },
@@ -161,14 +162,15 @@ const CreditCard = props => {
                     errors={Array.from(errors.values())}
                 />
                 <div className={classes.dropin_root}>
-                    <BrainTreeDropin
+                    {/* <BrainTreeDropin
                         onError={onPaymentError}
                         onReady={onPaymentReady}
                         onSuccess={onPaymentSuccess}
                         shouldRequestPaymentNonce={shouldRequestPaymentNonce}
                         shouldTeardownDropin={shouldTeardownDropin}
                         resetShouldTeardownDropin={resetShouldTeardownDropin}
-                    />
+                    /> */}
+                    {/* <CardKnox/> */}
                 </div>
                 <div
                     data-cy="CreditCard-AddressCheck-root"

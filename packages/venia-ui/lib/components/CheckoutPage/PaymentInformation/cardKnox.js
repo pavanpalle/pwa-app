@@ -2,25 +2,61 @@ import './index.css';
 import React, { useRef, useState } from 'react';
 import WrappedIfield from './wrapped-ifield';
 import { CARD_TYPE, CVV_TYPE, CardknoxApplePay } from '@cardknox/react-ifields';
+import { useCardKnox } from '@magento/peregrine/lib/talons/CheckoutPage/PaymentInformation/useCardKnox';
 
 
-export default function CardKnox() {
+const CardKnox = props => {
+
+  const {
+    classes: propClasses,
+    onPaymentSuccess: onSuccess,
+    onPaymentReady: onReady,
+    onPaymentError: onError,
+    resetShouldSubmit,
+    shouldSubmit
+} = props;
+
+
+   const talonProps = useCardKnox({ onSuccess,
+    onReady,
+    onError,
+    shouldSubmit,
+    resetShouldSubmit});
+
+
+
+  
+    const {
+    
+      shouldRequestPaymentNonce,
+      onPaymentError,
+      onPaymentSuccess,
+      onPaymentReady,
+     
+      /**
+       * `stepNumber` depicts the state of the process flow in credit card
+       * payment flow.
+       *
+       * `0` No call made yet
+       * `1` Billing address mutation intiated
+       * `2` Braintree nonce requsted
+       * `3` Payment information mutation intiated
+       * `4` All mutations done
+       */
+      stepNumber,
+     
+  } = talonProps;
+
+
+
+
   const [cardToken, setCardToken] = useState('');
   const [cvvToken, setCvvToken] = useState('');
   const [issuer, setIssuer] = useState('');
-  const [amount, setAmount] = useState(2.36);
-  const [firstName, setFirstName] = useState('John');
-  const [lastName, setLastName] = useState('Doe');
-  const [address, setAddress] = useState('123 Somewhere');
-  const [city, setCity] = useState('Anywhere');
-  const [addressState, setAddressState] = useState('NY');
-  const [zip, setZip] = useState('98765');
-  const [mobile, setMobile] = useState('1234567890');
-  const [email, setEmail] = useState('test@test.com');
+  
   const [expMonth, setExpMonth] = useState(new Date().getMonth() + 1);
   const [expYear, setExpYear] = useState(new Date().getFullYear());
-  const [gatewayResponse, setGatewayResponse] = useState('');
-  const [gateway3dsResponse, setGateway3dsResponse] = useState('');
+ 
   const cardRef = useRef();
   const cvvRef = useRef();
   const getCardToken = () => {
@@ -29,87 +65,25 @@ export default function CardKnox() {
   const getCvvToken = () => {
     cvvRef.current.getToken();
   };
-  const focusCard = () => {
-    cardRef.current.focusIfield();
-  };
-  const focusCvv = () => {
-    cvvRef.current.focusIfield();
-  };
-  const clearCard = () => {
-    cardRef.current.clearIfield();
-  };
-  const clearCvv = () => {
-    cvvRef.current.clearIfield();
-  };
+
   const onCardToken = (data) => {
     setCardToken(data.xToken);
   };
   const onCvvToken = (data) => {
     setCvvToken(data.xToken);
   };
-  const submitToGateway = async () => {
-    setGatewayResponse('');
-    let request = {
-      xSoftwareName: "Test-React-iFields",
-      xSoftwareVersion: "1.0",
-      xVersion: "5.0.0",
-      xCommand: "cc:sale",
-      xAmount: amount,
-      xCardnum: cardToken,
-      xBillFirstName: firstName,
-      xBillLastName: lastName,
-      xBillStreet: address,
-      xBillCity: city,
-      xBillZip: zip,
-      xBillState: addressState,
-      xBillMobile: mobile,
-      xEmail: email,
-      xExp: 
-       "12/25",
-      xCvv: cvvToken
-    };
-    console.log(request)
-    try {
-      const response = await fetch("https://x1.cardknox.com/gatewayjson", {
-        method: 'POST',
-        body: JSON.stringify(request),
-        headers: { 'Content-Type': 'application/json',xKey: "sparitydev111f54eac8fe4166aff7053710aa245e" }
-      });
-      const responseBody = await response.json();
-      setGatewayResponse(responseBody);
-      if (responseBody.xResult === 'V')
-        verify3DS(responseBody);
-    } catch (error) {
-      console.error(error);
-      setGatewayResponse(error);
-    }
-  }
-  const verify3DS = (verifyData) => {
-    window.ck3DS.verifyTrans(verifyData);
+
+
+  const getCardAndCvvToken = () => {
+    getCardToken();
+    getCvvToken();
   }
 
-  const handle3DSResults = async (actionCode, xCavv, xEciFlag, xRefNum, xAuthenticateStatus, xSignatureVerification, error) => {
-    try {
-      console.log('handle3DSResults')
-      const postData = {
-        xSoftwareName: "Test-React-iFields",
-        xSoftwareVersion: "1.0",
-        xVersion: "5.0.0",
-        x3dsError: error,
-        xRefNum: xRefNum,
-        xCavv: xCavv,
-        xEci: xEciFlag,
-        x3dsAuthenticationStatus: xAuthenticateStatus,
-        x3dsSignatureVerificationStatus: xSignatureVerification,
-        x3dsActionCode: actionCode,
-      };
-      const response = await fetch('https://x1.cardknox.com/verifyjson', { method: 'POST', body: JSON.stringify(postData), headers: { 'Content-Type': 'application/json',xKey: "sparitydev111f54eac8fe4166aff7053710aa245e" } });
-      setGateway3dsResponse(await response.json());
-    } catch (error) {
-      console.error(error);
-      setGateway3dsResponse(error);
-    }
-  };
+
+
+  
+
+
 
   const getApplePayProperties = () => {
     return {
@@ -156,112 +130,22 @@ export default function CardKnox() {
 
   return (
     <div>
-      <section className='hero is-primary'>
-        <div className='hero-body'>
-          <div className='container'>
-            <h1 className='title'>
-              Checkout
-            </h1>
-            <h4 className='subtitle'>
-              Please enter your credit card information
-            </h4>
-          </div>
-        </div>
-      </section>
+
+      
+      
       <div className='main'>
-        <p id="total">
-          Your Total: <span id="total-amount">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount)}</span>
-        </p>
+       
         <div className='columns'>
           <div className='column'>
             <section className='box card-box'>
-              <div className="field">
-                <label className="label">
-                  Amount
-                  <div className="control">
-                    <input className="input" type="text" placeholder="Enter amount" value={amount} onChange={(e) => setAmount(e.target.value)} />
-                  </div>
-                </label>
-              </div>
-              <div className="field is-grouped">
-                <div className='field'>
-                  <label className="label">
-                    First Name
-                    <div className="control">
-                      <input className="input" type="text" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-                    </div>
-                  </label>
-                </div>
-                <div className='field'>
-                  <label className="label">
-                    Last Name
-                    <div className="control">
-                      <input className="input" type="text" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-                    </div>
-                  </label>
-                </div>
-              </div>
-              <div className="field">
-                <label className="label">
-                  Address
-                  <div className="control">
-                    <input className="input" type="text" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} />
-                  </div>
-                </label>
-              </div>
-              <div className="field is-grouped">
-                <div className='field is-expanded'>
-                  <label className="label">
-                    City
-                    <div className="control">
-                      <input className="input" type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} />
-                    </div>
-                  </label>
-                </div>
-                <div className='field smallWidth'>
-                  <label className="label">
-                    State
-                    <div className="control">
-                      <input className="input" type="text" placeholder="State" value={addressState} onChange={(e) => setAddressState(e.target.value)} />
-                    </div>
-                  </label>
-                </div>
-                <div className='field smallWidth'>
-                  <label className="label">
-                    Zip
-                    <div className="control">
-                      <input className="input" type="text" placeholder="Zip" value={zip} onChange={(e) => setZip(e.target.value)} />
-                    </div>
-                  </label>
-                </div>
-              </div>
-              <div className="field">
-                <label className="label">
-                  Mobile
-                  <div className="control">
-                    <input className="input" type="text" placeholder="Mobile" value={mobile} onChange={(e) => setMobile(e.target.value)} />
-                  </div>
-                </label>
-              </div>
-              <div className="field">
-                <label className="label">
-                  Email
-                  <div className="control">
-                    <input className="input" type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                  </div>
-                </label>
-              </div>
+             
               <div className='field'>
                 <p className="label">Card Number</p>
                 <div className="control">
-                  <WrappedIfield ifieldType={CARD_TYPE} onIssuer={setIssuer} onToken={onCardToken} handle3DSResults={handle3DSResults} ref={cardRef} />
+                  <WrappedIfield ifieldType={CARD_TYPE} onIssuer={setIssuer} onToken={onCardToken} ref={cardRef} />
                 </div>
               </div>
-              <div className='button-group'>
-              <button className="button is-info is-rounded is-small" onClick={focusCard}>Focus</button>
-              <button className="button is-info is-rounded is-small" onClick={clearCard}>Clear</button>
-              <button className="button is-info is-rounded is-small" onClick={getCardToken}>Submit</button>
-              </div>
+              
               <div className="field is-grouped mt-3">
                 <div className='field'>
                   <p className="label">Month</p>
@@ -290,12 +174,10 @@ export default function CardKnox() {
                   <WrappedIfield ifieldType={CVV_TYPE} issuer={issuer} onToken={onCvvToken} ref={cvvRef} />
                 </div>
               </div>
-              <button className="button is-info is-rounded is-small" onClick={focusCvv}>Focus</button>
-              <button className="button is-info is-rounded is-small" onClick={clearCvv}>Clear</button>
-              <button className="button is-info is-rounded is-small" onClick={getCvvToken}>Submit</button>
-              <div className='button-spaced mt-3'>
-                <button className='button is-success is-rounded' onClick={submitToGateway}>Submit to Gateway</button>
-              </div>
+              {/* <button className="button is-info is-rounded is-small" onClick={focusCvv}>Focus</button>
+              <button className="button is-info is-rounded is-small" onClick={clearCvv}>Clear</button> */}
+              <button className="button is-info is-rounded is-small" onClick={getCardAndCvvToken}>Submit</button>
+              
               <div style={{width:'175px',display:'block',marginTop:'12px'}}>
                 <CardknoxApplePay enableLogging={true} properties={getApplePayProperties()} onGetTransactionInfo={getApplePayTransInfo} onPaymentAuthorize={applePayPaymentAuthorize} />
               </div>                
@@ -307,21 +189,12 @@ export default function CardKnox() {
                 <p className='label'>Card Token</p>
                 <p className='token-field'>{cardToken}</p>
               </div>
-              <div className='field'>
-                <p className='label'>CVV Token</p>
-                <p className='token-field'>{cvvToken}</p>
-              </div>
-              <div className='field'>
-                <p className='label'>Gateway Response</p>
-                <p className='token-field'>{JSON.stringify(gatewayResponse)}</p>
-              </div>
-              <div className='field'>
-                <p className='label'>3DS Response</p>
-                <p className='token-field'>{JSON.stringify(gateway3dsResponse)}</p>
-              </div>
+           
             </section>
           </div>
         </div>
       </div>
     </div>);
 }
+
+export default CardKnox;

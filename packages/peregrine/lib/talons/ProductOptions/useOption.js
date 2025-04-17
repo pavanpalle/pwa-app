@@ -9,17 +9,28 @@ import { useCallback, useMemo, useState } from 'react';
  * @param {array} props.values an array containing possible values
  */
 export const useOption = props => {
-    const { attribute_id, onSelectionChange, selectedValue, values } = props;
+    const {
+        attribute_id,
+        onSelectionChange,
+        selectedValue,
+        values,
+        getProductDetailsByColor
+    } = props;
+
     const [selection, setSelection] = useState(null);
     const initialSelection = useMemo(() => {
         let initialSelection = {};
         const searchValue = selection || selectedValue;
+        // if (getProductDetailsByColor) {
+           
+        //     getProductDetailsByColor(values?.[0]?.value_index);
+        // }
         if (searchValue) {
             initialSelection =
                 values.find(value => value.default_label === searchValue) || {};
         }
         return initialSelection;
-    }, [selectedValue, selection, values]);
+    }, [selection, selectedValue, values]);
 
     const valuesMap = useMemo(() => {
         return new Map(

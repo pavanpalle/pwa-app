@@ -60,6 +60,8 @@ export const useCustomerForm = props => {
 
     const hasDefaultShipping =
         !!customerData && !!customerData.customer.default_shipping;
+        const hasDefaultBilling =
+        !!customerData && !!customerData.customer.default_billing;
 
     // For first time creation pre-fill the form with Customer data
     if (!isUpdate && !getCustomerLoading && !hasDefaultShipping) {
@@ -177,6 +179,7 @@ export const useCustomerForm = props => {
         handleCancel,
         handleSubmit,
         hasDefaultShipping,
+        hasDefaultBilling,
         initialValues,
         isLoading: getCustomerLoading,
         isSaving,

@@ -20,6 +20,7 @@ export const GET_DEFAULT_SHIPPING = gql`
         # eslint-disable-next-line @graphql-eslint/require-id-when-available
         customer {
             default_shipping
+            default_billing
         }
     }
 `;

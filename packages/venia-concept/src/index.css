@@ -994,9 +994,7 @@ ul.social-icons li{
 .paymentMethods-payment_method-kXb{
     @apply p-0  max-w-[240px] w-full
 }
-.paymentMethods-payment_method-kXb:nth-child(1), .paymentMethods-payment_method-kXb:nth-child(3), .paymentMethods-payment_method-kXb:last-child{
-    @apply hidden
-}
+
 .paymentMethods-payment_method-kXb .radio-root-sgH{
     @apply relative h-[60px] w-full !px-0 !gap-0 border border-[#DCDCDC]
 }

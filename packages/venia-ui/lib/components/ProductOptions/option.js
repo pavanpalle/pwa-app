@@ -46,7 +46,8 @@ const Option = props => {
         label,
         onSelectionChange,
         selectedValue,
-        values
+        values,
+        getProductDetailsByColor
     });
 
     const {
