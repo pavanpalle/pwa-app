@@ -22,6 +22,36 @@ export const PLACE_ORDER = gql`
     }
 `;
 
+export const PLACE_ORDER_CARD_KNOX = gql`
+    mutation placeOrder(
+        $Token: String!
+        $Exp: String!
+        $cvv: String!
+        $cartId: String!
+    ) {
+        createCardknoxOrder(
+            input: {
+                QuoteId: $cartId
+                xCardNum: $Token
+                xExp: $Exp
+                xCVV: $cvv
+            }
+        ) {
+            error
+            OrderId
+        }
+    }
+`;
+
+export const PLACE_ORDER_CARD_KNOX_STATIC = gql`
+    mutation placeOrder($Token: String!, $cartId: String!) {
+        createCardknoxStaticOrder(input: { Token: $Token, QuoteId: $cartId }) {
+            error
+            OrderId
+        }
+    }
+`;
+
 // A query to fetch order details _right_ before we submit, so that we can pass
 // data to the order confirmation page.
 export const GET_ORDER_DETAILS = gql`
@@ -65,5 +95,7 @@ export default {
     getCheckoutDetailsQuery: GET_CHECKOUT_DETAILS,
     getCustomerQuery: GET_CUSTOMER,
     getOrderDetailsQuery: GET_ORDER_DETAILS,
-    placeOrderMutation: PLACE_ORDER
+    placeOrderMutation: PLACE_ORDER,
+    cardKnoxPlaceOrderMutation: PLACE_ORDER_CARD_KNOX,
+    cardKnoxStaticPlaceOrderMutation: PLACE_ORDER_CARD_KNOX_STATIC,
 };

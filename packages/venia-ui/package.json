@@ -85,7 +85,6 @@
     "@magento/peregrine": "~14.5.1",
     "@magento/pwa-buildpack": "~11.5.4",
     "apollo-cache-persist": "~0.1.1",
-    "braintree-web-drop-in": "~1.43.0",
     "graphql": "~15.5.0",
     "react": "~17.0.1",
     "react-intl": "~5.20.0",

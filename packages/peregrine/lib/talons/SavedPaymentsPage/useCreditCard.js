@@ -8,12 +8,16 @@ export const useCreditCard = props => {
     const { paymentHash } = props;
 
     const operations = mergeOperations(defaultOperations, props.operations);
-    const { deleteCreditCardPaymentMutation } = operations;
+    const { deleteCreditCardPaymentMutation,setAsDefaultCreditCardPaymentMutation } = operations;
 
     const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
 
     const [deletePayment, { error, loading }] = useMutation(
         deleteCreditCardPaymentMutation
+    );
+
+    const [setAsDefault, { error:setAsDefaultError, loading:setAsDefaultLoading }] = useMutation(
+        setAsDefaultCreditCardPaymentMutation
     );
 
     const handleDeletePayment = useCallback(async () => {
@@ -24,6 +28,14 @@ export const useCreditCard = props => {
         }
     }, [deletePayment, paymentHash]);
 
+    const handleDefaultPayment = useCallback(async () => {
+        try {
+            await setAsDefault({ variables: { paymentHash } });
+        } catch {
+            setIsConfirmingDelete(false);
+        }
+    }, [setAsDefault, paymentHash]);
+
     const toggleDeleteConfirmation = useCallback(() => {
         setIsConfirmingDelete(current => !current);
     }, []);
@@ -33,6 +45,7 @@ export const useCreditCard = props => {
         hasError: !!error,
         isConfirmingDelete,
         isDeletingPayment: loading,
-        toggleDeleteConfirmation
+        toggleDeleteConfirmation,
+        handleDefaultPayment
     };
 };

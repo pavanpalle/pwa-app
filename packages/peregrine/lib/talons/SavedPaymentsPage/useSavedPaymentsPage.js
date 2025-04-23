@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { useQuery } from '@apollo/client';
+import { useCallback, useEffect, useState } from 'react';
+import { useMutation, useQuery } from '@apollo/client';
 
 import { useAppContext } from '@magento/peregrine/lib/context/app';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
@@ -9,7 +9,7 @@ import defaultOperations from './savedPaymentsPage.gql';
 
 export const normalizeTokens = responseData => {
     const paymentTokens =
-        (responseData && responseData.customerPaymentTokens.items) || [];
+        (responseData && responseData.cardknoxPaymentMethods) || [];
 
     return paymentTokens.map(
         ({ details, public_hash, payment_method_code }) => ({
@@ -36,8 +36,8 @@ export const normalizeTokens = responseData => {
  */
 export const useSavedPaymentsPage = (props = {}) => {
     const operations = mergeOperations(defaultOperations, props.operations);
-    const { getSavedPaymentsQuery } = operations;
-
+    const { getSavedPaymentsQuery, addNewPaymentMethodMutation } = operations;
+    const [addCard, setAddCard] = useState(false);
     const [
         ,
         {
@@ -54,17 +54,57 @@ export const useSavedPaymentsPage = (props = {}) => {
             skip: !isSignedIn
         }
     );
-
+    const [
+        addPaymentMethod,
+        { loading: addPaymentMethodLoading }
+    ] = useMutation(addNewPaymentMethodMutation, {
+        onCompleted: () => {
+            setAddCard(current => !current);
+        }
+    });
     // Update the page indicator if the GraphQL query is in flight.
     useEffect(() => {
         setPageLoading(loading);
     }, [loading, setPageLoading]);
 
-    const savedPayments = normalizeTokens(savedPaymentsData);
+    const savedPayments =
+        (savedPaymentsData && savedPaymentsData.cardknoxPaymentMethods) || [];
+
+    const toggleAddCard = useCallback(() => {
+        setAddCard(current => !current);
+    }, []);
+
+    const getExpiryDate = (expMonth, expYear) => {
+        // Pad month with leading zero if needed
+        const month = String(expMonth).padStart(2, '0');
+        // Get last two digits of year
+        const year = String(expYear).slice(-2);
+        return month + year;
+    };
+
+    const handleAddPaymentMethod = useCallback(
+        data => {
+            const expDate = getExpiryDate(data.expMonth, data.expYear);
+
+            addPaymentMethod({
+                variables: {
+                    Token: data.token,
+                    Exp: expDate,
+                    SetAsDefault: true
+                },
+                refetchQueries: [{ query: getSavedPaymentsQuery }]
+            });
+        },
+        [addPaymentMethod, getSavedPaymentsQuery]
+    );
 
     return {
         isLoading: loading,
-        savedPayments
+        savedPayments,
+        toggleAddCard,
+        addCard,
+        handleAddPaymentMethod,
+        isProcessing: addPaymentMethodLoading
     };
 };
 

@@ -23,16 +23,16 @@ import defaultClasses from './creditCard.module.css';
 const cardTypeMapper = {
     AE: 'American Express',
     AU: 'Aura',
-    DI: 'Discover',
+    Discover: 'Discover',
     DN: 'Diners',
     ELO: 'Elo',
     HC: 'Hipercard',
     JCB: 'JCB',
-    MC: 'MasterCard',
+    MasterCard: 'MasterCard',
     MD: 'Maestro Domestic',
     MI: 'Maestro International',
     UN: 'UnionPay',
-    VI: 'Visa'
+    Visa: 'Visa'
 };
 
 const errorIcon = <Icon src={AlertCircleIcon} size={20} />;
@@ -46,7 +46,8 @@ const CreditCard = props => {
         hasError,
         isConfirmingDelete,
         isDeletingPayment,
-        toggleDeleteConfirmation
+        toggleDeleteConfirmation,
+        handleDefaultPayment
     } = talonProps;
 
     const { formatMessage } = useIntl();
@@ -70,18 +71,22 @@ const CreditCard = props => {
 
     const classes = useStyle(defaultClasses, propClasses);
 
-    const number = `**** ${details.maskedCC} \u00A0\u00A0 ${cardTypeMapper[
-        details.type
+    const number = `${details.MaskedNumber} \u00A0\u00A0 ${cardTypeMapper[
+        details.CardType
     ] || ''}`;
     const cardExpiryDate = useMemo(() => {
-        const [month, year] = details.expirationDate.split('/');
+        if (!details.Exp || details.Exp.length !== 4) return '';
+    
+        const month = details.Exp.slice(0, 2); // "04"
+        const year = `20${details.Exp.slice(2)}`; // "26" → "2026"
+    
         const shortMonth = new Date(+year, +month - 1).toLocaleString(
             'default',
-            { month: 'short' }
+            { month: 'short' } // e.g., "Apr"
         );
-
+    
         return `${shortMonth}. ${year}`;
-    }, [details.expirationDate]);
+    }, [details.Exp]);
 
     const rootClass = isConfirmingDelete ? classes.root_active : classes.root;
 
@@ -96,6 +101,23 @@ const CreditCard = props => {
                 <FormattedMessage
                     id={'storedPayments.delete'}
                     defaultMessage={'Delete'}
+                />
+            </span>
+        </LinkButton>
+    );
+
+
+    const setAsDefaultButton = (
+        <LinkButton
+            classes={{ root: classes.deleteButton }}
+            disabled={details?.IsDefaultPaymentMethod}
+            onClick={handleDefaultPayment}
+        >
+           
+            <span className={classes.deleteText}>
+                <FormattedMessage
+                    id={'storedPayments.setasdefault'}
+                    defaultMessage={details?.IsDefaultPaymentMethod?"Default":'Set as Default'}
                 />
             </span>
         </LinkButton>
@@ -147,8 +169,8 @@ const CreditCard = props => {
             </div>
             <div className={classes.number}>{number}</div>
             <div className={classes.expiry_date}>{cardExpiryDate}</div>
-            <div className={classes.delete}>{deleteButton}</div>
-            {deleteConfirmationOverlay}
+            <div className={classes.delete}>{setAsDefaultButton}</div>
+            {/* {deleteConfirmationOverlay} */}
         </div>
     );
 };

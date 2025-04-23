@@ -77,7 +77,9 @@ export const useCheckoutPage = (props = {}) => {
         getCheckoutDetailsQuery,
         getCustomerQuery,
         getOrderDetailsQuery,
-        placeOrderMutation
+        placeOrderMutation,
+        cardKnoxPlaceOrderMutation,
+        cardKnoxStaticPlaceOrderMutation
     } = operations;
 
     const { generateReCaptchaData, recaptchaWidgetProps } = useGoogleReCaptcha({
@@ -103,6 +105,13 @@ export const useCheckoutPage = (props = {}) => {
     );
     const [guestSignInUsername, setGuestSignInUsername] = useState('');
 
+    const [paymentHash, setPaymentHash] = useState({
+        paymentToken: '',
+        cvvToken: '',
+        exp: '',
+        paymentMethod: ''
+    });
+
     const [{ isSignedIn }] = useUserContext();
     const [{ cartId }, { createCart, removeCart }] = useCartContext();
 
@@ -115,6 +124,24 @@ export const useCheckoutPage = (props = {}) => {
             loading: placeOrderLoading
         }
     ] = useMutation(placeOrderMutation);
+
+    const [
+        cardKnoxPlaceOrder,
+        {
+            data: cardKnoxPlaceOrderData,
+            error: cardKnoxPlaceOrderError,
+            loading: cardKnoxPlaceOrderLoading
+        }
+    ] = useMutation(cardKnoxPlaceOrderMutation);
+
+    const [
+        cardKnoxStaticPlaceOrder,
+        {
+            data: cardKnoxStaticPlaceOrderData,
+            error: cardKnoxStaticPlaceOrderError,
+            loading: cardKnoxStaticPlaceOrderLoading
+        }
+    ] = useMutation(cardKnoxStaticPlaceOrderMutation);
 
     const [
         getOrderDetails,
@@ -277,12 +304,32 @@ export const useCheckoutPage = (props = {}) => {
             try {
                 const reCaptchaData = await generateReCaptchaData();
 
-                await placeOrder({
-                    variables: {
-                        cartId
-                    },
-                    ...reCaptchaData
-                });
+                if (paymentHash.paymentMethod === 'cardknox') {
+                    await cardKnoxPlaceOrder({
+                        variables: {
+                            cartId,
+                            Token: paymentHash.paymentToken,
+                            Exp: paymentHash.exp,
+                            cvv: paymentHash.cvvToken
+                        },
+                        ...reCaptchaData
+                    });
+                } else if (paymentHash.paymentMethod === 'cardknox_static') {
+                    await cardKnoxStaticPlaceOrder({
+                        variables: {
+                            cartId,
+                            Token: paymentHash.paymentToken
+                        },
+                        ...reCaptchaData
+                    });
+                } else {
+                    await placeOrder({
+                        variables: {
+                            cartId
+                        },
+                        ...reCaptchaData
+                    });
+                }
                 // Cleanup stale cart and customer info.
                 await removeCart();
                 await apolloClient.clearCacheData(apolloClient, 'cart');
@@ -312,7 +359,10 @@ export const useCheckoutPage = (props = {}) => {
         orderDetailsData,
         placeOrder,
         removeCart,
-        isPlacingOrder
+        isPlacingOrder,
+        paymentHash,
+        cardKnoxPlaceOrder,
+        cardKnoxStaticPlaceOrder
     ]);
 
     useEffect(() => {
@@ -365,11 +415,41 @@ export const useCheckoutPage = (props = {}) => {
                     payload: eventPayload
                 });
             } else if (placeOrderData && orderDetailsData?.cart.id === cartId) {
+                console.log('placeOrderData', placeOrderData);
+                dispatch({
+                    type: 'ORDER_CONFIRMATION_PAGE_VIEW',
+                    payload: {
+                        order_number: placeOrderData.placeOrder.orderV2.number,
+                        ...eventPayload
+                    }
+                });
+            } else if (
+                cardKnoxPlaceOrderData &&
+                orderDetailsData?.cart.id === cartId
+            ) {
+                console.log('cardKnoxPlaceOrderData', cardKnoxPlaceOrderData);
                 dispatch({
                     type: 'ORDER_CONFIRMATION_PAGE_VIEW',
                     payload: {
                         order_number:
-                            placeOrderData.placeOrder.orderV2.number,
+                            cardKnoxPlaceOrderData.createCardknoxOrder.OrderId,
+                        ...eventPayload
+                    }
+                });
+            } else if (
+                cardKnoxStaticPlaceOrderData &&
+                orderDetailsData?.cart.id === cartId
+            ) {
+                console.log(
+                    'cardKnoxStaticPlaceOrderData',
+                    cardKnoxStaticPlaceOrderData
+                );
+                dispatch({
+                    type: 'ORDER_CONFIRMATION_PAGE_VIEW',
+                    payload: {
+                        order_number:
+                            cardKnoxStaticPlaceOrderData
+                                .createCardknoxStaticOrder.OrderId,
                         ...eventPayload
                     }
                 });
@@ -385,18 +465,39 @@ export const useCheckoutPage = (props = {}) => {
         dispatch,
         placeOrderData,
         isPlacingOrder,
-        reviewOrderButtonClicked
+        reviewOrderButtonClicked,
+        cardKnoxPlaceOrderData,
+        cardKnoxStaticPlaceOrderData
     ]);
     useEffect(() => {
-        if (isSignedIn && placeOrderData) {
+        if (
+            isSignedIn &&
+            (placeOrderData ||
+                cardKnoxPlaceOrderData ||
+                cardKnoxStaticPlaceOrderData)
+        ) {
             history.push('/order-confirmation', {
-                orderNumber: placeOrderData.placeOrder.orderV2.number,
+                orderNumber:
+                    (placeOrderData &&
+                        placeOrderData.placeOrder.orderV2.number) ||
+                    (cardKnoxPlaceOrderData &&
+                        cardKnoxPlaceOrderData.createCardknoxOrder.OrderId) ||
+                    (cardKnoxStaticPlaceOrderData &&
+                        cardKnoxStaticPlaceOrderData.createCardknoxStaticOrder
+                            .OrderId),
                 items: cartItems
             });
         } else if (!isSignedIn && placeOrderData) {
             history.push('/checkout');
         }
-    }, [isSignedIn, placeOrderData, cartItems, history]);
+    }, [
+        isSignedIn,
+        placeOrderData,
+        cartItems,
+        history,
+        cardKnoxPlaceOrderData,
+        cardKnoxStaticPlaceOrderData
+    ]);
 
     return {
         activeContent,
@@ -419,6 +520,11 @@ export const useCheckoutPage = (props = {}) => {
         orderDetailsLoading,
         orderNumber:
             (placeOrderData && placeOrderData.placeOrder.orderV2.number) ||
+            (cardKnoxPlaceOrderData &&
+                cardKnoxPlaceOrderData.createCardknoxOrder.OrderId) ||
+            (cardKnoxStaticPlaceOrderData &&
+                cardKnoxStaticPlaceOrderData.createCardknoxStaticOrder
+                    .OrderId) ||
             null,
         placeOrderLoading,
         placeOrderButtonClicked,
@@ -438,6 +544,7 @@ export const useCheckoutPage = (props = {}) => {
         reviewOrderButtonClicked,
         recaptchaWidgetProps,
         toggleAddressBookContent,
-        toggleSignInContent
+        toggleSignInContent,
+        setPaymentHash
     };
 };

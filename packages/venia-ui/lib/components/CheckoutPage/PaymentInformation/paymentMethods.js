@@ -8,8 +8,8 @@ import { useStyle } from '../../../classify';
 import RadioGroup from '@magento/venia-ui/lib/components/RadioGroup';
 import Radio from '@magento/venia-ui/lib/components/RadioGroup/radio';
 import defaultClasses from './paymentMethods.module.css';
-import payments from './paymentMethodCollection';
 import Cardknox from './cardKnox';
+import SavedCards from './savedCards';
 
 const PaymentMethods = props => {
     const {
@@ -17,7 +17,8 @@ const PaymentMethods = props => {
         onPaymentError,
         onPaymentSuccess,
         resetShouldSubmit,
-        shouldSubmit
+        shouldSubmit,
+        setPaymentHash
     } = props;
 
     const { formatMessage } = useIntl();
@@ -38,29 +39,28 @@ const PaymentMethods = props => {
         return null;
     }
 
-    
-
     const radios = availablePaymentMethods
         .map(({ code, title }) => {
-
-           
-
             // If we don't have an implementation for a method type, ignore it.
             // if (!Object.keys(payments).includes(code)) {
             //     return;
             // }
 
-           
-
             const id = `paymentMethod--${code}`;
             const isSelected = currentSelectedPaymentMethod === code;
-            const PaymentMethodComponent = code==="cardknox"?Cardknox:"cashondelivery";//payments[code];
+            const PaymentMethodComponent =
+                code === 'cardknox'
+                    ? Cardknox
+                    : code === 'cardknoxstatic'
+                    ? SavedCards
+                    : 'cashondelivery'; //payments[code];
             const renderedComponent = isSelected ? (
                 <PaymentMethodComponent
                     onPaymentSuccess={onPaymentSuccess}
                     onPaymentError={onPaymentError}
                     resetShouldSubmit={resetShouldSubmit}
                     shouldSubmit={shouldSubmit}
+                    setPaymentHash={setPaymentHash}
                 />
             ) : null;
 

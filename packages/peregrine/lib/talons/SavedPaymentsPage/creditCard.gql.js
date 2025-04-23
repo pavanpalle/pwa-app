@@ -14,6 +14,22 @@ export const DELETE_CREDIT_CARD_PAYMENT = gql`
     ${SavedPaymentsFragment}
 `;
 
+export const DEFAULT_CREDIT_CARD_PAYMENT = gql`
+    mutation SetAsDefaultCreditCardPayment($paymentHash: String!) {
+        updateCardknoxPaymentMethod(
+            input: {
+                PaymentMethodId: $paymentHash
+                SetAsDefault: true
+                Revision: 1
+            }
+        ) {
+            error
+            message
+        }
+    }
+`;
+
 export default {
-    deleteCreditCardPaymentMutation: DELETE_CREDIT_CARD_PAYMENT
+    deleteCreditCardPaymentMutation: DELETE_CREDIT_CARD_PAYMENT,
+    setAsDefaultCreditCardPaymentMutation: DEFAULT_CREDIT_CARD_PAYMENT
 };

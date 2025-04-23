@@ -12,7 +12,6 @@ import Button from '../Button';
 import Checkbox from '../Checkbox';
 import Field from '../Field';
 import TextInput from '../TextInput';
-import BraintreeDropin from './braintreeDropin';
 
 /**
  * This component is meant to be nested within an `informed` form. It utilizes
@@ -139,12 +138,12 @@ const PaymentsFormItems = props => {
             <div className={classes.body}>
                 <h2 className={classes.heading}>{headingText}</h2>
                 <div className={classes.braintree}>
-                    <BraintreeDropin
+                    {/* <BraintreeDropin
                         shouldRequestPaymentNonce={isSubmitting}
                         onError={handleError}
                         onSuccess={handleSuccess}
                         onReady={setIsReady}
-                    />
+                    /> */}
                 </div>
                 <div className={classes.address_check}>
                     <Checkbox

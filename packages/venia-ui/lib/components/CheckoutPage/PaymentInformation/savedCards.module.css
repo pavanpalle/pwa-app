@@ -1,0 +1,15 @@
+.root {
+    composes: border-b-2 from global;
+    composes: border-solid from global;
+    composes: border-subtle from global;
+    composes: grid from global;
+    composes: gap-y-xs from global;
+    composes: p-md from global;
+    composes: rounded-box from global;
+}
+
+.form {
+    composes: gap-y-sm from global;
+    composes: grid from global;
+    composes: grid-rows-autoLast from global;
+}

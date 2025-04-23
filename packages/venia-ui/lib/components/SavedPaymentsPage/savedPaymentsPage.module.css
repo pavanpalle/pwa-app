@@ -52,3 +52,21 @@
 
     composes: hover_border-brand-dark from global;
 }
+
+.add {
+    grid-column: 2 / span 1;
+    grid-row: 1 / span 3;
+    margin-top: 10px;
+}
+
+.addButton {
+    composes: root from '../LinkButton/linkButton.module.css';
+
+    @apply no-underline;
+}
+
+.addText {
+    composes: hidden from global;
+    padding: 10px;
+    composes: xs_lg_block from global;
+}

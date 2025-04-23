@@ -2,7 +2,6 @@ import React, { useMemo, useCallback } from 'react';
 import { useIntl } from 'react-intl';
 import { bool, func, shape, string } from 'prop-types';
 import { useCreditCard } from '@magento/peregrine/lib/talons/CheckoutPage/PaymentInformation/useCreditCard';
-
 import { isRequired } from '../../../util/formValidators';
 import Country from '../../Country';
 import Region from '../../Region';
@@ -10,17 +9,14 @@ import Postcode from '../../Postcode';
 import Checkbox from '../../Checkbox';
 import Field from '../../Field';
 import TextInput from '../../TextInput';
-import BrainTreeDropin from './brainTreeDropIn';
 import LoadingIndicator from '../../LoadingIndicator';
 import { useStyle } from '../../../classify';
-
 import defaultClasses from './creditCard.module.css';
 import FormError from '../../FormError';
-import GoogleReCaptcha from '../../GoogleReCaptcha';
-import CardKnox from './cardKnox';
+
 
 const STEP_DESCRIPTIONS = [
-    { defaultMessage: 'Loading Payment', id: 'checkoutPage.step0' },
+    { defaultMessage: 'Loading', id: 'checkoutPage.step0' },
     {
         defaultMessage: 'Checking Credit Card Information',
         id: 'checkoutPage.step1'
@@ -65,10 +61,7 @@ const CreditCard = props => {
 
     const {
         errors,
-        shouldRequestPaymentNonce,
-        onPaymentError,
-        onPaymentSuccess,
-        onPaymentReady,
+       
         isBillingAddressSame,
         isLoading,
         /**
@@ -83,10 +76,7 @@ const CreditCard = props => {
          */
         stepNumber,
         initialValues,
-        shippingAddressCountry,
-        shouldTeardownDropin,
-        resetShouldTeardownDropin,
-        recaptchaWidgetProps
+        shippingAddressCountry
     } = talonProps;
 
     const creditCardComponentClassName = isLoading
@@ -315,7 +305,7 @@ const CreditCard = props => {
                         />
                     </Field>
                 </div>
-                <GoogleReCaptcha {...recaptchaWidgetProps} />
+               
             </div>
             {loadingIndicator}
         </div>

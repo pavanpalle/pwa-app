@@ -83,7 +83,8 @@ const CheckoutPage = props => {
         reviewOrderButtonClicked,
         recaptchaWidgetProps,
         toggleAddressBookContent,
-        toggleSignInContent
+        toggleSignInContent,
+        setPaymentHash
     } = talonProps;
 
     const [, { addToast }] = useToasts();
@@ -239,6 +240,7 @@ const CheckoutPage = props => {
                     resetShouldSubmit={resetReviewOrderButtonClicked}
                     setCheckoutStep={setCheckoutStep}
                     shouldSubmit={reviewOrderButtonClicked}
+                    setPaymentHash={setPaymentHash}
                 />
             ) : (
                 <h3 className={classes.payment_information_heading}>

@@ -1,6 +1,0 @@
-.root {
-}
-
-.error {
-    composes: text-error from global;
-}

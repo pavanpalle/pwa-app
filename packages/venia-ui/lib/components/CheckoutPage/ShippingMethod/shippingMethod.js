@@ -90,6 +90,7 @@ const ShippingMethod = props => {
                 shipping_method: lowestCostShippingMethodSerializedValue
             };
 
+           
             bodyContents = (
                 <Form
                     className={classes.form}

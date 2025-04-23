@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes, {
     bool,
     func,
@@ -17,8 +17,49 @@ import SimpleImage from './simpleImage';
 import { useStyle } from '../../classify';
 
 import defaultClasses from './image.module.css';
+
+/**
+ * Custom hook to handle Intersection Observer functionality
+ * @param {Object} options - Options for the intersection observer
+ * @returns {Object} - Reference and intersection status
+ */
+const useIntersectionObserver = (options = {}) => {
+    const ref = useRef(null);
+    const [isIntersecting, setIsIntersecting] = React.useState(false);
+    const [wasIntersected, setWasIntersected] = React.useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(([entry]) => {
+            setIsIntersecting(entry.isIntersecting);
+            
+            if (entry.isIntersecting && !wasIntersected) {
+                setWasIntersected(true);
+            }
+        }, {
+            root: null,
+            rootMargin: '200px', // Start loading slightly before it comes into view
+            threshold: 0.01,
+            ...options
+        });
+
+        const currentRef = ref.current;
+        if (currentRef) {
+            observer.observe(currentRef);
+        }
+
+        return () => {
+            if (currentRef) {
+                observer.unobserve(currentRef);
+            }
+        };
+    }, [options, wasIntersected]);
+
+    return { ref, isIntersecting, wasIntersected };
+};
+
 /**
  * The Image component renders a placeholder until the image is loaded.
+ * Now enhanced with Intersection Observer for lazy loading.
  *
  * @param {object}   props.classes any classes to apply to this component
  * @param {bool}     props.displayPlaceholder whether or not to display a placeholder while the image loads or if it errors on load.
@@ -32,10 +73,11 @@ import defaultClasses from './image.module.css';
  * @param {number}   props.width the intrinsic width of the image & the width to request for the fallback image for browsers that don't support srcset / sizes.
  * @param {number}   props.ratio is the image width to height ratio. Defaults to `DEFAULT_WIDTH_TO_HEIGHT_RATIO` from `util/images.js`.
  * @param {Map}      props.widths a map of breakpoints to possible widths used to create the img's sizes attribute.
+ * @param {bool}     props.lazyLoad whether to lazy load the image using IntersectionObserver
  */
 const Image = props => {
     const {
-        alt,
+        alt="",
         classes: propsClasses,
         displayPlaceholder,
         height,
@@ -48,8 +90,15 @@ const Image = props => {
         width,
         widths,
         ratio,
+        lazyLoad = true, // Default to true for lazy loading
         ...rest
     } = props;
+
+    const { ref, wasIntersected } = useIntersectionObserver();
+
+    // Only pass the resource and src to the talonProps if we should load the image
+    // (either lazyLoad is false or the element has been intersected)
+    const shouldLoadImage = !lazyLoad || wasIntersected;
 
     const talonProps = useImage({
         onError,
@@ -75,35 +124,37 @@ const Image = props => {
     const imageClass = `${classes.image} ${isLoadedClass}`;
 
     // If we have a src, use it directly. If not, assume this is a resource image.
-    const actualImage = src ? (
-        <SimpleImage
-            alt={alt}
-            className={imageClass}
-            handleError={handleError}
-            handleLoad={handleImageLoad}
-            height={talonResourceHeight}
-            src={src}
-            width={width}
-            {...rest}
-        />
-    ) : (
-        <ResourceImage
-            alt={alt}
-            className={imageClass}
-            handleError={handleError}
-            handleLoad={handleImageLoad}
-            height={talonResourceHeight}
-            resource={resource}
-            type={type}
-            width={talonResourceWidth}
-            widths={widths}
-            ratio={ratio}
-            {...rest}
-        />
-    );
+    const actualImage = shouldLoadImage ? (
+        src ? (
+            <SimpleImage
+                alt={alt}
+                className={imageClass}
+                handleError={handleError}
+                handleLoad={handleImageLoad}
+                height={talonResourceHeight}
+                src={src}
+                width={width}
+                {...rest}
+            />
+        ) : (
+            <ResourceImage
+                alt={alt}
+                className={imageClass}
+                handleError={handleError}
+                handleLoad={handleImageLoad}
+                height={talonResourceHeight}
+                resource={resource}
+                type={type}
+                width={talonResourceWidth}
+                widths={widths}
+                ratio={ratio}
+                {...rest}
+            />
+        )
+    ) : null;
 
     return (
-        <div className={containerClass}>
+        <div ref={ref} className={containerClass}>
             <PlaceholderImage
                 alt={alt}
                 classes={classes}
@@ -140,7 +191,7 @@ const conditionallyRequiredString = (props, propName, componentName) => {
 };
 
 Image.propTypes = {
-    alt: string.isRequired,
+    alt: string,
     classes: shape({
         container: string,
         loaded: string,
@@ -157,12 +208,14 @@ Image.propTypes = {
     type: string,
     width: oneOfType([number, string]),
     widths: instanceOf(Map),
-    ratio: number
+    ratio: number,
+    lazyLoad: bool
 };
 
 Image.defaultProps = {
     displayPlaceholder: true,
-    ratio: DEFAULT_WIDTH_TO_HEIGHT_RATIO
+    ratio: DEFAULT_WIDTH_TO_HEIGHT_RATIO,
+    lazyLoad: true
 };
 
 export default Image;

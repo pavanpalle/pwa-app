@@ -16,7 +16,7 @@ const WrappedIfield = React.forwardRef((props, ref) => {
     }
   }), []);
 
-  const { ifieldType, issuer, onIssuer, onToken, onError, handle3DSResults } = props;
+  const { ifieldType, issuer, onIssuer, onToken, onError, handle3DSResults ,className} = props;
   const account = {
     xKey: "ifields_malleshsofttechdev34aea0b8c23443c78fc",
     xSoftwareName: "react-cardknox-ifields",
@@ -27,11 +27,11 @@ const WrappedIfield = React.forwardRef((props, ref) => {
     enableLogging: false,
     autoFormat: true,
     autoFormatSeparator: ' ',
-    autoSubmit: false,
+    autoSubmit: true,
     blockNonNumericInput: true,
     iFieldstyle: {
-      width: "50%",
-      "max-width": "50%",
+      width: "100%",
+      "max-width": "80%",
     
       // "box-shadow": "inset 0 1px 2px rgba(10, 10, 10, 0.1)",
       "background-color": "white",
@@ -39,7 +39,7 @@ const WrappedIfield = React.forwardRef((props, ref) => {
       "border-color": "#BFC0BF",
       "border-radius": "10px",
       color: "#363636",
-      height: "50px",
+      height: "48px",
       "line-height": "1.5",
       "padding-bottom": "calc(0.375em - 1px)",
       "padding-left": "calc(0.625em - 1px)",
@@ -53,6 +53,7 @@ const WrappedIfield = React.forwardRef((props, ref) => {
     console.log("Iframe loaded");
   };
   const onUpdate = (data) => {
+    console.log("data", data);
     if (ifieldType === CARD_TYPE && data.issuer)
       onIssuer(data.issuer);
   };
@@ -78,7 +79,7 @@ const WrappedIfield = React.forwardRef((props, ref) => {
     onError={onError}
     issuer={issuer}
     autoSubmit={true}
-    className='ifields' />);
+    className={className}/>);
 });
 WrappedIfield.propTypes = {
   ifieldType: PropTypes.oneOf([CARD_TYPE, CVV_TYPE, ACH_TYPE]),

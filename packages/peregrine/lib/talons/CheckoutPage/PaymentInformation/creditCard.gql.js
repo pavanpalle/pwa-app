@@ -12,14 +12,7 @@ export const GET_IS_BILLING_ADDRESS_SAME = gql`
     }
 `;
 
-export const GET_PAYMENT_NONCE = gql`
-    query getPaymentNonce($cartId: String!) {
-        cart(cart_id: $cartId) @client {
-            id
-            paymentNonce
-        }
-    }
-`;
+
 
 export const GET_BILLING_ADDRESS = gql`
     query getBillingAddress($cartId: String!) {
@@ -127,39 +120,11 @@ export const SET_BILLING_ADDRESS = gql`
     ${AvailablePaymentMethodsFragment}
 `;
 
-export const SET_CC_DETAILS_ON_CART = gql`
-    mutation setSelectedPaymentMethod(
-        $cartId: String!
-        $paymentNonce: String!
-    ) {
-        setPaymentMethodOnCart(
-            input: {
-                cart_id: $cartId
-                payment_method: {
-                    code: "braintree"
-                    braintree: {
-                        payment_method_nonce: $paymentNonce
-                        is_active_payment_token_enabler: false
-                    }
-                }
-            }
-        ) {
-            cart {
-                id
-                selected_payment_method {
-                    code
-                    title
-                }
-            }
-        }
-    }
-`;
+
 
 export default {
     getBillingAddressQuery: GET_BILLING_ADDRESS,
     getIsBillingAddressSameQuery: GET_IS_BILLING_ADDRESS_SAME,
-    getPaymentNonceQuery: GET_PAYMENT_NONCE,
     getShippingAddressQuery: GET_SHIPPING_ADDRESS,
     setBillingAddressMutation: SET_BILLING_ADDRESS,
-    setCreditCardDetailsOnCartMutation: SET_CC_DETAILS_ON_CART
 };

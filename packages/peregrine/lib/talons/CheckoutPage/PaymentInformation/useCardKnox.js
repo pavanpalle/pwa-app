@@ -82,7 +82,6 @@ export const useCardKnox = props => {
      *
      * `0` No call made yet
      * `1` Billing address mutation initiated
-     * `2` Braintree nonce requested
      * `3` Payment information mutation initiated
      * `4` All mutations done
      */
@@ -136,7 +135,8 @@ export const useCardKnox = props => {
      * Function to be called by the braintree dropin when the
      * nonce generation is successful.
      */
-    const onPaymentSuccess = useCallback(braintreeNonce => {
+    const onPaymentSuccess = useCallback(token => {
+        console.log(token)
         setStepNumber(3);
     }, []);
 
@@ -183,6 +183,9 @@ export const useCardKnox = props => {
             setShouldRequestPaymentNonce(false);
         }
     }, [shouldSubmit, resetShouldSubmit, formState.errors, onSuccess]);
+
+
+    
 
     return {
         hasError: !!error,

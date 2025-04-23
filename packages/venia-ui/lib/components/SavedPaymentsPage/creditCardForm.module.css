@@ -1,0 +1,257 @@
+/* Original styles */
+.mockIfield {
+    position: relative;
+    width: 100%;
+  }
+  
+  .mockInput {
+    width: 100%;
+    height: 48px;
+    padding: 0 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: all 0.2s;
+  }
+  
+  .mockInput:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+  
+
+  
+
+  
+  /* New styles to replace Tailwind */
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    background-color: #f3f4f6;
+    padding: 1rem;
+  }
+  
+  .formCard {
+    width: 100%;
+    max-width: 40rem;
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+  }
+  
+  .formHeader {
+    padding: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .formTitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
+  }
+  
+  .formBody {
+    padding: 1.5rem;
+  }
+  
+  .successContainer {
+    text-align: center;
+    padding: 2rem 0;
+  }
+  
+  .successIcon {
+    margin-bottom: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 9999px;
+    background-color: #d1fae5;
+  }
+  
+  .successIconSvg {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #10b981;
+  }
+  
+  .successTitle {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: #111827;
+    margin-bottom: 0.5rem;
+  }
+  
+  .successMessage {
+    color: #4b5563;
+    margin-bottom: 1.5rem;
+  }
+  
+  .successButton {
+    color: #2563eb;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  
+  .formGroup {
+    margin-bottom: 1.5rem;
+  }
+  
+  .formLabel {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.5rem;
+  }
+  
+  .formFlex {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .formHalf {
+    width: 50%;
+  }
+  
+  .expiryFlex {
+    display: flex;
+    align-items: center;
+  }
+  
+  .expiryMonth {
+    width: 40%;
+    position: relative;
+  }
+  
+  .expirySlash {
+    padding: 0 0.5rem;
+    color: #6b7280;
+  }
+  
+  .expiryYear {
+    width: 60%;
+    position: relative;
+  }
+  
+  .selectField {
+    display: block;
+    width: 100%;
+    border-radius: 0.5rem;
+    border: 1px solid #d1d5db;
+    padding: 0.75rem;
+    appearance: none;
+    background-color: white;
+    color: #374151;
+  }
+  
+  .selectArrow {
+    pointer-events: none;
+    position: absolute;
+    inset-y: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    padding-right: 0.5rem;
+    color: #374151;
+  }
+  
+  .errorText {
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: #dc2626;
+  }
+  
+  .buttonContainer {
+    margin-top: 2rem;
+  }
+  
+  .submitButton {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+  
+  .submitButtonEnabled {
+    background-color: #2563eb;
+    color: white;
+  }
+  
+  .submitButtonEnabled:hover {
+    background-color: #1d4ed8;
+  }
+  
+  .submitButtonDisabled {
+    background-color: #d1d5db;
+    color: #6b7280;
+    cursor: not-allowed;
+  }
+  
+  .submitButtonProcessing {
+    opacity: 0.75;
+    cursor: wait;
+  }
+  
+  .spinnerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .spinner {
+    animation: spin 1s linear infinite;
+    margin-right: 0.5rem;
+    margin-left: -0.25rem;
+    height: 1rem;
+    width: 1rem;
+  }
+  
+  .applePayContainer {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .applePayWrapper {
+    width: 12rem;
+  }
+  
+  .tokenDisplay {
+    margin-top: 1.5rem;
+    padding: 0.75rem;
+    background-color: #f9fafb;
+    border-radius: 0.5rem;
+    border: 1px solid #e5e7eb;
+  }
+  
+  .tokenText {
+    font-size: 0.75rem;
+  }
+  
+  .tokenLabel {
+    font-weight: 600;
+    color: #374151;
+  }
+  
+  .tokenValue {
+    margin-left: 0.25rem;
+    font-family: monospace;
+    color: #4b5563;
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
