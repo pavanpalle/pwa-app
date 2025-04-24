@@ -22,7 +22,7 @@ import TextInput from '../TextInput';
 import defaultClasses from './orderHistoryPage.module.css';
 import OrderRow from './orderRow';
 import ResetButton from './resetButton';
-
+import JQGrid from '../JQGrid';
 const errorIcon = (
     <Icon
         src={AlertCircleIcon}
@@ -165,6 +165,7 @@ const OrderHistoryPage = props => {
         }
     }, [addToast, errorMessage]);
 
+
     return (
         <OrderHistoryContextProvider>
             <div className={classes.root}>
@@ -198,6 +199,7 @@ const OrderHistoryPage = props => {
                     </Form>
                 </div>
                 {pageContents}
+                <JQGrid />
                 {loadMoreButton}
             </div>
         </OrderHistoryContextProvider>
