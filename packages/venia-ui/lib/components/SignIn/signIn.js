@@ -15,6 +15,12 @@ import LinkButton from '../LinkButton';
 import Password from '../Password';
 import FormError from '../FormError/formError';
 import GoogleRecaptcha from '../GoogleReCaptcha';
+import Logo from '../Logo';
+import loginImage from './login-image.png';
+import loginBg from './login-bg.png';
+import userIcon from './user-icon.svg';
+import passwordIcon from './password-icon.svg';
+import Image from '../Image';
 
 const SignIn = props => {
     const classes = useStyle(defaultClasses, props.classes);
@@ -51,100 +57,129 @@ const SignIn = props => {
     };
 
     return (
-        <div data-cy="SignIn-root" className={classes.root}>
-            <span data-cy="SignIn-title" className={classes.title}>
-                <FormattedMessage
-                    id={'signIn.titleText'}
-                    defaultMessage={'Sign-in to Your Account'}
-                />
-            </span>
-            <FormError errors={Array.from(errors.values())} />
-            <Form
-                getApi={setFormApi}
-                className={classes.form}
-                onSubmit={handleSubmit}
-                data-cy="SignIn-form"
-                initialValues={initialValues && initialValues}
-            >
-                <Field
-                    id="emailSignIn"
-                    label={formatMessage({
-                        id: 'signIn.emailAddressText',
-                        defaultMessage: 'Email address'
-                    })}
-                >
-                    <TextInput
-                        id="emailSignIn"
-                        data-cy="SignIn-email"
-                        autoComplete="email"
-                        field="email"
-                        validate={isRequired}
-                        data-cy="email"
-                        aria-label={formatMessage({
-                            id: 'global.emailRequired',
-                            defaultMessage: 'Email Required'
-                        })}
+        <div className='flex flex-row'>
+            <div data-cy="SignIn-root" className={classes.root}>
+                <div className='signin-form-container'>
+                <Logo />
+                <span data-cy="SignIn-title" className={classes.title}>
+                    <FormattedMessage
+                        id={'signIn.titleText'}
+                        defaultMessage={'Login'}
                     />
-                </Field>
-                <Password
-                    data-cy="SignIn-password"
-                    fieldName="password"
-                    id="Password"
-                    label={formatMessage({
-                        id: 'signIn.passwordText',
-                        defaultMessage: 'Password'
-                    })}
-                    validate={isRequired}
-                    autoComplete="current-password"
-                    isToggleButtonHidden={false}
-                    data-cy="password"
-                    aria-label={formatMessage({
-                        id: 'global.passwordRequired',
-                        defaultMessage: 'Password Required'
-                    })}
-                />
-                <div className={classes.forgotPasswordButtonContainer}>
-                    <LinkButton
-                        classes={forgotPasswordClasses}
-                        type="button"
-                        onClick={handleForgotPassword}
-                        onKeyDown={forgotPasswordHandleEnterKeyPress}
-                        data-cy="SignIn-forgotPasswordButton"
+                </span>
+                <p>If you have an account, sign in with your email address.</p>
+                <FormError errors={Array.from(errors.values())} />
+                <Form
+                    getApi={setFormApi}
+                    className={classes.form}
+                    onSubmit={handleSubmit}
+                    data-cy="SignIn-form"
+                    initialValues={initialValues && initialValues}
+                >
+                    <div className='field'>
+                    <Field
+                        id="emailSignIn"
+                        label={formatMessage({
+                            id: 'signIn.emailAddressText',
+                            defaultMessage: 'Email address'
+                        })}
                     >
-                        <FormattedMessage
-                            id={'signIn.forgotPasswordText'}
-                            defaultMessage={'Forgot Password?'}
+                        <img src={userIcon} width={24} height={24} title="Username"/>
+                        <TextInput
+                            id="emailSignIn"
+                            data-cy="SignIn-email"
+                            autoComplete="email"
+                            field="email"
+                            validate={isRequired}
+                            data-cy="email"
+                            aria-label={formatMessage({
+                                id: 'global.emailRequired',
+                                defaultMessage: 'Email Required'
+                            })}
+                            placeholder="Username"
                         />
-                    </LinkButton>
+                    </Field>
+                    </div>
+                    <div class="field">
+                        <img src={passwordIcon} width={24} height={24} title='Passowrd' />
+                        <Password
+                        data-cy="SignIn-password"
+                        fieldName="password"
+                        id="Password"
+                        label={formatMessage({
+                            id: 'signIn.passwordText',
+                            defaultMessage: 'Password'
+                        })}
+                        validate={isRequired}
+                        autoComplete="current-password"
+                        isToggleButtonHidden={false}
+                        data-cy="password"
+                        aria-label={formatMessage({
+                            id: 'global.passwordRequired',
+                            defaultMessage: 'Password Required'
+                        })}
+                        placeholder="Password"                        
+                    />
+
+                    </div>
+                    <div className={classes.forgotPasswordButtonContainer}>
+                        <LinkButton
+                            classes={forgotPasswordClasses}
+                            type="button"
+                            onClick={handleForgotPassword}
+                            onKeyDown={forgotPasswordHandleEnterKeyPress}
+                            data-cy="SignIn-forgotPasswordButton"
+                        >
+                            <FormattedMessage
+                                id={'signIn.forgotPasswordText'}
+                                defaultMessage={'Forgot Password?'}
+                            />
+                        </LinkButton>
+                    </div>
+                    <GoogleRecaptcha {...recaptchaWidgetProps} />
+                    <div className={classes.buttonsContainer}>
+                        <Button
+                            priority="high"
+                            type="submit"
+                            onKeyDown={signinHandleEnterKeyPress}
+                            data-cy="SignInButton-root_highPriority"
+                            disabled={Boolean(isBusy)}
+                        >
+                            <FormattedMessage
+                                id={'signIn.signInText'}
+                                defaultMessage={'Login'}
+                            />
+                        </Button>
+                    
+                    </div>
+                    <h3>New Customers</h3>
+                    <p>Creating an account has many benefits: check out faster, 
+                    keep more than one address, track orders and more.</p>
+                    <div className={classes.buttonsContainer}>
+                        
+                        <Button
+                            priority="normal"
+                            type="button"
+                            onClick={handleCreateAccount}
+                            data-cy="CreateAccount-initiateButton"
+                            onKeyDown={handleEnterKeyPress}
+                        >
+                            <FormattedMessage
+                                id={'signIn.createAccountText'}
+                                defaultMessage={'Create an Account'}
+                            />
+                        </Button>
+                    </div>
+                </Form>
                 </div>
-                <GoogleRecaptcha {...recaptchaWidgetProps} />
-                <div className={classes.buttonsContainer}>
-                    <Button
-                        priority="high"
-                        type="submit"
-                        onKeyDown={signinHandleEnterKeyPress}
-                        data-cy="SignInButton-root_highPriority"
-                        disabled={Boolean(isBusy)}
-                    >
-                        <FormattedMessage
-                            id={'signIn.signInText'}
-                            defaultMessage={'Sign In'}
-                        />
-                    </Button>
-                    <Button
-                        priority="normal"
-                        type="button"
-                        onClick={handleCreateAccount}
-                        data-cy="CreateAccount-initiateButton"
-                        onKeyDown={handleEnterKeyPress}
-                    >
-                        <FormattedMessage
-                            id={'signIn.createAccountText'}
-                            defaultMessage={'Create an Account'}
-                        />
-                    </Button>
+            </div>
+            <div className='signin-right-container'>
+                <img src={loginBg} width={100} height={100} className="w-full absolute top-0 left-0 h-full object-fit" />
+                <div className='signin-image-container'>
+                    <img src={loginImage} width={460} height={519} className="w-full relative" />
+                    <h4>A leading supplier of apparel to the imprinted sportswear market</h4>
                 </div>
-            </Form>
+            </div>
         </div>
     );
 };

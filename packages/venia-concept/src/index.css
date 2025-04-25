@@ -1065,7 +1065,7 @@ ul.social-icons li{
     @apply w-full
 }
 
-
+/******Order History******/
 
 .jqx-grid{
     @apply !h-auto
@@ -1218,4 +1218,66 @@ ul.social-icons li{
 }
 [id^="dropdownlistArrowgridpagerlistJqxGridjqx"] .jqx-icon-arrow-down:before{
     @apply w-[30px] min-w-[30px] h-[40px] content-[""] bg-[url('../../venia-ui/lib/components/JQGrid/down-arrow.png')] bg-no-repeat bg-center block !mx-0
+}
+
+/**********Signin **********/
+.signInPage-root-boO, .createAccountPage-root-1-v{
+    @apply p-0
+}
+.signInPage-root-boO .signInPage-header-6Mu, .createAccountPage-root-1-v .createAccountPage-header-57J{
+    @apply hidden
+}
+.signInPage-root-boO .signInPage-contentContainer-Clw, .createAccountPage-root-1-v .createAccountPage-contentContainer-2dE{
+    @apply !w-[100vw] h-full !border-none
+}
+.signIn-root-7hM{
+    @apply w-full h-[100vh] flex items-center justify-center
+}
+.signin-form-container{
+    @apply !w-[365px] w-full flex items-center flex-col
+}
+.signin-form-container p{
+    @apply text-[14px] text-[#525252] mb-[20px]
+}
+.signin-right-container{
+    @apply w-full h-[100vh] relative flex items-center justify-center
+}
+.signin-image-container{
+    @apply relative max-w-[460px]
+}
+.signin-image-container h4{
+    @apply text-[18px] font-bold text-center px-[54px] pb-[54px] mb-0 w-full text-white left-0 bottom-0 absolute
+}
+ .signIn-title-4HG{
+    @apply text-[20px] font-bold text-[#000000] uppercase mb-[15px]
+ }
+ .signIn-form-do- input{
+    @apply !h-[48px] bg-[#EBECF0] border border-[#DCDCDC] !pl-[50px]
+ }
+ .signIn-form-do- .field-label-ba9{
+    @apply hidden
+ }
+ .button-root_highPriority-yQe{
+    @apply !w-96 !h-[48px] !rounded-[10px]
+ }
+ .field{
+    @apply relative
+ }
+ .field img{
+    @apply absolute left-[15px] top-[14px]
+ }
+ .signIn-form-do- h3{
+    @apply text-[18px] font-bold text-[#000000] mb-0 relative mt-10
+}
+.signIn-form-do- h3:before{
+    @apply content-[""] w-full h-[1px] bg-[#F0EDFF] absolute top-3.5 left-0 z-[-1]
+}
+.button-root_normalPriority-c1Z{
+    @apply text-[#306E91] border !border-[#306E91] text-[14px] !capitalize !h-[48px] rounded-[24px] w-[200px]
+}
+.button-root_normalPriority-c1Z:hover{
+    @apply bg-[#306E91] !text-white
+}
+.createAccount-root-Jgh{
+    @apply !w-full p-[40px]
 }
