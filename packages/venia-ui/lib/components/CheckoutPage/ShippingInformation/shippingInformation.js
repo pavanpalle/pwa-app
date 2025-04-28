@@ -1,18 +1,17 @@
-import React, { Fragment, Suspense } from 'react';
-import { FormattedMessage } from 'react-intl';
-import { func, string, shape } from 'prop-types';
-import { Edit2 as EditIcon, Plus as PlusIcon  } from 'react-feather';
 import { useShippingInformation } from '@magento/peregrine/lib/talons/CheckoutPage/ShippingInformation/useShippingInformation';
+import { func, shape, string } from 'prop-types';
+import React, { Fragment, Suspense } from 'react';
+import { Edit2 as EditIcon, Plus as PlusIcon } from 'react-feather';
+import { FormattedMessage } from 'react-intl';
 
 import { useStyle } from '../../../classify';
 import Icon from '../../Icon';
+import LinkButton from '../../LinkButton';
 import LoadingIndicator from '../../LoadingIndicator';
 import AddressForm from './AddressForm';
 import Card from './card';
 import defaultClasses from './shippingInformation.module.css';
-import LinkButton from '../../LinkButton';
 
-import { Form } from 'informed';
 
 const EditModal = React.lazy(() => import('./editModal'));
 
@@ -23,9 +22,7 @@ const ShippingInformation = props => {
         onSuccess,
         toggleActiveContent,
         toggleSignInContent,
-        setGuestSignInUsername,
-        resetShouldSubmit,
-        shouldSubmit
+        setGuestSignInUsername
     } = props;
     const talonProps = useShippingInformation({
         onSave,
@@ -67,8 +64,13 @@ const ShippingInformation = props => {
 
     const shippingInformation = doneEditing ? (
         <Fragment>
-            <div className='step-header'>
-                <h3>SHIPPING ADDRESS</h3>
+            <div className="step-header">
+                <h3>
+                    <FormattedMessage
+                        id={'ShippingInformation.shippingAddress'}
+                        defaultMessage={'SHIPPING ADDRESS'}
+                    />
+                </h3>
                 <LinkButton
                     onClick={handleEditShipping}
                     className={classes.editButton}
@@ -78,43 +80,42 @@ const ShippingInformation = props => {
                         size={20}
                         src={PlusIcon}
                         classes={{ icon: classes.plusIcon }}
-                        
                     />
-                    New Address
+                   <FormattedMessage
+                        id={'ShippingInformation.newAddress'}
+                        defaultMessage={'New Address'}
+                    />
                 </LinkButton>
             </div>
-            <div className='shipping-adderss-card'>
-                      
-              
-            <div className={classes.cardHeader}>
-                {/* <h5 className={classes.cardTitle}>
+            <div className="shipping-adderss-card">
+                <div className={classes.cardHeader}>
+                    {/* <h5 className={classes.cardTitle}>
                     <FormattedMessage
                         id={'shippingInformation.cardTitle'}
                         defaultMessage={'Shipping Information'}
                     />
                 </h5> */}
-                <LinkButton
-                    onClick={handleEditShipping}
-                    className={classes.editButton}
-                    data-cy="ShippingInformation-editButton"
-                >
-                    <Icon
-                        size={16}
-                        src={EditIcon}
-                        classes={{ icon: classes.editIcon }}
-                    />
-                    <span className={classes.editText}>
-                        <FormattedMessage
-                            id={'global.editButton'}
-                            defaultMessage={'Edit'}
+                    <LinkButton
+                        onClick={handleEditShipping}
+                        className={classes.editButton}
+                        data-cy="ShippingInformation-editButton"
+                    >
+                        <Icon
+                            size={16}
+                            src={EditIcon}
+                            classes={{ icon: classes.editIcon }}
                         />
-                    </span>
-                </LinkButton>
+                        <span className={classes.editText}>
+                            <FormattedMessage
+                                id={'global.editButton'}
+                                defaultMessage={'Edit'}
+                            />
+                        </span>
+                    </LinkButton>
+                </div>
+                <Card shippingData={shippingData} />
+                {editModal}
             </div>
-            <Card shippingData={shippingData} />
-            {editModal}
-            </div>
-            
         </Fragment>
     ) : (
         <Fragment>
@@ -134,9 +135,7 @@ const ShippingInformation = props => {
                     toggleSignInContent={toggleSignInContent}
                     setGuestSignInUsername={setGuestSignInUsername}
                 />
-                 
             </div>
-           
         </Fragment>
     );
 

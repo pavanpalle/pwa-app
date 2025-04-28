@@ -46,6 +46,7 @@ const CardKnox = props => {
     const [cardToken, setCardToken] = useState('');
     const [cvvToken, setCvvToken] = useState('');
     const [issuer, setIssuer] = useState('');
+    const [isChecked, setIsChecked] = useState(false);
 
     const [expMonth, setExpMonth] = useState(new Date().getMonth() + 1);
     const [expYear, setExpYear] = useState(new Date().getFullYear());
@@ -79,18 +80,25 @@ const CardKnox = props => {
     };
 
     const getExpiryDate = (expMonth, expYear) => {
-      // Pad month with leading zero if needed
-      const month = String(expMonth).padStart(2, '0');
-      // Get last two digits of year
-      const year = String(expYear).slice(-2);
-      return month + year;
-  };
+        // Pad month with leading zero if needed
+        const month = String(expMonth).padStart(2, '0');
+        // Get last two digits of year
+        const year = String(expYear).slice(-2);
+        return month + year;
+    };
 
     useEffect(() => {
         if (cardToken !== '') {
-            setPaymentHash({paymentToken:cardToken,exp:getExpiryDate(expMonth,expYear),cvvToken:cvvToken, paymentMethod: "cardknox"});
+            setPaymentHash({
+                paymentToken: cardToken,
+                exp: getExpiryDate(expMonth, expYear),
+                cvvToken: cvvToken,
+                paymentMethod: 'cardknox',
+                cardType: issuer,
+                saveCard: isChecked
+            });
         }
-    }, [cardToken, cvvToken, expMonth, expYear, setPaymentHash]);
+    }, [cardToken, cvvToken, expMonth, expYear, isChecked, issuer, setPaymentHash]);
 
     const getApplePayTransInfo = () => {
         const lineItems = [
@@ -127,7 +135,9 @@ const CardKnox = props => {
             }
         });
     };
-
+    const handleChange = event => {
+        setIsChecked(event.target.checked);
+    };
     return (
         <div>
             <div className="main">
@@ -218,14 +228,15 @@ const CardKnox = props => {
                                     />
                                 </div>
                             </div>
-                            {/* <button className="button is-info is-rounded is-small" onClick={focusCvv}>Focus</button>
-              <button className="button is-info is-rounded is-small" onClick={clearCvv}>Clear</button> */}
-                            <button
-                                className="button is-info is-rounded is-small"
-                                onClick={getCardAndCvvToken}
-                            >
-                                Submit
-                            </button>
+
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    checked={isChecked}
+                                    onChange={handleChange}
+                                />
+                                Save this card for future use
+                            </label>
 
                             <div
                                 style={{
@@ -245,14 +256,14 @@ const CardKnox = props => {
                             </div>
                         </section>
                     </div>
-                    <div className="column">
+                    {/* <div className="column">
                         <section className="box result-box">
                             <div className="field">
                                 <p className="label">Card Token</p>
                                 <p className="token-field">{cardToken}</p>
                             </div>
                         </section>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

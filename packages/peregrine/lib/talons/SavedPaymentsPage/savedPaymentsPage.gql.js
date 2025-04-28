@@ -27,12 +27,13 @@ export const GET_SAVED_PAYMENTS_QUERY = gql`
 `;
 
 export const ADD_CREDIT_CARD_PAYMENT = gql`
-    mutation AddCreditCardPayment($Token: String!, $Exp: String!,$SetAsDefault: Boolean!) {
+    mutation AddCreditCardPayment($Token: String!, $Exp: String!,$CardType: String, $SetAsDefault: Boolean!) {
         createCardknoxPaymentMethod(
             input: {
                 Token: $Token
                 TokenType: "cc"
                 Exp: $Exp
+                CardType: $CardType
                 SetAsDefault: $SetAsDefault
             }
         ) {

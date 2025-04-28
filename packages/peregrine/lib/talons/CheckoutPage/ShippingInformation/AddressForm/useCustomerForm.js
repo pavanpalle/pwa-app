@@ -60,7 +60,7 @@ export const useCustomerForm = props => {
 
     const hasDefaultShipping =
         !!customerData && !!customerData.customer.default_shipping;
-        const hasDefaultBilling =
+    const hasDefaultBilling =
         !!customerData && !!customerData.customer.default_billing;
 
     // For first time creation pre-fill the form with Customer data
@@ -116,7 +116,8 @@ export const useCustomerForm = props => {
                     ...address,
                     // Cleans up the street array when values are null or undefined
                     street: address.street.filter(e => e),
-                    country_code: country
+                    country_code: country,
+                    is_valid_address: "0"
                 };
 
                 if (isUpdate) {

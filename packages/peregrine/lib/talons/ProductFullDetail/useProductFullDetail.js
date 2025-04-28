@@ -1,4 +1,4 @@
-import { useCallback, useState, useMemo } from 'react';
+import { useCallback, useState, useMemo, useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { useMutation, useQuery } from '@apollo/client';
 import { useCartContext } from '@magento/peregrine/lib/context/cart';
@@ -101,120 +101,128 @@ const getIsAllOutOfStock = product => {
     return stock_status === OUT_OF_STOCK_CODE;
 };
 
-// const getMediaGalleryEntries = (product, optionCodes, optionSelections) => {
-//     let value = [];
-
-//     const { media_gallery_entries, variants } = product;
-//     const isConfigurable = isProductConfigurable(product);
-
-//     // Selections are initialized to "code => undefined". Once we select a value, like color, the selections change. This filters out unselected options.
-//     const optionsSelected =
-//         Array.from(optionSelections.values()).filter(value => !!value).length >
-//         0;
-
-
-    
-
-//     if (!isConfigurable || !optionsSelected) {
-//         value = media_gallery_entries;
-//     } else {
-//         // If any of the possible variants matches the selection add that
-//         // variant's image to the media gallery. NOTE: This _can_, and does,
-//         // include variants such as size. If Magento is configured to display
-//         // an image for a size attribute, it will render that image.
-//         const item = findMatchingVariant({
-//             optionCodes,
-//             optionSelections,
-//             variants
-//         });
-      
-//         value = item
-//             ? [...item.product.media_gallery_entries, ...media_gallery_entries]
-//             : media_gallery_entries;
-//     }
-
-   
-
-//     return value;
-// };
-
 const getMediaGalleryEntries = (product, optionCodes, optionSelections) => {
+    let value = [];
+
     const { media_gallery_entries, variants } = product;
     const isConfigurable = isProductConfigurable(product);
+
+    // Selections are initialized to "code => undefined". Once we select a value, like color, the selections change. This filters out unselected options.
+    const optionsSelected =
+        Array.from(optionSelections.values()).filter(value => !!value).length >
+        0;
+
+
     
-    // Check if any options are selected (array values or single values)
-    const optionsSelected = Array.from(optionSelections.entries())
-        .some(([_, value]) => Array.isArray(value) ? value.length > 0 : !!value);
-    
+
     if (!isConfigurable || !optionsSelected) {
-        return media_gallery_entries;
-    } 
-    
-    // Handle multiple variant selections
-    let matchingItems = [];
-    
-    // Find all matching variants
-    if (variants && variants.length > 0) {
-        matchingItems = variants.filter(variant => 
-            variantMatchesSelections(variant, optionCodes, optionSelections)
-        );
+        value = media_gallery_entries;
+    } else {
+        // If any of the possible variants matches the selection add that
+        // variant's image to the media gallery. NOTE: This _can_, and does,
+        // include variants such as size. If Magento is configured to display
+        // an image for a size attribute, it will render that image.
+        const item = findMatchingVariant({
+            optionCodes,
+            optionSelections,
+            variants
+        });
+      
+        value = item
+            ? [...item.product.media_gallery_entries, ...media_gallery_entries]
+            : media_gallery_entries;
     }
-    
-    if (matchingItems.length === 0) {
-        return media_gallery_entries;
-    }
-    
-    // Collect media gallery entries from all matching variants
-    const variantMedia = matchingItems.flatMap(item => 
-        item.product?.media_gallery_entries || []
-    );
-    
-    // Combine variant media with product media and remove duplicates
-    // Using a Set with a custom key to identify duplicate entries
-    const uniqueEntries = new Map();
-    
-    // First add variant media (takes precedence)
-    variantMedia?.forEach(entry => {
-        // Create a unique key based on file or id (whichever is available)
-        const key = entry.file || entry.id?.toString();
-        if (key && !uniqueEntries.has(key)) {
-            uniqueEntries.set(key, entry);
+
+    const uniqueEntriesMap = new Map();
+    value.forEach(entry => {
+        const key = entry.file || entry.id?.toString() || JSON.stringify(entry);
+        if (!uniqueEntriesMap.has(key)) {
+            uniqueEntriesMap.set(key, entry);
         }
     });
-    
-    // Then add product media if not already added
-    media_gallery_entries?.forEach(entry => {
-        const key = entry.file || entry.id?.toString();
-        if (key && !uniqueEntries.has(key)) {
-            uniqueEntries.set(key, entry);
-        }
-    });
-    
-    return Array.from(uniqueEntries.values());
+
+    return Array.from(uniqueEntriesMap.values());
+
+    //return value;
 };
 
+// const getMediaGalleryEntries = (product, optionCodes, optionSelections) => {
+//     const { media_gallery_entries, variants } = product;
+//     const isConfigurable = isProductConfigurable(product);
+    
+//     // Check if any options are selected (array values or single values)
+//     const optionsSelected = Array.from(optionSelections.entries())
+//         .some(([_, value]) => Array.isArray(value) ? value.length > 0 : !!value);
+    
+//     if (!isConfigurable || !optionsSelected) {
+//         return media_gallery_entries;
+//     } 
+    
+//     // Handle multiple variant selections
+//     let matchingItems = [];
+    
+//     // Find all matching variants
+//     if (variants && variants.length > 0) {
+//         matchingItems = variants.filter(variant => 
+//             variantMatchesSelections(variant, optionCodes, optionSelections)
+//         );
+//     }
+    
+//     if (matchingItems.length === 0) {
+//         return media_gallery_entries;
+//     }
+    
+//     // Collect media gallery entries from all matching variants
+//     const variantMedia = matchingItems.flatMap(item => 
+//         item.product?.media_gallery_entries || []
+//     );
+    
+//     // Combine variant media with product media and remove duplicates
+//     // Using a Set with a custom key to identify duplicate entries
+//     const uniqueEntries = new Map();
+    
+//     // First add variant media (takes precedence)
+//     variantMedia?.forEach(entry => {
+//         // Create a unique key based on file or id (whichever is available)
+//         const key = entry.file || entry.id?.toString();
+//         if (key && !uniqueEntries.has(key)) {
+//             uniqueEntries.set(key, entry);
+//         }
+//     });
+    
+//     // Then add product media if not already added
+//     media_gallery_entries?.forEach(entry => {
+//         const key = entry.file || entry.id?.toString();
+//         if (key && !uniqueEntries.has(key)) {
+//             uniqueEntries.set(key, entry);
+//         }
+//     });
+    
+//     return Array.from(uniqueEntries.values());
+// };
+
 // Helper function to check if a variant matches the selected options
-const variantMatchesSelections = (variant, optionCodes, optionSelections) => {
-    return Array.from(optionSelections.entries()).every(([optionId, selectedValues]) => {
-        // Skip unselected options
-        if (!selectedValues) return true;
+// const variantMatchesSelections = (variant, optionCodes, optionSelections) => {
+//     return Array.from(optionSelections.entries()).every(([optionId, selectedValues]) => {
+//         // Skip unselected options
+//         if (!selectedValues) return true;
         
-        const attributeCode = optionCodes.get(optionId);
-        if (!attributeCode) return true;
+//         const attributeCode = optionCodes.get(optionId);
+//         if (!attributeCode) return true;
         
-        const matchingAttribute = variant.attributes.find(
-            attr => attr.code === attributeCode
-        );
+//         const matchingAttribute = variant.attributes.find(
+//             attr => attr.code === attributeCode
+//         );
         
-        if (!matchingAttribute) return false;
+//         if (!matchingAttribute) return false;
         
-        if (Array.isArray(selectedValues)) {
-            return selectedValues.includes(matchingAttribute.value_index);
-        } else {
-            return matchingAttribute.value_index === selectedValues;
-        }
-    });
-};
+//         if (Array.isArray(selectedValues)) {
+//             return selectedValues.includes(matchingAttribute.value_index);
+//         } else {
+//             return matchingAttribute.value_index === selectedValues;
+//         }
+//     });
+// };
 
 // We only want to display breadcrumbs for one category on a PDP even if a
 // product has multiple related categories. This function filters and selects
@@ -313,44 +321,105 @@ const getCustomAttributes = (product, optionCodes, optionSelections) => {
  * @param {Object} quantities - Object mapping SKUs to their quantities
  * @returns {Object} Variables object for the GraphQL mutation
  */
-function createCartVariables(cartId, sizesTable, quantities,parent_sku,productUid,productName) {
-    // Array to hold all cart items
-    const cartItems = [];
+// function createCartVariables(cartId, sizesTable, quantities,parent_sku,productUid,productName) {
+//     // Array to hold all cart items
+//     const cartItems = [];
     
-    // Process each SKU in the quantities object
+//     // Process each SKU in the quantities object
+//     Object.entries(quantities)?.forEach(([sku, quantity]) => {
+//       // Extract the size and color information from the SKU (WJ10-SIZE-COLOR format)
+//       const skuParts = sku.split('-');
+//       if (skuParts.length !== 3) {
+//         console.error(`Invalid SKU format: ${sku}`);
+//         return;
+//       }
+      
+     
+//       const size = skuParts[1];
+//       const color = skuParts[2];
+      
+//       // Find matching color in sizesTable
+//       let colorUid = null;
+//       let sizeUid = null;
+      
+//       for (const [colorId, colorData] of Object.entries(sizesTable)) {
+//         if (colorData.color.label === color) {
+//           colorUid = colorData.color.uid;
+          
+//           // Find the matching size for this color
+//           if (colorData.sizes[size]) {
+//             sizeUid = colorData.sizes[size].size.uid;
+//             break;
+//           }
+//         }
+//       }
+      
+//       if (!colorUid || !sizeUid) {
+//         console.error(`Could not find matching color (${color}) and size (${size}) for SKU: ${sku}`);
+//         return;
+//       }
+      
+//       // Create cart item
+//       cartItems.push({
+//         sku: sku,
+//         parent_sku: parent_sku,
+//         quantity: quantity,
+//         entered_options: [
+//           {
+//             uid: productUid,
+//             value: productName
+//           }
+//         ],
+//         selected_options: [
+//           colorUid,
+//           sizeUid
+//         ]
+//       });
+//     });
+    
+//     // Return the variables object
+//     return {
+//       cartId: cartId,
+//       product: cartItems
+//     };
+//   }
+  
+  // Example usage:
+  // const variables = createCartVariables(
+  //   "3BKFyNXAlmKMRNw8xaMWhNPZKLh6eVqY", 
+  //   sizesTable, 
+  //   { "WJ10-XS-Black": 10, "WJ10-M-Black": 20, "WJ10-XL-Black": 30, "WJ10-S-Orange": 40, "WJ10-L-Orange": 50 }
+  // );
+
+
+  function createCartVariables(cartId, sizesTable, quantities, parent_sku, productUid, productName) {
+    const cartItems = [];
+  
+    const colorLabel = sizesTable.color.label;
+    const colorUid = sizesTable.color.uid;
+  
     Object.entries(quantities)?.forEach(([sku, quantity]) => {
-      // Extract the size and color information from the SKU (WJ10-SIZE-COLOR format)
       const skuParts = sku.split('-');
       if (skuParts.length !== 3) {
         console.error(`Invalid SKU format: ${sku}`);
         return;
       }
-      
+  
       const size = skuParts[1];
       const color = skuParts[2];
-      
-      // Find matching color in sizesTable
-      let colorUid = null;
-      let sizeUid = null;
-      
-      for (const [colorId, colorData] of Object.entries(sizesTable)) {
-        if (colorData.color.label === color) {
-          colorUid = colorData.color.uid;
-          
-          // Find the matching size for this color
-          if (colorData.sizes[size]) {
-            sizeUid = colorData.sizes[size].size.uid;
-            break;
-          }
-        }
-      }
-      
-      if (!colorUid || !sizeUid) {
-        console.error(`Could not find matching color (${color}) and size (${size}) for SKU: ${sku}`);
+  
+      // Validate color (optional)
+      if (color.toLowerCase() !== colorLabel.toLowerCase()) {
+        console.error(`Color mismatch: SKU has ${color}, but table has ${colorLabel}`);
         return;
       }
-      
-      // Create cart item
+  
+      const sizeData = sizesTable.sizes[size];
+      if (!sizeData) {
+        console.error(`Size ${size} not found in sizesTable`);
+        return;
+      }
+  
       cartItems.push({
         sku: sku,
         parent_sku: parent_sku,
@@ -363,25 +432,17 @@ function createCartVariables(cartId, sizesTable, quantities,parent_sku,productUi
         ],
         selected_options: [
           colorUid,
-          sizeUid
+          sizeData.size_index
         ]
       });
     });
-    
-    // Return the variables object
+  
     return {
       cartId: cartId,
       product: cartItems
     };
   }
   
-  // Example usage:
-  // const variables = createCartVariables(
-  //   "3BKFyNXAlmKMRNw8xaMWhNPZKLh6eVqY", 
-  //   sizesTable, 
-  //   { "WJ10-XS-Black": 10, "WJ10-M-Black": 20, "WJ10-XL-Black": 30, "WJ10-S-Orange": 40, "WJ10-L-Orange": 50 }
-  // );
-
 /**
  * @param {GraphQLDocument} props.addConfigurableProductToCartMutation - configurable product mutation
  * @param {GraphQLDocument} props.addSimpleProductToCartMutation - configurable product mutation
@@ -493,6 +554,9 @@ export const useProductFullDetail = props => {
         () => getIsOutOfStock(product, optionCodes, optionSelections),
         [product, optionCodes, optionSelections]
     );
+
+
+     
 
    
 
@@ -714,150 +778,214 @@ export const useProductFullDetail = props => {
         [addConfigurableProductToCart, addProductToCart, addSimpleProductToCart, cartId, dispatch, hasDeprecatedOperationProp, isSupportedProductType, optionCodes, optionSelections, product, productPrice.discount.amount_off, productPrice.final_price.currency, productPrice.final_price.value, productType, quantities, selectedOptionsArray, sizesTable]
     );
 
-    // const handleSelectionChange = useCallback(
-    //     (optionId, selection) => {
-
-    //         console.log("optionId,selection", optionId,selection);
-    //         // We must create a new Map here so that React knows that the value
-    //         // of optionSelections has changed.
-    //         const nextOptionSelections = new Map([...optionSelections]);
-
-           
-
-    //         nextOptionSelections.set(optionId, selection);
-           
-    //         setOptionSelections(nextOptionSelections);
-    //         // Create a new Map to keep track of single selections with key as String
-    //         const nextSingleOptionSelection = new Map();
-    //         nextSingleOptionSelection.set(optionId, selection);
-    //         setSingleOptionSelection(nextSingleOptionSelection);
-
-          
-    //     },
-    //     [optionSelections]
-    // );
-
     const handleSelectionChange = useCallback(
         (optionId, selection) => {
-        
+
+            console.log("optionId,selection", optionId,selection);
+            // We must create a new Map here so that React knows that the value
+            // of optionSelections has changed.
+            const nextOptionSelections = new Map([...optionSelections]);
+
+           
+
+            nextOptionSelections.set(optionId, selection);
+           
+            setOptionSelections(nextOptionSelections);
+            // Create a new Map to keep track of single selections with key as String
+            const nextSingleOptionSelection = new Map();
+            nextSingleOptionSelection.set(optionId, selection);
+            setSingleOptionSelection(nextSingleOptionSelection);
+
           
-          // Create a new Map for React state updates
-          const nextOptionSelections = new Map([...optionSelections]);
-          const existingSelection = nextOptionSelections.get(optionId) || [];
-          
-          // If selection is empty or null, clear the selection
-          if (selection === null || (Array.isArray(selection) && selection.length === 0)) {
-            nextOptionSelections.set(optionId, []);
-          } 
-          // If we're given a specific selection array, use it directly (replacing the existing one)
-          else if (Array.isArray(selection)) {
-            nextOptionSelections.set(optionId, [...selection]);
-          } 
-          // If we're given a single value, toggle it in the existing array
-          else {
-            const selectionIndex = existingSelection.indexOf(selection);
-            
-            if (selectionIndex === -1) {
-              // Add if not present
-              nextOptionSelections.set(optionId, [...existingSelection, selection]);
-            } else {
-              // Remove if present
-              const updatedSelection = [...existingSelection];
-              updatedSelection.splice(selectionIndex, 1);
-              nextOptionSelections.set(optionId, updatedSelection);
-            }
-          }
-          
-       
-          setOptionSelections(nextOptionSelections);
-          
-          // Update single selection tracking
-          const nextSingleOptionSelection = new Map();
-          nextSingleOptionSelection.set(optionId, selection);
-       
-          setSingleOptionSelection(nextSingleOptionSelection);
         },
         [optionSelections]
-      );
+    );
+
+    // const handleSelectionChange = useCallback(
+    //     (optionId, selection) => {
+        
+          
+    //       // Create a new Map for React state updates
+    //       const nextOptionSelections = new Map([...optionSelections]);
+    //       const existingSelection = nextOptionSelections.get(optionId) || [];
+          
+    //       // If selection is empty or null, clear the selection
+    //       if (selection === null || (Array.isArray(selection) && selection.length === 0)) {
+    //         nextOptionSelections.set(optionId, []);
+    //       } 
+    //       // If we're given a specific selection array, use it directly (replacing the existing one)
+    //       else if (Array.isArray(selection)) {
+    //         nextOptionSelections.set(optionId, [...selection]);
+    //       } 
+    //       // If we're given a single value, toggle it in the existing array
+    //       else {
+    //         const selectionIndex = existingSelection.indexOf(selection);
+            
+    //         if (selectionIndex === -1) {
+    //           // Add if not present
+    //           nextOptionSelections.set(optionId, [...existingSelection, selection]);
+    //         } else {
+    //           // Remove if present
+    //           const updatedSelection = [...existingSelection];
+    //           updatedSelection.splice(selectionIndex, 1);
+    //           nextOptionSelections.set(optionId, updatedSelection);
+    //         }
+    //       }
+          
+       
+    //       setOptionSelections(nextOptionSelections);
+          
+    //       // Update single selection tracking
+    //       const nextSingleOptionSelection = new Map();
+    //       nextSingleOptionSelection.set(optionId, selection);
+       
+    //       setSingleOptionSelection(nextSingleOptionSelection);
+    //     },
+    //     [optionSelections]
+    //   );
       
       
-      
+    const  getProductDetailsByColor = useCallback((colorCode) =>{
+        // Convert colorCode to integer for comparison
+        const colorCodeInt = parseInt(colorCode);
+
+     
+        
+        // Find color information from configurable options
+        const colorOption = product.configurable_options.find(option => option.attribute_code === "color");
+        if (!colorOption) {
+          return { error: "Color option not found in product data" };
+        }
+        
+        const selectedColor = colorOption.values.find(value => value.value_index === colorCodeInt);
+        if (!selectedColor) {
+          return { error: "Selected color not found" };
+        }
+        
+        // Find size information from configurable options
+        const sizeOption = product?.configurable_options?.find(option => option.attribute_code === "size");
+        if (!sizeOption) {
+          return { error: "Size option not found in product data" };
+        }
+        
+        // Create result object with color information
+        const result = {
+            color: selectedColor,
+          sizes: {}
+        };
+        
+        // Process each size option
+        sizeOption.values.forEach(size => {
+          // Find variant for this color-size combination
+          const variant = product?.variants?.find(v => 
+            v.attributes.some(attr => attr.code === "color" && attr.value_index === colorCodeInt) &&
+            v.attributes.some(attr => attr.code === "size" && attr.value_index === size.value_index)
+          );
+          
+          // Default values in case variant isn't found
+          let price = null;
+          let sku = `Unknown-${size.default_label}-${selectedColor.default_label}`;
+          let stockStatus = "UNKNOWN";
+          let inventory = 0;
+          
+          // If we found the variant, extract its details
+          if (variant) {
+            price = variant.product.price.regularPrice.amount.value;
+            sku = variant.product.sku;
+            stockStatus = variant.product.stock_status;
+            inventory = variant.product.qty;
+          }
+          
+          // Add size details to result
+          result.sizes[size.default_label] = {
+            price: price,
+            sku: sku,
+            stock_status: stockStatus,
+            size_index: size.value_index,
+            inventory:inventory
+          };
+        });
+        console.log("result", result);
+        setSizesTable(result);
+       
+       
+      },[product.configurable_options, product?.variants]);
 
    
 
-      const getProductDetailsByColor = useCallback((colorCodes) => {
+    //   const getProductDetailsByColor = useCallback((colorCodes) => {
         
-        // Initialize an object to store all results
-        const updatedSizesTable = {};
+    //     // Initialize an object to store all results
+    //     const updatedSizesTable = {};
     
-        // Loop through each colorCode
-        colorCodes?.forEach(colorCode => {
-            const colorCodeInt = parseInt(colorCode);
+    //     // Loop through each colorCode
+    //     colorCodes?.forEach(colorCode => {
+    //         const colorCodeInt = parseInt(colorCode);
     
            
     
-            // Process color option and size option
-            const colorOption = product.configurable_options.find(option => option.attribute_code === "color");
-            if (!colorOption) {
-                console.error("Color option not found in product data");
-                return;
-            }
+    //         // Process color option and size option
+    //         const colorOption = product.configurable_options.find(option => option.attribute_code === "color");
+    //         if (!colorOption) {
+    //             console.error("Color option not found in product data");
+    //             return;
+    //         }
     
-            const selectedColor = colorOption.values.find(value => value.value_index === colorCodeInt);
-            if (!selectedColor) {
-                console.error("Selected color not found");
-                return;
-            }
+    //         const selectedColor = colorOption.values.find(value => value.value_index === colorCodeInt);
+    //         if (!selectedColor) {
+    //             console.error("Selected color not found");
+    //             return;
+    //         }
     
-            const sizeOption = product?.configurable_options?.find(option => option.attribute_code === "size");
-            if (!sizeOption) {
-                console.error("Size option not found in product data");
-                return;
-            }
+    //         const sizeOption = product?.configurable_options?.find(option => option.attribute_code === "size");
+    //         if (!sizeOption) {
+    //             console.error("Size option not found in product data");
+    //             return;
+    //         }
     
-            const result = {
-                color: selectedColor,
-                sizes: {}
-            };
+    //         const result = {
+    //             color: selectedColor,
+    //             sizes: {}
+    //         };
     
-            // Loop through size options and fetch the variant information
-            sizeOption?.values?.forEach(size => {
-                const variant = product?.variants?.find(v =>
-                    v.attributes.some(attr => attr.code === "color" && attr.value_index === colorCodeInt) &&
-                    v.attributes.some(attr => attr.code === "size" && attr.value_index === size.value_index)
-                );
+    //         // Loop through size options and fetch the variant information
+    //         sizeOption?.values?.forEach(size => {
+    //             const variant = product?.variants?.find(v =>
+    //                 v.attributes.some(attr => attr.code === "color" && attr.value_index === colorCodeInt) &&
+    //                 v.attributes.some(attr => attr.code === "size" && attr.value_index === size.value_index)
+    //             );
     
-                let price = null;
-                let sku = `Unknown-${size.default_label}-${selectedColor.default_label}`;
-                let stockStatus = "UNKNOWN";
-                let inventory = 0;
+    //             let price = null;
+    //             let sku = `Unknown-${size.default_label}-${selectedColor.default_label}`;
+    //             let stockStatus = "UNKNOWN";
+    //             let inventory = 0;
     
-                if (variant) {
-                    price = variant.product.price.regularPrice.amount.value;
-                    sku = variant.product.sku;
-                    stockStatus = variant.product.stock_status;
-                    inventory = variant.product.qty;
-                }
+    //             if (variant) {
+    //                 price = variant.product.price.regularPrice.amount.value;
+    //                 sku = variant.product.sku;
+    //                 stockStatus = variant.product.stock_status;
+    //                 inventory = variant.product.qty;
+    //             }
     
-                result.sizes[size.default_label] = {
-                    price: price,
-                    sku: sku,
-                    stock_status: stockStatus,
-                    size_index: size.value_index,
-                    inventory: inventory,
-                    size:size
-                };
-            });
+    //             result.sizes[size.default_label] = {
+    //                 price: price,
+    //                 sku: sku,
+    //                 stock_status: stockStatus,
+    //                 size_index: size.value_index,
+    //                 inventory: inventory,
+    //                 size:size
+    //             };
+    //         });
     
     
-            // Save to local object instead of state immediately
-            updatedSizesTable[colorCodeInt] = result;
-        });
+    //         // Save to local object instead of state immediately
+    //         updatedSizesTable[colorCodeInt] = result;
+    //     });
     
-        // Now update state after all colorCode iterations are done
-        setSizesTable(updatedSizesTable);
+    //     // Now update state after all colorCode iterations are done
+    //     setSizesTable(updatedSizesTable);
     
-    }, [product.configurable_options, product?.variants]);
+    // }, [product.configurable_options, product?.variants]);
     
 
     // Normalization object for product details we need for rendering.

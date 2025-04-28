@@ -2,6 +2,8 @@ import { gql } from '@apollo/client';
 import { CheckoutPageFragment } from './checkoutPageFragments.gql';
 import { ItemsReviewFragment } from './ItemsReview/itemsReviewFragments.gql';
 import { OrderConfirmationPageFragment } from './OrderConfirmationPage/orderConfirmationPageFragments.gql';
+import { VALIDATE_CUSTOMER_CART_ADDRESS } from './ShippingInformation/shippingInformation.gql';
+import { ShippingInformationFragment } from './ShippingInformation/shippingInformationFragments.gql';
 
 export const CREATE_CART = gql`
     # This mutation will return a masked cart id. If a bearer token is provided for
@@ -28,6 +30,8 @@ export const PLACE_ORDER_CARD_KNOX = gql`
         $Exp: String!
         $cvv: String!
         $cartId: String!
+        $cardType: String!
+        $saveCard: Boolean
     ) {
         createCardknoxOrder(
             input: {
@@ -35,6 +39,9 @@ export const PLACE_ORDER_CARD_KNOX = gql`
                 xCardNum: $Token
                 xExp: $Exp
                 xCVV: $cvv
+                TokenType: "cc"
+                CardType: $cardType
+                saveCard: $saveCard
             }
         ) {
             error
@@ -69,10 +76,12 @@ export const GET_CHECKOUT_DETAILS = gql`
         cart(cart_id: $cartId) {
             id
             ...CheckoutPageFragment
+            ...ShippingInformationFragment
             ...ItemsReviewFragment
         }
     }
     ${CheckoutPageFragment}
+    ${ShippingInformationFragment}
     ${ItemsReviewFragment}
 `;
 
@@ -98,4 +107,5 @@ export default {
     placeOrderMutation: PLACE_ORDER,
     cardKnoxPlaceOrderMutation: PLACE_ORDER_CARD_KNOX,
     cardKnoxStaticPlaceOrderMutation: PLACE_ORDER_CARD_KNOX_STATIC,
+    validateCartAddressMutation: VALIDATE_CUSTOMER_CART_ADDRESS
 };

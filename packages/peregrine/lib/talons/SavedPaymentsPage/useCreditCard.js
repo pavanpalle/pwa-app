@@ -4,19 +4,20 @@ import { useMutation } from '@apollo/client';
 import mergeOperations from '@magento/peregrine/lib/util/shallowMerge';
 import defaultOperations from './creditCard.gql';
 
+
 export const useCreditCard = props => {
     const { paymentHash } = props;
 
     const operations = mergeOperations(defaultOperations, props.operations);
     const { deleteCreditCardPaymentMutation,setAsDefaultCreditCardPaymentMutation } = operations;
-
+   
     const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
 
     const [deletePayment, { error, loading }] = useMutation(
         deleteCreditCardPaymentMutation
     );
 
-    const [setAsDefault, { error:setAsDefaultError, loading:setAsDefaultLoading }] = useMutation(
+    const [setAsDefault] = useMutation(
         setAsDefaultCreditCardPaymentMutation
     );
 

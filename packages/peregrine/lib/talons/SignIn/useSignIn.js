@@ -156,7 +156,8 @@ export const useSignIn = props => {
                     userOnOrderSuccess &&
                     REDIRECT_FOR_ROUTES.includes(location.pathname)
                 ) {
-                    history.push('/order-history');
+                   // history.push('/order-history');
+                   history.push('/')
                 }
             } catch (error) {
                 if (process.env.NODE_ENV !== 'production') {

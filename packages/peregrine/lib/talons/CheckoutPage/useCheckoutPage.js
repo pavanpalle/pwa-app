@@ -79,7 +79,8 @@ export const useCheckoutPage = (props = {}) => {
         getOrderDetailsQuery,
         placeOrderMutation,
         cardKnoxPlaceOrderMutation,
-        cardKnoxStaticPlaceOrderMutation
+        cardKnoxStaticPlaceOrderMutation,
+        validateCartAddressMutation
     } = operations;
 
     const { generateReCaptchaData, recaptchaWidgetProps } = useGoogleReCaptcha({
@@ -104,12 +105,16 @@ export const useCheckoutPage = (props = {}) => {
         CHECKOUT_STEP.SHIPPING_ADDRESS
     );
     const [guestSignInUsername, setGuestSignInUsername] = useState('');
-
+    const [showOverlay, setShowOverlay] = useState(false);
+    const [suggestedAddress, setSuggestedAddress] = useState();
+    const [validateAddress, setValidateAddress] = useState();
     const [paymentHash, setPaymentHash] = useState({
         paymentToken: '',
         cvvToken: '',
         exp: '',
-        paymentMethod: ''
+        paymentMethod: '',
+        cardType: '',
+        saveCard: false
     });
 
     const [{ isSignedIn }] = useUserContext();
@@ -127,19 +132,14 @@ export const useCheckoutPage = (props = {}) => {
 
     const [
         cardKnoxPlaceOrder,
-        {
-            data: cardKnoxPlaceOrderData,
-            error: cardKnoxPlaceOrderError,
-            loading: cardKnoxPlaceOrderLoading
-        }
+        { data: cardKnoxPlaceOrderData, error: cardKnoxPlaceOrderError }
     ] = useMutation(cardKnoxPlaceOrderMutation);
 
     const [
         cardKnoxStaticPlaceOrder,
         {
             data: cardKnoxStaticPlaceOrderData,
-            error: cardKnoxStaticPlaceOrderError,
-            loading: cardKnoxStaticPlaceOrderLoading
+            error: cardKnoxStaticPlaceOrderError
         }
     ] = useMutation(cardKnoxStaticPlaceOrderMutation);
 
@@ -173,6 +173,8 @@ export const useCheckoutPage = (props = {}) => {
         }
     });
 
+    const [validateCartAddress] = useMutation(validateCartAddressMutation);
+
     const cartItems = useMemo(() => {
         return (checkoutData && checkoutData?.cart?.items) || [];
     }, [checkoutData]);
@@ -204,15 +206,81 @@ export const useCheckoutPage = (props = {}) => {
     }, []);
 
     const checkoutError = useMemo(() => {
-        if (placeOrderError) {
-            return new CheckoutError(placeOrderError);
+        if (
+            placeOrderError ||
+            cardKnoxPlaceOrderError ||
+            cardKnoxStaticPlaceOrderError
+        ) {
+            return new CheckoutError(
+                placeOrderError ||
+                    cardKnoxPlaceOrderError ||
+                    cardKnoxStaticPlaceOrderError
+            );
         }
-    }, [placeOrderError]);
+    }, [
+        cardKnoxPlaceOrderError,
+        cardKnoxStaticPlaceOrderError,
+        placeOrderError
+    ]);
 
-    const handleReviewOrder = useCallback(() => {
-        setReviewOrderButtonClicked(true);
-        //setCheckoutStep(CHECKOUT_STEP.REVIEW);
-    }, []);
+    const isSuggestedAddressAllNull = data => {
+        const suggestedAddress = data?.suggested_address;
+
+        // If suggestedAddress is missing or not an object
+        if (!suggestedAddress || typeof suggestedAddress !== 'object') {
+            return true;
+        }
+
+        // Check if every value is null
+        return Object.values(suggestedAddress).every(value => value === null);
+    };
+
+    const handleReviewOrder = useCallback(async () => {
+        // setReviewOrderButtonClicked(true);
+        try {
+            const shipping = checkoutData?.cart?.shipping_addresses?.[0] || {};
+
+            if (Object.keys(shipping).length === 0) {
+                return;
+            }
+
+            // Step 1: Validate address via GraphQL mutation
+            const data = await validateCartAddress({
+                variables: {
+                    input: {
+                        AddressLine: shipping.street[0] || '',
+                        AddressLine2: shipping.street[1] || '',
+                        City: shipping.city,
+                        State: shipping?.region?.code,
+                        Postcode: shipping.postcode,
+                        CountryCode: shipping?.country?.code
+                    }
+                }
+            });
+
+            const addressValidation = data?.data?.addressValidation;
+            // Step 2: If valid or "Unknown", apply address to cart
+
+            if (
+                addressValidation?.is_valid ||
+                addressValidation?.classification === 'Unknown'
+            ) {
+                setReviewOrderButtonClicked(true);
+            }
+            // Step 3: If invalid but has a suggestion, show suggestion
+            else if (
+                !addressValidation?.is_valid &&
+                !isSuggestedAddressAllNull(addressValidation)
+            ) {
+                setValidateAddress(shipping);
+                setSuggestedAddress(addressValidation.suggested_address);
+                setShowOverlay(true);
+            }
+        } catch (e) {
+            console.log('e', e);
+            return;
+        }
+    }, [checkoutData, validateCartAddress]);
 
     const handleReviewOrderEnterKeyPress = useCallback(() => {
         event => {
@@ -310,7 +378,9 @@ export const useCheckoutPage = (props = {}) => {
                             cartId,
                             Token: paymentHash.paymentToken,
                             Exp: paymentHash.exp,
-                            cvv: paymentHash.cvvToken
+                            cvv: paymentHash.cvvToken,
+                            saveCard: paymentHash.saveCard,
+                            cardType: paymentHash.cardType
                         },
                         ...reCaptchaData
                     });
@@ -415,7 +485,6 @@ export const useCheckoutPage = (props = {}) => {
                     payload: eventPayload
                 });
             } else if (placeOrderData && orderDetailsData?.cart.id === cartId) {
-                console.log('placeOrderData', placeOrderData);
                 dispatch({
                     type: 'ORDER_CONFIRMATION_PAGE_VIEW',
                     payload: {
@@ -427,7 +496,6 @@ export const useCheckoutPage = (props = {}) => {
                 cardKnoxPlaceOrderData &&
                 orderDetailsData?.cart.id === cartId
             ) {
-                console.log('cardKnoxPlaceOrderData', cardKnoxPlaceOrderData);
                 dispatch({
                     type: 'ORDER_CONFIRMATION_PAGE_VIEW',
                     payload: {
@@ -440,10 +508,6 @@ export const useCheckoutPage = (props = {}) => {
                 cardKnoxStaticPlaceOrderData &&
                 orderDetailsData?.cart.id === cartId
             ) {
-                console.log(
-                    'cardKnoxStaticPlaceOrderData',
-                    cardKnoxStaticPlaceOrderData
-                );
                 dispatch({
                     type: 'ORDER_CONFIRMATION_PAGE_VIEW',
                     payload: {
@@ -545,6 +609,12 @@ export const useCheckoutPage = (props = {}) => {
         recaptchaWidgetProps,
         toggleAddressBookContent,
         toggleSignInContent,
-        setPaymentHash
+        setPaymentHash,
+        showOverlay,
+        setShowOverlay,
+        suggestedAddress,
+        setSuggestedAddress,
+        validateAddress,
+        setValidateAddress
     };
 };

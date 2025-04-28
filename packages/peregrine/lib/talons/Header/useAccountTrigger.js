@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 
 import { useDropdown } from '@magento/peregrine/lib/hooks/useDropdown';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
+import { useHistory } from 'react-router-dom';
 /**
  * The useAccountTrigger talon complements the AccountTrigger component.
  *
@@ -19,13 +20,17 @@ export const useAccountTrigger = () => {
         setExpanded: setAccountMenuIsOpen,
         triggerRef: accountMenuTriggerRef
     } = useDropdown();
-
+    const history = useHistory();
+    const [{ isSignedIn: isUserSignedIn }] = useUserContext();
     const handleTriggerClick = useCallback(() => {
         // Toggle the Account Menu.
-        setAccountMenuIsOpen(isOpen => !isOpen);
-    }, [setAccountMenuIsOpen]);
 
-    const [{ isSignedIn: isUserSignedIn }] = useUserContext();
+        if (isUserSignedIn) {
+            setAccountMenuIsOpen(isOpen => !isOpen);
+        } else {
+            history.push('/sign-in');
+        }
+    }, [history, isUserSignedIn, setAccountMenuIsOpen]);
 
     return {
         accountMenuIsOpen,

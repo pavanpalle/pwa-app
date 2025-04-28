@@ -49,23 +49,23 @@ const Options = props => {
                   // Check if this is a multi-select attribute
                   // You need to define which attributes are multi-select
                   // This could be based on attribute code, input_type, or a custom flag
-                  const isMultiSelect = option.attribute_code === 'color' ;
+                //   const isMultiSelect = option.attribute_code === 'color' ;
                   
-                  if (isMultiSelect) {
-                      return (
-                          <MultiSelectSwatch
-                              {...option}
-                              classes={classes}
-                              key={option.attribute_id}
-                              onSelectionChange={handleMultiSelectionChange}
-                              selectedValues={multiSelectedValueMap?.get(option.label) || []}
-                              isEverythingOutOfStock={isEverythingOutOfStock}
-                              outOfStockVariants={outOfStockVariants}
-                              getProductDetailsByColor={option.label?.toLowerCase() === 'color' ? getProductDetailsByColor : undefined}
-                              from={from}
-                          />
-                      );
-                  }
+                //   if (isMultiSelect) {
+                //       return (
+                //           <MultiSelectSwatch
+                //               {...option}
+                //               classes={classes}
+                //               key={option.attribute_id}
+                //               onSelectionChange={handleMultiSelectionChange}
+                //               selectedValues={multiSelectedValueMap?.get(option.label) || []}
+                //               isEverythingOutOfStock={isEverythingOutOfStock}
+                //               outOfStockVariants={outOfStockVariants}
+                //               getProductDetailsByColor={option.label?.toLowerCase() === 'color' ? getProductDetailsByColor : undefined}
+                //               from={from}
+                //           />
+                //       );
+                //   }
                   
                   // Use the existing Option component for regular single-select options
                   return (

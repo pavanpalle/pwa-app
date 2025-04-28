@@ -1,16 +1,17 @@
-import React, { Fragment, useEffect, useMemo, Suspense } from 'react';
-import { FormattedMessage } from 'react-intl';
-import { shape, string, func } from 'prop-types';
-import { PlusSquare, AlertCircle as AlertCircleIcon } from 'react-feather';
 import { useToasts } from '@magento/peregrine';
 import { useAddressBook } from '@magento/peregrine/lib/talons/CheckoutPage/AddressBook/useAddressBook';
+import { func, shape, string } from 'prop-types';
+import React, { Fragment, Suspense, useEffect, useMemo } from 'react';
+import { AlertCircle as AlertCircleIcon, PlusSquare } from 'react-feather';
+import { FormattedMessage } from 'react-intl';
 
 import { useStyle } from '../../../classify';
 import Button from '../../Button';
-import defaultClasses from './addressBook.module.css';
-import AddressCard from './addressCard';
+import Dialog from '../../Dialog';
 import Icon from '../../Icon';
 import LinkButton from '../../LinkButton';
+import defaultClasses from './addressBook.module.css';
+import AddressCard from './addressCard';
 
 const EditModal = React.lazy(() => import('../ShippingInformation/editModal'));
 
@@ -28,12 +29,23 @@ const AddressBook = props => {
         activeContent,
         classes: propClasses,
         toggleActiveContent,
-        onSuccess
+        onSuccess,
+        showOverlay,
+        setShowOverlay,
+        suggestedAddress,
+        setSuggestedAddress,
+        validateAddress,
+        setValidateAddress
     } = props;
 
     const talonProps = useAddressBook({
         toggleActiveContent,
-        onSuccess
+        onSuccess,
+        setShowOverlay,
+        setSuggestedAddress,
+        suggestedAddress,
+        validateAddress,
+        setValidateAddress
     });
 
     const {
@@ -46,7 +58,10 @@ const AddressBook = props => {
         handleEditAddress,
         handleSelectAddress,
         isLoading,
-        selectedAddress
+        selectedAddress,
+
+        handleAddressValidationCancel,
+        handleAddressValidationSubmit
     } = talonProps;
 
     const classes = useStyle(defaultClasses, propClasses);
@@ -167,6 +182,49 @@ const AddressBook = props => {
             <Suspense fallback={null}>
                 <EditModal onSuccess={onSuccess} shippingData={activeAddress} />
             </Suspense>
+
+            <Dialog
+                confirmText={'Continue'}
+                confirmTranslationId={'productForm.submit'}
+                isOpen={showOverlay}
+                onCancel={handleAddressValidationCancel}
+                onConfirm={handleAddressValidationSubmit}
+                shouldUnmountOnHide={false}
+                title={'Address Validation'}
+            >
+                <div className="items-center justify-center flex">
+                    <span>
+                        <FormattedMessage
+                            id={'addressBook.addressValidationMessage'}
+                            defaultMessage={
+                                'Please review your address and make any necessary changes.'
+                            }
+                        />
+                    </span>
+                </div>
+
+                <div className="items-center justify-center flex">
+                    <span>
+                        <FormattedMessage
+                            id={'addressBook.useSuggestedAddress'}
+                            defaultMessage={'Use Suggested Address:'}
+                        />
+                    </span>
+                </div>
+                <div>
+                    <span>{suggestedAddress?.AddressLine}</span>
+                    <span className="text-bold">
+                        <FormattedMessage
+                            id={'addressBook.suggestedAddress'}
+                            defaultMessage={`, ${suggestedAddress?.City}, ${
+                                suggestedAddress?.Region?.region
+                            }, ${suggestedAddress?.Postcode} ${
+                                suggestedAddress?.CountryCode
+                            }`}
+                        />
+                    </span>
+                </div>
+            </Dialog>
         </Fragment>
     );
 };

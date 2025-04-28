@@ -4,7 +4,8 @@ import { CARD_TYPE, CVV_TYPE } from '@cardknox/react-ifields';
 import defaultClasses from './creditCardForm.module.css';
 import { useStyle } from '../../classify';
 import Checkbox from '../Checkbox';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { Form } from 'informed';
 const CreditCardForm = props => {
     const {
         classes: propClasses,
@@ -24,90 +25,6 @@ const CreditCardForm = props => {
     const cardRef = useRef();
     const cvvRef = useRef();
 
-    const getCardToken = () => {
-        cardRef.current.getToken();
-    };
-    const getCvvToken = () => {
-        cvvRef.current.getToken();
-    };
-
-    // const onCardToken = (data) => {
-    //   setCardToken(data.xToken);
-    // };
-    // const onCvvToken = (data) => {
-    //   setCvvToken(data.xToken);
-    // };
-
-    const getCardAndCvvToken = () => {
-        getCardToken();
-        getCvvToken();
-    };
-
-    //     const [cardToken, setCardToken] = useState('');
-    // const [cvvToken, setCvvToken] = useState('');
-    // const [issuer, setIssuer] = useState('');
-    // const [expMonth, setExpMonth] = useState(new Date().getMonth() + 1);
-    // const [expYear, setExpYear] = useState(new Date().getFullYear());
-    // Refs
-
-    // const [isFormValid, setIsFormValid] = useState(false);
-    // const [formErrors, setFormErrors] = useState({
-    //   card: '',
-    //   cvv: '',
-    //   expiry: ''
-    // });
-    // const [isProcessing, setIsProcessing] = useState(false);
-    // const [isComplete, setIsComplete] = useState(false);
-
-    // // Validate expiry date
-    // useEffect(() => {
-    //   const validateExpiryDate = () => {
-    //     const currentDate = new Date();
-    //     const currentMonth = currentDate.getMonth() + 1;
-    //     const currentYear = currentDate.getFullYear();
-
-    //     if (expYear < currentYear || (expYear === currentYear && expMonth < currentMonth)) {
-    //       setFormErrors(prev => ({ ...prev, expiry: 'Card has expired' }));
-    //     } else {
-    //       setFormErrors(prev => ({ ...prev, expiry: '' }));
-    //     }
-    //   };
-
-    //   validateExpiryDate();
-    // }, [expMonth, expYear]);
-
-    // // Check if form is valid when tokens or errors change
-    // useEffect(() => {
-    //   const isValid = cardToken && cvvToken && !formErrors.card && !formErrors.cvv && !formErrors.expiry;
-    //   setIsFormValid(isValid);
-    // }, [cardToken, cvvToken, formErrors]);
-
-    // const onCardToken = (data) => {
-    //   if (data.xToken) {
-    //     setCardToken(data.xToken);
-    //     setFormErrors(prev => ({ ...prev, card: '' }));
-    //   } else {
-    //     setFormErrors(prev => ({ ...prev, card: 'Invalid card number' }));
-    //   }
-    // };
-
-    // const onCvvToken = (data) => {
-    //   if (data.xToken) {
-    //     setCvvToken(data.xToken);
-    //     setFormErrors(prev => ({ ...prev, cvv: '' }));
-    //   } else {
-    //     setFormErrors(prev => ({ ...prev, cvv: 'Invalid CVV' }));
-    //   }
-    // };
-
-    // const onCardError = (error) => {
-    //   setFormErrors(prev => ({ ...prev, card: error.message || 'Card validation failed' }));
-    // };
-
-    // const onCvvError = (error) => {
-    //   setFormErrors(prev => ({ ...prev, cvv: error.message || 'CVV validation failed' }));
-    // };
-
     const onIssuerChange = issuerData => {
         setIssuer(issuerData);
     };
@@ -116,38 +33,13 @@ const CreditCardForm = props => {
         console.log('3DS Results:', results);
     };
 
-    // const handleSubmit = () => {
-    //   if (!isFormValid) {
-    //     return;
-    //   }
-
-    //   setIsProcessing(true);
-
-    //   // Mock payment processing
-    //   setTimeout(() => {
-    //     setIsProcessing(false);
-    //     setIsComplete(true);
-    //   }, 1500);
-    // };
-
-    // const resetForm = () => {
-    //   setCardToken('');
-    //   setCvvToken('');
-    //   setIsComplete(false);
-
-    //   // Clear the ifields
-    //   if (cardRef.current) cardRef.current.clearIfield();
-    //   if (cvvRef.current) cvvRef.current.clearIfield();
-    // };
-
     const [isFormValid, setIsFormValid] = useState(false);
     const [formErrors, setFormErrors] = useState({
         card: '',
         cvv: '',
         expiry: ''
     });
-    //const [isProcessing, setIsProcessing] = useState(false);
-    //const [isComplete, setIsComplete] = useState(false);
+    const [isChecked, setIsChecked] = useState(false);
 
     // Validate expiry date
     useEffect(() => {
@@ -221,8 +113,15 @@ const CreditCardForm = props => {
             token: cardToken,
             cvv: cvvToken,
             expMonth,
-            expYear
+            expYear,
+            isChecked,
+            issuer
         });
+    };
+
+    const handleChange = event => {
+        setIsChecked(event.target.checked);
+       
     };
 
     return (
@@ -341,15 +240,16 @@ const CreditCardForm = props => {
                             )}
                         </div>
                     </div>
-                    {/* <Checkbox
-                        data-cy="SavedPaymentsPage-saveCard"
-                        field="saveCard"
-                        label={FormattedMessage({
-                            id: 'SavedPaymentsPage.saveCard',
-                            defaultMessage: 'Save card for future use.'
-                        })}
-                        //initialValue={false}
-                    /> */}
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={handleChange}
+                        />
+                        Set as Default Payment Method
+                    </label>
+
                     <div className={classes.buttonContainer}>
                         <button
                             className={`${classes.submitButton} ${

@@ -43,6 +43,7 @@ export const getUserDetails = ({ fetchUserDetails }) =>
             try {
                 const { data } = await fetchUserDetails();
 
+                console.log("customer Data",data)
                 storage.setItem(
                     'customer',
                     data.customer

@@ -53,7 +53,7 @@ const ShippingMethod = props => {
 
     if (displayState === displayStates.EDITING) {
         const updateFormInitialValues = {
-            shipping_method: selectedShippingMethod.serializedValue
+            shipping_method: selectedShippingMethod?.serializedValue
         };
 
         contents = (

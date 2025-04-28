@@ -17,6 +17,7 @@ const SwatchList = props => {
         getProductDetailsByColor
     } = props;
 
+   
     const classes = useStyle(defaultClasses, props.classes);
     const swatches = useMemo(
         () =>
@@ -39,18 +40,11 @@ const SwatchList = props => {
                         isOptionOutOfStock={isOptionOutOfStock}
                         attributeLabel={attributeLabel}
                         getProductDetailsByColor={getProductDetailsByColor}
+                        items={items}
                     />
                 );
             }),
-        [
-            getItemKey,
-            selectedValue.label,
-            items,
-            onSelectionChange,
-            isEverythingOutOfStock,
-            outOfStockVariants,
-            attributeLabel
-        ]
+        [items, selectedValue.label, outOfStockVariants, getItemKey, onSelectionChange, isEverythingOutOfStock, attributeLabel, getProductDetailsByColor]
     );
 
     return <div className={classes.root}>{swatches}</div>;

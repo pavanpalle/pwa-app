@@ -47,9 +47,38 @@ export const SET_CUSTOMER_ADDRESS_ON_CART = gql`
     ${PriceSummaryFragment}
     ${AvailablePaymentMethodsFragment}
 `;
-
+export const VALIDATE_CUSTOMER_CART_ADDRESS = gql`
+    mutation ValidateCustomerCartAddress($input: AddressValidationInput!) {
+        addressValidation(input: $input) {
+            error
+            error_message
+            is_valid
+            classification
+            original_address {
+                AddressLine
+                AddressLine2
+                City
+                State
+                Postcode
+                CountryCode
+            }
+            suggested_address {
+                AddressLine
+                City
+                Postcode
+                CountryCode
+                Region {
+                    region
+                    region_code
+                    region_id
+                }
+            }
+        }
+    }
+`;
 export default {
     setDefaultAddressOnCartMutation: SET_CUSTOMER_ADDRESS_ON_CART,
     getDefaultShippingQuery: GET_DEFAULT_SHIPPING,
-    getShippingInformationQuery: GET_SHIPPING_INFORMATION
+    getShippingInformationQuery: GET_SHIPPING_INFORMATION,
+    validateAddressMutation: VALIDATE_CUSTOMER_CART_ADDRESS
 };

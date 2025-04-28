@@ -6,6 +6,7 @@ import { useUserContext } from '@magento/peregrine/lib/context/user';
 import mergeOperations from '@magento/peregrine/lib/util/shallowMerge';
 
 import defaultOperations from './savedPaymentsPage.gql';
+import { useFormApi, useFormState } from 'informed';
 
 export const normalizeTokens = responseData => {
     const paymentTokens =
@@ -90,7 +91,8 @@ export const useSavedPaymentsPage = (props = {}) => {
                 variables: {
                     Token: data.token,
                     Exp: expDate,
-                    SetAsDefault: true
+                    CardType:data.issuer,
+                    SetAsDefault: data.isChecked
                 },
                 refetchQueries: [{ query: getSavedPaymentsQuery }]
             });

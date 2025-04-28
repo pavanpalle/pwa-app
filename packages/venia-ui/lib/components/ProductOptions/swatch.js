@@ -42,13 +42,15 @@ const Swatch = props => {
         isEverythingOutOfStock,
         isOptionOutOfStock,
         attributeLabel,
-        getProductDetailsByColor
+        getProductDetailsByColor,
+        items
     } = props;
 
     const talonProps = useSwatch({
         onClick,
         value_index,
-        getProductDetailsByColor
+        getProductDetailsByColor,
+        items
     });
 
     const { handleClick } = talonProps;

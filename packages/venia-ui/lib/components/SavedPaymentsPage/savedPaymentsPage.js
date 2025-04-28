@@ -12,6 +12,7 @@ import defaultClasses from './savedPaymentsPage.module.css';
 import CreditCard from './creditCard';
 import LinkButton from '../LinkButton';
 import Icon from '../Icon';
+import { Form } from 'informed';
 
 const AddCardModal = React.lazy(() => import('./addCardModal'));
 
@@ -109,6 +110,7 @@ const SavedPaymentsPage = props => {
             <div className={classes.add}>{AddButton}</div>
             <div className={classes.noPayments}>{noSavedPayments}</div>
             <Suspense fallback={null}>
+                <Form>
                 <AddCardModal
                     onSuccess={toggleAddCard}
                     isOpen={addCard}
@@ -116,6 +118,7 @@ const SavedPaymentsPage = props => {
                     handleAddPaymentMethod={handleAddPaymentMethod}
                     isProcessing={isProcessing}
                 />
+                </Form>
             </Suspense>
         </div>
     );

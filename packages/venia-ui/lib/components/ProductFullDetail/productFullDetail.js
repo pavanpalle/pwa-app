@@ -290,18 +290,15 @@ const ProductFullDetail = props => {
 
                         {isSignedIn &&
                             sizesTable &&
-                            Object.entries(sizesTable || {}).map(
-                                ([colorId, tableData]) => {
-                                    return (
-                                        <div
+                            <div
                                             className="product-grid-table "
-                                            key={colorId}
+                                           
                                         >
                                             {/* Header row */}
                                             <ul>
                                                 <li>
                                                     {productDetails.sku} -{' '}
-                                                    {tableData?.color?.label}
+                                                    {sizesTable?.color?.label}
                                                 </li>
                                                 <li>PRICE</li>
                                                 <li>INVENTORY</li>
@@ -309,9 +306,9 @@ const ProductFullDetail = props => {
                                             </ul>
 
                                             {/* Product rows */}
-                                            {tableData &&
+                                            {sizesTable &&
                                                 Object.entries(
-                                                    tableData?.sizes || {}
+                                                    sizesTable?.sizes || {}
                                                 ).map(([size, details]) => (
                                                     <ul
                                                         className="space-y-4"
@@ -344,9 +341,7 @@ const ProductFullDetail = props => {
                                                     </ul>
                                                 ))}
                                         </div>
-                                    );
-                                }
-                            )}
+}
 
                         {/* <section className={classes.quantity}>
                             <span

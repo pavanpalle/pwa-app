@@ -17,13 +17,13 @@ const initializingContents = (
 );
 
 const SavedCards = props => {
-    const { classes: propClasses , setPaymentHash} = props;
+    const { classes: propClasses, setPaymentHash } = props;
     const classes = useStyle({}, propClasses);
-    const talonProps = useSavedCards({ setPaymentHash});
+    const talonProps = useSavedCards({ setPaymentHash });
 
     const { isLoading, savedCards, handleSubmit, defaultCard } = talonProps;
     const deaultSavedCard = {
-        paymentHash: defaultCard.Token,
+        paymentHash: defaultCard?.Token || ''
     };
     let bodyContents = initializingContents;
     bodyContents = (
@@ -38,7 +38,7 @@ const SavedCards = props => {
     );
 
     const contents = <div data-cy="SavedCards-root">{bodyContents}</div>;
-   
+
     return <Fragment>{contents}</Fragment>;
 };
 

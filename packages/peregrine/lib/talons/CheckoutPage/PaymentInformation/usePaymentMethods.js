@@ -37,6 +37,7 @@ export const usePaymentMethods = props => {
         'selectedPaymentMethod'
     );
     const userProfile = storage.getItem('customer') || {};
+    console.log("userProfile", userProfile);
     const availablePaymentMethodsLocal = useMemo(() => {
         return (data && data.cart.available_payment_methods) || [];
     }, [data]);

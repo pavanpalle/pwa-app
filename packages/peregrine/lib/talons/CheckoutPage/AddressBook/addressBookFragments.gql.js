@@ -7,6 +7,7 @@ export const CustomerAddressFragment = gql`
         country_code
         default_shipping
         default_billing
+        is_valid_address
         firstname
         lastname
         postcode

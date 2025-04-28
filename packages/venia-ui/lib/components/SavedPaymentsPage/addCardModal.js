@@ -21,13 +21,13 @@ const AddCardModal = props => {
     const rootClass = isOpen ? classes.root_open : classes.root;
 
     const bodyElement = isOpen ? (
-        <Form>
+       
             <CreditCardForm
                 handleClose={handleClose}
                 handleAddPaymentMethod={handleAddPaymentMethod}
                 isProcessing={isProcessing}
             />
-        </Form>
+     
     ) : null;
 
     return (

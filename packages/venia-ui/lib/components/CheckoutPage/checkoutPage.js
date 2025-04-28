@@ -84,7 +84,13 @@ const CheckoutPage = props => {
         recaptchaWidgetProps,
         toggleAddressBookContent,
         toggleSignInContent,
-        setPaymentHash
+        setPaymentHash,
+        showOverlay,
+        setShowOverlay,
+        suggestedAddress,
+        setSuggestedAddress,
+        validateAddress,
+        setValidateAddress
     } = talonProps;
 
     const [, { addToast }] = useToasts();
@@ -435,6 +441,12 @@ const CheckoutPage = props => {
             activeContent={activeContent}
             toggleActiveContent={toggleAddressBookContent}
             onSuccess={scrollShippingInformationIntoView}
+            showOverlay={showOverlay}
+            setShowOverlay={setShowOverlay}
+            suggestedAddress={suggestedAddress}
+            setSuggestedAddress={setSuggestedAddress}
+            validateAddress={validateAddress} 
+            setValidateAddress={setValidateAddress}
         />
     ) : null;
 

@@ -1,3 +1,6 @@
+/**
+ * TODO Document
+ */
 export const findMatchingVariant = ({
     variants,
     optionCodes,
@@ -9,21 +12,21 @@ export const findMatchingVariant = ({
             new Map()
         );
 
-        for (const [id, values] of optionSelections) {
-            if (!values || !Array.isArray(values)) continue;
-
+        for (const [id, value] of optionSelections) {
             const code = optionCodes.get(id);
-            const matches = values.some((value) => {
-                const matchesStandard = product[code] === value;
-                const matchesCustom = customAttributes.get(code) === value;
-                return matchesStandard || matchesCustom;
-            });
+            const matchesStandardAttribute = product[code] === value;
+            const matchesCustomAttribute = customAttributes.get(code) === value;
 
-            if (!matches) {
+            // if any option selection fails to match any standard attribute
+            // and also fails to match any custom attribute
+            // then this isn't the correct variant
+            if (!matchesStandardAttribute && !matchesCustomAttribute) {
                 return false;
             }
         }
 
+        // otherwise, every option selection matched
+        // and this is the correct variant
         return true;
     });
 };
