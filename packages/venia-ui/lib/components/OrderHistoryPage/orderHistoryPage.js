@@ -23,6 +23,7 @@ import defaultClasses from './orderHistoryPage.module.css';
 import OrderRow from './orderRow';
 import ResetButton from './resetButton';
 import JQGrid from '../JQGrid';
+import AccountMenuItems from '../AccountMenu/accountMenuItems';
 const errorIcon = (
     <Icon
         src={AlertCircleIcon}
@@ -167,6 +168,8 @@ const OrderHistoryPage = props => {
 
 
     return (
+        <div className='account-layout'>
+            <AccountMenuItems />
         <OrderHistoryContextProvider>
             <div className={classes.root}>
                 <StoreTitle>{PAGE_TITLE}</StoreTitle>
@@ -203,6 +206,7 @@ const OrderHistoryPage = props => {
                 {loadMoreButton}
             </div>
         </OrderHistoryContextProvider>
+        </div>
     );
 };
 

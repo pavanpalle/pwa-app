@@ -54,10 +54,11 @@ const CreateAccount = props => {
             onClick={handleCancel}
             onKeyDown={handleCancelKeyPress}
         >
-            <FormattedMessage
+            {/* <FormattedMessage
                 id={'createAccount.cancelText'}
                 defaultMessage={'Cancel'}
-            />
+            /> */}
+            Back to Login
         </Button>
     );
 
@@ -89,10 +90,15 @@ const CreateAccount = props => {
             onSubmit={handleSubmit}
         >
             <h2 data-cy="CreateAccount-title" className={classes.title}>
-                <FormattedMessage
+                {/* <FormattedMessage
                     id={'createAccount.createAccountText'}
                     defaultMessage={'Create New Customer Account'}
-                />
+                /> */}
+                <Button 
+                 onClick={handleCancel}
+                 onKeyDown={handleCancelKeyPress}
+                >&#x27F5;</Button>
+                Create New Customer Account
             </h2>
             <FormError errors={Array.from(errors.values())} />
             <div className='grid grid-cols-2 gap-8 gap-y-4'>  

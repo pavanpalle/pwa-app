@@ -57,7 +57,7 @@ const JQGrid = () => {
                 ]}
             /> */}
             <JqxGrid
-            width={window.innerWidth*0.95}
+            width="100%"
             height={window.innerHeight*0.5}
               source={dataAdapter}
               pageable={true}
@@ -68,6 +68,9 @@ const JQGrid = () => {
               columnsresize={false}
               autorowheight={true}
               editable={true}
+              scrollbarsize={10}
+              scrollfeedback={true}
+              scrollmode={'logical'}
               columns={[
                 { text: 'ID No', datafield: 'id', width: 150 },
                 { text: 'External Document No', datafield: 'document', width: 250 },
