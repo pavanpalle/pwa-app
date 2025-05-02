@@ -35,7 +35,7 @@ const Logo = props => {
         <Image
             classes={{ image: classes.logo }}
             height={height}
-            src={currentStoreLogo}
+            src={currentStoreLogo || logo}
             alt={title}
             title={title}
             width={width}
