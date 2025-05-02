@@ -27,7 +27,13 @@
     --color-accent: #00cccc;
     --color-border: #dddddd;
   }
-
+  [data-store="recoverstoreview"] {
+    --color-primary: #01b472;
+    --color-background: #f0f0f0;
+    --color-text: #222222;
+    --color-accent: #00cccc;
+    --color-border: #dddddd;
+  }
 
 body{
     font-family: "Albert Sans", sans-serif !important;
@@ -1401,4 +1407,37 @@ ul.social-icons li{
  }
  .orderHistoryPage-heading-l5r{
     @apply text-left w-full
+ }
+
+ /******Home page 2********/
+ .main-banner-block{
+    @apply w-full
+ }
+ .text-block{
+    @apply py-[20px]
+ }
+ .text-block p{
+    @apply text-[22px] text-black
+ }
+ .three-column-block .columnLine-root-MOz{
+    @apply gap-[50px]
+ }
+ .heading-block{
+    @apply py-[20px]
+ }
+ .heading-block h2{
+    @apply !text-[36px] !font-bold
+
+ }
+ .four-column-block .columnLine-root-MOz{
+    @apply mb-[30px]
+ }
+ .four-column-block .columnLine-root-MOz figure{
+    @apply w-full max-w-[250px]
+ }
+ .four-column-block .columnLine-root-MOz figcaption{
+    @apply text-[20px] font-bold
+ }
+ .four-column-block .columnLine-root-MOz .pagebuilder-column{
+    @apply flex flex-col items-center
  }
