@@ -50,6 +50,15 @@ ul li, ol li{
 .cmsBlock-root-dCh{
     @apply !m-0 !w-[calc(100%+4rem)] !mx-[-2rem]
 }
+.header-switchersContainer-oIh{
+    @apply relative z-[999]
+}
+.storeSwitcher-root-qtK{
+    @apply relative
+}
+.storeSwitcher-root-qtK .storeSwitcher-menu_open-HCg{
+    @apply absolute right-0 top-[35px]
+}
 .header-top-bar{
     @apply bg-primary h-[40px] w-full flex items-center justify-center
 }
@@ -81,7 +90,10 @@ ul li, ol li{
     @apply flex flex-wrap flex-row bg-white z-[99]
 }
 .header-logoContainer-G01 img{
-    @apply bg-white
+    @apply bg-white !max-h-[50px] !w-auto hidden
+}
+.header-logoContainer-G01 img:last-child{
+    @apply relative block
 }
 .header-logoContainer-G01 .image-placeholder-qmv{
      @apply z-[-1]
