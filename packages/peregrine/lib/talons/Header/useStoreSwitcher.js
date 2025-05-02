@@ -166,6 +166,8 @@ export const useStoreSwitcher = (props = {}) => {
             if (!availableStores.has(storeCode)) return;
 
             storage.setItem('store_view_code', storeCode);
+            console.log("storeCode",storeCode)
+            document.documentElement.setAttribute('data-store', storeCode);
             storage.setItem(
                 'store_view_currency',
                 availableStores.get(storeCode).currency

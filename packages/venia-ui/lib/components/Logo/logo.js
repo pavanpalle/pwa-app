@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { useStyle } from '../../classify';
 import Image from '../Image';
 import logo from './ng-logo.svg';
+import headSweatsLogo from './headsweats_logo.svg';
 
 /**
  * A component that renders a logo in the header.
@@ -15,17 +16,20 @@ import logo from './ng-logo.svg';
  * @returns {React.Element} A React component that displays a logo.
  */
 const Logo = props => {
-    const { height, width } = props;
+    const { height, width, storeCode } = props;
     const classes = useStyle({}, props.classes);
     const { formatMessage } = useIntl();
 
-    const title = formatMessage({ id: 'logo.title', defaultMessage: 'NgLabs' });
+    const title = formatMessage({
+        id: 'logo.title',
+        defaultMessage: storeCode === 'default' ? 'NgLabs' : 'Whole Sale'
+    });
 
     return (
         <Image
             classes={{ image: classes.logo }}
             height={height}
-            src={logo}
+            src={storeCode === 'default' ? logo : headSweatsLogo}
             alt={title}
             title={title}
             width={width}

@@ -160,6 +160,13 @@ export const useAdapter = props => {
         })();
     }, [apolloClient, initialized]);
 
+    useEffect(() => {
+        document.documentElement.setAttribute(
+            'data-store',
+            storeCode || 'default'
+        );
+    }, [storeCode]);
+
     return {
         apolloProps,
         initialized,

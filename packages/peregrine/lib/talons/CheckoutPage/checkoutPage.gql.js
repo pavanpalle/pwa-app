@@ -4,6 +4,7 @@ import { ItemsReviewFragment } from './ItemsReview/itemsReviewFragments.gql';
 import { OrderConfirmationPageFragment } from './OrderConfirmationPage/orderConfirmationPageFragments.gql';
 import { VALIDATE_CUSTOMER_CART_ADDRESS } from './ShippingInformation/shippingInformation.gql';
 import { ShippingInformationFragment } from './ShippingInformation/shippingInformationFragments.gql';
+import { GET_CUSTOMER_ADDRESSES } from './AddressBook/addressBook.gql';
 
 export const CREATE_CART = gql`
     # This mutation will return a masked cart id. If a bearer token is provided for
@@ -107,5 +108,6 @@ export default {
     placeOrderMutation: PLACE_ORDER,
     cardKnoxPlaceOrderMutation: PLACE_ORDER_CARD_KNOX,
     cardKnoxStaticPlaceOrderMutation: PLACE_ORDER_CARD_KNOX_STATIC,
-    validateCartAddressMutation: VALIDATE_CUSTOMER_CART_ADDRESS
+    validateCartAddressMutation: VALIDATE_CUSTOMER_CART_ADDRESS,
+    getCustomerAddressesQuery: GET_CUSTOMER_ADDRESSES,
 };

@@ -6,18 +6,22 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 const colors = {
     brand: {
-        base: '61 132 255',
+        base: '0 45 81',
         dark: '41 84 255',
         darkest: '23 43 196',
         light: '194 200 255',
         100: '194 200 255',
-        400: '61 132 255',
-        // 500: '51 109 255',
+        400: '0 45 81',
+        500: '51 109 255',
         600: '41 84 255',
         700: '31 57 255',
         800: '23 43 196'
     }
 };
+
+
+
+
 
 const extend = {
     alignContent: {
@@ -96,7 +100,14 @@ const extend = {
         radioFocus: `-3px 3px ${theme('colors.brand.100')}`,
         thin: `0 1px ${theme('colors.gray.300')}`
     }),
-    colors: getColors(colors),
+    colors: {
+        primary: 'var(--color-primary)',
+        background: 'var(--color-background)',
+        text: 'var(--color-text)',
+        accent: 'var(--color-accent)',
+        border: 'var(--color-border)',
+        ...getColors(colors)
+    },
     content: {
         empty: ''
     },

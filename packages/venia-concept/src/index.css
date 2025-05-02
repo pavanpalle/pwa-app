@@ -3,7 +3,30 @@
 @tailwind components;
 @tailwind utilities;
 
-
+:root {
+    /* fallback/default */
+    --color-primary: #002D51;
+    --color-background: #ffffff;
+    --color-text: #000000;
+    --color-accent: #ffd700;
+    --color-border: #cccccc;
+  }
+  
+  [data-store="default"] {
+    --color-primary: #002D51 ;
+    --color-background: #ffffff;
+    --color-text: #000000;
+    --color-accent: #ffd700;
+    --color-border: #cccccc;
+  }
+  
+  [data-store="wholesalestoreview"] {
+    --color-primary: #CF142D;
+    --color-background: #f0f0f0;
+    --color-text: #222222;
+    --color-accent: #00cccc;
+    --color-border: #dddddd;
+  }
 
 
 body{
@@ -22,7 +45,7 @@ ul li, ol li{
     @apply !m-0 !w-[calc(100%+4rem)] !mx-[-2rem]
 }
 .header-top-bar{
-    @apply bg-[#002D51] h-[40px] w-full flex items-center justify-center
+    @apply bg-primary h-[40px] w-full flex items-center justify-center
 }
 .header-top-bar ul{
     @apply flex justify-between items-center text-white !m-0 !pl-0 w-full max-w-[1545px] mx-auto
@@ -165,7 +188,7 @@ ul li, ol li{
     @apply !min-w-[25px] !h-[25px] rounded-[13px] border-[#DCDCDC] border bg-white text-black leading-[25px] top-[-10px]  !left-[35px]
 }
 .cartTrigger-triggerContainer-8Eq{
-    @apply w-[48px] h-[48px] rounded-[5px] bg-[#306E91] shadow-xl shadow-[#98C4E459]
+    @apply w-[48px] h-[48px] rounded-[5px] bg-primary shadow-xl shadow-[#98C4E459]
 }
 .cartTrigger-triggerContainer-8Eq svg{
     @apply !stroke-white
@@ -186,7 +209,7 @@ ul li, ol li{
     @apply text-[22px] font-bold text-center
 }
 .footer-root-xZ1{
-    @apply max-w-[100vw] bg-[#002D51] mt-6
+    @apply max-w-[100vw] bg-primary mt-6
 }
 .footer-root-xZ1 .cmsBlock-root-dCh{
     @apply !mx-0 !w-full

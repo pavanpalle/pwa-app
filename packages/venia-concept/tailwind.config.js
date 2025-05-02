@@ -20,9 +20,12 @@ const config = {
         // Extract Tailwind classnames from source files.
         // Our default matcher only matches targets of CSS Modules' `composes`,
         // not classnames included directly in HTML or JS!
-        extract: {
-            css: content => content.match(matcher) || []
-        }
+        extractors: [
+            {
+              extensions: ["css"],
+              extractor: (content) => content.match(matcher) || [],
+            },
+        ],
     },
     // Set the character Tailwind uses when prefixing classnames with variants.
     // CSS Modules doesn't like Tailwind's default `:`, so we use `_`.

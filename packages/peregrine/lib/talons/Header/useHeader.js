@@ -2,9 +2,11 @@ import { useCallback } from 'react';
 
 import { useAppContext } from '@magento/peregrine/lib/context/app';
 import { useDropdown } from '@magento/peregrine/lib/hooks/useDropdown';
-
+import { BrowserPersistence } from '@magento/peregrine/lib/util';
+const storage = new BrowserPersistence();
 export const useHeader = () => {
     const [{ hasBeenOffline, isOnline, isPageLoading }] = useAppContext();
+    const storeCode = storage.getItem('store_view_code') || STORE_VIEW_CODE;
     const {
         elementRef: searchRef,
         expanded: isSearchOpen,
@@ -24,6 +26,7 @@ export const useHeader = () => {
         isPageLoading,
         isSearchOpen,
         searchRef,
-        searchTriggerRef
+        searchTriggerRef,
+        storeCode
     };
 };

@@ -80,7 +80,8 @@ export const useCheckoutPage = (props = {}) => {
         placeOrderMutation,
         cardKnoxPlaceOrderMutation,
         cardKnoxStaticPlaceOrderMutation,
-        validateCartAddressMutation
+        validateCartAddressMutation,
+        getCustomerAddressesQuery
     } = operations;
 
     const { generateReCaptchaData, recaptchaWidgetProps } = useGoogleReCaptcha({
@@ -157,6 +158,10 @@ export const useCheckoutPage = (props = {}) => {
         getCustomerQuery,
         { skip: !isSignedIn }
     );
+    const {
+        data: customerAddressesData,
+        loading: customerAddressLoading
+    } = useQuery(getCustomerAddressesQuery, { skip: !isSignedIn });
 
     const {
         data: checkoutData,
@@ -189,10 +194,20 @@ export const useCheckoutPage = (props = {}) => {
             ? checkoutQueryNetworkStatus < 7
             : true;
 
-        return checkoutQueryInFlight || customerLoading;
-    }, [checkoutQueryNetworkStatus, customerLoading]);
+        return (
+            checkoutQueryInFlight || customerLoading || customerAddressLoading
+        );
+    }, [checkoutQueryNetworkStatus, customerLoading, customerAddressLoading]);
 
     const customer = customerData && customerData.customer;
+
+    const customerAddresses = useMemo(
+        () =>
+            (customerAddressesData &&
+                customerAddressesData.customer.addresses) ||
+            [],
+        [customerAddressesData]
+    );
 
     const toggleAddressBookContent = useCallback(() => {
         setActiveContent(currentlyActive =>
@@ -223,6 +238,10 @@ export const useCheckoutPage = (props = {}) => {
         placeOrderError
     ]);
 
+    const toggleOverlay = useCallback(() => {
+        setShowOverlay(true);
+    }, []);
+
     const isSuggestedAddressAllNull = data => {
         const suggestedAddress = data?.suggested_address;
 
@@ -239,7 +258,16 @@ export const useCheckoutPage = (props = {}) => {
         // setReviewOrderButtonClicked(true);
         try {
             const shipping = checkoutData?.cart?.shipping_addresses?.[0] || {};
+            console.log("shipping",shipping)
+            console.log("customerAddresses",customerAddresses)
+            const foundSelectedAddress = customerAddresses.find(
+                customerAddress =>
+                    customerAddress.street[0] === shipping.street[0] &&
+                    customerAddress.firstname === shipping.firstname &&
+                    customerAddress.lastname === shipping.lastname
+            );
 
+            console.log("foundSelectedAddress",foundSelectedAddress)
             if (Object.keys(shipping).length === 0) {
                 return;
             }
@@ -248,12 +276,12 @@ export const useCheckoutPage = (props = {}) => {
             const data = await validateCartAddress({
                 variables: {
                     input: {
-                        AddressLine: shipping.street[0] || '',
-                        AddressLine2: shipping.street[1] || '',
-                        City: shipping.city,
-                        State: shipping?.region?.code,
-                        Postcode: shipping.postcode,
-                        CountryCode: shipping?.country?.code
+                        AddressLine: foundSelectedAddress.street[0] || '',
+                        AddressLine2: foundSelectedAddress.street[1] || '',
+                        City: foundSelectedAddress.city,
+                        State: foundSelectedAddress?.region?.region_code,
+                        Postcode: foundSelectedAddress.postcode,
+                        CountryCode: foundSelectedAddress?.country_code
                     }
                 }
             });
@@ -272,15 +300,22 @@ export const useCheckoutPage = (props = {}) => {
                 !addressValidation?.is_valid &&
                 !isSuggestedAddressAllNull(addressValidation)
             ) {
-                setValidateAddress(shipping);
+                setValidateAddress(foundSelectedAddress);
                 setSuggestedAddress(addressValidation.suggested_address);
-                setShowOverlay(true);
+                toggleOverlay();
+               // toggleAddressBookContent();
+               
             }
         } catch (e) {
             console.log('e', e);
             return;
         }
-    }, [checkoutData, validateCartAddress]);
+    }, [
+        checkoutData,
+        customerAddresses,
+        toggleOverlay,
+        validateCartAddress
+    ]);
 
     const handleReviewOrderEnterKeyPress = useCallback(() => {
         event => {

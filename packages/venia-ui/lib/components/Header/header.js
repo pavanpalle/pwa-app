@@ -29,7 +29,8 @@ const Header = props => {
         isOnline,
         isSearchOpen,
         searchRef,
-        searchTriggerRef
+        searchTriggerRef,
+        storeCode
     } = useHeader();
 
     const classes = useStyle(defaultClasses, props.classes);
@@ -78,7 +79,7 @@ const Header = props => {
                         className={classes.logoContainer}
                         data-cy="Header-logoContainer"
                     >
-                        <Logo classes={{ logo: classes.logo }} />
+                        <Logo classes={{ logo: classes.logo }} storeCode={storeCode}/>
                     </Link>
                     {/* {searchBar} */}
                         <Suspense fallback={searchBarFallback}>

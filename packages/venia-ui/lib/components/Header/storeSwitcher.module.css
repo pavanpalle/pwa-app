@@ -53,7 +53,7 @@
 
 .menu_open {
     composes: menu;
-
+    composes: relative from global;
     @apply opacity-100;
     @apply visible;
     transform: translate3d(0, 4px, 0);
