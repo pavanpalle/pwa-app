@@ -10,8 +10,8 @@ export const useHeader = (props = {}) => {
     const operations = mergeOperations(DEFAULT_OPERATIONS, props.operations);
     const { getHeaderLogoData } = operations;
     const [{ hasBeenOffline, isOnline, isPageLoading }] = useAppContext();
-    const storeCode = storage.getItem('store_view_code') || STORE_VIEW_CODE;
-    const mediaUrl = storage.getItem('store_view_secure_base_media_url') || STORE_VIEW_SECURE_BASE_MEDIA_URL;
+    const storeCode = storage.getItem('store_view_code') || "default";
+    const mediaUrl = storage.getItem('store_view_secure_base_media_url') || "https://demoecommerce.sparity.com/media/";
     const {
         elementRef: searchRef,
         expanded: isSearchOpen,
