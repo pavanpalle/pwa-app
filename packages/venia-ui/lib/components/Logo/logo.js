@@ -16,20 +16,26 @@ import headSweatsLogo from './headsweats_logo.svg';
  * @returns {React.Element} A React component that displays a logo.
  */
 const Logo = props => {
-    const { height, width, storeCode } = props;
+    const {
+        height,
+        width,
+        storeCode,
+        currentStoreName,
+        currentStoreLogo
+    } = props;
     const classes = useStyle({}, props.classes);
     const { formatMessage } = useIntl();
 
     const title = formatMessage({
         id: 'logo.title',
-        defaultMessage: storeCode === 'default' ? 'NgLabs' : 'Whole Sale'
+        defaultMessage: currentStoreName
     });
 
     return (
         <Image
             classes={{ image: classes.logo }}
             height={height}
-            src={storeCode === 'default' ? logo : headSweatsLogo}
+            src={currentStoreLogo}
             alt={title}
             title={title}
             width={width}

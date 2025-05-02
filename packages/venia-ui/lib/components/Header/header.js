@@ -6,7 +6,6 @@ import Logo from '../Logo';
 import AccountTrigger from './accountTrigger';
 import CartTrigger from './cartTrigger';
 import NavTrigger from './navTrigger';
-import SearchTrigger from './searchTrigger';
 import OnlineIndicator from './onlineIndicator';
 import { useHeader } from '@magento/peregrine/lib/talons/Header/useHeader';
 import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
@@ -24,13 +23,13 @@ const SearchBar = React.lazy(() => import('../SearchBar'));
 
 const Header = props => {
     const {
-        handleSearchTriggerClick,
         hasBeenOffline,
         isOnline,
         isSearchOpen,
         searchRef,
-        searchTriggerRef,
-        storeCode
+        storeCode,
+        currentStoreName,
+        currentStoreLogo
     } = useHeader();
 
     const classes = useStyle(defaultClasses, props.classes);
@@ -53,7 +52,6 @@ const Header = props => {
     //         </Route>
     //     </Suspense>
     // ) : null;
-    
 
     const { formatMessage } = useIntl();
     const title = formatMessage({ id: 'logo.title', defaultMessage: 'NgLabs' });
@@ -79,15 +77,20 @@ const Header = props => {
                         className={classes.logoContainer}
                         data-cy="Header-logoContainer"
                     >
-                        <Logo classes={{ logo: classes.logo }} storeCode={storeCode}/>
+                        <Logo
+                            classes={{ logo: classes.logo }}
+                            storeCode={storeCode}
+                            currentStoreName={currentStoreName}
+                            currentStoreLogo={currentStoreLogo}
+                        />
                     </Link>
                     {/* {searchBar} */}
-                        <Suspense fallback={searchBarFallback}>
-                            <Route>
-                                <SearchBar ref={searchRef} />
-                            </Route>
-                        </Suspense>
-                    
+                    <Suspense fallback={searchBarFallback}>
+                        <Route>
+                            <SearchBar ref={searchRef} />
+                        </Route>
+                    </Suspense>
+
                     <div className={classes.secondaryActions}>
                         {/* <SearchTrigger
                             onClick={handleSearchTriggerClick}

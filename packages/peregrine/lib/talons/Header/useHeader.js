@@ -1,12 +1,17 @@
-import { useCallback } from 'react';
-
+import { useCallback, useMemo } from 'react';
+import { useQuery } from '@apollo/client';
 import { useAppContext } from '@magento/peregrine/lib/context/app';
 import { useDropdown } from '@magento/peregrine/lib/hooks/useDropdown';
 import { BrowserPersistence } from '@magento/peregrine/lib/util';
+import mergeOperations from '../../util/shallowMerge';
+import DEFAULT_OPERATIONS from './headerLogo.gql';
 const storage = new BrowserPersistence();
-export const useHeader = () => {
+export const useHeader = (props = {}) => {
+    const operations = mergeOperations(DEFAULT_OPERATIONS, props.operations);
+    const { getHeaderLogoData } = operations;
     const [{ hasBeenOffline, isOnline, isPageLoading }] = useAppContext();
     const storeCode = storage.getItem('store_view_code') || STORE_VIEW_CODE;
+    const mediaUrl = storage.getItem('store_view_secure_base_media_url') || STORE_VIEW_SECURE_BASE_MEDIA_URL;
     const {
         elementRef: searchRef,
         expanded: isSearchOpen,
@@ -14,6 +19,21 @@ export const useHeader = () => {
         triggerRef: searchTriggerRef
     } = useDropdown();
 
+    const { data: headerLogoData } = useQuery(getHeaderLogoData, {
+        fetchPolicy: 'cache-and-network',
+        nextFetchPolicy: 'cache-first'
+    });
+
+    const currentStoreName = useMemo(() => {
+        if (headerLogoData) {
+            return headerLogoData.storeConfig.store_name;
+        }
+    }, [headerLogoData]);
+    const currentStoreLogo = useMemo(() => {
+        if (headerLogoData) {
+            return `${mediaUrl}logo/${headerLogoData.storeConfig.header_logo_src}`;
+        }
+    }, [headerLogoData,mediaUrl]);
     const handleSearchTriggerClick = useCallback(() => {
         // Toggle the Search input form.
         setIsSearchOpen(isOpen => !isOpen);
@@ -27,6 +47,8 @@ export const useHeader = () => {
         isSearchOpen,
         searchRef,
         searchTriggerRef,
-        storeCode
+        storeCode,
+        currentStoreName,
+        currentStoreLogo
     };
 };
