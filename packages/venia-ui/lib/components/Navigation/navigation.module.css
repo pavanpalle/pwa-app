@@ -71,7 +71,7 @@
     composes: grid-flow-col from global;
     composes: justify-between from global;
     composes: w-full from global;
-
+    composes: -sm_justify-center from global;
     composes: sm_hidden from global;
 }
 

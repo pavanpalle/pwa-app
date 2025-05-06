@@ -11,8 +11,7 @@
     composes: sticky from global;
     composes: w-full from global;
     composes: z-header from global;
-
-    composes: lg_px-8 from global;
+    composes: lg_px-0 from global;
 }
 
 .switchers {
@@ -25,6 +24,7 @@
     composes: relative from global;
     composes: w-full from global;
     composes: z-menu from global;
+    composes: -sm_justify-center from global;
 }
 
 .switchersContainer {
@@ -32,6 +32,8 @@
     composes: hidden from global;
     composes: px-8 from global;
     composes: w-full from global;
+    composes: relative from global;
+    composes: z-[999] from global;
 }
 
 /* Large screen styles */
@@ -160,6 +162,16 @@
     composes: left-[3.5em] from global;
     composes: text-gray-600 from global;
 }
+
+.headerTopBar{
+    composes: bg-primary from global; 
+    composes: h-[40px] from global; 
+    composes: w-full from global; 
+    composes: flex from global; 
+    composes: items-center from global; 
+    composes: justify-center from global;
+}
+
 
 @keyframes pulse {
     0%,

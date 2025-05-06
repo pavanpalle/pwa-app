@@ -85,12 +85,7 @@ const Header = props => {
                         />
                     </Link>
                     {/* {searchBar} */}
-                    <Suspense fallback={searchBarFallback}>
-                        <Route>
-                            <SearchBar ref={searchRef} />
-                        </Route>
-                    </Suspense>
-
+                    
                     <div className={classes.secondaryActions}>
                         {/* <SearchTrigger
                             onClick={handleSearchTriggerClick}
@@ -100,7 +95,16 @@ const Header = props => {
                         <CartTrigger />
                     </div>
                 </div>
-                <MegaMenu />
+                <div className='menu-search-group'>
+                    <MegaMenu />
+                        <div className="search-box">
+                        <Suspense fallback={searchBarFallback}>
+                            <Route>
+                                <SearchBar ref={searchRef} />
+                            </Route>
+                        </Suspense>
+                        </div>
+                    </div>
                 <PageLoadingIndicator absolute />
             </header>
             <OnlineIndicator

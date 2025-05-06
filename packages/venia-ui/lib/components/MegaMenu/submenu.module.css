@@ -1,14 +1,15 @@
 .submenu {
     composes: absolute from global;
-    composes: bg-white from global;
+    composes: bg-transparent from global;
     composes: flex-wrap from global;
     composes: justify-between from global;
     composes: left-0 from global;
     composes: px-3 from global;
-    composes: py-5 from global;
+    composes: py-0 from global;
     composes: right-0 from global;
-    top: 80px;
-    box-shadow: 0 3px rgb(var(--venia-global-color-gray-100));
+    top: 60px;
+    /* box-shadow: 0 3px rgb(var(--venia-global-color-gray-100)); */
+    box-shadow:none;
 
     composes: before_content-empty from global;
     composes: before_h-2.5 from global;
@@ -36,8 +37,14 @@
 .submenuItems {
     composes: flex from global;
     composes: flex-wrap from global;
-    composes: justify-between from global;
+    composes: justify-center from global;
     composes: max-w-site from global;
     composes: ml-auto from global;
     composes: mr-auto from global;
+    composes: items-start from global;
+    composes: min-w-auto from global;
+    composes: bg-white from global;
+    composes: rounded-[12px] from global;
+    composes: max-w-[50vw] from global;
+    box-shadow: 0 3px 6px #0000001A;
 }

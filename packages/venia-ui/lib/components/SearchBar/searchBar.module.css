@@ -3,9 +3,10 @@
     composes: justify-items-center from global;
     composes: justify-self-center from global;
     composes: max-w-site from global;
-    composes: px-xs from global;
+    composes: lg_px-xs from global;
     composes: py-0 from global;
     composes: w-full from global;
+    composes: !flex from global;
 
     @apply hidden;
 }
@@ -29,9 +30,11 @@
     composes: items-center from global;
     composes: justify-center from global;
     composes: max-w-[24rem] from global;
-    composes: pb-xs from global;
+    /* composes: pb-xs from global; */
     composes: relative from global;
+    composes: lg_w-[300px] from global;
     composes: w-full from global;
+    composes: -sm_order-1 from global;
 }
 
 .search {

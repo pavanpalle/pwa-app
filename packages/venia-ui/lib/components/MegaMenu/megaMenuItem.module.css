@@ -1,17 +1,25 @@
 .megaMenuItem {
-    composes: px-3 from global;
+    composes: px-0 from global;
     composes: py-0 from global;
 }
 
 .megaMenuLink {
     composes: items-center from global;
     composes: inline-flex from global;
-    min-height: 5rem;
+    composes: h-[58px] from global;
+    composes: text-[18px] from global;
+    composes: font-semibold from global;
+    composes: text-white from global;
+    composes: px-[20px] from global;
+
+    @apply hover_bg-[#CBD9E1];
+    @apply hover_text-[#003E6B];
+    @apply hover_!no-underline;
 }
 
 .megaMenuLinkActive {
     composes: megaMenuLink;
-    composes: underline from global;
+    composes: no-underline from global;
 }
 
 .megaMenuItem_active {
@@ -22,9 +30,12 @@
 .arrowDown {
     composes: leading-[0] from global;
     composes: pl-2xs from global;
+    composes: text-white from global;
 }
 
 .megaMenuItem:hover .megaMenuLink,
 .megaMenuItem:focus .megaMenuLink {
-    @apply underline;
+    @apply no-underline;
 }
+
+  

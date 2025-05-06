@@ -106,6 +106,7 @@ const extend = {
         text: 'var(--color-text)',
         accent: 'var(--color-accent)',
         border: 'var(--color-border)',
+        currentColor: 'var(--color-currentColor)',
         ...getColors(colors)
     },
     content: {
@@ -347,6 +348,7 @@ const theme = {
                         400: hexToRgb(theme('colors.red.400')),
                         700: hexToRgb(theme('colors.red.700'))
                     }
+                    
                 }
             }
         }

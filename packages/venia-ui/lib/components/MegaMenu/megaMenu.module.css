@@ -9,4 +9,13 @@
 /* Large screen styles */
 .megaMenu {
     composes: lg_flex from global;
+    composes: -sm_hidden from global;
+    /* composes: bg-primary from global; */
+    /* composes: mx-[-2rem] from global; */
+    composes: justify-start from global;
+    composes: relative from global;
+    composes: z-[99] from global;
+    
+    /* @apply w-[calc(100%+4rem)]; */
 }
+
