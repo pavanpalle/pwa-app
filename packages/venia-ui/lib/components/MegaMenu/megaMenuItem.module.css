@@ -11,7 +11,7 @@
     composes: font-semibold from global;
     composes: text-white from global;
     composes: px-[20px] from global;
-
+    composes: -xl_px-[10px] from global;
     @apply hover_bg-[#CBD9E1];
     @apply hover_text-[#003E6B];
     @apply hover_!no-underline;

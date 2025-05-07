@@ -10,10 +10,14 @@
     composes: pb-[1rem] from global;
     composes: text-sm from global;
     composes: whitespace-nowrap from global;
+    composes: flex from global;
+    composes: items-center from global;
+    composes: !ml-0 from global;
 }
 
 .text {
     composes: p-1 from global;
+
 }
 
 .divider {
@@ -22,9 +26,15 @@
 
 .link {
     composes: text;
-    composes: underline from global;
+    /* composes: underline from global; */
+    composes: no-underline from global; 
+    composes: text-[18px] from global;
+    composes: font-semibold from global; 
+    composes: !text-[#111111] from global;
 }
 
 .currentCategory {
-    composes: text;
+    composes: text-[#306E91] from global;
+    composes: text-[18px] from global;
+    composes: font-semibold from global; 
 }

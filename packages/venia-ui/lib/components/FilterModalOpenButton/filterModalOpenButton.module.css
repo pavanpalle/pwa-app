@@ -4,4 +4,7 @@
     @apply min-w-[6.25rem];
 
     @apply lg_hidden;
+    @apply text-[16px]; 
+    @apply font-medium;
+    composes: -sm_w-full from global;
 }

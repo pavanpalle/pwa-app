@@ -66,6 +66,7 @@
     composes: lg_h-20 from global;
     composes: lg_gap-x-8 from global;
     composes: lg_grid-cols-12 from global;
+    composes: xl_px-4 from global;
 }
 
 .logo {

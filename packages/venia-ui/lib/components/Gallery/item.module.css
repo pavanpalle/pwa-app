@@ -12,6 +12,9 @@
 
 .imageContainer {
     grid-area: main;
+    composes: bg-[#EBEBEB] from global;
+    composes: !rounded-[12px] from global;
+    composes: max-h-[406px] from global;
 }
 
 .image {
@@ -20,6 +23,10 @@
     composes: object-contain from global;
     composes: w-full from global;
     transition: opacity 512ms ease-out;
+    composes: max-w-full from global;
+    composes: h-full from global;
+    composes: mix-blend-multiply from global;
+    composes: z-1 from global;
 }
 
 .imageLoaded {
@@ -38,6 +45,7 @@
     composes: image;
 
     composes: bg-subtle from global;
+    composes: z-[-1] from global;
 }
 
 .actionsContainer {

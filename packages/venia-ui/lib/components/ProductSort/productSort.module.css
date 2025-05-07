@@ -1,6 +1,7 @@
 .root {
     composes: relative from global;
     composes: ml-2xs from global;
+    composes: -sm_w-full from global;
 }
 
 .menu {
@@ -40,11 +41,16 @@
 
     @apply min-w-[6.26rem];
 
-    composes: lg_border-2 from global;
-    composes: lg_border-gray-500 from global;
+    /* composes: lg_border-2 from global;
+    composes: lg_border-gray-500 from global; */
     composes: lg_font-normal from global;
     composes: lg_normal-case from global;
-    composes: lg_rounded-input from global;
+    /* composes: lg_rounded-input from global; */
+    composes: !border-[#BFC0BF] from global;
+    composes: !border from global;
+    composes: h-[48px] from global;
+    composes: !rounded-[12px] from global;
+    composes: -sm_w-full from global;
 }
 
 .desktopText {

@@ -7,4 +7,5 @@
     composes: items-center from global;
     composes: justify-items-center from global;
     composes: relative from global;
+    composes: px-5 from global;
 }

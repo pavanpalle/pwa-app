@@ -29,12 +29,13 @@
     composes: inline-flex from global;
     composes: items-center from global;
     composes: justify-center from global;
-    composes: max-w-[24rem] from global;
+    composes: lg_max-w-[24rem] from global;
     /* composes: pb-xs from global; */
     composes: relative from global;
     composes: lg_w-[300px] from global;
     composes: w-full from global;
     composes: -sm_order-1 from global;
+    composes: md_max-w-full from global;
 }
 
 .search {
