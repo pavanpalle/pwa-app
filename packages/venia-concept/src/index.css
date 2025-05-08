@@ -82,20 +82,49 @@ ul li, ol li{
     @apply absolute right-0 top-[35px]
 } */
 
-
-
-
-.grecaptcha-badge { visibility: hidden; }
-
+.header-secondaryActions-H-q > div[class="flex flex-row"]{
+    @apply min-w-[600px]
+}
+.header-secondaryActions-H-q .signIn-root-8WO{
+    @apply !p-0 w-full
+}
+.header-secondaryActions-H-q .signIn-root-8WO .signIn-form-3hL{
+    @apply grid grid-cols-2 gap-5 pr-[180px] relative min-w-[600px]
+}
+.header-secondaryActions-H-q .signIn-root-8WO .signIn-form-3hL .field{
+    @apply relative
+}
+.header-secondaryActions-H-q .signIn-root-8WO .signIn-form-3hL .field label{
+    @apply hidden
+}
+.header-secondaryActions-H-q .signIn-root-8WO .signIn-form-3hL .field img{
+    @apply absolute left-[10px] top-[10px]
+}
+.header-secondaryActions-H-q .signIn-root-8WO .signIn-form-3hL .field input{
+    @apply !pl-[45px] border border-gray-300 rounded-[5px]
+}
+.header-secondaryActions-H-q .signIn-root-8WO .signIn-form-3hL .signIn-buttonsContainer-b2N{
+    @apply w-[160px] absolute right-0 top-0 mt-0
+}
+.header-secondaryActions-H-q .signIn-root-8WO .signIn-form-3hL .signIn-buttonsContainer-b2N button{
+    @apply !w-full
+}
+.header-secondaryActions-H-q .signIn-root-8WO .signIn-form-3hL .googleReCaptcha-root-jrX{
+    @apply absolute opacity-0 z-[-999] top-[-9999]
+}
+/* .grecaptcha-badge { visibility: hidden; } */
+.header-secondaryActions-H-q .signIn-root-8WO .signin-form-container{
+    @apply !min-w-[600px]
+}
 
 .headerTopBar{
-    @apply h-[40px] flex items-center justify-between w-full max-w-[1545px] mx-auto -sm_flex-wrap -sm_h-[70px] -sm_bg-primary -sm_py-[5px] xl_px-[20px]
+    @apply h-[50px] flex items-center justify-between w-full max-w-[1545px] mx-auto -sm_flex-wrap -sm_h-[70px] -sm_bg-primary -sm_py-[5px] xl_px-[20px]
 }
 .headerTopBar ul{
     @apply flex justify-between items-center text-white !m-0 !pl-0  gap-5 -sm_justify-center -sm_w-full -sm_h-[30px]
 }
 .headerTopBar li{
-    @apply flex items-center gap-2 text-[16px]
+    @apply flex items-center gap-2 text-[18px]
 }
 .headerTopBar li label{
     @apply w-[80px]
@@ -116,7 +145,7 @@ ul li, ol li{
     @apply flex flex-wrap flex-row bg-white z-[99]
 }
 .header-logoContainer-G01 img{
-    @apply bg-white !max-h-[50px] !w-auto hidden
+    @apply bg-white !max-h-[50px] !w-auto hidden max-w-none
 }
 .header-logoContainer-G01 img:last-child{
     @apply relative block
@@ -161,7 +190,7 @@ ul li, ol li{
  @apply max-h-[135px] max-w-full w-auto mix-blend-multiply
 }
 .header-toolbar-9k4{
-    @apply !h-auto py-3
+    @apply !h-auto py-3 min-h-[110px]
 }
 /*.searchBar-root-kcW{
     @apply !block !px-0 w-[600px] !max-w-[600px] mx-auto right-[-11vw] relative
@@ -1557,11 +1586,26 @@ ul.social-icons li img{
     @apply mb-[30px]
  }
  .four-column-block .columnLine-root-MOz figure{
-    @apply w-full max-w-[250px]
+    @apply w-full max-w-[250px] 
+ }
+ .four-column-block .columnLine-root-MOz figure img{
+    @apply rounded-full
  }
  .four-column-block .columnLine-root-MOz figcaption{
     @apply text-[20px] font-bold
  }
  .four-column-block .columnLine-root-MOz .pagebuilder-column{
     @apply flex flex-col items-center
+ }
+ .slick-slide img{
+    @apply w-[100vw]
+ }
+ .custom-banner-block img{
+    @apply min-w-full table !my-0
+ }
+ .slick-slider .slick-track{
+    @apply !gap-0
+ }
+ .slick-track:before, .slick-track:after{
+    @apply hidden
  }
