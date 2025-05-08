@@ -18,6 +18,7 @@ import MegaMenu from '../MegaMenu';
 import PageLoadingIndicator from '../PageLoadingIndicator';
 import { useIntl } from 'react-intl';
 import CmsBlock from '../CmsBlock';
+import SignIn from './signIn';
 
 const SearchBar = React.lazy(() => import('../SearchBar'));
 
@@ -29,7 +30,8 @@ const Header = props => {
         searchRef,
         storeCode,
         currentStoreName,
-        currentStoreLogo
+        currentStoreLogo,
+        isUserSignedIn
     } = useHeader();
 
     const classes = useStyle(defaultClasses, props.classes);
@@ -85,38 +87,28 @@ const Header = props => {
                         />
                     </Link>
                     {/* {searchBar} */}
-                    
-                    <div className={classes.secondaryActions}>
-                        <div className='header-login-form'>
-                            <form>
-                            <ul>
-                                <li><input type="text" className='input'/></li>
-                                <li><input type="passwrod" className='text-input'/></li>
-                                <li><input type="checkbox"/> <label>Stay Logged In</label></li>
-                                <li><a href="#">Forgot Password?</a></li>
-                            </ul>
-                            <button type="submit">Login</button>
-                            </form>
+
+                    {isUserSignedIn ? (
+                        <div className={classes.secondaryActions}>
+                            <AccountTrigger />
+                            <CartTrigger />
                         </div>
-                        {/* <SearchTrigger
-                            onClick={handleSearchTriggerClick}
-                            ref={searchTriggerRef}
-                        /> */}
-                        <AccountTrigger />
-                        <CartTrigger />
-                    </div>
-                    
+                    ) : (
+                        <div className={classes.secondaryActions}>
+                           <SignIn/>
+                        </div>
+                    )}
                 </div>
-                <div className='menu-search-group'>
+                <div className="menu-search-group">
                     <MegaMenu />
-                        <div className="search-box">
+                    <div className="search-box">
                         <Suspense fallback={searchBarFallback}>
                             <Route>
                                 <SearchBar ref={searchRef} />
                             </Route>
                         </Suspense>
-                        </div>
                     </div>
+                </div>
                 <PageLoadingIndicator absolute />
             </header>
             <OnlineIndicator
