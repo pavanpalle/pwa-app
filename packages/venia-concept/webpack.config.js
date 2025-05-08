@@ -75,6 +75,7 @@ module.exports = async env => {
     global.MAGENTO_MEDIA_BACKEND_URL = mediaUrl;
     global.LOCALE = storeConfigData.locale.replace('_', '-');
     global.AVAILABLE_STORE_VIEWS = availableStores;
+    global.STORE_CODE = storeConfigData.store_code;
 
     const possibleTypes = await getPossibleTypes();
 
@@ -127,6 +128,20 @@ module.exports = async env => {
         }),
         new HTMLWebpackPlugin(htmlWebpackConfig)
     ];
+
+    if (!config.module.rules) config.module.rules = [];
+
+    config.module.rules.push({
+        test: /\.(woff(2)?|ttf|eot|otf)$/,
+        use: {
+            loader: 'file-loader',
+            options: {
+                name: 'fonts/[name].[ext]',
+                outputPath: 'fonts/',
+                publicPath: '/fonts/'
+            }
+        }
+    });
 
     /*
     Commenting out this section until SSR is fully implemented

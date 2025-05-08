@@ -1,0 +1,36 @@
+.root {
+    composes: pr-0 from global;
+
+    composes: lg_grid from global;
+    composes: lg_pr-sm from global;
+}
+
+.heading {
+    composes: font-bold from global;
+    composes: pb-3 from global;
+}
+
+.itemsContainer {
+    composes: grid from global;
+    composes: gap-y-md from global;
+}
+
+.itemsTable {
+    composes: flex from global;
+    composes: items-center from global;
+    composes: w-full from global;
+    composes: p-4 from global;
+}
+.itemsHeading {
+    composes: w-1/2 from global;
+    composes: font-semibold from global;
+    composes: text_sm from global;
+    
+}
+.itemsHeadingLables {
+    composes: w-1/6 from global;
+    composes: font-semibold from global;
+    composes: text_sm from global;
+    composes: text-center from global;
+    
+}

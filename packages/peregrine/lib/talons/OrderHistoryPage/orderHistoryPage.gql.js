@@ -60,7 +60,7 @@ const CustomerOrdersFragment = gql`
             }
             shipping_method
             status
-            
+
             total {
                 discounts {
                     amount {
@@ -109,6 +109,55 @@ export const GET_CUSTOMER_ORDERS = gql`
     ${CustomerOrdersFragment}
 `;
 
+export const GET_SALES_ORDERS_LIST = gql`
+    query GetSalesOrdersList(
+        $filter: SalesOrdersFilterInput
+        $pageSize: Int!
+        $currentPage: Int!
+    ) {
+        # eslint-disable-next-line @graphql-eslint/require-id-when-available
+
+        salesOrdersList(
+            filter: $filter
+            pageSize: $pageSize
+            currentPage: $currentPage
+        ) {
+            items {
+                External_Document_No
+                NO
+                Order_Date
+                Ship_to_Address
+                Ship_to_City
+                Ship_to_County
+                Ship_to_Name
+                Status
+            }
+            total_count
+        }
+    }
+    
+`;
+
+export const GET_ORDER_PDF = gql`
+    query GetOrderPdf(
+       
+        $OrderNo: String!
+    ) {
+        # eslint-disable-next-line @graphql-eslint/require-id-when-available
+
+        orderPdf(
+           
+            OrderNo: $OrderNo
+        ) {
+            pdfData
+           
+        }
+    }
+    
+`;
+
 export default {
-    getCustomerOrdersQuery: GET_CUSTOMER_ORDERS
+    getCustomerOrdersQuery: GET_CUSTOMER_ORDERS,
+    getSalesOrderListQuery: GET_SALES_ORDERS_LIST,
+    getOrderPdfQuery: GET_ORDER_PDF
 };

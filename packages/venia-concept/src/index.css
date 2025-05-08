@@ -1173,7 +1173,7 @@ ul.social-icons li img{
 
 /******Order History******/
 
-.jqx-grid{
+/* .jqx-grid{
     @apply !h-auto
 }
 .jqx-widget-header{
@@ -1240,7 +1240,7 @@ ul.social-icons li img{
 [role="combobox"]{
     @apply !bg-transparent
 }
-/*[role="row"]{min-height:42px;}*/
+
 [role="row"] .jqx-grid-cell-hover, [role="row"] .jqx-grid-cell-selected{
     @apply !bg-[#f1f1f1] !text-black 
 }
@@ -1330,7 +1330,7 @@ ul.social-icons li img{
 }
 [id^="horizontalScrollBarJqxGridjqx"] [id^="jqxScrollOuterWraphorizontalScrollBarJqxGridjqx"]{
     @apply !top-[15px] 
-}
+} */
 
 /**********Signin **********/
 .signInPage-root-boO, .createAccountPage-root-1-v, .forgotPasswordPage-root-lhE{
@@ -1479,9 +1479,9 @@ ul.social-icons li img{
  .account-layout > div:last-child{
     @apply !p-0 max-w-full overflow-hidden w-full
  }
- .orderHistoryPage-orderHistoryTable-KMr{
+ /* .orderHistoryPage-orderHistoryTable-KMr{
     @apply hidden
- }
+ } */
  .orderHistoryPage-heading-l5r{
     @apply text-left w-full
  }

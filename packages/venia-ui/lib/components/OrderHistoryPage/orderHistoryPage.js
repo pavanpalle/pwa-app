@@ -1,29 +1,23 @@
-import React, { useMemo, useEffect } from 'react';
-import { useIntl, FormattedMessage } from 'react-intl';
-import {
-    Search as SearchIcon,
-    AlertCircle as AlertCircleIcon,
-    ArrowRight as SubmitIcon
-} from 'react-feather';
 import { shape, string } from 'prop-types';
-import { Form } from 'informed';
+import React, { useEffect, useMemo } from 'react';
+import {
+    AlertCircle as AlertCircleIcon
+} from 'react-feather';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { useToasts } from '@magento/peregrine/lib/Toasts';
 import OrderHistoryContextProvider from '@magento/peregrine/lib/talons/OrderHistoryPage/orderHistoryContext';
 import { useOrderHistoryPage } from '@magento/peregrine/lib/talons/OrderHistoryPage/useOrderHistoryPage';
 
 import { useStyle } from '../../classify';
-import Button from '../Button';
+import { StoreTitle } from '../Head';
 import Icon from '../Icon';
 import LoadingIndicator from '../LoadingIndicator';
-import { StoreTitle } from '../Head';
-import TextInput from '../TextInput';
 
 import defaultClasses from './orderHistoryPage.module.css';
-import OrderRow from './orderRow';
-import ResetButton from './resetButton';
-import JQGrid from '../JQGrid';
+
 import AccountMenuItems from '../AccountMenu/accountMenuItems';
+import JQGrid from '../JQGrid';
 const errorIcon = (
     <Icon
         src={AlertCircleIcon}
@@ -32,20 +26,17 @@ const errorIcon = (
         }}
     />
 );
-const searchIcon = <Icon src={SearchIcon} size={24} />;
+
 
 const OrderHistoryPage = props => {
     const talonProps = useOrderHistoryPage();
     const {
         errorMessage,
-        loadMoreOrders,
-        handleReset,
-        handleSubmit,
         isBackgroundLoading,
         isLoadingWithoutData,
         orders,
-        pageInfo,
-        searchText
+        searchText,
+        handleDownloadPdf
     } = talonProps;
     const [, { addToast }] = useToasts();
     const { formatMessage } = useIntl();
@@ -53,10 +44,7 @@ const OrderHistoryPage = props => {
         id: 'orderHistoryPage.pageTitleText',
         defaultMessage: 'Order History'
     });
-    const SEARCH_PLACE_HOLDER = formatMessage({
-        id: 'orderHistoryPage.search',
-        defaultMessage: 'Search by Order Number'
-    });
+   
 
     const ordersCountMessage = formatMessage(
         {
@@ -68,11 +56,7 @@ const OrderHistoryPage = props => {
 
     const classes = useStyle(defaultClasses, props.classes);
 
-    const orderRows = useMemo(() => {
-        return orders.map(order => {
-            return <OrderRow key={order.id} order={order} />;
-        });
-    }, [orders]);
+
 
     const pageContents = useMemo(() => {
         if (isLoadingWithoutData) {
@@ -104,7 +88,8 @@ const OrderHistoryPage = props => {
                     className={classes.orderHistoryTable}
                     data-cy="OrderHistoryPage-orderHistoryTable"
                 >
-                    {orderRows}
+                    <JQGrid data={orders} handleDownloadPdf={handleDownloadPdf}/>
+                    {/* {orderRows} */}
                 </ul>
             );
         }
@@ -113,46 +98,26 @@ const OrderHistoryPage = props => {
         classes.orderHistoryTable,
         isBackgroundLoading,
         isLoadingWithoutData,
-        orderRows,
-        orders.length,
-        searchText
+        orders,
+        searchText,
+        handleDownloadPdf
     ]);
 
-    const resetButtonElement = searchText ? (
-        <ResetButton onReset={handleReset} />
-    ) : null;
+   
 
-    const submitIcon = (
-        <Icon
-            src={SubmitIcon}
-            size={24}
-            classes={{
-                icon: classes.submitIcon
-            }}
-        />
-    );
-
-    const pageInfoLabel = pageInfo ? (
-        <FormattedMessage
-            defaultMessage={'Showing {current} of {total}'}
-            id={'orderHistoryPage.pageInfo'}
-            values={pageInfo}
-        />
-    ) : null;
-
-    const loadMoreButton = loadMoreOrders ? (
-        <Button
-            classes={{ root_lowPriority: classes.loadMoreButton }}
-            disabled={isBackgroundLoading || isLoadingWithoutData}
-            onClick={loadMoreOrders}
-            priority="low"
-        >
-            <FormattedMessage
-                id={'orderHistoryPage.loadMore'}
-                defaultMessage={'Load More'}
-            />
-        </Button>
-    ) : null;
+    // const loadMoreButton = loadMoreOrders ? (
+    //     <Button
+    //         classes={{ root_lowPriority: classes.loadMoreButton }}
+    //         disabled={isBackgroundLoading || isLoadingWithoutData}
+    //         onClick={loadMoreOrders}
+    //         priority="low"
+    //     >
+    //         <FormattedMessage
+    //             id={'orderHistoryPage.loadMore'}
+    //             defaultMessage={'Load More'}
+    //         />
+    //     </Button>
+    // ) : null;
 
     useEffect(() => {
         if (errorMessage) {
@@ -166,46 +131,26 @@ const OrderHistoryPage = props => {
         }
     }, [addToast, errorMessage]);
 
-
     return (
-        <div className='account-layout'>
+        <div className="account-layout">
             <AccountMenuItems />
-        <OrderHistoryContextProvider>
-            <div className={classes.root}>
-                <StoreTitle>{PAGE_TITLE}</StoreTitle>
-                <div aria-live="polite" className={classes.heading}>
-                    {PAGE_TITLE}
-                    <div aria-live="polite" aria-label={ordersCountMessage} />
-                </div>
-
-                <div className={classes.filterRow}>
-                    <span className={classes.pageInfo}>{pageInfoLabel}</span>
-                    <Form className={classes.search} onSubmit={handleSubmit}>
-                        <TextInput
-                            after={resetButtonElement}
-                            before={searchIcon}
-                            field="search"
-                            id={classes.search}
-                            placeholder={SEARCH_PLACE_HOLDER}
+            <OrderHistoryContextProvider>
+                <div className={classes.root}>
+                    <StoreTitle>{PAGE_TITLE}</StoreTitle>
+                    <div aria-live="polite" className={classes.heading}>
+                        {PAGE_TITLE}
+                        <div
+                            aria-live="polite"
+                            aria-label={ordersCountMessage}
                         />
-                        <Button
-                            className={classes.searchButton}
-                            disabled={
-                                isBackgroundLoading || isLoadingWithoutData
-                            }
-                            priority={'high'}
-                            type="submit"
-                            aria-label="submit"
-                        >
-                            {submitIcon}
-                        </Button>
-                    </Form>
+                    </div>
+
+                  
+                    {pageContents}
+
+                   
                 </div>
-                {pageContents}
-                <JQGrid />
-                {loadMoreButton}
-            </div>
-        </OrderHistoryContextProvider>
+            </OrderHistoryContextProvider>
         </div>
     );
 };

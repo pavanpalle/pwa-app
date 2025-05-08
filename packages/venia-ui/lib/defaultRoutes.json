@@ -68,6 +68,14 @@
         "redirectTo": "/sign-in"
     },
     {
+        "name": "OrderDetail",
+        "pattern": "/order-detail/:orderId",
+        "exact": true,
+        "path": "../OrderDetailPage",
+        "authed": true,
+        "redirectTo": "/sign-in"
+    },
+    {
         "name": "Reset Password",
         "pattern": "/customer/account/createPassword",
         "exact": true,

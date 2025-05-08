@@ -25,12 +25,13 @@ export const useAccountTrigger = () => {
     const handleTriggerClick = useCallback(() => {
         // Toggle the Account Menu.
 
-        if (isUserSignedIn) {
-            setAccountMenuIsOpen(isOpen => !isOpen);
-        } else {
-            history.push('/sign-in');
-        }
-    }, [history, isUserSignedIn, setAccountMenuIsOpen]);
+        // if (isUserSignedIn) {
+        //     setAccountMenuIsOpen(isOpen => !isOpen);
+        // } else {
+        //     history.push('/sign-in');
+        // }
+        setAccountMenuIsOpen(isOpen => !isOpen);
+    }, [setAccountMenuIsOpen]);
 
     return {
         accountMenuIsOpen,

@@ -1,0 +1,50 @@
+
+.jqx-widget-header{min-height:42px !important;}
+#jqxgrid[role="grid"]{border:0px !important;}
+[role="columnheader"]{background:#fff !important; font-weight:600 !important; padding:10px 5px !important; box-sizing:border-box !important;}
+[role="columnheader"] > div > div{line-height:24px !important;}
+[role="gridcell"]{padding:5px 5px !important;box-sizing:border-box !important; line-height:normal !important; }
+[role="gridcell"] a{display:table; margin:auto;}
+[role="gridcell"] a img{width:25px !important;}
+[role="gridcell"] > div{margin-top:2px !important;}
+[role="gridcell"].jqx-grid-cell-pinned{background-color:#f9f9f9 !important;}
+[role="rowgroup"].jqx-enableselect{height:auto !important;}
+#pagerjqxgrid{background:none !important;}
+[role="combobox"]{background:none !important;}
+/*[role="row"]{min-height:42px;}*/
+[role="row"] .jqx-grid-cell-hover, [role="row"] .jqx-grid-cell-selected{background:#f1f1f1 !important; color:#000 !important; text-shadow:none !important;}
+[role="button"]{background:#f9f9f9 !important;}
+[role="menubar"]{background:#fff !important;}
+.jqx-grid-pager {
+    background: #fff !important;
+}
+.jqx-grid-pager:before{content:""; width:99.98%; height:100%; border:2px solid #fff;box-sizing:border-box; position:absolute; left:-0.5px; bottom:1px;}
+#contentjqxgrid{border:1px solid #aaa !important; box-sizing:border-box;}
+#contentjqxgrid:before{content:""; width:1px; height:100%; background:#aaa !important; position:absolute; right:2px; top:0px; display:block; z-index:999;}
+.jqx-scrollbar-thumb-state-normal-horizontal {
+    margin: 0px;
+    padding: 0px;
+    background: #fff !important;
+    border: 1px solid #aaa;
+    touch-action: none;
+}
+.jqx-fill-state-normal {
+    box-sizing: content-box;
+    -ms-touch-action: none;
+    font-family: Verdana, Arial, sans-serif;
+    font-style: normal;
+    font-size: 13px;
+    border-color: #aaa;
+    background: #fff;
+}
+/* .jqx-window-header {
+    outline: none;
+    border-width: 0px;
+    border-bottom: 1px solid transparent;
+    overflow: hidden;
+    padding: 7px;
+    height: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    background-color: #fff !important;
+} */
