@@ -85,18 +85,19 @@ const Header = props => {
                         />
                     </Link>
                     {/* {searchBar} */}
-                    <div className=''>
-                        <form>
-                        <ul>
-                            <li><input type="text" className='input'/></li>
-                            <li><input type="passwrod" className='text-input'/></li>
-                            <li><input type="checkbox"/> <label>Stay Logged In</label></li>
-                            <li><a href="#">Forgot Password?</a></li>
-                        </ul>
-                        <button type="submit">Login</button>
-                        </form>
-                    </div>
+                    
                     <div className={classes.secondaryActions}>
+                        <div className='header-login-form'>
+                            <form>
+                            <ul>
+                                <li><input type="text" className='input'/></li>
+                                <li><input type="passwrod" className='text-input'/></li>
+                                <li><input type="checkbox"/> <label>Stay Logged In</label></li>
+                                <li><a href="#">Forgot Password?</a></li>
+                            </ul>
+                            <button type="submit">Login</button>
+                            </form>
+                        </div>
                         {/* <SearchTrigger
                             onClick={handleSearchTriggerClick}
                             ref={searchTriggerRef}
@@ -104,6 +105,7 @@ const Header = props => {
                         <AccountTrigger />
                         <CartTrigger />
                     </div>
+                    
                 </div>
                 <div className='menu-search-group'>
                     <MegaMenu />
