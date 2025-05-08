@@ -41,6 +41,11 @@
     composes: gap-6 from global;
     composes: -sm_flex-col from global;
     composes: -sm_justify-end from global;
+    composes: md_flex-wrap from global;
+    composes: md_max-w-[50%] from global;
+    composes: md_ml-auto from global;
+    composes: md_gap-2 from global;
+    composes: md_justify-end from global;
 }
 
 .categoryContent {

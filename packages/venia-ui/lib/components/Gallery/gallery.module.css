@@ -13,10 +13,21 @@
     composes: mb-3 from global;
     grid-area: items;
     grid-template-columns: repeat(4, 1fr);
+
 }
 
 @media screen(-sm) {
     .items {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media screen(md) {
+    .items {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media screen(2xl) {
+    .items {
+        grid-template-columns: repeat(4, 1fr);
     }
 }

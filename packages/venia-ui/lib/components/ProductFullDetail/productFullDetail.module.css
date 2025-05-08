@@ -18,7 +18,7 @@
             'images quantity'
             'images cart'
             'images .';
-        grid-template-columns: minmax(0, 1.5625fr) minmax(0, 1fr);
+        grid-template-columns: minmax(3, 1.5625fr) minmax(0, 1fr);
         grid-template-rows: repeat(5, min-content) 1fr [fold];
     }
 
@@ -79,7 +79,7 @@
     composes: max-w-[640px] from global;
     composes: mx-auto from global;
     composes: my-0 from global;
-
+    composes: px-0 from global;
     composes: lg_m-0 from global;
     composes: lg_px-0 from global;
     composes: lg_py-sm from global;

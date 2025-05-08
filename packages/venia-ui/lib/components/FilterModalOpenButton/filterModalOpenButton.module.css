@@ -6,5 +6,6 @@
     @apply lg_hidden;
     @apply text-[16px]; 
     @apply font-medium;
-    composes: -sm_w-full from global;
+    composes: -sm_w-[90%] from global;
+    composes: -sm_!min-w-[40%] from global;
 }

@@ -14,7 +14,7 @@
     grid-area: main;
     composes: bg-[#EBEBEB] from global;
     composes: !rounded-[12px] from global;
-    composes: max-h-[406px] from global;
+    composes: max-h-[575px] from global;
 }
 
 .image {
@@ -58,7 +58,17 @@
 }
 
 .name {
-    composes: font-semibold from global;
+    composes: font-medium from global;
+    composes: text-[20px] from global; 
+    composes: leading-[25px] from global;
+    composes: max-h-[50px] from global; 
+    composes: font-semibold from global; 
+    composes: line-clamp-2 from global; 
+    composes: overflow-hidden from global; 
+    composes: text-ellipsis from global; 
+    composes: text-left from global; 
+    composes: text-[#111111]  from global;
+    composes: mt-1 from global;
 }
 
 .name,
@@ -78,5 +88,11 @@
     composes: p-3 from global;
     composes: text-sm from global;
     composes: text-subtle from global;
+    composes: w-full from global;
+}
+.product-info{
+    composes: flex from global;
+    composes: items-center from global;
+    composes: justify-between from global;
     composes: w-full from global;
 }

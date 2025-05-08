@@ -365,8 +365,7 @@ const ProductFullDetail = props => {
                                 <WishlistButton {...wishlistButtonProps} />
                             </Suspense>
                         </section>
-                    </div>
-                    <section className={classes.description}>
+                        <section className={classes.description}>
                         <span
                             data-cy="ProductFullDetail-descriptionTitle"
                             className={classes.descriptionTitle}
@@ -392,6 +391,8 @@ const ProductFullDetail = props => {
                         customAttributes={customAttributesDetails.list}
                     /> */}
                     </section>
+                    </div>
+                   
                     {/* {pageBuilderAttributes} */}
                 </Form>
             </div>

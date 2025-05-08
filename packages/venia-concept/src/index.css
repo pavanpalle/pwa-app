@@ -1,7 +1,21 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family:'Avenir Book';
+    src: url('@magento/venia-ui/lib/assets/fonts/AvenirBook.eot');
+	src: url('@magento/venia-ui/lib/assets/fonts/AvenirBook.eot?#iefix') format('embedded-opentype'),
+		url('@magento/venia-ui/lib/assets/fonts/AvenirBook.woff2') format('woff2'),
+		url('@magento/venia-ui/lib/assets/fonts/AvenirBook.woff') format('woff'),
+		url('@magento/venia-ui/lib/assets/fonts/AvenirBook.svg') format('svg');
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-02DC;
+}
 
 :root {
     /* fallback/default */
@@ -39,8 +53,11 @@
     --color-currentColor: #000000;
   }
 
+
+
 body{
-    font-family: "Albert Sans", sans-serif !important;
+    /* font-family: "Albert Sans", sans-serif !important; */
+    font-family:'Avenir Book' !important;
 }
 ul, ol{
     margin:0px;
@@ -268,7 +285,7 @@ ul li, ol li{
     @apply w-full !max-w-full 
 }
 .footer-row{
-    @apply flex flex-row gap-5 -sm_flex-col max-w-[1545px] mx-auto md_px-[20px] lg_px-0 md_flex-wrap lg_flex-nowrap xl_px-[20px]
+    @apply flex flex-row gap-5 -sm_flex-col max-w-[1545px] mx-auto md_px-[20px] lg_px-0 md_flex-wrap lg_flex-nowrap xl_px-[20px] 2xl_px-0
 }
 .footer-column{
     @apply w-full  text-[#EBEBEB] text-[18px] font-medium h-auto flex flex-col items-center -sm_border-b -sm_border-gray-200 -sm_pb-3 relative md_w-[calc(33.33%-20px)]
@@ -538,9 +555,9 @@ ul.social-icons li img{
 /* .image-placeholder-qmv{
     @apply z-[-1]
 } */
-.item-name-8Fe{
+/* .item-name-8Fe{
     @apply text-[20px] leading-[25px] max-h-[50px] font-semibold line-clamp-2 overflow-hidden text-ellipsis text-center text-[#111111] mt-1
-}
+} */
 .item-actionsContainer-GWK{
     @apply !hidden
 }
@@ -633,23 +650,32 @@ ul.social-icons li img{
     @apply text-[32px] text-[#111111] font-bold relative
 }
 .main-page-dhh.max-w-site{
-    @apply !max-w-[94%] mx-auto
+    @apply !max-w-[1545px] mx-auto -sm_px-[15px] md_px-[20px] max_px-0
+}
+.product-info{
+    @apply flex justify-between items-center text-[20px] text-black font-medium mt-2
+}
+.product-info span:first-child{
+    @apply font-bold
 }
 /********PDP Page***********/
-.pdp-container{
+/* .pdp-container{
     @apply w-[100%+6%] mx-[-3%] my-[-20px] bg-[#F5F5F5] px-[3%] py-[20px]
+} */
+.pdp-container{
+    @apply w-full mx-auto py-[20px]
 }
-.productFullDetail-root-PD6{
+/* .productFullDetail-root-PD6{
     @apply !grid-cols-3 !py-3 !px-0 relative
-}
-.productFullDetail-root-PD6:before{
+} */
+/* .productFullDetail-root-PD6:before{
     @apply content-[""] w-full h-full bg-white absolute left-0 top-0 hidden
-}
-.productFullDetail-root-PD6 .productFullDetail-imageCarousel-Xpl{
+} */
+/* .productFullDetail-root-PD6 .productFullDetail-imageCarousel-Xpl{
     @apply bg-white rounded-l-[10px] p-[40px] h-full
-}
+} */
 .productFullInformation-block{
-    @apply bg-white rounded-r-[10px] py-[20px] pb-[30px] col-span-2 border-l border-[#DCDCDC] h-full pr-[40px]
+    @apply bg-white rounded-r-[10px] py-[20px] pb-[30px] col-span-2
 }
 .carousel-root-TMr{
     @apply !flex flex-col
@@ -1240,7 +1266,6 @@ ul.social-icons li img{
 [role="combobox"]{
     @apply !bg-transparent
 }
-
 [role="row"] .jqx-grid-cell-hover, [role="row"] .jqx-grid-cell-selected{
     @apply !bg-[#f1f1f1] !text-black 
 }

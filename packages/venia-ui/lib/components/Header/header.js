@@ -85,7 +85,17 @@ const Header = props => {
                         />
                     </Link>
                     {/* {searchBar} */}
-                    
+                    <div className=''>
+                        <form>
+                        <ul>
+                            <li><input type="text" className='input'/></li>
+                            <li><input type="passwrod" className='text-input'/></li>
+                            <li><input type="checkbox"/> <label>Stay Logged In</label></li>
+                            <li><a href="#">Forgot Password?</a></li>
+                        </ul>
+                        <button type="submit">Login</button>
+                        </form>
+                    </div>
                     <div className={classes.secondaryActions}>
                         {/* <SearchTrigger
                             onClick={handleSearchTriggerClick}
