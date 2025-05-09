@@ -2,11 +2,12 @@ import React from 'react';
 import { gql } from '@apollo/client';
 import { bool, func, shape, string } from 'prop-types';
 import { useAutocomplete } from '@magento/peregrine/lib/talons/SearchBar';
-import { useIntl } from 'react-intl';
+import { useIntl, FormattedMessage } from 'react-intl';
 
 import defaultClasses from './autocomplete.module.css';
 import { useStyle } from '../../classify';
 import Suggestions from './suggestions';
+import {Link} from 'react-router-dom';
 
 const GET_AUTOCOMPLETE_RESULTS = gql`
     query getAutocompleteResults($inputText: String!) {
@@ -148,15 +149,21 @@ const Autocomplete = props => {
                     visible={visible}
                 />
             </div>
-           { displayResult && products?.items?.length > 0 && 
-            <label
-                id="search_query"
-                data-cy="Autocomplete-message"
-                className={classes.message}
-            >
-                View All <span>{message} Results</span>
-            </label>
-            } 
+            {displayResult && products?.items?.length > 0 && (
+                <span
+                    id="search_query"
+                    data-cy="Autocomplete-message"
+                    className={classes.message}
+                  
+                >
+                    <Link to={`/search.html?query=${value}`}>
+                    <FormattedMessage
+                        id="autocomplete.resultViewAll"
+                        defaultMessage={`View All ${message} Results`}
+                    />
+                    </Link>
+                </span>
+            )}
         </div>
     );
 };

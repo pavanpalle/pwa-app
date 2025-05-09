@@ -45,17 +45,17 @@ const GalleryItem = props => {
 
  
 
-      const talonProps = useGalleryOptions({ product:item });
+    //   const talonProps = useGalleryOptions({ product:item });
     
-        const {
+    //     const {
            
-            handleSelectionChange,
+    //         handleSelectionChange,
            
-            isEverythingOutOfStock,
-            outOfStockVariants,
-            mediaGalleryEntries
+    //         isEverythingOutOfStock,
+    //         outOfStockVariants,
+    //         mediaGalleryEntries
            
-        } = talonProps;
+    //     } = talonProps;
 
      
 
@@ -79,17 +79,17 @@ const GalleryItem = props => {
 
 
 
-     const options = isProductConfigurable(item) ? (
-            <Suspense fallback={<ProductOptionsShimmer />}>
-                <Options
-                    onSelectionChange={handleSelectionChange}
-                    options={configurable_options}
-                   isEverythingOutOfStock={isEverythingOutOfStock}
-                    outOfStockVariants={outOfStockVariants}
-                    from={'Gallery Item'}
-                />
-            </Suspense>
-        ) : null;
+    //  const options = isProductConfigurable(item) ? (
+    //         <Suspense fallback={<ProductOptionsShimmer />}>
+    //             <Options
+    //                 onSelectionChange={handleSelectionChange}
+    //                 options={configurable_options}
+    //                isEverythingOutOfStock={isEverythingOutOfStock}
+    //                 outOfStockVariants={outOfStockVariants}
+    //                 from={'Gallery Item'}
+    //             />
+    //         </Suspense>
+    //     ) : null;
 
     const wishlistButton = wishlistButtonProps ? (
         <WishlistGalleryButton {...wishlistButtonProps} />
@@ -147,7 +147,8 @@ const GalleryItem = props => {
                         root: classes.imageContainer
                     }}
                     height={IMAGE_HEIGHT}
-                    resource={mediaGalleryEntries?.[0]?.file|| smallImageURL}
+                    //resource={mediaGalleryEntries?.[0]?.file|| smallImageURL}
+                    resource={smallImageURL}
                     widths={IMAGE_WIDTHS}
                 />
                 {ratingAverage}
@@ -171,7 +172,7 @@ const GalleryItem = props => {
             </div> */}
            
             <div className={classes.actionsContainer}>
-                {' '}
+               
                 {addButton}
                 {wishlistButton}
             </div>

@@ -194,7 +194,7 @@ export const useCategoryContent = props => {
             ? categoryData.categories.items[0].description
             : null;
     const availableSortMethods = sortData
-        ? sortData.products.sort_fields.options
+        ? sortData?.products?.sort_fields?.options
         : null;
 
     useEffect(() => {

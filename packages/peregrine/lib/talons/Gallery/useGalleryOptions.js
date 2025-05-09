@@ -16,12 +16,14 @@ const deriveOptionCodesFromProduct = product => {
 
     // Initialize optionCodes based on the options of the product.
     const initialOptionCodes = new Map();
+    if (product?.configurable_options) {
     for (const {
         attribute_id,
         attribute_code
     } of product.configurable_options) {
         initialOptionCodes.set(attribute_id, attribute_code);
     }
+}
 
     return initialOptionCodes;
 };
@@ -33,8 +35,10 @@ const deriveOptionSelectionsFromProduct = product => {
     }
 
     const initialOptionSelections = new Map();
-    for (const { attribute_id } of product.configurable_options) {
-        initialOptionSelections.set(attribute_id, undefined);
+    if (product?.configurable_options) {
+        for (const { attribute_id } of product?.configurable_options) {
+            initialOptionSelections.set(attribute_id, undefined);
+        }
     }
 
     return initialOptionSelections;
@@ -89,9 +93,6 @@ const getMediaGalleryEntries = (product, optionCodes, optionSelections) => {
 export const useGalleryOptions = props => {
     const { product } = props;
 
-
-  
-
     const derivedOptionSelections = useMemo(
         () => deriveOptionSelectionsFromProduct(product),
         [product]
@@ -127,9 +128,9 @@ export const useGalleryOptions = props => {
     ]);
 
     const mediaGalleryEntries = useMemo(
-            () => getMediaGalleryEntries(product, optionCodes, optionSelections),
-            [product, optionCodes, optionSelections]
-        );
+        () => getMediaGalleryEntries(product, optionCodes, optionSelections),
+        [product, optionCodes, optionSelections]
+    );
 
     const outOfStockVariants = useMemo(
         () =>
