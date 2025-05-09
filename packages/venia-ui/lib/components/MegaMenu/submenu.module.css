@@ -4,11 +4,11 @@
     composes: flex-wrap from global;
     composes: justify-between from global;
     composes: left-0 from global;
-    composes: px-3 from global;
     composes: py-0 from global;
     composes: right-0 from global;
-    top: 60px;
-    /* box-shadow: 0 3px rgb(var(--venia-global-color-gray-100)); */
+    composes: -xl_max-h-[500px] from global;
+    overflow: auto;
+    top: 58px;
     box-shadow:none;
 
     composes: before_content-empty from global;
@@ -36,15 +36,14 @@
 
 .submenuItems {
     composes: flex from global;
-    composes: flex-wrap from global;
+    composes: flex-col from global;
     composes: justify-center from global;
-    composes: max-w-site from global;
+    composes: !w-full from global;
     composes: ml-auto from global;
     composes: mr-auto from global;
     composes: items-start from global;
-    composes: min-w-auto from global;
-    composes: bg-white from global;
-    composes: rounded-[12px] from global;
-    composes: max-w-[50vw] from global;
+    composes: !min-w-auto from global;
+    composes: bg-white/90 from global;
+    composes: !max-w-full from global;
     box-shadow: 0 3px 6px #0000001A;
 }

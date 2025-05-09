@@ -19,6 +19,8 @@ import PageLoadingIndicator from '../PageLoadingIndicator';
 import { useIntl } from 'react-intl';
 import CmsBlock from '../CmsBlock';
 import SignIn from './signIn';
+import headwearLogo from './headwear-logo.png';
+import recoverLogo from './recover-logo.png';
 
 const SearchBar = React.lazy(() => import('../SearchBar'));
 
@@ -67,7 +69,9 @@ const Header = props => {
                 </div>
             </div>
             <header className={rootClass} data-cy="Header-root">
-                <CmsBlock identifiers="header-top-bar" />
+                <div className={classes.headerTopBar}>
+                    <CmsBlock identifiers="header-top-bar" />
+                </div>
                 <div className={classes.toolbar}>
                     <div className={classes.primaryActions}>
                         <NavTrigger />
@@ -86,6 +90,28 @@ const Header = props => {
                             currentStoreLogo={currentStoreLogo}
                         />
                     </Link>
+                    <div className='flex items-center gap-5'>
+                    <Link
+                        aria-label={title}
+                        to={resourceUrl('/headsweats')}
+                        className={classes.customLogo}
+                    >
+                        <img src={headwearLogo}
+                        width={300}
+                        height={97} 
+                        />
+                    </Link>
+                    <Link
+                        aria-label={title}
+                        to={resourceUrl('/recover')}
+                        className={classes.customLogo}
+                    >
+                        <img src={recoverLogo}
+                        width={300}
+                        height={97}
+                        />
+                    </Link>
+                    </div>
                     {/* {searchBar} */}
 
                     {isUserSignedIn ? (
@@ -101,7 +127,7 @@ const Header = props => {
                 </div>
                 <div className="menu-search-group">
                     <MegaMenu />
-                    <div className="search-box">
+                    <div className={classes.searchBox}>
                         <Suspense fallback={searchBarFallback}>
                             <Route>
                                 <SearchBar ref={searchRef} />

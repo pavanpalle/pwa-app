@@ -4,18 +4,17 @@
     composes: flex-grow from global;
     composes: hidden from global;
     composes: justify-self-center from global;
+    composes: border-0 from global;
+    composes: h-[58px] from global;
 }
 
 /* Large screen styles */
 .megaMenu {
     composes: lg_flex from global;
     composes: -sm_hidden from global;
-    /* composes: bg-primary from global; */
-    /* composes: mx-[-2rem] from global; */
-    composes: justify-start from global;
+    composes: justify-between from global;
     composes: relative from global;
     composes: z-[99] from global;
     
-    /* @apply w-[calc(100%+4rem)]; */
 }
 

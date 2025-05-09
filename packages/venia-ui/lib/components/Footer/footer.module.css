@@ -5,11 +5,10 @@
     composes: gap-y-16 from global;
     composes: grid from global;
     composes: leading-normal from global;
-    /* composes: max-w-site from global; */
     composes: min-h-[15rem] from global;
     composes: mx-auto from global;
     composes: my-0 from global;
-    composes: pt-16 from global;
+    composes: pt-0 from global;
     composes: text-sm from global;
     composes: text-subtle from global;
     composes: w-full from global;

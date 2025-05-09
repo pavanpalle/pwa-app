@@ -11,7 +11,7 @@
 }
 
 .input_shimmer {
-    composes: h-[2.5rem] from global;
+    composes: h-[40px] from global;
     composes: m-0 from global;
     composes: max-w-full from global;
     composes: rounded-input from global;

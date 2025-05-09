@@ -43,6 +43,7 @@
 
 .open {
     composes: root;
+    composes: border-0 from global;
 }
 
 .closed {
@@ -62,18 +63,29 @@
     composes: max-w-site from global;
     composes: w-full from global;
     composes: z-header from global;
-
+    composes: min-h-[110px] from global;
+    composes: pb-3 from global;
     composes: lg_h-20 from global;
     composes: lg_gap-x-8 from global;
     composes: lg_grid-cols-12 from global;
     composes: xl_px-4 from global;
+    composes: 2xl_px-0 from global;
 }
 
 .logo {
     height: var(--height);
     width: var(--width);
 }
+.customLogo{
+    composes: w-auto from global;
+    composes: max-w-none from global;
+    composes: mr-6 from global;
+    composes: table from global;
+}
 
+.customLogo :global(img){
+    @apply !max-w-none !max-h-[70px] !w-auto
+}
 .primaryActions {
     composes: col-start-1 from global;
     composes: grid from global;
@@ -183,4 +195,30 @@
     40% {
         box-shadow: 0 var(--dot-size) 0 0;
     }
+}
+
+.headerTopBar{
+    composes: h-[50px] from global;
+    composes: flex from global;
+    composes: items-center from global;
+    composes: justify-between from global;
+    composes: w-full from global;
+    composes: max-w-[1545px] from global;
+    composes: mx-auto from global;
+    composes: -sm_flex-wrap from global;
+    composes: -sm_h-[70px] from global;
+    composes: -sm_py-[5px] from global;
+    composes: xl_px-[20px] from global;
+    composes: bg-white from global;
+
+}
+.headerTopBar :global(ul){
+    @apply flex justify-end items-center text-white !m-0 !pl-0  gap-5 -sm_justify-center -sm_w-full -sm_h-[30px]
+}
+.headerTopBar :global(li){
+    @apply flex items-center gap-2 text-[18px]
+
+}
+.headerTopBar :global(a){
+    @apply flex items-center gap-1 no-underline -sm_text-[14px] text-[16px] text-black -sm_text-white -sm_leading-[20px]
 }

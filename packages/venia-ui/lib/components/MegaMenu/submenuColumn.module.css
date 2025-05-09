@@ -1,12 +1,13 @@
 .submenuColumn {
-    composes: max-w-[235px] from global;
-    composes: p-5 from global;
+    composes: max-w-full from global;
+    composes: px-5 from global;
+    composes: py-1.5 from global;
 }
 
 .heading {
     composes: font-semibold from global;
-    composes: w-[135px] from global;
-    composes: max-w-[135px] from global;
+    composes: w-full from global;
+    composes: w-full from global;
     composes: flex from global;
     composes: leading-[20px] from global;
     composes: break-all from global;
@@ -25,8 +26,9 @@
     composes: gap-2 from global;
     composes: items-center from global;
     composes: text-[18px] from global;
-    composes: max-w-[135px] from global;
+    composes: max-w-full from global;
     composes: justify-center from global;
+    composes: text-black from global;
 }
 
 .linkActive {
@@ -40,18 +42,3 @@
 .submenuChildItem {
     composes: mb-3 from global;
 }
-/* .cat-thumb{
-    composes: w-[135px] from global;
-    composes: h-[135px] from global;
-    composes: rounded-[10px] from global;
-    composes: bg-[#EBEBEB] from global;
-    composes: flex from global;
-    composes: items-center from global;
-    composes: justify-center from global;
-    oveeflow: hidden
-}
-.cat-thumb_img{
-    composes: max-h-[135px] from global;
-    composes: max-w-full from global;
-    composes: w-auto from global;
-   } */

@@ -1,17 +1,22 @@
 .megaMenuItem {
     composes: px-0 from global;
     composes: py-0 from global;
+    composes: w-full from global;
+    composes: relative from global;
+    composes: h-[60px] from global;
 }
 
 .megaMenuLink {
     composes: items-center from global;
     composes: inline-flex from global;
-    composes: h-[58px] from global;
+    composes: h-[60px] from global;
     composes: text-[18px] from global;
     composes: font-semibold from global;
     composes: text-white from global;
     composes: px-[20px] from global;
     composes: -xl_px-[10px] from global;
+    composes: justify-center from global;
+    composes: w-full from global;
     @apply hover_bg-[#CBD9E1];
     @apply hover_text-[#003E6B];
     @apply hover_!no-underline;
@@ -37,5 +42,10 @@
 .megaMenuItem:focus .megaMenuLink {
     @apply no-underline;
 }
-
+.megaMenuItem:hover{
+    @apply hover_bg-[#CBD9E1];
+}
+.megaMenuItem:hover :global(a){
+    @apply text-[#003E6B];
+}
   

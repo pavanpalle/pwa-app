@@ -30,12 +30,14 @@
     composes: items-center from global;
     composes: justify-center from global;
     composes: lg_max-w-[24rem] from global;
-    /* composes: pb-xs from global; */
+    composes: bg-white from global;
+    composes: my-2 from global;
     composes: relative from global;
     composes: lg_w-[300px] from global;
     composes: w-full from global;
     composes: -sm_order-1 from global;
     composes: md_max-w-full from global;
+    composes: rounded from global;
 }
 
 .search {
@@ -45,6 +47,15 @@
 
 .autocomplete {
     composes: grid from global;
-    /* composes: relative from global; */
     composes: z-menu from global;
 }
+.searchBox{
+    composes: w-full from global;
+    composes: lg_w-[300px] from global;
+    composes: 3xl_w-[350px] from global;
+    composes: 2xl_w-[300px] from global;
+}
+.searchBox :global(input){
+    @apply -sm_!h-[40px] !h-[40px] !border-0
+}
+

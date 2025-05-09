@@ -1,6 +1,5 @@
 .root {
-    composes: bg-gray-100 from global;
-    composes: h-[2px] from global;
+    composes: h-[0px] from global;
     composes: overflow-hidden from global;
     composes: w-full from global;
 }

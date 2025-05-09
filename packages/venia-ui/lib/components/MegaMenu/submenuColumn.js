@@ -73,7 +73,7 @@ const SubmenuColumn = props => {
                     onNavigate();
                 }}
             >
-                <div className='cat-thumb'><img alt={category?.name} src={category?.image} height={135} width={135}/></div>
+                {/* <div className='cat-thumb'><img alt={category?.name} src={category?.image} height={135} width={135}/></div> */}
                 <span className={classes.heading}>{category.name}</span>
             </Link>
             {children}

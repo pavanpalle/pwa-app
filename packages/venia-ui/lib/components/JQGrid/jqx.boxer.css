@@ -1,50 +1,159 @@
+/******Order History******/
 
-.jqx-widget-header{min-height:42px !important;}
-#jqxgrid[role="grid"]{border:0px !important;}
-[role="columnheader"]{background:#fff !important; font-weight:600 !important; padding:10px 5px !important; box-sizing:border-box !important;}
-[role="columnheader"] > div > div{line-height:24px !important;}
-[role="gridcell"]{padding:5px 5px !important;box-sizing:border-box !important; line-height:normal !important; }
-[role="gridcell"] a{display:table; margin:auto;}
-[role="gridcell"] a img{width:25px !important;}
-[role="gridcell"] > div{margin-top:2px !important;}
-[role="gridcell"].jqx-grid-cell-pinned{background-color:#f9f9f9 !important;}
-[role="rowgroup"].jqx-enableselect{height:auto !important;}
-#pagerjqxgrid{background:none !important;}
-[role="combobox"]{background:none !important;}
-/*[role="row"]{min-height:42px;}*/
-[role="row"] .jqx-grid-cell-hover, [role="row"] .jqx-grid-cell-selected{background:#f1f1f1 !important; color:#000 !important; text-shadow:none !important;}
-[role="button"]{background:#f9f9f9 !important;}
-[role="menubar"]{background:#fff !important;}
-.jqx-grid-pager {
-    background: #fff !important;
+.jqx-grid{
+    @apply !h-auto
 }
-.jqx-grid-pager:before{content:""; width:99.98%; height:100%; border:2px solid #fff;box-sizing:border-box; position:absolute; left:-0.5px; bottom:1px;}
-#contentjqxgrid{border:1px solid #aaa !important; box-sizing:border-box;}
-#contentjqxgrid:before{content:""; width:1px; height:100%; background:#aaa !important; position:absolute; right:2px; top:0px; display:block; z-index:999;}
+.jqx-widget-header{
+    @apply !min-h-[72px] !h-auto flex items-center
+}
+[id^="filterJqxGridjqx"]:empty, [id^="groupsheaderJqxGridjqx"]:empty, [id^="toolbarJqxGridjqx"]:empty{
+    @apply !hidden
+}
+[id^="columntableJqxGridjqx"]{
+    @apply !h-[72px]
+}
+[id^="columntableJqxGridjqx"] > .jqx-grid-column-header{
+    @apply !bg-[#EBECF0] !text-[18px] !font-semibold !text-[#171A1F]
+}
+[id^="columntableJqxGridjqx"] > .jqx-grid-column-header > div{
+    @apply flex items-center
+}
+#jqxgrid[role="grid"]{
+    @apply !border-none
+}
+[id^="row"]{
+    @apply flex !h-[72px]
+}
+[role="columnheader"]{
+    @apply !bg-white !font-bold !px-[15px] !py-[10px]  
+}
+[role="columnheader"] > div > div{
+    @apply !leading-[24px]
+}
+[id^="row"] > [role="gridcell"]:empty{
+    @apply !hidden
+}
+[id^="filterrow\.JqxGridjqx"]{
+    @apply !h-[72px] !border-b !border-[#BFC0BF] 
+}
+[id^="filterrow\.JqxGridjqx"] input{
+    @apply border !border-[#BFC0BF] !w-full !h-[43px] !rounded-[6px] pl-3
+
+}
+[id^="filterrow\.JqxGridjqx"] .jqx-grid-cell{
+    @apply !px-[15px] !py-[5px] flex items-center
+}
+[role="gridcell"]{
+    @apply !py-[10px] !px-[20px] !leading-normal border-b border-[#e1e1e1] flex items-center text-[18px] text-[#171A1F] !z-[98]
+}
+[role="gridcell"] a{
+    @apply table m-auto
+}
+[role="gridcell"] a img{
+    @apply !w-[25px]
+}
+[role="gridcell"] > div{
+    @apply !mt-[2px] whitespace-nowrap text-ellipsis overflow-hidden text-[18px]
+}
+[role="gridcell"].jqx-grid-cell-pinned{
+    @apply !bg-[#f9f9f9]
+}
+[role="rowgroup"].jqx-enableselect{
+    @apply !h-auto
+}
+#pagerjqxgrid{
+    @apply !bg-transparent
+}
+[role="combobox"]{
+    @apply !bg-transparent
+}
+[role="row"] .jqx-grid-cell-hover, [role="row"] .jqx-grid-cell-selected{
+    @apply !bg-[#f1f1f1] !text-black 
+}
+[role="button"]{
+    @apply !bg-[#f9f9f9]
+}
+[role="menubar"]{
+    @apply !bg-white
+}
+.jqx-grid-pager {
+    @apply !bg-white
+}
+.jqx-grid-pager:before{
+    @apply content-[""] w-full h-full  border-[2px] border-white absolute left-[-0.5px] bottom-[1px]
+}
+#contentjqxgrid{
+    @apply border-[1px] border-[#aaa] 
+}
+#contentjqxgrid:before{
+    @apply content-[""] w-[1px] h-full !bg-[#aaa] absolute right-[2px] top-0 block z-[999] 
+}
 .jqx-scrollbar-thumb-state-normal-horizontal {
-    margin: 0px;
-    padding: 0px;
-    background: #fff !important;
-    border: 1px solid #aaa;
-    touch-action: none;
+    @apply m-0 p-0 !bg-white border touch-none border-[#e1e1e1]
 }
 .jqx-fill-state-normal {
-    box-sizing: content-box;
-    -ms-touch-action: none;
-    font-family: Verdana, Arial, sans-serif;
-    font-style: normal;
-    font-size: 13px;
-    border-color: #aaa;
-    background: #fff;
+    @apply touch-none text-[13px] border border-[#e1e1e1] bg-white 
 }
-/* .jqx-window-header {
-    outline: none;
-    border-width: 0px;
-    border-bottom: 1px solid transparent;
-    overflow: hidden;
-    padding: 7px;
-    height: auto;
-    white-space: nowrap;
-    overflow: hidden;
-    background-color: #fff !important;
-} */
+.iconscontainer{
+    @apply !h-full
+}
+.invoiced{
+    @apply text-[#01A0BE] bg-[#01A0BE33] h-[34px] rounded-[16px] px-[10px] flex items-center mx-auto font-semibold
+}
+.inprogress{
+    @apply text-[#EB8202] bg-[#EB820233] h-[34px] rounded-[16px] px-[10px] flex items-center mx-auto font-semibold
+}
+.cancelled{
+    @apply text-[#DD2025] bg-[#DD202533] h-[34px] rounded-[16px] px-[10px] flex items-center mx-auto font-semibold
+}
+[id^="statusbarJqxGridjqx"], [id^="addrowJqxGridjqx"]{
+    @apply !min-h-auto
+}
+[id^="pagerJqxGridjqx"] > div{
+    @apply !top-0 !text-[16px] !text-[#000000DE] w-full flex items-center flex-row-reverse gap-2 px-5 !border-t-0
+}
+[id^="pagerJqxGridjqx"] > div > div{
+    @apply !visible !h-[40px] !flex items-center text-[16px]
+}
+[id^="pagerJqxGridjqx"] > div input{
+    @apply !h-[40px] !border !border-[#0000001F] !text-center rounded-[5px] !text-[16px] !w-[40px]
+}
+[id^="gridpagerlistJqxGridjqx"]{
+    @apply !h-[40px] !border !border-[#0000001F] !text-center rounded-[5px] !w-[75px] !text-[16px]
+}
+[id^="dropdownlistWrappergridpagerlistJqxGridjqx"]{
+    @apply flex items-center
+}
+[id^="dropdownlistContentgridpagerlistJqxGridjqx"]{
+    @apply !w-full !mt-0 !h-full px-[10px] flex items-center
+}
+[id^="listBoxContentinnerListBoxgridpagerlistJqxGridjqx"]{
+    @apply bg-white shadow-xl rounded-[5px] !border !border-[#0000001F]
+}
+[id^="listBoxContentinnerListBoxgridpagerlistJqxGridjqx"] .jqx-listitem-element{
+    @apply !px-[10px] !h-[23px] 
+}
+[id^="pagerJqxGridjqx"] [id^="jqxWidget"]{
+    @apply !w-[30px] !h-[40px] !border-none !bg-transparent
+}
+[id^="pagerJqxGridjqx"] [id^="jqxWidget"] .jqx-icon-arrow-left, [id^="pagerJqxGridjqx"] [id^="jqxWidget"] .jqx-icon-arrow-right{
+    @apply !w-[30px] !h-[40px] !mx-0
+}
+[id^="pagerJqxGridjqx"] [id^="jqxWidget"] .jqx-icon-arrow-left:before{
+  @apply !content-[""] w-[30px] h-[40px] bg-[url('../../venia-ui/lib/components/JQGrid/left-arrow.png')] bg-no-repeat bg-center block !mx-0
+}
+[id^="pagerJqxGridjqx"] [id^="jqxWidget"] .jqx-icon-arrow-right:before{
+    @apply !content-[""] w-[30px] h-[40px] bg-[url('../../venia-ui/lib/components/JQGrid/right-arrow.png')] bg-no-repeat bg-center block !mx-0
+  }
+  [id^="dropdownlistArrowgridpagerlistJqxGridjqx"], [id^="dropdownlistArrowgridpagerlistJqxGridjqx"] .jqx-icon-arrow-down{
+    @apply w-[30px] min-w-[30px] h-[40px]
+}
+[id^="dropdownlistArrowgridpagerlistJqxGridjqx"] .jqx-icon-arrow-down:before{
+    @apply w-[30px] min-w-[30px] h-[40px] content-[""] bg-[url('../../venia-ui/lib/components/JQGrid/down-arrow.png')] bg-no-repeat bg-center block !mx-0
+}
+[id^="horizontalScrollBarJqxGridjqx"]{
+    @apply !bg-[#F6F6F6] !h-[25px]
+}
+[id^="horizontalScrollBarJqxGridjqx"] [id^="jqxScrollOuterWraphorizontalScrollBarJqxGridjqx"]{
+    @apply !top-[15px] 
+}
