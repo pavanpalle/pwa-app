@@ -5,11 +5,11 @@
 
 @font-face {
     font-family:'Avenir Book';
-    src: url('@magento/venia-ui/lib/fonts/AvenirBook.eot');
-	src: url('@magento/venia-ui/lib/fonts/AvenirBook.eot?#iefix') format('embedded-opentype'),
-		url('@magento/venia-ui/lib/fonts/AvenirBook.woff2') format('woff2'),
-		url('@magento/venia-ui/lib/fonts/AvenirBook.woff') format('woff'),
-		url('@magento/venia-ui/lib/fonts/AvenirBook.svg') format('svg');
+    src: url('@magento/venia-ui/lib/assets/fonts/AvenirBook.eot');
+	src: url('@magento/venia-ui/lib/assets/fonts/AvenirBook.eot?#iefix') format('embedded-opentype'),
+		url('@magento/venia-ui/lib/assets/fonts/AvenirBook.woff2') format('woff2'),
+		url('@magento/venia-ui/lib/assets/fonts/AvenirBook.woff') format('woff'),
+		url('@magento/venia-ui/lib/assets/fonts/AvenirBook.svg') format('svg');
     font-weight: 400;
     font-style: normal;
     font-stretch: normal;
@@ -26,32 +26,6 @@
     --color-currentColor: #000000;
   }
   
-  [data-store="default"] {
-    --color-primary: #002D51 ;
-    --color-background: #ffffff;
-    --color-text: #000000;
-    --color-accent: #ffd700;
-    --color-border: #cccccc;
-    --color-currentColor: #000000;
-  }
-  
-  [data-store="headsweats_store_view"] {
-    --color-primary: #CF142D;
-    --color-background: #f0f0f0;
-    --color-text: #222222;
-    --color-accent: #00cccc;
-    --color-border: #dddddd;
-    --color-currentColor: #000000;
-  }
-  [data-store="recoverstoreview"] {
-    --color-primary: #01b472;
-    --color-background: #f0f0f0;
-    --color-text: #222222;
-    --color-accent: #00cccc;
-    --color-border: #dddddd;
-    --color-currentColor: #000000;
-  }
-
 
 
 body{
