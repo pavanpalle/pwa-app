@@ -260,6 +260,9 @@
 .broadcastMessages{
     @apply w-full h-[40px] bg-gray-200 flex items-center justify-center text-center
 }
+.broadcastMessages :global(.banner-content-1HW){
+    @apply flex items-center justify-center
+}
 
 .bg-header{
     @apply flex flex-wrap flex-row bg-white z-[99]
