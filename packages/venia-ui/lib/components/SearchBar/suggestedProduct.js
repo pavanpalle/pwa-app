@@ -49,7 +49,7 @@ const SuggestedProduct = props => {
                 width={IMAGE_WIDTH}
                 data-cy="SuggestedProduct-image"
             />
-            <div className='SuggestedProduct-info'>
+            <div className={classes.suggestedProductInfo}>
                 <h3><span className={classes.name}>{name}</span></h3>
                 <p><span>SKU : {sku}</span></p>
                 {/* <span data-cy="SuggestedProduct-price" className={classes.price}>

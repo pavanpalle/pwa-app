@@ -140,16 +140,16 @@
     @apply !w-[30px] !h-[40px] !mx-0
 }
 [id^="pagerJqxGridjqx"] [id^="jqxWidget"] .jqx-icon-arrow-left:before{
-  @apply !content-[""] w-[30px] h-[40px] bg-[url('../../venia-ui/lib/components/JQGrid/left-arrow.png')] bg-no-repeat bg-center block !mx-0
+  @apply !content-[""] w-[30px] h-[40px] bg-[url('./left-arrow.png')] bg-no-repeat bg-center block !mx-0
 }
 [id^="pagerJqxGridjqx"] [id^="jqxWidget"] .jqx-icon-arrow-right:before{
-    @apply !content-[""] w-[30px] h-[40px] bg-[url('../../venia-ui/lib/components/JQGrid/right-arrow.png')] bg-no-repeat bg-center block !mx-0
+    @apply !content-[""] w-[30px] h-[40px] bg-[url('./right-arrow.png')] bg-no-repeat bg-center block !mx-0
   }
   [id^="dropdownlistArrowgridpagerlistJqxGridjqx"], [id^="dropdownlistArrowgridpagerlistJqxGridjqx"] .jqx-icon-arrow-down{
     @apply w-[30px] min-w-[30px] h-[40px]
 }
 [id^="dropdownlistArrowgridpagerlistJqxGridjqx"] .jqx-icon-arrow-down:before{
-    @apply w-[30px] min-w-[30px] h-[40px] content-[""] bg-[url('../../venia-ui/lib/components/JQGrid/down-arrow.png')] bg-no-repeat bg-center block !mx-0
+    @apply w-[30px] min-w-[30px] h-[40px] content-[""] bg-[url('./down-arrow.png')] bg-no-repeat bg-center block !mx-0
 }
 [id^="horizontalScrollBarJqxGridjqx"]{
     @apply !bg-[#F6F6F6] !h-[25px]

@@ -28,7 +28,7 @@
     composes: text-[18px] from global;
     composes: max-w-full from global;
     composes: justify-center from global;
-    composes: text-black from global;
+    composes: !text-black from global;
 }
 
 .linkActive {

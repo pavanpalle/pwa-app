@@ -117,7 +117,9 @@ const Footer = props => {
                     <Logo classes={{ logo: classes.logo }} />
                 </Link>
             </div> */}
-            <CmsBlock identifiers="footer-links" />
+            <div className={classes.footerBlock}>
+                <CmsBlock identifiers="footer-links" />
+            </div>
         </footer>
     );
 };

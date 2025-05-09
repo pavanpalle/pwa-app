@@ -68,6 +68,9 @@ const Header = props => {
                     <CurrencySwitcher />
                 </div>
             </div>
+            <div className={classes.broadcastMessages}>
+                <CmsBlock identifiers="broadcast-message" />
+            </div>
             <header className={rootClass} data-cy="Header-root">
                 <div className={classes.headerTopBar}>
                     <CmsBlock identifiers="header-top-bar" />
@@ -125,7 +128,7 @@ const Header = props => {
                         </div>
                     )}
                 </div>
-                <div className="menu-search-group">
+                <div className={classes.menuSearchGroup}>
                     <MegaMenu />
                     <div className={classes.searchBox}>
                         <Suspense fallback={searchBarFallback}>

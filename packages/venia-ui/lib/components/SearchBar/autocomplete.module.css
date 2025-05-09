@@ -1,27 +1,26 @@
 .root {
     composes: absolute from global;
-    composes: bg-white from global;
-    composes: border-2 from global;
+    /* composes: bg-white from global; */
+    /* composes: border-2 from global; */
     composes: border-input from global;
     composes: border-solid from global;
     composes: border-t-0 from global;
     composes: gap-3 from global;
     composes: grid from global;
     composes: left-0 from global;
-    composes: p-xs from global;
+    /* composes: p-xs from global; */
     composes: right-0 from global;
-    composes: rounded-b-md from global;
-    composes: rounded-t-none from global;
+    /* composes: rounded-b-md from global; */
+    composes: rounded-none from global;
     /* composes: shadow-inputFocus from global; */
     composes: text-sm from global;
-    composes: top-9 from global;
+    composes: top-0 from global;
     composes: z-menu from global;
     transition-property: opacity, transform, visibility;
 }
 
 .root_hidden {
     composes: root;
-
     composes: invisible from global;
     composes: opacity-0 from global;
     transform: translate3d(0, -2rem, 0);
@@ -31,9 +30,13 @@
 
 .root_visible {
     composes: root;
-
+    composes: !top-8 from global;
     composes: opacity-100 from global;
     composes: visible from global;
+    composes: bg-white from global;
+    composes: rounded-none from global;
+    composes: p-5 from global;
+    composes: shadow-xl from global;
     transform: translate3d(0, 0, 0);
     transition-duration: 224ms;
     transition-timing-function: var(--venia-global-anim-in);
@@ -44,13 +47,36 @@
     composes: py-0 from global;
     composes: text-center from global;
     composes: text-subtle from global;
-
     composes: empty_hidden from global;
+    composes: w-full from global;
+    composes: h-[46px] from global;
+    composes: bg-[#DCF1FF] from global;
+    composes: rounded-[12px] from global;
+    composes: flex from global;
+    composes: items-center from global;
+    composes: justify-center from global;
+    composes: cursor-poiner from global;
+}
+.message :global(span){
+    @apply font-semibold ml-1
 }
 
 .suggestions {
     composes: gap-2xs from global;
     composes: grid from global;
-
     composes: empty_hidden from global;
 }
+
+
+
+
+.suggestions :global(h2){
+    @apply hidden
+}
+.suggestions :global(ul > li){
+    @apply py-[15px] border-b border-[#EBECF0]
+}
+.suggestions :global(ul > li:first-child){
+    @apply !pt-0
+}
+

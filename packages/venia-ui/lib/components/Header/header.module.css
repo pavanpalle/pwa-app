@@ -73,8 +73,9 @@
 }
 
 .logo {
-    height: var(--height);
-    width: var(--width);
+    height: 50px;
+    width: auto;
+    max-width:none;
 }
 .customLogo{
     composes: w-auto from global;
@@ -222,3 +223,58 @@
 .headerTopBar :global(a){
     @apply flex items-center gap-1 no-underline -sm_text-[14px] text-[16px] text-black -sm_text-white -sm_leading-[20px]
 }
+
+.secondaryActions :global(> div[class="flex flex-row"]){
+    @apply min-w-[600px]
+}
+.secondaryActions :global(.signIn-root-8WO){
+    @apply !p-0 w-full
+}
+.secondaryActions :global(.signIn-root-8WO .signIn-form-3hL){
+    @apply grid grid-cols-2 gap-5 pr-[180px] relative min-w-[600px]
+}
+.secondaryActions :global(.signIn-root-8WO .signIn-form-3hL .field){
+    @apply relative
+}
+.secondaryActions :global(.signIn-root-8WO .signIn-form-3hL .field label){
+    @apply hidden
+}
+.secondaryActions :global(.signIn-root-8WO .signIn-form-3hL .field img){
+    @apply absolute left-[10px] top-[10px]
+}
+.secondaryActions :global(.signIn-root-8WO .signIn-form-3hL .field input){
+    @apply !pl-[45px] border border-gray-300 rounded-[5px] !h-[48px]
+}
+.secondaryActions :global(.signIn-root-8WO .signIn-form-3hL .signIn-buttonsContainer-b2N){
+    @apply w-[160px] !absolute right-0 top-0 mt-0
+}
+.secondaryActions :global(.signIn-root-8WO .signIn-form-3hL .signIn-buttonsContainer-b2N button){
+    @apply !w-full
+}
+.secondaryActions :global(.signIn-root-8WO .signIn-form-3hL .googleReCaptcha-root-jrX){
+@apply absolute opacity-0 z-[-999] top-[-9999]
+}
+.secondaryActions :global(.signIn-root-8WO .signin-form-container){
+@apply !min-w-[600px]
+}
+.broadcastMessages{
+    @apply w-full h-[40px] bg-gray-200 flex items-center justify-center text-center
+}
+
+.bg-header{
+    @apply flex flex-wrap flex-row bg-white z-[99]
+}
+.menuSearchGroup{
+    @apply flex justify-between w-full lg_bg-primary max_px-[9%] 2xl_px-[15px] lg_min-h-[60px] min-h-[50px] mb-3 lg_mb-0
+}
+
+
+/* .header-logoContainer-G01 img{
+    @apply bg-white !max-h-[50px] !w-auto hidden max-w-none
+}
+.header-logoContainer-G01 img:last-child{
+    @apply relative block
+}
+.header-logoContainer-G01 .image-placeholder-qmv{
+     @apply z-[-1]
+} */

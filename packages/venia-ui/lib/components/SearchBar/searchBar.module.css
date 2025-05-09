@@ -31,9 +31,9 @@
     composes: justify-center from global;
     composes: lg_max-w-[24rem] from global;
     composes: bg-white from global;
-    composes: my-2 from global;
+    composes: my-2.5 from global;
     composes: relative from global;
-    composes: lg_w-[300px] from global;
+    composes: lg_w-[400px] from global;
     composes: w-full from global;
     composes: -sm_order-1 from global;
     composes: md_max-w-full from global;
@@ -52,10 +52,10 @@
 .searchBox{
     composes: w-full from global;
     composes: lg_w-[300px] from global;
-    composes: 3xl_w-[350px] from global;
-    composes: 2xl_w-[300px] from global;
+    composes: 3xl_w-[400px] from global;
+    composes: 2xl_w-[400px] from global;
 }
-.searchBox :global(input){
+.search :global(input){
     @apply -sm_!h-[40px] !h-[40px] !border-0
 }
 

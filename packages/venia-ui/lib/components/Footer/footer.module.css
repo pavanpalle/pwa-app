@@ -12,6 +12,8 @@
     composes: text-sm from global;
     composes: text-subtle from global;
     composes: w-full from global;
+    composes: max-w-[100vw] from global; 
+    composes: bg-primary  from global;
 }
 
 .links {
@@ -137,3 +139,85 @@
     height: var(--height);
     width: var(--width);
 }
+
+.footerBlock :global(.cmsBlock-root-dCh){
+    @apply !mx-0 !w-full bg-white
+}
+.footerBlock :global(.cmsBlock-root-dCh .richContent-root-ggm){
+    @apply  pt-6 relative 
+}
+.footerBlock :global(.row-contained-SFt){
+    @apply w-full !max-w-full
+}
+.footerBlock :global(.footer-row){
+    @apply flex flex-row gap-5 -sm_flex-col max-w-[1545px] mx-auto md_px-[20px] lg_px-0 md_flex-wrap lg_flex-nowrap xl_px-[20px] 2xl_px-0
+}
+
+.footerBlock :global(.footer-column){
+    @apply w-full  text-[#EBEBEB] text-[18px] font-medium h-auto flex flex-col items-center -sm_border-b -sm_border-gray-200 -sm_pb-3 relative md_w-[calc(33.33%-20px)]
+}
+.footerBlock :global(.social-icons){
+    @apply !mt-0
+}
+.footerBlock :global(.footer-column-inner){
+    @apply table -sm_w-full -sm_px-[15px] px-0 w-full
+}
+.footerBlock :global(.footer-column h2){
+@apply !font-bold !mt-0 text-black !text-[24px] !text-left !capitalize !mb-[5px] flex justify-between items-center
+
+}
+.footerBlock :global(.footer-column h2:after){
+@apply -md_content-["+"] -md_w-[30px] -md_h-[30px] -md_flex -md_items-center -md_justify-center -md_text-[24px] -md_text-gray-500
+
+}
+.footerBlock :global(.footer-column p){
+    @apply text-black text-[20px] mt-[10px] text-center
+}
+.footerBlock :global(.footer-column input){
+    @apply w-full h-[40px] opacity-0 hidden -sm_flex -sm_absolute -sm_left-0 -sm_top-0
+}
+.footerBlock :global(.footer-column input:checked + h2 + ul){
+    @apply -sm_table -sm_!mt-[10px]
+}
+.footerBlock :global(.footer-column input:checked + h2:afer){
+    @apply content-["-"]   
+}
+.footerBlock :global(.footer-column ul){
+    @apply !my-0 !pl-0 !list-none m-0 -sm_hidden transition-all
+}
+.footerBlock :global(.footer-column ul li){
+    @apply mb-0
+
+}
+.footerBlock :global(.footer-column ul li a){
+    @apply text-[18px] list-none !no-underline font-medium flex flex-row items-center gap-2 text-black
+}
+.footerBlock :global(.footer-column ul li a img){
+    @apply !my-0
+}
+.footerBlock :global(ul.social-icons){
+    @apply flex flex-row gap-3 items-center !mt-6 justify-between -sm_justify-center
+}
+
+.footerBlock :global(ul.social-icons li){
+    @apply !mb-0
+}
+.footerBlock :global(ul.social-icons li img){
+    @apply w-[40px]
+}
+.footerBlock :global(.copyright-block){
+    @apply  py-3 text-center bg-primary text-[#FFFFFF] text-[18px] !font-medium gap-20 !mt-6 overflow-hidden  w-full mx-auto flex items-center justify-center -lg_flex-col -lg_w-full -lg_mx-0 -lg_gap-3 z-[99]
+}
+.footerBlock :global(.copyright-block p){
+    @apply  py-3 text-center bg-primary text-[#FFFFFF] text-[18px] !font-medium gap-20 !mt-6 overflow-hidden  w-full mx-auto flex items-center justify-center -lg_flex-col -lg_w-full -lg_mx-0 -lg_gap-3 z-[99]
+}
+.footerBlock :global(.copyright-block ul){
+@apply w-full flex gap-10 items-center !mb-0 !pl-0 -sm_flex-wrap -sm_gap-3 -sm_gap-y-1 -sm_!px-[15px] -sm_justify-center lg_gap-5
+}
+.footerBlock :global(.copyright-block ul li a){
+    @apply no-underline
+}
+.footerBlock :global(.subscribe-btn){
+    @apply w-full h-[50px] bg-primary rounded-[5px] text-white !no-underline text-[20px] font-bold flex items-center justify-center
+ }
+
