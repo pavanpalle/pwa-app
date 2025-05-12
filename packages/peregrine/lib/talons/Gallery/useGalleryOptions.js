@@ -90,6 +90,45 @@ const getMediaGalleryEntries = (product, optionCodes, optionSelections) => {
     return value;
 };
 
+const normalizeSize = (label) => {
+  const map = {
+    "EXTRASMALL": "XS",
+    "SMALL": "S",
+    "MEDIUM": "M",
+    "LARGE": "L",
+    "EXTRALARGE": "XL",
+  };
+  const cleanLabel = label.replace(/[\s\-]/g, '').toUpperCase();
+  return map[cleanLabel] || cleanLabel;
+};
+
+const getSizeScore = (size) => {
+  if (/^X+S$/.test(size)) return -size.match(/^X+/)[0].length;
+  if (/^X+L$/.test(size)) return size.match(/^X+/)[0].length + 2;
+  const base = { XS: -1, S: 0, M: 1, L: 2, XL: 3 };
+  return base[size] !== undefined ? base[size] : 100;
+};
+
+const useSizeRange = (configurableOptions) => {
+
+
+   
+
+
+  return useMemo(() => {
+    const sizeOption = configurableOptions.find(opt => opt.attribute_code === 'size');
+    if (!sizeOption) return null;
+
+    const normalizedSizes = sizeOption.values
+      .map(v => normalizeSize(v.label))
+      .filter((val, idx, self) => self.indexOf(val) === idx);
+
+    const sortedSizes = normalizedSizes.sort((a, b) => getSizeScore(a) - getSizeScore(b));
+
+    return `${sortedSizes[0]} - ${sortedSizes[sortedSizes.length - 1]}`;
+  }, [configurableOptions]);
+};
+
 export const useGalleryOptions = props => {
     const { product } = props;
 
@@ -165,10 +204,14 @@ export const useGalleryOptions = props => {
         [optionSelections]
     );
 
+
+    const sizeRange = useSizeRange(product.configurable_options||[]);
+
     return {
         isEverythingOutOfStock,
         outOfStockVariants,
         handleSelectionChange,
-        mediaGalleryEntries
+        mediaGalleryEntries,
+        sizeRange
     };
 };

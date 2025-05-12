@@ -50,6 +50,7 @@ const SearchBar = React.forwardRef((props, ref) => {
                                 setVisible={setIsAutoCompleteOpen}
                                 valid={valid}
                                 visible={isAutoCompleteOpen}
+                                handleSubmit={handleSubmit}
                             />
                         </div>
                     </div>

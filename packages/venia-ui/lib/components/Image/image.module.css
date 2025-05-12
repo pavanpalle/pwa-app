@@ -38,6 +38,6 @@
 
 .placeholder_layoutOnly {
     composes: placeholder;
-
+ @apply invisible;
     composes: bg-transparent from global;
 }

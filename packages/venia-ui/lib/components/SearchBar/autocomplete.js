@@ -7,7 +7,7 @@ import { useIntl, FormattedMessage } from 'react-intl';
 import defaultClasses from './autocomplete.module.css';
 import { useStyle } from '../../classify';
 import Suggestions from './suggestions';
-import {Link} from 'react-router-dom';
+
 
 const GET_AUTOCOMPLETE_RESULTS = gql`
     query getAutocompleteResults($inputText: String!) {
@@ -63,7 +63,7 @@ const GET_AUTOCOMPLETE_RESULTS = gql`
 `;
 
 const Autocomplete = props => {
-    const { setVisible, valid, visible } = props;
+    const { setVisible, valid, visible ,handleSubmit} = props;
     const talonProps = useAutocomplete({
         queries: {
             getAutocompleteResults: GET_AUTOCOMPLETE_RESULTS
@@ -150,19 +150,20 @@ const Autocomplete = props => {
                 />
             </div>
             {displayResult && products?.items?.length > 0 && (
-                <span
+                <button
                     id="search_query"
                     data-cy="Autocomplete-message"
                     className={classes.message}
+                    onClick={handleSubmit}
                   
                 >
-                    <Link to={`/search.html?query=${value}`}>
+                   
                     <FormattedMessage
                         id="autocomplete.resultViewAll"
                         defaultMessage={`View All ${message} Results`}
                     />
-                    </Link>
-                </span>
+                   
+                </button>
             )}
         </div>
     );

@@ -22,7 +22,6 @@ import Rating from '../Rating';
 import { ProductOptionsShimmer } from '../ProductOptions';
 const Options = React.lazy(() => import('../ProductOptions'));
 
-
 // The placeholder image is 4:5, so we should make sure to size our product
 // images appropriately.
 const IMAGE_WIDTH = 300;
@@ -42,22 +41,16 @@ const GalleryItem = props => {
         isSupportedProductType
     } = useGalleryItem(props);
 
+    const talonProps = useGalleryOptions({ product: item });
 
- 
+    const {
+        handleSelectionChange,
 
-    //   const talonProps = useGalleryOptions({ product:item });
-    
-    //     const {
-           
-    //         handleSelectionChange,
-           
-    //         isEverythingOutOfStock,
-    //         outOfStockVariants,
-    //         mediaGalleryEntries
-           
-    //     } = talonProps;
-
-     
+        isEverythingOutOfStock,
+        outOfStockVariants,
+        mediaGalleryEntries,
+        sizeRange
+    } = talonProps;
 
     const { storeConfig } = props;
 
@@ -70,26 +63,29 @@ const GalleryItem = props => {
     }
 
     // eslint-disable-next-line no-unused-vars
-    const { name, price_range, small_image, url_key, rating_summary ,configurable_options} = item;
+    const {
+        name,
+        price_range,
+        small_image,
+        url_key,
+        rating_summary,
+        configurable_options
+    } = item;
 
     const { url: smallImageURL } = small_image;
     const productLink = resourceUrl(`/${url_key}${productUrlSuffix || ''}`);
 
-    
-
-
-
-    //  const options = isProductConfigurable(item) ? (
-    //         <Suspense fallback={<ProductOptionsShimmer />}>
-    //             <Options
-    //                 onSelectionChange={handleSelectionChange}
-    //                 options={configurable_options}
-    //                isEverythingOutOfStock={isEverythingOutOfStock}
-    //                 outOfStockVariants={outOfStockVariants}
-    //                 from={'Gallery Item'}
-    //             />
-    //         </Suspense>
-    //     ) : null;
+    const options = isProductConfigurable(item) ? (
+        <Suspense fallback={<ProductOptionsShimmer />}>
+            <Options
+                onSelectionChange={handleSelectionChange}
+                options={configurable_options}
+                isEverythingOutOfStock={isEverythingOutOfStock}
+                outOfStockVariants={outOfStockVariants}
+                from={'Gallery Item'}
+            />
+        </Suspense>
+    ) : null;
 
     const wishlistButton = wishlistButtonProps ? (
         <WishlistGalleryButton {...wishlistButtonProps} />
@@ -147,8 +143,8 @@ const GalleryItem = props => {
                         root: classes.imageContainer
                     }}
                     height={IMAGE_HEIGHT}
-                    //resource={mediaGalleryEntries?.[0]?.file|| smallImageURL}
-                    resource={smallImageURL}
+                    resource={mediaGalleryEntries?.[0]?.file || smallImageURL}
+                    //resource={smallImageURL}
                     widths={IMAGE_WIDTHS}
                 />
                 {ratingAverage}
@@ -156,7 +152,7 @@ const GalleryItem = props => {
             {/* <section className={classes.options}>{options}</section> */}
             <div className="product-info">
                 <span>{item.sku}</span>
-                <span>XS-4XL</span>
+                <span>{sizeRange}</span>
             </div>
             <Link
                 onClick={handleLinkClick}
@@ -170,9 +166,8 @@ const GalleryItem = props => {
             {/* <div data-cy="GalleryItem-price" className={classes.price}>
                 <Price value={priceSourceValue} currencyCode={currencyCode} />
             </div> */}
-           
+
             <div className={classes.actionsContainer}>
-               
                 {addButton}
                 {wishlistButton}
             </div>
