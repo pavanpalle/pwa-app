@@ -431,3 +431,77 @@
         justify-content: center !important;
     }
 }
+
+
+
+ /* *****Home page 2*******
+ :global(.main-banner-block){
+    @apply w-full py-0 my-0 relative overflow-hidden
+ }
+:global(.main-banner-block img){
+    @apply !my-0 table
+  }
+:global(.text-block){
+    @apply py-[20px]
+ }
+:global(.text-block p){
+    @apply text-[22px] text-black
+ }
+:global(.three-column-block .columnLine-root-MOz){
+    @apply gap-[50px]
+ }
+:global(.three-column-block figure){
+    @apply relative
+ } 
+:global(.three-column-block figure img){
+    @apply w-auto h-full object-cover
+ }
+:global(.three-column-block figcaption){
+    @apply w-[calc(100%-40px)] bg-white h-[50px] rounded-sm flex items-center justify-center uppercase font-bold text-black text-[20px] shadow-md absolute left-[20px] bottom-[10px] no-underline
+  }
+:global(.heading-block){
+    @apply py-[20px] mt-[20px]
+ }
+:global(.heading-block h2){
+    @apply !text-[36px] !font-bold
+
+ }
+:global(.four-column-block .columnLine-root-MOz){
+    @apply mb-[30px]
+ }
+:global(.four-column-block .columnLine-root-MOz figure){
+    @apply w-full max-w-[250px] 
+ }
+:global(.four-column-block .columnLine-root-MOz figure img){
+    @apply rounded-full
+ }
+ :global(.four-column-block .columnLine-root-MOz figcaption){
+    @apply text-[20px] font-bold no-underline
+ }
+:global(.four-column-block .columnLine-root-MOz .pagebuilder-column){
+    @apply flex flex-col items-center
+ }
+:global(.custom-banner-block img){
+    @apply !my-0
+ }
+:global(.slick-slide img){
+    @apply w-[100vw]
+ }
+:global(.custom-banner-block img){
+    @apply min-w-full table !my-0
+ }
+:global(.slick-slider .slick-track){
+    @apply !gap-0
+ }
+:global(.slick-track:before, .slick-track:after){
+    @apply hidden
+ }
+:global(.slider-root-E0Z.pagebuilder-slider .slick-arrow.slick-next){
+    @apply !w-[30px] !h-[30px] !border-none !right-5 !translate-x-0 !top-0 !z-[9999]
+}
+:global(.slider-root-E0Z.pagebuilder-slider .slick-arrow.slick-prev){
+    @apply !w-[30px] !h-[30px] !border-none !left-5 !translate-x-0 !top-0 !z-[9999]
+}
+:global(.main-banner-block .slider-root-E0Z.pagebuilder-slider .slick-arrow){
+    @apply !top-[50%]
+} */

@@ -19,4 +19,5 @@
     composes: h-[3rem] from global;
     composes: min-w-[6rem] from global;
     composes: z-foreground from global;
+    composes: -md_min-w-auto from global;
 }

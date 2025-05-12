@@ -1,4 +1,5 @@
-import { useCallback, useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useCallback, useMemo, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { useAppContext } from '@magento/peregrine/lib/context/app';
 import { useDropdown } from '@magento/peregrine/lib/hooks/useDropdown';
@@ -8,6 +9,7 @@ import mergeOperations from '../../util/shallowMerge';
 import DEFAULT_OPERATIONS from './headerLogo.gql';
 const storage = new BrowserPersistence();
 export const useHeader = (props = {}) => {
+    const location = useLocation();
     const operations = mergeOperations(DEFAULT_OPERATIONS, props.operations);
     const { getHeaderLogoData } = operations;
     const [{ hasBeenOffline, isOnline, isPageLoading }] = useAppContext();
@@ -40,6 +42,18 @@ export const useHeader = (props = {}) => {
         // Toggle the Search input form.
         setIsSearchOpen(isOpen => !isOpen);
     }, [setIsSearchOpen]);
+    
+    useEffect(() => {
+        const path = location.pathname;
+ 
+        if (path === '/')
+            document.documentElement.setAttribute('data-store', 'default');
+        else if (path === '/headsweats')
+            document.documentElement.setAttribute('data-store', 'headsweats');
+        else if (path === '/recover')
+            document.documentElement.setAttribute('data-store', 'recover');
+        else document.documentElement.setAttribute('data-store', 'default');
+    }, [location]);
 
     return {
         handleSearchTriggerClick,

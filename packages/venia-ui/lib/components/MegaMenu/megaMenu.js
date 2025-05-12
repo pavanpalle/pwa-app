@@ -7,6 +7,7 @@ import { useStyle } from '@magento/venia-ui/lib/classify';
 import MegaMenuItem from './megaMenuItem';
 import defaultClasses from './megaMenu.module.css';
 
+
 /**
  * The MegaMenu component displays menu with categories on desktop devices
  */

@@ -25,7 +25,31 @@
     --color-border: #cccccc;
     --color-currentColor: #000000;
   }
-  
+[data-store="default"] {
+    --color-primary: #002D51 ;
+    --color-background: #ffffff;
+    --color-text: #000000;
+    --color-accent: #ffd700;
+    --color-border: #cccccc;
+    --color-currentColor: #000000;
+  }
+ 
+ [data-store="headsweats"] {
+    --color-primary: #CF142D;
+    --color-background: #f0f0f0;
+    --color-text: #222222;
+    --color-accent: #00cccc;
+    --color-border: #dddddd;
+    --color-currentColor: #000000;
+  }
+  [data-store="recover"] {
+    --color-primary: #01b472;
+    --color-background: #f0f0f0;
+    --color-text: #222222;
+    --color-accent: #00cccc;
+    --color-border: #dddddd;
+    --color-currentColor: #000000;
+  }  
 
 
 body{
@@ -999,7 +1023,7 @@ ul li, ol li{
     @apply text-left w-full
  }
 
- /******Home page 2********/
+ *****Home page 2*******
  .main-banner-block{
     @apply w-full py-0 my-0 relative overflow-hidden
  }

@@ -70,12 +70,25 @@
     composes: lg_grid-cols-12 from global;
     composes: xl_px-4 from global;
     composes: 2xl_px-8 from global;
+    /* composes: -md_!flex from global;
+    composes: -md_!flex-wrap from global; */
+    composes: -md_items-center from global;
 }
 
 .logo {
     height: 50px;
     width: auto;
     max-width:none;
+}
+.logosGroup{
+    composes: flex from global;
+    composes: items-center from global;
+    composes: gap-5 from global;
+    composes: -md_gap-0 from global;
+    composes: -md_flex-wrap from global;
+}
+.logosGroup :global(a){
+    @apply flex
 }
 .customLogo{
     composes: w-auto from global;
@@ -249,7 +262,7 @@
     @apply w-[160px] !absolute right-0 top-0 mt-0
 }
 .secondaryActions :global(.signIn-root-8WO .signIn-form-3hL .signIn-buttonsContainer-b2N button){
-    @apply !w-full
+    @apply !w-full !bg-primary !border-primary
 }
 .secondaryActions :global(.signIn-root-8WO .signIn-form-3hL .googleReCaptcha-root-jrX){
 @apply absolute opacity-0 z-[-999] top-[-9999]
@@ -258,7 +271,10 @@
 @apply !min-w-[600px]
 }
 .broadcastMessages{
-    @apply w-full h-[40px] bg-gray-200 flex items-center justify-center text-center
+    @apply w-full h-[40px] bg-gray-200 flex items-center justify-center text-center 
+}
+.broadcastMessages :global(p){
+    @apply -md_leading-[20px]   
 }
 .broadcastMessages :global(.banner-content-1HW){
     @apply flex items-center justify-center
@@ -274,6 +290,13 @@
     @apply flex justify-between w-full lg_bg-primary max_px-8 2xl_px-[15px] lg_min-h-[60px] min-h-[50px] mb-3 lg_mb-0
 }
 
-.mobileSignin{
-    @apply lg_hidden
+.mobileSignin :global(.accountTrigger-root-3GU ){
+    @apply lg_hidden block
 }
+.mobileSignin :global(.accountTrigger-root-3GU button span span){
+    @apply hidden lg_!block
+}
+
+/* .mobileSignin :global(.accountTrigger-root-3GU button .accountTrigger-trigger-HXt){
+    @apply !min-w-auto
+} */

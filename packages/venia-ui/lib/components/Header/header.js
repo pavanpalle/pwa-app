@@ -22,6 +22,7 @@ import SignIn from './signIn';
 import headwearLogo from './headwear-logo.png';
 import recoverLogo from './recover-logo.png';
 
+
 const SearchBar = React.lazy(() => import('../SearchBar'));
 
 const Header = props => {
@@ -79,7 +80,7 @@ const Header = props => {
                     <div className={classes.primaryActions}>
                         <NavTrigger />
                     </div>
-
+                    <div className={classes.logosGroup}>
                     <Link
                         aria-label={title}
                         to={resourceUrl('/')}
@@ -93,7 +94,6 @@ const Header = props => {
                             currentStoreLogo={currentStoreLogo}
                         />
                     </Link>
-                    <div className='flex items-center gap-5'>
                     <Link
                         aria-label={title}
                         to={resourceUrl('/headsweats')}
