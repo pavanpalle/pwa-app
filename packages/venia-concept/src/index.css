@@ -1023,7 +1023,6 @@ ul li, ol li{
     @apply text-left w-full
  }
 
- *****Home page 2*******
  .main-banner-block{
     @apply w-full py-0 my-0 relative overflow-hidden
  }
@@ -1059,8 +1058,11 @@ ul li, ol li{
     @apply mb-[30px]
  }
  .four-column-block .columnLine-root-MOz figure{
-    @apply w-full max-w-[250px] 
+    @apply w-full max-w-[250px] no-underline
  }
+  .four-column-block .columnLine-root-MOz figure a{
+    @apply no-underline
+  }
  .four-column-block .columnLine-root-MOz figure img{
     @apply rounded-full
  }
@@ -1093,4 +1095,16 @@ ul li, ol li{
 }
 .main-banner-block .slider-root-E0Z.pagebuilder-slider .slick-arrow{
     @apply !top-[50%]
+}
+.main-banner-block .pagebuilder-slider{
+    @apply -md_!min-h-auto
+}
+.main-banner-block .slider-bannerPosterOverlay-z-u {
+    @apply -md_!min-h-[17vh]
+}
+.main-banner-block .slider-bannerWrapper-yRV{
+    @apply bg-contain
+}
+.cms-root_cmsFullWidth-r1I{
+    @apply -sm_px-0
 }

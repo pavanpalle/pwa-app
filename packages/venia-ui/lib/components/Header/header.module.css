@@ -54,9 +54,9 @@
     composes: border-0 from global;
     composes: content-center from global;
     composes: gap-x-4 from global;
-    composes: grid from global;
-    composes: grid-cols-3 from global;
-    composes: grid-rows-header from global;
+    composes: flex from global;
+    /* composes: grid-cols-3 from global; */
+    /* composes: grid-rows-header from global; */
     composes: h-14 from global;
     composes: items-center from global;
     composes: justify-self-center from global;
@@ -75,25 +75,43 @@
     composes: -md_items-center from global;
 }
 
-.logo {
+/* .logo {
     height: 50px;
     width: auto;
     max-width:none;
-}
+} */
 .logosGroup{
     composes: flex from global;
     composes: items-center from global;
+    composes: justify-start from global;
     composes: gap-5 from global;
+    composes: mr-auto from global;
     composes: -md_gap-0 from global;
     composes: -md_flex-wrap from global;
+    composes: w-full from global;
+    composes: -md_justify-center from global;
+    composes: -md_gap-3 from global;
+
 }
 .logosGroup :global(a){
-    @apply flex
+    @apply flex !w-auto
+}
+.logosGroup :global(a:first-child){
+    @apply min-w-[250px] !mr-0  -md_min-w-full
+}
+.logosGroup :global(a > div){
+    @apply !w-full -md_flex -md_justify-center -md_items-center
+} 
+.logosGroup :global(a img){
+    @apply !h-[50px] !w-auto -md_!h-[30px] absolute
+} 
+.logosGroup :global(a img:last-child){
+    @apply relative 
 }
 .customLogo{
     composes: w-auto from global;
     composes: max-w-none from global;
-    composes: mr-6 from global;
+    composes: mr-0 from global;
     composes: table from global;
 }
 
@@ -118,6 +136,7 @@
     composes: lg_justify-self-start from global;
     composes: lg_mr-8 from global;
     composes: lg_row-start-1 from global;
+    composes: -md_col-span-2 from global;
 }
 
 .secondaryActions {
@@ -274,7 +293,7 @@
     @apply w-full h-[40px] bg-gray-200 flex items-center justify-center text-center 
 }
 .broadcastMessages :global(p){
-    @apply -md_leading-[20px]   
+    @apply -md_leading-[16px] -sm_text-[12px]   
 }
 .broadcastMessages :global(.banner-content-1HW){
     @apply flex items-center justify-center
@@ -287,9 +306,12 @@
     @apply flex flex-wrap flex-row bg-white z-[99]
 }
 .menuSearchGroup{
-    @apply flex justify-between w-full lg_bg-primary max_px-8 2xl_px-[15px] lg_min-h-[60px] min-h-[50px] mb-3 lg_mb-0
+    @apply flex justify-between w-full bg-primary max_px-8 2xl_px-[15px] lg_min-h-[60px] min-h-[50px] mb-3 lg_mb-0 -md_!w-[calc(100%+30px)] -md_!mx-[-15px] -md_px-[15px] -md_mb-0
 }
 
+.menuSearchGroup :global(> div){
+    @apply -md_!w-full
+}
 .mobileSignin :global(.accountTrigger-root-3GU ){
     @apply lg_hidden block
 }
