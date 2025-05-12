@@ -72,9 +72,9 @@ const Header = props => {
                 <CmsBlock identifiers="broadcast-message" />
             </div>
             <header className={rootClass} data-cy="Header-root">
-                <div className={classes.headerTopBar}>
+                {/* <div className={classes.headerTopBar}>
                     <CmsBlock identifiers="header-top-bar" />
-                </div>
+                </div> */}
                 <div className={classes.toolbar}>
                     <div className={classes.primaryActions}>
                         <NavTrigger />
@@ -102,6 +102,7 @@ const Header = props => {
                         <img src={headwearLogo}
                         width={300}
                         height={97} 
+                        alt='Headsweats Logo'
                         />
                     </Link>
                     <Link
@@ -112,11 +113,11 @@ const Header = props => {
                         <img src={recoverLogo}
                         width={300}
                         height={97}
+                        alt='Recover Logo'
                         />
                     </Link>
                     </div>
                     {/* {searchBar} */}
-
                     {isUserSignedIn ? (
                         <div className={classes.secondaryActions}>
                             <AccountTrigger />
@@ -125,6 +126,9 @@ const Header = props => {
                     ) : (
                         <div className={classes.secondaryActions}>
                            <SignIn/>
+                            <div className={classes.mobileSignin}>
+                             <AccountTrigger />
+                            </div>
                         </div>
                     )}
                 </div>

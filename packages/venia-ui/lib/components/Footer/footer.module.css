@@ -150,7 +150,7 @@
     @apply w-full !max-w-full
 }
 .footerBlock :global(.footer-row){
-    @apply flex flex-row gap-5 -sm_flex-col max-w-[1545px] mx-auto md_px-[20px] lg_px-0 md_flex-wrap lg_flex-nowrap xl_px-[20px] 2xl_px-0
+    @apply flex flex-row gap-5 -sm_flex-col mx-auto md_px-[20px] lg_px-[30px] md_flex-wrap lg_flex-nowrap
 }
 
 .footerBlock :global(.footer-column){
@@ -209,7 +209,7 @@
     @apply  py-3 text-center bg-primary text-[#FFFFFF] text-[18px] !font-medium gap-20 !mt-6 overflow-hidden  w-full mx-auto flex items-center justify-center -lg_flex-col -lg_w-full -lg_mx-0 -lg_gap-3 z-[99]
 }
 .footerBlock :global(.copyright-block p){
-    @apply  py-3 text-center bg-primary text-[#FFFFFF] text-[18px] !font-medium gap-20 !mt-6 overflow-hidden  w-full mx-auto flex items-center justify-center -lg_flex-col -lg_w-full -lg_mx-0 -lg_gap-3 z-[99]
+    @apply  py-0 text-center bg-primary text-[#FFFFFF] text-[18px] !font-medium gap-20 !my-0 overflow-hidden  w-full mx-auto flex items-center justify-center -lg_flex-col -lg_w-full -lg_mx-0 -lg_gap-3 z-[99]
 }
 .footerBlock :global(.copyright-block ul){
 @apply w-full flex gap-10 items-center !mb-0 !pl-0 -sm_flex-wrap -sm_gap-3 -sm_gap-y-1 -sm_!px-[15px] -sm_justify-center lg_gap-5

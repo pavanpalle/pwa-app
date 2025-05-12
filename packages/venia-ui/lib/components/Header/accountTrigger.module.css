@@ -4,6 +4,7 @@
     composes: h-lg from global;
 
     composes: sm_grid from global;
+    composes: -md-!flex from global;
 }
 
 .root_open {

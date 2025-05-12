@@ -111,14 +111,19 @@ const SignIn = props => {
                                 placeholder="Password"
                             />
                         </div>
-                        <Checkbox
+                        {/* <Checkbox
                             field="stayLoggedIn"
                             id="stayLoggedIn"
                             label={formatMessage({
                                 id: 'SignIn.stayLoggedIn',
                                 defaultMessage: 'Stay Logged In'
                             })}
-                        />
+                        /> */}
+                          <Link
+                                classes={forgotPasswordClasses}
+                                to={'/create-account'}
+                            >New Customer Signup</Link> 
+
                         <div className={classes.forgotPasswordButtonContainer}>
                             <Link
                                 classes={forgotPasswordClasses}

@@ -1015,8 +1015,17 @@ ul li, ol li{
  .three-column-block .columnLine-root-MOz{
     @apply gap-[50px]
  }
+ .three-column-block figure{
+    @apply relative
+ } 
+ .three-column-block figure img{
+    @apply w-auto h-full object-cover
+ }
+ .three-column-block figcaption{
+    @apply w-[calc(100%-40px)] bg-white h-[50px] rounded-sm flex items-center justify-center uppercase font-bold text-black text-[20px] shadow-md absolute left-[20px] bottom-[10px] no-underline
+  }
  .heading-block{
-    @apply py-[20px]
+    @apply py-[20px] mt-[20px]
  }
  .heading-block h2{
     @apply !text-[36px] !font-bold
@@ -1032,7 +1041,7 @@ ul li, ol li{
     @apply rounded-full
  }
  .four-column-block .columnLine-root-MOz figcaption{
-    @apply text-[20px] font-bold
+    @apply text-[20px] font-bold no-underline
  }
  .four-column-block .columnLine-root-MOz .pagebuilder-column{
     @apply flex flex-col items-center
@@ -1052,3 +1061,12 @@ ul li, ol li{
  .slick-track:before, .slick-track:after{
     @apply hidden
  }
+.slider-root-E0Z.pagebuilder-slider .slick-arrow.slick-next{
+    @apply !w-[30px] !h-[30px] !border-none !right-5 !translate-x-0 !top-0 !z-[9999]
+}
+.slider-root-E0Z.pagebuilder-slider .slick-arrow.slick-prev{
+    @apply !w-[30px] !h-[30px] !border-none !left-5 !translate-x-0 !top-0 !z-[9999]
+}
+.main-banner-block .slider-root-E0Z.pagebuilder-slider .slick-arrow{
+    @apply !top-[50%]
+}
