@@ -22,7 +22,6 @@ import SignIn from './signIn';
 import headwearLogo from './headwear-logo.png';
 import recoverLogo from './recover-logo.png';
 
-
 const SearchBar = React.lazy(() => import('../SearchBar'));
 
 const Header = props => {
@@ -34,8 +33,16 @@ const Header = props => {
         storeCode,
         currentStoreName,
         currentStoreLogo,
-        isUserSignedIn
+        isUserSignedIn,
+        location
     } = useHeader();
+
+    const path = location.pathname;
+
+    const showAll =
+        path === '/' || (path !== '/headsweats' && path !== '/recover');
+    const showHeadsweats = path === '/headsweats';
+    const showRecover = path === '/recover';
 
     const classes = useStyle(defaultClasses, props.classes);
     const rootClass = isSearchOpen ? classes.open : classes.open;
@@ -81,41 +88,49 @@ const Header = props => {
                         <NavTrigger />
                     </div>
                     <div className={classes.logosGroup}>
-                    <Link
-                        aria-label={title}
-                        to={resourceUrl('/')}
-                        className={classes.logoContainer}
-                        data-cy="Header-logoContainer"
-                    >
-                        <Logo
-                            classes={{ logo: classes.logo }}
-                            storeCode={storeCode}
-                            currentStoreName={currentStoreName}
-                            currentStoreLogo={currentStoreLogo}
-                        />
-                    </Link>
-                    <Link
-                        aria-label={title}
-                        to={resourceUrl('/headsweats')}
-                        className={classes.customLogo}
-                    >
-                        <img src={headwearLogo}
-                        width={300}
-                        height={97} 
-                        alt='Headsweats Logo'
-                        />
-                    </Link>
-                    <Link
-                        aria-label={title}
-                        to={resourceUrl('/recover')}
-                        className={classes.customLogo}
-                    >
-                        <img src={recoverLogo}
-                        width={300}
-                        height={97}
-                        alt='Recover Logo'
-                        />
-                    </Link>
+                        {(showAll ) && (
+                            <Link
+                                aria-label={title}
+                                to={resourceUrl('/')}
+                                className={classes.logoContainer}
+                                data-cy="Header-logoContainer"
+                            >
+                                <Logo
+                                    classes={{ logo: classes.logo }}
+                                    storeCode={storeCode}
+                                    currentStoreName={currentStoreName}
+                                    currentStoreLogo={currentStoreLogo}
+                                />
+                            </Link>
+                        )}
+                        {(showAll || showHeadsweats) && (
+                            <Link
+                                aria-label={title}
+                                to={resourceUrl('/headsweats')}
+                                className={classes.customLogo}
+                            >
+                                <img
+                                    src={headwearLogo}
+                                    width={300}
+                                    height={97}
+                                    alt="Headsweats Logo"
+                                />
+                            </Link>
+                        )}
+                        {(showAll || showRecover) && (
+                            <Link
+                                aria-label={title}
+                                to={resourceUrl('/recover')}
+                                className={classes.customLogo}
+                            >
+                                <img
+                                    src={recoverLogo}
+                                    width={300}
+                                    height={97}
+                                    alt="Recover Logo"
+                                />
+                            </Link>
+                        )}
                     </div>
                     {/* {searchBar} */}
                     {isUserSignedIn ? (
@@ -125,9 +140,9 @@ const Header = props => {
                         </div>
                     ) : (
                         <div className={classes.secondaryActions}>
-                           <SignIn/>
+                            <SignIn />
                             <div className={classes.mobileSignin}>
-                             <AccountTrigger />
+                                <AccountTrigger />
                             </div>
                         </div>
                     )}

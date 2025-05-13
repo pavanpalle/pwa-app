@@ -66,6 +66,7 @@ export const useHeader = (props = {}) => {
         storeCode,
         currentStoreName,
         currentStoreLogo,
-        isUserSignedIn
+        isUserSignedIn,
+        location
     };
 };
