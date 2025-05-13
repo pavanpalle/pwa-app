@@ -136,9 +136,11 @@ module.exports = async env => {
         use: {
             loader: 'file-loader',
             options: {
-                name: 'fonts/[name].[ext]',
-                outputPath: 'fonts/',
-                publicPath: '/fonts/'
+                options: {
+                    name: '[name].[ext]',
+                    outputPath: 'fonts/',
+                    publicPath: '/venia-static/fonts/'
+                }
             }
         }
     });

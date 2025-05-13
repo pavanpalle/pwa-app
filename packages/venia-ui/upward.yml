@@ -18,7 +18,7 @@ veniaResponse:
           pattern: '^/(robots\.txt|favicon\.ico|manifest\.json)'
           use: staticFromRoot
         - matches: fileExtension
-          pattern: '(js|json|png|jpg|gif|svg|ico|css|txt)'
+          pattern: '(js|json|png|jpg|gif|svg|ico|css|txt|eot|woff|woff2|ttf)'
           use: veniaStatic
         - matches:  urlResolver.redirect_code
           pattern: '(301|302)'
@@ -77,6 +77,10 @@ contentTypeFromExtension:
           pattern: '^json$'
           use:
               inline: application/json
+        - matches: fileExtension
+          pattern: '^eot$'
+          use:
+              inline: application/vnd.ms-fontobject      
     default:
         inline: text/html
 
