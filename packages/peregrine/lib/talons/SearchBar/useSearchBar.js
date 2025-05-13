@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { getSearchParam } from '@magento/peregrine/lib/hooks/useSearchParam';
 
 import { useDropdown } from '../../hooks/useDropdown';
 
@@ -20,9 +21,12 @@ export const useSearchBar = () => {
         value => {
             const hasValue = !!value;
             const isValid = hasValue && value.length > 2;
+            const urlTerm = getSearchParam('query', location);
 
-            setValid(isValid);
-            setIsAutoCompleteOpen(hasValue);
+            if (urlTerm !== value) {
+                setValid(isValid);
+                setIsAutoCompleteOpen(hasValue);
+            }
         },
         [setIsAutoCompleteOpen, setValid]
     );
