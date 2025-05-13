@@ -1,0 +1,11 @@
+@font-face {
+    font-family:'Avenir Book';
+    src: url('../dist/public/fonts/AvenirBook.eot');
+	src: url('../dist/public/fonts/AvenirBook.eot?#iefix') format('embedded-opentype'),
+		url('../dist/public/fonts/AvenirBook.woff2') format('woff2'),
+		url('../dist/public/fonts/AvenirBook.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-02DC;
+}

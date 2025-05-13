@@ -3,6 +3,7 @@ import ReactDOM, { render } from 'react-dom';
 
 import store from './store';
 import './index.css';
+import './font.css';
 import app from '@magento/peregrine/lib/store/actions/app';
 import Adapter from '@magento/venia-ui/lib/components/Adapter';
 import { registerSW } from './registerSW';

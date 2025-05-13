@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
+/* @font-face {
     font-family:'Avenir Book';
     src: url('@magento/venia-ui/lib/assets/fonts/AvenirBook.eot');
 	src: url('@magento/venia-ui/lib/assets/fonts/AvenirBook.eot?#iefix') format('embedded-opentype'),
@@ -14,7 +14,7 @@
     font-style: normal;
     font-stretch: normal;
     unicode-range: U+0020-02DC;
-}
+} */
 
 :root {
     /* fallback/default */
@@ -54,7 +54,7 @@
 
 body{
     /* font-family: "Albert Sans", sans-serif !important; */
-    font-family:'Avenir Book' !important;
+    font-family:'Avenir Book', sans-serif !important;
 }
 ul, ol{
     margin:0px;
