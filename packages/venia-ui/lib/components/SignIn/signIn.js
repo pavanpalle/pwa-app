@@ -59,7 +59,7 @@ const SignIn = props => {
     return (
         <div className='flex flex-row'>
             <div data-cy="SignIn-root" className={classes.root}>
-                <div className='signin-form-container'>
+                <div className='signinFormContainer'>
                 <Logo />
                 <span data-cy="SignIn-title" className={classes.title}>
                     <FormattedMessage
@@ -173,13 +173,13 @@ const SignIn = props => {
                 </Form>
                 </div>
             </div>
-            <div className='signin-right-container'>
+            {/* <div className='signin-right-container'>
                 <img src={loginBg} width={100} height={100} className="w-full absolute top-0 left-0 h-full object-fit" />
                 <div className='signin-image-container'>
                     <img src={loginImage} width={460} height={519} className="w-full relative" />
                     <h4>A leading supplier of apparel to the imprinted sportswear market</h4>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };

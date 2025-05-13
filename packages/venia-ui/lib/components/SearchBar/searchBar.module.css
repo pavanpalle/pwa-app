@@ -33,10 +33,12 @@
     composes: bg-white from global;
     composes: my-2.5 from global;
     composes: relative from global;
-    composes: lg_w-[400px] from global;
+    composes: lg_!w-[350px] from global;
+    composes: xl_!w-[400px] from global;
     composes: w-full from global;
     composes: -sm_order-1 from global;
     composes: md_max-w-full from global;
+    composes: -md_!w-full from global;
     composes: rounded from global;
 }
 

@@ -13,7 +13,7 @@
     composes: lg_flex from global;
     composes: -sm_hidden from global;
     composes: justify-between from global;
-    composes: relative from global;
+    /* composes: relative from global; */
     composes: z-[99] from global;
     
 }

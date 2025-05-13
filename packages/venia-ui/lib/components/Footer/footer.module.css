@@ -212,7 +212,7 @@
     @apply  py-0 text-center bg-primary text-[#FFFFFF] text-[18px] !font-medium gap-20 !my-0 overflow-hidden  w-full mx-auto flex items-center justify-center -lg_flex-col -lg_w-full -lg_mx-0 -lg_gap-3 z-[99]
 }
 .footerBlock :global(.copyright-block ul){
-@apply w-full flex gap-10 items-center !mb-0 !pl-0 -sm_flex-wrap -sm_gap-3 -sm_gap-y-1 -sm_!px-[15px] -sm_justify-center lg_gap-5
+@apply w-full flex gap-10 items-center !mb-0 !pl-0 -sm_flex-wrap -sm_gap-3 -sm_gap-y-1 -sm_!px-[15px] -lg_justify-center lg_gap-5
 }
 .footerBlock :global(.copyright-block ul li a){
     @apply no-underline

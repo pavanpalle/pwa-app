@@ -55,8 +55,7 @@
 body{
     /* font-family: "Albert Sans", sans-serif !important; */
     font-family:'AvenirBook' !important;
-}
-ul, ol{
+}ul, ol{
     margin:0px;
 }
 ul li, ol li{
@@ -879,10 +878,10 @@ ul li, ol li{
 .signInPage-root-boO .signInPage-contentContainer-Clw, .createAccountPage-root-1-v .createAccountPage-contentContainer-2dE, .forgotPasswordPage-root-lhE .forgotPasswordPage-contentContainer-Y6z{
     @apply !w-[100vw] h-full !border-none
 }
-.signIn-root-7hM{
+/* .signIn-root-7hM{
     @apply w-full h-[100vh] flex items-center justify-center
-}
-.signin-form-container{
+} */
+/* .signin-form-container{
     @apply !w-[365px] w-full flex items-center flex-col
 }
 .signin-form-container .image-container-k-M{
@@ -932,7 +931,7 @@ ul li, ol li{
 }
 .button-root_normalPriority-c1Z:hover{
     @apply bg-[#306E91] !text-white
-}
+} */
 .createAccount-root-Jgh{
     @apply !w-full p-[40px]
 }
@@ -1036,7 +1035,7 @@ ul li, ol li{
     @apply text-[22px] text-black
  }
  .three-column-block .columnLine-root-MOz{
-    @apply gap-[50px]
+    @apply 2xl_gap-[50px] -lg_gap-[20px] xl_gap-[20px]
  }
  .three-column-block figure{
     @apply relative
@@ -1055,7 +1054,7 @@ ul li, ol li{
 
  }
  .four-column-block .columnLine-root-MOz{
-    @apply mb-[30px]
+    @apply mb-[30px] -lg_gap-[20px] xl_gap-[20px]
  }
  .four-column-block .columnLine-root-MOz figure{
     @apply w-full max-w-[250px] no-underline
@@ -1088,10 +1087,10 @@ ul li, ol li{
     @apply hidden
  }
 .slider-root-E0Z.pagebuilder-slider .slick-arrow.slick-next{
-    @apply !w-[30px] !h-[30px] !border-none !right-5 !translate-x-0 !top-0 !z-[9999]
+    @apply !w-[30px] !h-[30px] !border-none !right-5 !translate-x-0 !top-0 !z-[9999] mt-[-15px]
 }
 .slider-root-E0Z.pagebuilder-slider .slick-arrow.slick-prev{
-    @apply !w-[30px] !h-[30px] !border-none !left-5 !translate-x-0 !top-0 !z-[9999]
+    @apply !w-[30px] !h-[30px] !border-none !left-5 !translate-x-0 !top-0 !z-[9999] mt-[-15px]
 }
 .main-banner-block .slider-root-E0Z.pagebuilder-slider .slick-arrow{
     @apply !top-[50%]
@@ -1100,7 +1099,7 @@ ul li, ol li{
     @apply -md_!min-h-auto
 }
 .main-banner-block .slider-bannerPosterOverlay-z-u {
-    @apply -md_!min-h-[17vh]
+    @apply -lg_!min-h-[17vh] lg_!min-h-[50vh] 3xl_!min-h-[75vh]
 }
 .main-banner-block .slider-bannerWrapper-yRV{
     @apply bg-contain

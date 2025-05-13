@@ -1,8 +1,8 @@
 .root {
     composes: auto-cols-fr from global;
     composes: bg-header from global;
-    composes: border-b from global;
-    composes: border-subtle from global;
+    /* composes: border-b from global; */
+    /* composes: border-subtle from global; */
     composes: grid from global;
     composes: h-auto from global;
     composes: justify-center from global;
@@ -11,7 +11,7 @@
     composes: sticky from global;
     composes: w-full from global;
     composes: z-header from global;
-    composes: lg_px-0 from global;
+    composes: md_px-0 from global;
 }
 
 .switchers {
@@ -73,6 +73,7 @@
     /* composes: -md_!flex from global;
     composes: -md_!flex-wrap from global; */
     composes: -md_items-center from global;
+    composes: md_px-4 from global;
 }
 
 /* .logo {
@@ -91,22 +92,23 @@
     composes: w-full from global;
     composes: -md_justify-center from global;
     composes: -md_gap-3 from global;
+    composes: -lg_justify-center from global;
 
 }
 .logosGroup :global(a){
     @apply flex !w-auto
 }
 .logosGroup :global(a:first-child){
-    @apply min-w-[250px] !mr-0  -md_min-w-full
+    @apply min-w-[250px] !mr-0  -md_min-w-full  md_!min-w-auto
 }
 .logosGroup :global(a > div){
-    @apply !w-full -md_flex -md_justify-center -md_items-center
+    @apply !w-full -md_flex -md_justify-center -md_items-center 
 } 
 .logosGroup :global(a img){
-    @apply !h-[50px] !w-auto -md_!h-[30px] absolute
+    @apply 2xl_!h-[50px] !w-auto sm_!h-[30px] absolute
 } 
 .logosGroup :global(a img:last-child){
-    @apply relative 
+    @apply relative -xl_!h-[30px]
 }
 .customLogo{
     composes: w-auto from global;
@@ -290,7 +292,7 @@
 @apply !min-w-[600px]
 }
 .broadcastMessages{
-    @apply w-full h-[40px] bg-gray-200 flex items-center justify-center text-center 
+    @apply w-full h-[40px] bg-gray-200 flex items-center justify-center text-center -sm_w-[calc(100%+30px)] -sm_mx-[-15px] 
 }
 .broadcastMessages :global(p){
     @apply -md_leading-[16px] -sm_text-[12px]   
@@ -298,19 +300,28 @@
 .broadcastMessages :global(.banner-content-1HW){
     @apply flex items-center justify-center
 }
-.broadcastMessage :global(.pagebuilder-slider){
+.broadcastMessages :global(.pagebuilder-slider){
     @apply relative
+}
+.broadcastMessages :global(.slider-root-E0Z.pagebuilder-slider .slick-arrow){
+    @apply !translate-y-0 !top-[150px]
+}
+.broadcastMessages :global(.slider-root-E0Z.pagebuilder-slider .slick-arrow.slick-prev){
+    @apply -sm_!left-1 !bg-transparent -sm_!w-[20px] -sm_!h-[20px] scale-[0.7]
+}
+.broadcastMessages :global(.slider-root-E0Z.pagebuilder-slider .slick-arrow.slick-next){
+    @apply -sm_!right-3 !bg-transparent -sm_!w-[20px] -sm_!h-[20px] scale-[0.7]
 }
 
 .bg-header{
     @apply flex flex-wrap flex-row bg-white z-[99]
 }
 .menuSearchGroup{
-    @apply flex justify-between w-full bg-primary max_px-8 2xl_px-[15px] lg_min-h-[60px] min-h-[50px] mb-3 lg_mb-0 -md_!w-[calc(100%+30px)] -md_!mx-[-15px] -md_px-[15px] -md_mb-0
+    @apply flex justify-between w-full bg-primary max_px-8 2xl_px-[15px] lg_min-h-[60px] min-h-[50px] mb-3 md_mb-0 -md_!w-[calc(100%+30px)] -md_!mx-[-15px] -lg_px-[15px] -md_mb-0 relative
 }
 
 .menuSearchGroup :global(> div){
-    @apply -md_!w-full
+    @apply -lg_w-full xl_!w-auto
 }
 .mobileSignin :global(.accountTrigger-root-3GU ){
     @apply lg_hidden block

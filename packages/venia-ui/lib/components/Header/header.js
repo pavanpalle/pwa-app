@@ -76,10 +76,11 @@ const Header = props => {
                     <CurrencySwitcher />
                 </div>
             </div>
-            <div className={classes.broadcastMessages}>
+            
+            <header className={rootClass} data-cy="Header-root">
+                <div className={classes.broadcastMessages}>
                 <CmsBlock identifiers="broadcast-message" />
             </div>
-            <header className={rootClass} data-cy="Header-root">
                 {/* <div className={classes.headerTopBar}>
                     <CmsBlock identifiers="header-top-bar" />
                 </div> */}

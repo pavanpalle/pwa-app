@@ -6,10 +6,14 @@
     composes: left-0 from global;
     composes: py-0 from global;
     composes: right-0 from global;
-    composes: -xl_max-h-[500px] from global;
+    composes: shadow-2xl from global;
+    composes: px-8 from global;
+    composes: max-h-[70vh] from global;
+    composes: -xl_px-4 from global;
+    /* composes: -xl_max-h-[500px] from global; */
     overflow: auto;
     top: 58px;
-    box-shadow:none;
+    /* box-shadow:none; */
 
     composes: before_content-empty from global;
     composes: before_h-2.5 from global;
@@ -35,15 +39,21 @@
 }
 
 .submenuItems {
-    composes: flex from global;
-    composes: flex-col from global;
+    composes: 2xl_columns-6 from global;
     composes: justify-center from global;
-    composes: !w-full from global;
+    composes: w-full from global;
     composes: ml-auto from global;
     composes: mr-auto from global;
     composes: items-start from global;
     composes: !min-w-auto from global;
-    composes: bg-white/90 from global;
-    composes: !max-w-full from global;
-    box-shadow: 0 3px 6px #0000001A;
+    composes: bg-white from global;
+    composes: shadow-2xl from global;
+    composes: px-4 from global;
+    composes: py-4 from global;
+    composes: max-w-full from global;
+    composes: h-full from global;
+    overflow:auto;
+    composes: xl_columns-5 from global;
+    composes: -md_px-2 from global;
+    composes: md_columns-4 from global;
 }

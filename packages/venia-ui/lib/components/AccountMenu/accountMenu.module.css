@@ -36,12 +36,15 @@
 .contents {
     composes: absolute from global;
     composes: bg-white from global;
-    composes: grid from global;
+    composes: flex from global;
     composes: right-0 from global;
     composes: rounded-sm from global;
     composes: shadow-menu from global;
     composes: top-0 from global;
     composes: w-[27.5rem] from global;
+    composes: -sm_!w-full from global;
+    composes: -md_max-h-[80vh]  from global;
+    composes: -md_overflow-auto from global;
     min-height: 10rem;
     transform: translate3d(0, -8px, 0);
     transition-duration: 192ms;

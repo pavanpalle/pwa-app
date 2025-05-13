@@ -1,9 +1,14 @@
 .root {
     composes: gap-sm from global;
-    composes: grid from global;
+    /* composes: grid from global; */
     composes: justify-items-stretch from global;
     composes: px-sm from global;
     composes: py-xs from global;
+    composes: w-full from global;
+    composes: -md_h-[100vh] from global;
+    composes: flex from global;
+    composes: items-center from global;
+    composes: justify-center from global;
 }
 
 .forgotPassword {
@@ -58,7 +63,63 @@
 }
 
 .title {
-    composes: capitalize from global;
+    /* composes: capitalize from global; */
     composes: pt-2xs from global;
     composes: text-lg from global;
+    composes: font-bold from global;
+    composes: text-[#000000] from global;
+    composes: uppercase from global;
+    composes: mb-[15px] from global;
+}
+
+:global(.signinFormContainer){
+    @apply !w-full flex items-center flex-col 
+}
+:global(.signinFormContainer .image-container-k-M){
+    @apply min-w-[100px]
+}
+:global(.signinFormContainer .image-loaded-g2z){
+    @apply !w-[100px] !h-[100px] !min-w-[100px]
+}
+:global(.signinFormContainer p){
+    @apply text-[14px] text-[#525252] mb-[20px]
+}
+/* .signin-right-container{
+    @apply w-full h-[100vh] relative flex items-center justify-center
+}
+.signin-image-container{
+    @apply relative max-w-[460px]
+}
+.signin-image-container h4{
+    @apply text-[18px] font-bold text-center px-[54px] pb-[54px] mb-0 w-full text-white left-0 bottom-0 absolute
+} */
+ /* .signIn-title-4HG{
+    @apply text-[20px] font-bold text-[#000000] uppercase mb-[15px]
+ } */
+ :global(.signIn-form-do- input),  :global(.forgot-container input){
+    @apply !h-[48px] bg-[#EBECF0] border border-[#DCDCDC] !pl-[50px]
+ }
+ :global(.signIn-form-do- .field-label-ba9),  :global(.forgot-container .field-label-ba9){
+    @apply hidden
+ }
+:global(.button-root_highPriority-yQe){
+    @apply !w-full !h-[48px] !rounded-[10px]
+ }
+ :global(.field){
+    @apply relative
+ }
+:global(.field img){
+    @apply absolute left-[15px] top-[14px]
+ }
+:global(.signIn-form-do- h3){
+    @apply text-[18px] font-bold text-[#000000] mb-0 relative mt-10
+}
+:global(.signIn-form-do- h3:before){
+    @apply content-[""] w-full h-[1px] bg-[#F0EDFF] absolute top-3.5 left-0 z-[-1]
+}
+:global(.button-root_normalPriority-c1Z){
+    @apply text-[#306E91] border !border-[#306E91] text-[14px] !capitalize !h-[48px] rounded-[24px] w-[200px]
+}
+:global(.button-root_normalPriority-c1Z:hover){
+    @apply bg-[#306E91] !text-white
 }

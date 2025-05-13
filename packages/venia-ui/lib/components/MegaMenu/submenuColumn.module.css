@@ -1,7 +1,7 @@
 .submenuColumn {
     composes: max-w-full from global;
-    composes: px-5 from global;
-    composes: py-1.5 from global;
+    composes: px-0 from global;
+    composes: py-2 from global;
 }
 
 .heading {
@@ -11,7 +11,7 @@
     composes: flex from global;
     composes: leading-[20px] from global;
     composes: break-all from global;
-    composes: justify-center from global;
+    composes: justify-start from global;
     composes: text-center from global;
     composes: whitespace-pre-line from global;
 }
@@ -23,12 +23,13 @@
     composes: hover_underline from global;
     composes: flex from global;
     composes: flex-col from global;
-    composes: gap-2 from global;
-    composes: items-center from global;
+    composes: gap-0 from global;
+    composes: items-start from global;
     composes: text-[18px] from global;
     composes: max-w-full from global;
-    composes: justify-center from global;
+    composes: justify-start from global;
     composes: !text-black from global;
+
 }
 
 .linkActive {
@@ -36,9 +37,9 @@
 }
 
 .submenuChild {
-    composes: mt-5 from global;
+    composes: mt-3 from global;
 }
 
 .submenuChildItem {
-    composes: mb-3 from global;
+    composes: mb-0 from global;
 }
