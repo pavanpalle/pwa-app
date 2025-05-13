@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { useStyle } from '../../classify';
 import Image from '../Image';
 import logo from './ng-logo.svg';
-import headSweatsLogo from './headsweats_logo.svg';
 
 /**
  * A component that renders a logo in the header.
@@ -19,7 +18,6 @@ const Logo = props => {
     const {
         height,
         width,
-        storeCode,
         currentStoreName,
         currentStoreLogo
     } = props;
