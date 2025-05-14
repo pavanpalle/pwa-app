@@ -1,9 +1,10 @@
 .root {
     composes: gap-x-xs from global;
-    composes: gap-y-2xs from global;
-    composes: grid from global;
+    /* composes: gap-y-2xs from global; */
+    composes: flex from global;
     composes: opacity-100 from global;
     composes: text-sm from global;
+    composes: relative from global;
     grid-template-columns: auto 1fr auto;
     grid-template-rows: auto auto auto auto auto 1fr;
     transition-delay: 64ms;
@@ -21,13 +22,22 @@
 .thumbnailContainer {
     grid-column: 1 / span 1;
     grid-row: 1 / span 6;
+    composes: h-[100px] from global;
 }
 
 .thumbnail {
     composes: border from global;
     composes: border-solid from global;
     composes: border-subtle from global;
+    composes: w-[90px] from global; 
+    composes: h-[100px] from global; 
+    composes: bg-[#EBEBEB] from global; 
+    composes: rounded-[12px] from global;
 }
+.thumbnail :global(img){
+@apply mix-blend-multiply max-h-full !w-auto left-[50%] translate-x-[-50%]
+}
+
 
 .name {
     composes: font-semibold from global;
@@ -37,20 +47,26 @@
 }
 
 .options {
-    composes: gap-2xs from global;
+    composes: gap-1xs from global;
     composes: grid from global;
     grid-column: 2 / span 1;
     grid-row: 2 / span 2;
+    composes: my-0 from global; 
+    composes: w-full from global;
 }
 
 .quantity {
     grid-column: 2 / span 1;
     grid-row: 4 / span 1;
+    /* composes: mt-[5px] from global; */
 }
 
 .price {
     grid-column: 2 / span 1;
     grid-row: 5 / span 1;
+    composes: ml-auto from global;
+    composes: font-bold from global; 
+    composes: text-[18px] from global;
 }
 
 .stockStatus {
@@ -63,10 +79,27 @@
 .deleteButton {
     grid-column: 3 / span 1;
     grid-row: 1 / span 1;
+    composes: absolute from global;
+    composes: right-0 from global;
+    composes: top-0 from global;
+
+}
+.deleteButton :global(svg){
+    @apply w-[20px] h-[20px] text-[#EE7C24]
 }
 
 .hide {
     visibility: hidden;
     max-width: 1px;
     max-height: 1px;
+}
+
+.cartProductInfo{
+    composes: pl-[10px] from global; 
+    composes: flex from global; 
+    composes: flex-wrap from global;
+}
+.cartProductInfo :global(a){
+    @apply text-[18px] font-bold w-full
+
 }

@@ -1,6 +1,6 @@
 .root {
     composes: bg-white from global;
-    composes: border-t from global;
+    composes: border-none from global;
     composes: border-solid from global;
     composes: border-subtle from global;
     composes: gap-1 from global;
@@ -8,7 +8,19 @@
     composes: grid-flow-col from global;
     composes: justify-center from global;
     composes: px-0 from global;
-    composes: py-xs from global;
+    composes: py-md from global;
     composes: text-center from global;
     grid-auto-columns: minmax(2rem, auto);
+    composes: gap-0 from global;
+}
+
+.root :global(> button){
+    @apply w-[30px] h-[30px] text-[20px] text-[#AAB4B2]
+
+}
+.root :global(> button:hover), .root :global(> button.tile-root_active-amd){
+    @apply text-primary border-none
+}
+.root :global(> button:hover svg), .root :global(> button.tile-root_active-amd svg){
+    @apply !stroke-primary
 }

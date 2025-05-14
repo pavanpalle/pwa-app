@@ -87,8 +87,12 @@ const config = {
                 max: '1920px'
             }
         },
-        extend: {}
-    }
+        extend: {
+             fontFamily: {
+                avenirbold: ['AvenirNext', 'sans-serif'], // name your custom font key
+            },
+        },    
+}
 };
 
 module.exports = config;

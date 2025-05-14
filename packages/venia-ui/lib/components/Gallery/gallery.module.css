@@ -8,7 +8,7 @@
 }
 
 .items {
-    composes: gap-6 from global;
+    composes: gap-5 from global;
     composes: grid from global;
     composes: mb-3 from global;
     grid-area: items;

@@ -134,7 +134,7 @@ const MiniCart = React.forwardRef((props, ref) => {
         </div>
     ) : (
         <Fragment>
-            <div className="MinicartHeader">
+            <div className={classes.MinicartHeader}>
                 <h2>Shopping Cart</h2>
                 <Button>&times;</Button>
             </div>

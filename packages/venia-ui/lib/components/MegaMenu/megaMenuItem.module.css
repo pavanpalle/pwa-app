@@ -10,8 +10,9 @@
     composes: items-center from global;
     composes: inline-flex from global;
     composes: h-[60px] from global;
-    composes: text-[18px] from global;
-    composes: font-semibold from global;
+    composes: text-[20px] from global;
+    /* composes: font-avenirbold from global; */
+    composes: !font-bold from global;
     composes: text-white from global;
     composes: px-[20px] from global;
     composes: -xl_px-[10px] from global;

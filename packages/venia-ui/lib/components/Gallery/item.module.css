@@ -13,7 +13,7 @@
 .imageContainer {
     grid-area: main;
     composes: bg-[#EBEBEB] from global;
-    composes: !rounded-[12px] from global;
+    /* composes: !rounded-[12px] from global; */
     composes: max-h-[575px] from global;
 }
 
@@ -58,17 +58,16 @@
 }
 
 .name {
-    composes: font-medium from global;
-    composes: text-[20px] from global; 
+    composes: text-[21px] from global; 
     composes: leading-[25px] from global;
     composes: max-h-[50px] from global; 
     composes: font-semibold from global; 
-    composes: line-clamp-2 from global; 
+    composes: line-clamp-1 from global; 
     composes: overflow-hidden from global; 
     composes: text-ellipsis from global; 
     composes: text-left from global; 
-    composes: text-[#111111]  from global;
-    composes: mt-1 from global;
+    composes: mt-0 from global;
+    composes: -md_text-[16px] from global;
 }
 
 .name,
@@ -90,9 +89,17 @@
     composes: text-subtle from global;
     composes: w-full from global;
 }
-.product-info{
+.productInfo{
     composes: flex from global;
     composes: items-center from global;
     composes: justify-between from global;
     composes: w-full from global;
+    composes: text-[20px] from global;
+    composes: text-black from global;
+    composes: mt-2 from global;
+    composes: w-full from global;
+    composes: -sm_text-[16px] from global; 
+}
+.productInfo :global(span:first-child){
+    @apply font-avenirbold !font-medium;
 }

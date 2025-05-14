@@ -157,13 +157,13 @@ const CategoryContent = props => {
     return (
         <Fragment>
             <div>
-            <div className="category-banner-block">
+            {/* <div className="category-banner-block">
                 <img src={categoryBg} 
                                            width={1000}
                                            height={90} 
                                         />
                 <h2>{categoryTitle}</h2>
-                </div>
+                </div> */}
                 <Breadcrumbs categoryId={categoryId} />
                 <StoreTitle>{categoryName}</StoreTitle>
                 <article

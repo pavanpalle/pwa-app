@@ -7,3 +7,12 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+    font-family:'AvenirNext';
+  	src: url('@magento/venia-ui/venia-static/fonts/AvenirNextBold.eot') format('embedded-opentype'),
+		url('@magento/venia-ui/venia-static/fonts/AvenirNextBold.woff2') format('woff2'),
+		url('@magento/venia-ui/venia-static/fonts/AvenirNextBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}

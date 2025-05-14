@@ -5,11 +5,11 @@
 }
 
 .heading {
-    composes: font-semibold from global;
+    composes: font-bold from global;
     composes: w-full from global;
     composes: w-full from global;
     composes: flex from global;
-    composes: leading-[20px] from global;
+    composes: leading-[22px] from global;
     composes: break-all from global;
     composes: justify-start from global;
     composes: text-center from global;
@@ -25,7 +25,7 @@
     composes: flex-col from global;
     composes: gap-0 from global;
     composes: items-start from global;
-    composes: text-[18px] from global;
+    composes: text-[22px] from global;
     composes: max-w-full from global;
     composes: justify-start from global;
     composes: !text-black from global;

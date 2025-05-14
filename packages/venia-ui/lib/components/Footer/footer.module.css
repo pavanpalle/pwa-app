@@ -1,7 +1,7 @@
 .root {
-    composes: border-t-2 from global;
+    composes: border-t-[15px] from global;
     composes: border-solid from global;
-    composes: border-light from global;
+    composes: border-primary from global;
     composes: gap-y-16 from global;
     composes: grid from global;
     composes: leading-normal from global;
@@ -163,7 +163,7 @@
     @apply table -sm_w-full -sm_px-[15px] px-0 w-full
 }
 .footerBlock :global(.footer-column h2){
-@apply !font-bold !mt-0 text-black !text-[24px] !text-left !capitalize !mb-[5px] flex justify-between items-center
+@apply font-avenirbold !mt-0 text-black !text-[24px] !text-left !capitalize !mb-[5px] flex justify-between items-center
 
 }
 .footerBlock :global(.footer-column h2:after){
@@ -186,17 +186,17 @@
     @apply !my-0 !pl-0 !list-none m-0 -sm_hidden transition-all
 }
 .footerBlock :global(.footer-column ul li){
-    @apply mb-0
+    @apply mb-1
 
 }
 .footerBlock :global(.footer-column ul li a){
-    @apply text-[18px] list-none !no-underline font-medium flex flex-row items-center gap-2 text-black
+    @apply text-[20px] list-none !no-underline font-medium flex flex-row items-center gap-2 text-black
 }
 .footerBlock :global(.footer-column ul li a img){
     @apply !my-0
 }
 .footerBlock :global(ul.social-icons){
-    @apply flex flex-row gap-3 items-center !mt-6 justify-between -sm_justify-center
+    @apply flex flex-row gap-3 items-center !mt-6 justify-center -sm_justify-center
 }
 
 .footerBlock :global(ul.social-icons li){
@@ -206,18 +206,18 @@
     @apply w-[40px]
 }
 .footerBlock :global(.copyright-block){
-    @apply  py-3 text-center bg-primary text-[#FFFFFF] text-[18px] !font-medium gap-20 !mt-6 overflow-hidden  w-full mx-auto flex items-center justify-center -lg_flex-col -lg_w-full -lg_mx-0 -lg_gap-3 z-[99]
+    @apply  py-3 text-center bg-primary text-[#FFFFFF] text-[20px] !font-medium gap-20 !mt-6 overflow-hidden  w-full mx-auto flex items-center justify-center -lg_flex-col -lg_w-full -lg_mx-0 -lg_gap-3 z-[99]
 }
 .footerBlock :global(.copyright-block p){
-    @apply  py-0 text-center bg-primary text-[#FFFFFF] text-[18px] !font-medium gap-20 !my-0 overflow-hidden  w-full mx-auto flex items-center justify-center -lg_flex-col -lg_w-full -lg_mx-0 -lg_gap-3 z-[99]
+    @apply  py-0 text-center bg-primary text-[#FFFFFF] text-[20px] !font-medium gap-20 !my-0 overflow-hidden  w-full max-w-[30%] mx-auto -lg_max-w-full flex items-center justify-end -lg_flex-col -lg_w-full -lg_mx-0 -lg_gap-3 z-[99]
 }
 .footerBlock :global(.copyright-block ul){
-@apply w-full flex gap-10 items-center !mb-0 !pl-0 -sm_flex-wrap -sm_gap-3 -sm_gap-y-1 -sm_!px-[15px] -lg_justify-center lg_gap-5
+@apply w-full flex 2xl_gap-[7%] items-center !mb-0 !pl-0 -sm_flex-wrap -sm_gap-3 -sm_gap-y-1 -sm_!px-[15px] -lg_justify-center -lg_gap-4 lg_gap-5
 }
 .footerBlock :global(.copyright-block ul li a){
     @apply no-underline
 }
 .footerBlock :global(.subscribe-btn){
-    @apply w-full h-[50px] bg-primary rounded-[5px] text-white !no-underline text-[20px] font-bold flex items-center justify-center
+    @apply w-full h-[50px] bg-primary rounded-[5px] text-white !no-underline text-[24px] font-avenirbold flex items-center justify-center
  }
 

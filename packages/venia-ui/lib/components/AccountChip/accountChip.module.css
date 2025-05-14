@@ -10,3 +10,6 @@
 .loader {
     composes: indicator from '../LoadingIndicator/indicator.module.css';
 }
+:global(span){
+    @apply whitespace-nowrap;
+}

@@ -150,7 +150,7 @@ const GalleryItem = props => {
                 {ratingAverage}
             </Link>
             {/* <section className={classes.options}>{options}</section> */}
-            <div className="product-info">
+            <div className={classes.productInfo}>
                 <span>{item.sku}</span>
                 <span>{sizeRange}</span>
             </div>

@@ -96,7 +96,7 @@ const Item = props => {
                     data-cy="Item-image"
                 />
             </Link>
-            <div className='cart-product-info'>
+            <div className={classes.cartProductInfo}>
             <Link
                 className={classes.name}
                 to={itemLink}

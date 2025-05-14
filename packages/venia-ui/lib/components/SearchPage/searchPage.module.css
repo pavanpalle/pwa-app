@@ -1,5 +1,5 @@
 .root {
-    composes: p-xs from global;
+    /* composes: p-xs from global; */
 
     composes: lg_flex from global;
     composes: lg_flex-nowrap from global;
@@ -40,7 +40,8 @@
     composes: ml-0 from global;
     composes: mr-0 from global;
     composes: mt-10 from global;
-
+    composes: -lg_mt-5 from global;
+    composes: -lg_mb-0 from global;
     composes: lg_m-0 from global;
     composes: lg_basis-full from global;
 }

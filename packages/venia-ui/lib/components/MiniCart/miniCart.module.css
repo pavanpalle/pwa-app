@@ -20,6 +20,7 @@
     composes: left-[-100vw] from global;
 
     @apply invisible;
+    @apply !bg-transparent;
 }
 
 .root_open {
@@ -31,6 +32,7 @@
         visibility 224ms var(--venia-global-anim-in), left 0s;
 
     @apply visible;
+    @apply mt-[-70px];
 }
 
 /* These heights may change based on PWA-605 and should be based on 1.5 and 2.5 visible items. */
@@ -38,12 +40,15 @@
     composes: absolute from global;
     composes: bg-white from global;
     composes: grid from global;
-    composes: max-h-[35rem] from global;
+    composes: max-h-[700px] from global;
     composes: overflow-hidden from global;
-    composes: right-0 from global;
+    composes: 2xl_right-[15px] from global;
     composes: rounded-sm from global;
-    composes: top-0 from global;
-    composes: w-[22.5rem] from global;
+    composes: top-[-22px] from global;
+    composes: w-[500px] from global;
+    composes: border from global;
+    composes: border-gray-200 from global;
+    composes: lg_right-0 from global;
     box-shadow: 0 1px 6px rgb(var(--venia-global-color-gray-900) / 0.2);
     min-height: 20rem;
     transform: translate3d(0, -8px, 0);
@@ -70,12 +75,17 @@
     composes: grid-cols-autoLast from global;
     composes: items-center from global;
     composes: leading-tight from global;
-    composes: mx-xs from global;
     composes: my-0 from global;
     composes: pb-2xs from global;
     composes: pt-xs from global;
-    composes: px-2xs from global;
     composes: text-sm from global;
+    composes: border-t from global;
+    composes: py-5 from global;
+    composes: px-0 from global;
+    composes: mx-7 from global;
+}
+.header :global(span){
+    @apply text-[18px] font-medium font-medium
 }
 
 .stockStatusMessageContainer {
@@ -87,8 +97,9 @@
 .body {
     composes: max-h-[25rem] from global;
     composes: overflow-y-auto from global;
-    composes: p-sm from global;
+    composes: p-[30px] from global;
     min-height: 10rem;
+    @apply overflow-x-hidden;
 }
 
 .quantity {
@@ -111,6 +122,16 @@
     transition-duration: 384ms;
     transition-property: opacity;
     transition-timing-function: var(--venia-global-anim-standard);
+    composes: flex  from global;
+    composes: flex-wrap from global; 
+    composes: justify-center from global; 
+    composes: w-[100px] from global;
+}
+.price :global(span){
+    @apply text-[22px] font-bold
+}
+.price :global(span:first-child){
+    @apply w-full text-center font-medium text-[18px]
 }
 
 .price_loading {
@@ -120,36 +141,55 @@
 }
 
 .footer {
-    composes: border-t-2 from global;
+    composes: border-t-0 from global;
     composes: border-solid from global;
     composes: border-light from global;
-    composes: gap-2xs from global;
-    composes: grid from global;
+    composes: gap-7 from global;
+    composes: flex from global;
     composes: items-center from global;
     composes: justify-items-center from global;
     composes: leading-normal from global;
-    composes: mx-xs from global;
+    /* composes: mx-xs from global; */
     composes: my-0 from global;
     composes: overflow-hidden from global;
-    composes: p-xs from global;
+    composes: p-6 from global;
     composes: text-sm from global;
     min-height: 3rem;
-}
+    composes: w-full from global;
+ }
 
 .checkoutButton {
     composes: root_highPriority from '../Button/button.module.css';
-
     @apply bg-brand-dark;
     @apply border-0;
     composes: font-bold from global;
     composes: m-auto from global;
-    composes: w-[10rem] from global;
-    grid-column: 1 / span 1;
+    /* composes: w-[10rem] from global; */
+    /* grid-column: 1 / span 1; */
+    @apply w-full; 
+    @apply !h-[58px]; 
+    @apply !rounded-md; 
+    @apply bg-[#003E6B]; 
+    @apply text-white;
+    @apply text-[16px]; 
+    @apply shadow-xl; 
+    @apply shadow-[#00000026];
+    @apply capitalize;
+    @apply bg-primary;
+    @apply !px-0;
 }
 
 .editCartButton {
     composes: text-sm from global;
     composes: underline from global;
+    @apply w-full; 
+    @apply !h-[58px]; 
+    @apply rounded-md; 
+    @apply bg-[#003E6B]; 
+    @apply text-white;
+    @apply text-[16px]; 
+    @apply shadow-xl; 
+    @apply shadow-[#00000026];
 }
 
 .emptyCart {
@@ -161,4 +201,17 @@
 .emptyMessage {
     composes: font-bold from global;
     composes: m-auto from global;
+}
+
+.MinicartHeader{
+    @apply px-[30px] py-[15px] border-b border-[#DCDCDC] flex items-center justify-between
+}
+.MinicartHeader :global(h2){
+    @apply text-[#000000] text-[24px] font-bold leading-[24px]
+}
+.MinicartHeader :global(button){
+    @apply border-none w-auto table min-w-auto px-0 text-[24px] text-[#787878] !py-0 !bg-transparent
+}
+.MinicartHeader :global(button:hover span){
+    @apply !text-[#787878]
 }
