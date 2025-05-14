@@ -3,18 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @font-face {
-    font-family:'Avenir Book';
-    src: url('@magento/venia-ui/lib/assets/fonts/AvenirBook.eot');
-	src: url('@magento/venia-ui/lib/assets/fonts/AvenirBook.eot?#iefix') format('embedded-opentype'),
-		url('@magento/venia-ui/lib/assets/fonts/AvenirBook.woff2') format('woff2'),
-		url('@magento/venia-ui/lib/assets/fonts/AvenirBook.woff') format('woff'),
-		url('@magento/venia-ui/lib/assets/fonts/AvenirBook.svg') format('svg');
-    font-weight: 400;
-    font-style: normal;
-    font-stretch: normal;
-    unicode-range: U+0020-02DC;
-} */
 
 :root {
     /* fallback/default */
@@ -53,7 +41,6 @@
 
 
 body{
-    /* font-family: "Albert Sans", sans-serif !important; */
     font-family:'AvenirBook' !important;
 }ul, ol{
     margin:0px;
@@ -71,115 +58,15 @@ ul li, ol li{
 .divider-hr-fB0{
     @apply !my-0 !table
 }
-/* .accountTrigger-trigger-HXt{
-    @apply text-[18px]
-} */
 .cartTrigger-counter-O9c{
     @apply !min-w-[25px] !h-[25px] rounded-[13px] border-[#DCDCDC] border bg-white text-black leading-[25px] top-[-10px]  !left-[35px]
 }
-/* .cartTrigger-triggerContainer-8Eq{
-    @apply w-[48px] h-[48px] rounded-[5px] bg-primary shadow-xl shadow-[#98C4E459]
-} */
-/* .cartTrigger-triggerContainer-8Eq svg{
-    @apply !stroke-white
-} */
 .cms-root_1column-8bD{
     @apply !w-[calc(100%+6%)] mx-[-3%]
 }
 .main-slider .slick-slider .slick-track{
     @apply !gap-0
 }
-/* .grid-five-columns .columnLine-root-MOz{
-    @apply gap-6
-}
-.grid-five-columns .pagebuilder-column{
-    @apply !w-[100%] 
-}
-.grid-five-columns figcaption{
-    @apply text-[22px] font-bold text-center
-} */
-
-/* .miniCart-contents-I7h{
-    @apply w-[600px]  border border-[#DCDCDC] rounded-[20px] max-h-[700px]
-} */
-/* .MinicartHeader{
-    @apply px-[30px] py-[15px] border-b border-[#DCDCDC] flex items-center justify-between
-}
-.MinicartHeader h2{
-    @apply text-[#000000] text-[24px] font-bold leading-[24px]
-}
-.MinicartHeader button{
-    @apply border-none w-auto table min-w-auto px-0 text-[24px] text-[#787878] !py-0
-} */
-/* .miniCart-body-dah{
-    @apply p-[30px]
-} */
-/* .item-root-zD7{
-    @apply relative
-} */
-/* .miniCart-body-dah .item-thumbnailContainer-h8x{
-    @apply h-[100px]
-} */
-/* .miniCart-body-dah .item-thumbnail-uo5{
-    @apply w-[90px] h-[100px] bg-[#EBEBEB] rounded-[12px]
-} */
-/* .miniCart-body-dah .item-thumbnail-uo5 img{
-    @apply mix-blend-multiply max-h-full !w-auto left-[50%] translate-x-[-50%]
-} */
-/* .cart-product-info{
-    @apply pl-[10px] flex flex-wrap
-
-} */
-/* .cart-product-info .item-name-rOl{
-    @apply text-[18px] text-[#3C4242] font-bold w-full
-} */
-/* .cart-product-info .item-options-suT{
-    @apply my-[5px] w-full
-} */
-/* .cart-product-info .item-price-aN1{
-    @apply ml-auto
-} */
-/* .cart-product-info .item-deleteButton-8jv{
-    @apply absolute right-0 top-0
-} */
-/* .cart-product-info .item-deleteButton-8jv svg{
-    @apply w-[20px] h-[20px] text-[#EE7C24]
-} */
-/* .cart-product-info .item-price-aN1{
-    @apply font-bold text-[18px]
-} */
-/* .miniCart-header-eRR{
-    @apply border-t border-[#DCDCDC] py-5 px-0 mx-7} */
-/* .miniCart-header-eRR span{
-    @apply text-[18px] font-medium font-medium
-} */
-/* .miniCart-price-oUD{
-    @apply flex flex-wrap justify-center w-[100px] 
-} */
-/* .miniCart-price-oUD span{
-    @apply text-[22px] font-bold
-} */
-/* .miniCart-price-oUD span:first-child{
-    @apply w-full text-center font-medium text-[18px]
-} */
-/* .miniCart-footer-0Jg{
-    @apply w-full flex gap-7 !mx-0 px-7 py-6 border-t-0
-} */
-/* .miniCart-footer-0Jg button{
-    @apply !w-full !h-[58px] rounded-[10px] bg-[#003E6B] text-white text-[18px] shadow-xl shadow-[#00000026] 
-} */
-/* .miniCart-footer-0Jg .miniCart-editCartButton-bqR:hover{
-    @apply bg-[#306E91]
-}
-.miniCart-root_open-6lW{
-    @apply mt-[-70px]
-} */
-/* .miniCart-footer-0Jg  .miniCart-checkoutButton-F-S{
-    @apply bg-[#306E91] !capitalize
-} */
-/* .miniCart-footer-0Jg  .miniCart-checkoutButton-F-S:hover{
-    @apply bg-[#003E6B]
-} */
 .slick-slider .slick-track{
     @apply !flex !gap-6
 }
