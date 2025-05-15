@@ -164,7 +164,7 @@
     composes: w-[150px] from global;
     composes: px-4 from global;
     composes: py-2 from global;
-    composes: mb-[-2.5px] from global;
+    composes: !mb-[-2.5px] from global;
     composes: bg-white from global;
     composes: z-10 from global;
     composes: relative from global;

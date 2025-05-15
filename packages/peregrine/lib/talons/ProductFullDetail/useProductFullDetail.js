@@ -775,7 +775,7 @@ export const useProductFullDetail = props => {
                 }
             }
         },
-        [addConfigurableProductToCart, addProductToCart, addSimpleProductToCart, cartId, dispatch, hasDeprecatedOperationProp, isSupportedProductType, optionCodes, optionSelections, product, productPrice.discount.amount_off, productPrice.final_price.currency, productPrice.final_price.value, productType, quantities, selectedOptionsArray, sizesTable]
+        [addConfigurableProductToCart, addProductToCart, addSimpleProductToCart, cartId, dispatch, hasDeprecatedOperationProp, isSupportedProductType, optionCodes, optionSelections, product, productPrice, productType, quantities, selectedOptionsArray, sizesTable]
     );
 
     const handleSelectionChange = useCallback(
@@ -918,7 +918,7 @@ export const useProductFullDetail = props => {
           
           // If we found the variant, extract its details
           if (variant) {
-            price = variant.product.price.regularPrice.amount.value;
+            price = variant?.product?.price?.regularPrice?.amount?.value || 0.00;
             sku = variant.product.sku;
             stockStatus = variant.product.stock_status;
             inventory = variant.product.qty;

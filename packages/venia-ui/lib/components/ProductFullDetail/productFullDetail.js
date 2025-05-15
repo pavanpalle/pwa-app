@@ -228,8 +228,8 @@ const ProductFullDetail = props => {
                             >
                                 MSRP :{' '}
                                 <Price
-                                    currencyCode={productDetails.price.currency}
-                                    value={productDetails.price.value}
+                                    currencyCode={productDetails?.price?.currency}
+                                    value={productDetails?.price?.value}
                                 />
                             </p>
                             {shortDescription}
