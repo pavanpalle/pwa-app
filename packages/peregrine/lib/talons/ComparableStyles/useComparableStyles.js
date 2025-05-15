@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 import { useIntersectionObserver } from '@magento/peregrine/lib/hooks/useIntersectionObserver';
 import mergeOperations from '../../util/shallowMerge';
-import DEFAULT_OPERATIONS from './crosssellProducts.gql';
+import DEFAULT_OPERATIONS from './relatedProducts.gql';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 export const useComparableStyles = (props = {}) => {
     const [{ isSignedIn }] = useUserContext();
