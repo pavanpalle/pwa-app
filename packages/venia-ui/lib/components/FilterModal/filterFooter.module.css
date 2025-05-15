@@ -9,3 +9,7 @@
     composes: relative from global;
     composes: px-5 from global;
 }
+
+:global(.button-root_highPriority-yQe){
+    @apply !w-full
+}

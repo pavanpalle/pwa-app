@@ -1,9 +1,23 @@
 .root {
-    composes: px-xs from global;
+    /* composes: px-xs from global; */
     composes: py-0 from global;
     composes: overflow-auto from global;
-
     composes: empty_hidden from global;
+    composes: bg-white from global; 
+    composes: text-[#003E6B] from global;
+    /* composes: border  from global; */
+    composes: border-[#003E6B] from global; 
+    composes: rounded-[20px] from global; 
+    composes: text-[14px] from global; 
+    /* composes: py-1 from global;  */
+    /* composes: px-3 from global; */
+}
+
+.item :global(.currentFilter-root-eTO){
+@apply bg-white text-[#003E6B] border border-[#003E6B] rounded-[20px] text-[14px] py-1 px-3;
+}
+.item :global(.trigger-root-Uef svg){
+    @apply !stroke-[#003E6B];
 }
 
 .item {

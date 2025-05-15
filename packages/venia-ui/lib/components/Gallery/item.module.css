@@ -61,7 +61,7 @@
     composes: text-[21px] from global; 
     composes: leading-[25px] from global;
     composes: max-h-[50px] from global; 
-    composes: font-semibold from global; 
+    /* composes: font-semibold from global;  */
     composes: line-clamp-1 from global; 
     composes: overflow-hidden from global; 
     composes: text-ellipsis from global; 
@@ -101,5 +101,5 @@
     composes: -sm_text-[16px] from global; 
 }
 .productInfo :global(span:first-child){
-    @apply font-avenirbold !font-medium;
+    @apply !font-bold !font-medium;
 }

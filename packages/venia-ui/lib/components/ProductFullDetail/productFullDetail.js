@@ -335,7 +335,7 @@ const ProductFullDetail = props => {
                   
                 </Form>
                  <section ><ComparableStyles isSignedIn={isSignedIn}/></section>
-                      {/* <section ><CompanionStyles isSignedIn={isSignedIn}/></section> */}
+                      <section ><CompanionStyles isSignedIn={isSignedIn}/></section>
             </div>
         </Fragment>
     );

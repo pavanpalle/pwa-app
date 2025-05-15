@@ -163,7 +163,7 @@
     @apply table -sm_w-full -sm_px-[15px] px-0 w-full
 }
 .footerBlock :global(.footer-column h2){
-@apply font-avenirbold !mt-0 text-black !text-[24px] !text-left !capitalize !mb-[5px] flex justify-between items-center
+@apply md_font-avenirbold !mt-0 text-black text-[20px] md_!text-[24px] !text-left !capitalize !mb-[5px] flex justify-between items-center font-bold
 
 }
 .footerBlock :global(.footer-column h2:after){

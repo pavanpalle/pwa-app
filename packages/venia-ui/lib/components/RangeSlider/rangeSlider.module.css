@@ -21,6 +21,7 @@
 
 .rangeslider {
     z-index: 2;
+    composes: !bg-primary from global;
 }
 
 .thumb,
@@ -42,6 +43,8 @@
 
 .thumbright {
     z-index: 4;
+    composes: w-full from global; 
+    composes: right-[-4px] from global;
 }
 
 .thumb::-webkit-slider-thumb {
@@ -73,4 +76,8 @@
     margin-top: 4.5px;
     pointer-events: all;
     position: relative;
+    @apply !bg-primary; 
+    @apply !border-primary; 
+    @apply !w-[18px]; 
+    @apply !h-[18px];
 }

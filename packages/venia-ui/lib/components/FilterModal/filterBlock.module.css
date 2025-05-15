@@ -1,7 +1,7 @@
 .root {
     composes: border-solid from global;
     composes: border-subtle from global;
-    composes: border-t-2 from global;
+    composes: border-t from global;
     composes: border-r-0 from global;
     composes: border-b-0 from global;
     composes: border-l-0 from global;
@@ -20,6 +20,8 @@
 .name {
     composes: leading-normal from global;
     composes: text-left from global;
+    composes: font-bold from global;
+    composes: text-lg from global;
 }
 
 .list {

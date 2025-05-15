@@ -6,13 +6,29 @@
     grid-template-columns: 100%;
 }
 
+.items :global(> div > div > div){
+    @apply mb-[20px] !px-1;
+}
+.items :global(.checkbox-root-yYj){
+    @apply text-[#666] px-1;
+}
+.items :global(.checkbox-icon-WcA svg){
+    @apply !stroke-[#003E6B];
+}
+
 .showMoreLessItem {
+    composes: text-[16px] from global;
     composes: pl-1 from global;
+    composes: text-primary from global;
 }
 
 .showMoreLessButton {
     composes: text-sm from global;
     composes: underline from global;
-
-    composes: hover_no-underline from global;
+    composes: uppercase from global;
+    composes: no-underline from global;
+    composes: text-gray-600 from global;
+    composes: font-bold from global;
+    composes: hover_text-primary from global;
+    composes: hover_underline from global;
 }

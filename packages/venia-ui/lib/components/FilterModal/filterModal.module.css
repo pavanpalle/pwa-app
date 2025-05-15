@@ -45,11 +45,16 @@
     composes: px-5 from global;
 }
 
+.header :global(button){
+     @apply outline-none;
+}
 .headerTitle {
     composes: flex from global;
     composes: items-center from global;
     composes: leading-none from global;
-    composes: text-xl from global;
+    /* composes: text-xl from global; */
+    composes: font-bold from global;
+    composes: text-[22px] from global;
 }
 
 .action {
@@ -68,7 +73,12 @@
     composes: pt-xs from global;
     composes: px-xs from global;
 }
-
+.blocks :global(.filterBlock-root-JGM){
+@apply !border-t !border-[#e1e1e1] relative;
+}
+.blocks :global(.filterBlock-root-JGM .filterBlock-header-w8l){
+    @apply text-[18px] font-semibold;
+}
 .blocks > li:last-child {
     @apply border-b-2;
     @apply border-solid;

@@ -3,6 +3,7 @@
 
     composes: lg_flex from global;
     composes: lg_flex-nowrap from global;
+    composes: gap-5 from global;
 }
 
 .noResult {

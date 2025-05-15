@@ -8,4 +8,13 @@
     @apply font-medium;
     composes: -sm_w-[90%] from global;
     composes: -sm_!min-w-[40%] from global;
+    @apply !flex; 
+    @apply !rounded-[12px]; 
+    @apply !outline-none; 
+    @apply border; 
+    @apply border-[#BFC0BF]; 
+    @apply items-center;
+}
+.filterButton :global(.image-root-rpl){
+    @apply h-[16px];
 }

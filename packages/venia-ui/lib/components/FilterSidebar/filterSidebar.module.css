@@ -19,7 +19,7 @@
     composes: justify-between from global;
     composes: pb-0 from global;
     composes: pt-5 from global;
-    composes: px-5 from global;
+    composes: px-0 from global;
 }
 
 .headerTitle {
@@ -27,12 +27,13 @@
     composes: items-center from global;
     composes: leading-none from global;
     composes: text-lg from global;
+    composes: font-bold from global;
 }
 
 .action {
     composes: pb-0 from global;
     composes: pt-xs from global;
-    composes: px-xs from global;
+    /* composes: px-xs from global; */
 }
 
 .action button {
@@ -43,7 +44,7 @@
 .blocks {
     composes: pb-0 from global;
     composes: pt-xs from global;
-    composes: px-xs from global;
+    composes: px-1 from global;
 }
 
 .blocks > li:last-child {

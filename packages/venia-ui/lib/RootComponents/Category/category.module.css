@@ -76,19 +76,20 @@
 
     composes: lg_justify-end from global;
     composes: lg_pb-0 from global;
+    composes: gap-4 from global; 
 }
 
 .contentWrapper {
     composes: w-full from global;
 
     composes: lg_flex from global;
-    composes: flex-col  from global;
+    /* composes: flex-col  from global; */
     composes: mt-[-78px] from global;
+    composes: gap-5 from global;
 }
 
 .sidebar {
-    composes: !hidden from global;
-
+    composes: -lg_!hidden from global;
     composes: lg_flex from global;
     composes: lg_self-start from global;
     composes: lg_pt-16 from global;
