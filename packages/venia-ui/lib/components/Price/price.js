@@ -16,12 +16,12 @@ import patches from '@magento/peregrine/lib/util/intlPatches';
 
 const Price = props => {
     const { locale } = useIntl();
-    const { value, currencyCode, classes,isSignedIn } = props;
+    const { value, currencyCode = 'USD', classes,isSignedIn } = props;
 
     const parts = patches.toParts.call(
         new Intl.NumberFormat(locale, {
             style: 'currency',
-            currency: currencyCode
+            currency: currencyCode 
         }),
         value
     );

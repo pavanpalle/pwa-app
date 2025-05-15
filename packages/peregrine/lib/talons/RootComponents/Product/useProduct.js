@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client';
 import { useEffect, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAppContext } from '@magento/peregrine/lib/context/app';
+import { useUserContext } from '@magento/peregrine/lib/context/user';
 
 import mergeOperations from '../../../util/shallowMerge';
 import DEFAULT_OPERATIONS from './product.gql';
@@ -27,7 +28,7 @@ export const useProduct = props => {
     const { mapProduct } = props;
 
     const operations = mergeOperations(DEFAULT_OPERATIONS, props.operations);
-    const { getStoreConfigData, getProductDetailQuery } = operations;
+    const { getStoreConfigData, getProductDetailQuery ,getProductDetailNoPriceQuery} = operations;
     const { pathname } = useLocation();
     const [
         ,
@@ -35,6 +36,10 @@ export const useProduct = props => {
             actions: { setPageLoading }
         }
     ] = useAppContext();
+
+    const [{ isSignedIn }] = useUserContext();
+
+    const productQuery = isSignedIn? getProductDetailQuery : getProductDetailNoPriceQuery
 
     const { data: storeConfigData } = useQuery(getStoreConfigData, {
         fetchPolicy: 'cache-and-network',
@@ -45,7 +50,7 @@ export const useProduct = props => {
     const productUrlSuffix = storeConfigData?.storeConfig?.product_url_suffix;
     const urlKey = productUrlSuffix ? slug.replace(productUrlSuffix, '') : slug;
 
-    const { error, loading, data } = useQuery(getProductDetailQuery, {
+    const { error, loading, data } = useQuery(productQuery, {
         fetchPolicy: 'cache-and-network',
         nextFetchPolicy: 'cache-first',
         skip: !storeConfigData,
