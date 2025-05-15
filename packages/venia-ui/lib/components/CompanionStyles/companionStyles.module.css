@@ -1,0 +1,45 @@
+.root {
+    composes: px-0 from global;
+   
+}
+
+.section {
+  
+    composes: my-0 from global;
+    composes: mx-sm from global;
+    composes: px-0 from global;
+    composes: py-xs from global;
+}
+
+.sectionTitle {
+    composes: flex from global;
+    composes: font-semibold from global;
+    composes: items-center from global;
+    composes: leading-normal from global;
+    composes: mb-sm from global;
+    composes: text-colorDefault from global;
+}
+
+.title {
+    composes: section;
+    composes: gap-2 from global;
+    composes: grid from global;
+    composes: items-center from global;
+    composes: leading-normal from global;
+    @apply py-xs;
+    grid-area: title;
+}
+
+
+.productName {
+    composes: font-semibold from global;
+    composes: text-colorDefault from global;
+
+    composes: lg_font-bold from global;
+    composes: lg_text-xl from global;
+}
+
+.galleryItems {
+    composes: items from '~@magento/venia-ui/lib/components/Gallery/gallery.module.css';
+    grid-template-columns: repeat(5, 1fr);
+}

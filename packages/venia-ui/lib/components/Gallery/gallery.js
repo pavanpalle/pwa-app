@@ -3,6 +3,7 @@ import { string, shape, array } from 'prop-types';
 
 import { useStyle } from '../../classify';
 import GalleryItem from './item';
+import DetailGalleryItem from './detailItem';
 import GalleryItemShimmer from './item.shimmer';
 import defaultClasses from './gallery.module.css';
 import { useGallery } from '@magento/peregrine/lib/talons/Gallery/useGallery';
@@ -14,10 +15,12 @@ import { useGallery } from '@magento/peregrine/lib/talons/Gallery/useGallery';
  * @params {Array} props.items an array of items to render
  */
 const Gallery = props => {
-    const { items } = props;
+    const { items,from='' ,isSignedIn=false} = props;
     const classes = useStyle(defaultClasses, props.classes);
     const talonProps = useGallery();
     const { storeConfig } = talonProps;
+
+    const remainingCount = Math.max(items.length - 14, 0);
 
     const galleryItems = useMemo(
         () =>
@@ -25,6 +28,19 @@ const Gallery = props => {
                 if (item === null) {
                     return <GalleryItemShimmer key={index} />;
                 }
+
+                if (from === 'detail') {
+                return (
+                    <DetailGalleryItem
+                        key={item.id}
+                        item={item}
+                        storeConfig={storeConfig}
+                        remainingCount={remainingCount}
+                        isSignedIn={isSignedIn}
+                    />
+                );
+            }
+               
                 return (
                     <GalleryItem
                         key={item.id}
@@ -33,7 +49,7 @@ const Gallery = props => {
                     />
                 );
             }),
-        [items, storeConfig]
+        [items, storeConfig,from,remainingCount]
     );
 
     return (

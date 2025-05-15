@@ -1,26 +1,26 @@
 /* eslint-disable react/jsx-no-literals */
-import React, { useMemo, Fragment, Suspense, useState } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { arrayOf, bool, number, shape, string } from 'prop-types';
 import { Form } from 'informed';
+import { arrayOf, bool, number, shape, string } from 'prop-types';
+import React, { Fragment, Suspense } from 'react';
 import { Info } from 'react-feather';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import Price from '@magento/venia-ui/lib/components/Price';
 import { useProductFullDetail } from '@magento/peregrine/lib/talons/ProductFullDetail/useProductFullDetail';
 import { isProductConfigurable } from '@magento/peregrine/lib/util/isProductConfigurable';
+import Price from '@magento/venia-ui/lib/components/Price';
 
 import { useStyle } from '../../classify';
 import Breadcrumbs from '../Breadcrumbs';
 import Button from '../Button';
-import Carousel from '../ProductImageCarousel';
+import CompanionStyles from '../CompanionStyles';
+import ComparableStyles from '../ComparableStyles';
 import FormError from '../FormError';
-import QuantityStepper from '../QuantityStepper';
-import RichContent from '../RichContent/richContent';
+import Image from '../Image';
+import Carousel from '../ProductImageCarousel';
 import { ProductOptionsShimmer } from '../ProductOptions';
-import CustomAttributes from './CustomAttributes';
+import RichContent from '../RichContent/richContent';
 import defaultClasses from './productFullDetail.module.css';
 import addCartIcon from './shopping-cart.png';
-import Image from '../Image';
 
 const WishlistButton = React.lazy(() => import('../Wishlist/AddToListButton'));
 const Options = React.lazy(() => import('../ProductOptions'));
@@ -56,11 +56,9 @@ const ProductFullDetail = props => {
         isSupportedProductType,
         mediaGalleryEntries,
         productDetails,
-        customAttributes,
         wishlistButtonProps,
         getProductDetailsByColor,
         sizesTable,
-        quantities,
         handleQuantityChange,
         isSignedIn
     } = talonProps;
@@ -143,43 +141,7 @@ const ProductFullDetail = props => {
         }
     }
 
-    // const customAttributesDetails = useMemo(() => {
-    //     const list = [];
-    //     const pagebuilder = [];
-    //     const skuAttribute = {
-    //         attribute_metadata: {
-    //             uid: 'attribute_sku',
-    //             used_in_components: ['PRODUCT_DETAILS_PAGE'],
-    //             ui_input: {
-    //                 ui_input_type: 'TEXT'
-    //             },
-    //             label: formatMessage({
-    //                 id: 'global.sku',
-    //                 defaultMessage: 'SKU'
-    //             })
-    //         },
-    //         entered_attribute_value: {
-    //             value: productDetails.sku
-    //         }
-    //     };
-    //     if (Array.isArray(customAttributes)) {
-    //         customAttributes.forEach(customAttribute => {
-    //             if (
-    //                 customAttribute.attribute_metadata.ui_input
-    //                     .ui_input_type === 'PAGEBUILDER'
-    //             ) {
-    //                 pagebuilder.push(customAttribute);
-    //             } else {
-    //                 list.push(customAttribute);
-    //             }
-    //         });
-    //     }
-    //     list.unshift(skuAttribute);
-    //     return {
-    //         list: list,
-    //         pagebuilder: pagebuilder
-    //     };
-    // }, [customAttributes, productDetails.sku, formatMessage]);
+    
 
     const cartCallToActionText =
         !isEverythingOutOfStock || !isOutOfStock ? (
@@ -234,15 +196,7 @@ const ProductFullDetail = props => {
         <RichContent html={productDetails.shortDescription.html} />
     ) : null;
 
-    // const pageBuilderAttributes = customAttributesDetails.pagebuilder.length ? (
-    //     <section className={classes.detailsPageBuilder}>
-    //         <CustomAttributes
-    //             classes={{ list: classes.detailsPageBuilderList }}
-    //             customAttributes={customAttributesDetails.pagebuilder}
-    //             showLabels={false}
-    //         />
-    //     </section>
-    // ) : null;
+
 
    
 
@@ -343,22 +297,7 @@ const ProductFullDetail = props => {
                                         </div>
 }
 
-                        {/* <section className={classes.quantity}>
-                            <span
-                                data-cy="ProductFullDetail-quantityTitle"
-                                className={classes.quantityTitle}
-                            >
-                                <FormattedMessage
-                                    id={'global.quantity'}
-                                    defaultMessage={'Quantity'}
-                                />
-                            </span>
-                            <QuantityStepper
-                                classes={{ root: classes.quantityRoot }}
-                                min={1}
-                                message={errors.get('quantity')}
-                            />
-                        </section> */}
+                       
                         <section className={classes.actions}>
                             {cartActionContent}
                             <Suspense fallback={null}>
@@ -387,14 +326,16 @@ const ProductFullDetail = props => {
                                 defaultMessage={'Details'}
                             />
                         </span>
-                        {/* <CustomAttributes
-                        customAttributes={customAttributesDetails.list}
-                    /> */}
+                       
                     </section>
+                    
                     </div>
+                    
                    
-                    {/* {pageBuilderAttributes} */}
+                  
                 </Form>
+                 <section ><ComparableStyles isSignedIn={isSignedIn}/></section>
+                      <section ><CompanionStyles isSignedIn={isSignedIn}/></section>
             </div>
         </Fragment>
     );

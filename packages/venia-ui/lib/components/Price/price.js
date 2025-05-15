@@ -16,7 +16,7 @@ import patches from '@magento/peregrine/lib/util/intlPatches';
 
 const Price = props => {
     const { locale } = useIntl();
-    const { value, currencyCode, classes } = props;
+    const { value, currencyCode, classes,isSignedIn } = props;
 
     const parts = patches.toParts.call(
         new Intl.NumberFormat(locale, {
@@ -32,12 +32,12 @@ const Price = props => {
 
         return (
             <span key={key} className={partClass}>
-                {part.value}
+                 {part.value}
             </span>
         );
     });
 
-    return <Fragment>{children}</Fragment>;
+    return <Fragment>{isSignedIn?children:"$0.00"}</Fragment>;
 };
 
 Price.propTypes = {

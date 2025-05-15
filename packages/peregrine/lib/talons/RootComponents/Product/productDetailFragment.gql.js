@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
- 
+
 export const ProductDetailsFragment = gql`
     fragment ProductDetailsFragment on ProductInterface {
         __typename
@@ -53,25 +53,24 @@ export const ProductDetailsFragment = gql`
         }
         stock_status
         url_key
-        custom_attributesV2(filters: {used_in_product_listing: true}) {
-                items
-                {
-                    code
-                    ... on AttributeValue {
+        custom_attributesV2(filters: { used_in_product_listing: true }) {
+            items {
+                code
+                ... on AttributeValue {
+                    value
+                }
+                ... on AttributeSelectedOptions {
+                    selected_options {
+                        label
                         value
                     }
-                    ... on AttributeSelectedOptions {
-                        selected_options {
-                            label
-                            value
-                        }
-                    }
-                },
-                errors {
-                    type
-                    message
                 }
             }
+            errors {
+                type
+                message
+            }
+        }
         ... on ConfigurableProduct {
             # eslint-disable-next-line @graphql-eslint/require-id-when-available
             configurable_options {
@@ -133,25 +132,26 @@ export const ProductDetailsFragment = gql`
                             }
                         }
                     }
-                    custom_attributesV2(filters: {used_in_product_listing: true}) {
-                items
-                {
-                    code
-                    ... on AttributeValue {
-                        value
-                    }
-                    ... on AttributeSelectedOptions {
-                        selected_options {
-                            label
-                            value
+                    custom_attributesV2(
+                        filters: { used_in_product_listing: true }
+                    ) {
+                        items {
+                            code
+                            ... on AttributeValue {
+                                value
+                            }
+                            ... on AttributeSelectedOptions {
+                                selected_options {
+                                    label
+                                    value
+                                }
+                            }
+                        }
+                        errors {
+                            type
+                            message
                         }
                     }
-                },
-                errors {
-                    type
-                    message
-                }
-            }
                 }
             }
         }
