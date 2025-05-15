@@ -1,12 +1,13 @@
 .root {
     composes: px-0 from global;
-    composes: py-xs from global;
+    /* composes: py-xs from global; */
 
-    composes: lg_grid from global;
-    composes: lg_grid-flow-row from global;
+    composes: lg_flex from global;
+    /* composes: lg_grid-flow-row from global; */
     composes: lg_items-start from global;
     composes: lg_px-xs from global;
     composes: lg_py-md from global;
+    composes: gap-8 from global;
 }
 
 @media screen(lg) {
@@ -35,7 +36,7 @@
     composes: border-b from global;
     composes: border-l-0 from global;
     composes: my-0 from global;
-    composes: mx-sm from global;
+    composes: mx-0 from global;
     composes: px-0 from global;
     composes: py-xs from global;
 }
@@ -52,19 +53,32 @@
 .title {
     composes: section;
     composes: gap-2 from global;
-    composes: grid from global;
-    composes: items-center from global;
+    composes: flex from global;
+    composes: items-start from global;
+    composes: w-full from global;
+    composes: flex-col from global;
     composes: leading-normal from global;
-    @apply py-xs;
+    composes: !mx-0 from global;
+    /* @apply py-xs; */
     grid-area: title;
 }
 
 .productName {
     composes: font-semibold from global;
     composes: text-colorDefault from global;
-
     composes: lg_font-normal from global;
-    composes: lg_text-xl from global;
+    composes: lg_text-2xl from global;
+    /* composes: !text-[38px] from global;  */
+    composes: !font-avenirbold from global; 
+    composes: text-white from global;
+    composes: bg-primary from global; 
+    composes: flex from global; 
+    composes: gap-5 from global; 
+    composes: items-center from global; 
+    composes: w-full from global;
+    composes: px-5 from global;
+    composes: py-1 from global;
+
 }
 
 .productPrice {
@@ -76,17 +90,19 @@
     grid-area: images;
     grid-column: 1 / 2;
     grid-row: 1 / fold;
-    composes: max-w-[640px] from global;
+    composes: max-w-[500px] from global;
     composes: mx-auto from global;
     composes: my-0 from global;
     composes: px-0 from global;
     composes: lg_m-0 from global;
     composes: lg_px-0 from global;
     composes: lg_py-sm from global;
+    composes: w-full from global;
 }
 
 .options {
     grid-area: options;
+    composes: px-0 from global;
 }
 
 .formErrors {
@@ -107,10 +123,11 @@
     composes: gap-y-sm from global;
     composes: grid from global;
     composes: items-center from global;
-    composes: justify-items-center from global;
+    composes: justify-start from global;
     composes: section;
     grid-area: cart;
-
+    composes: px-0 from global;
+    composes: !mx-0 from global;
     composes: lg_border-b-0 from global;
 }
 
@@ -198,4 +215,11 @@
 }
 .actButton {
     composes: mt-sm from global;
+}
+.pdpContainer{
+    composes: w-full from global;
+    composes: mx-auto from global;
+}
+.productFullInformationBlock{
+    @apply bg-white rounded-r-[10px] col-span-2;
 }

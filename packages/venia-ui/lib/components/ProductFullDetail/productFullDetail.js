@@ -202,7 +202,7 @@ const ProductFullDetail = props => {
 
     return (
         <Fragment>
-            <div class="pdp-container">
+            <div class={classes.pdpContainer}>
                 {breadcrumbs}
                 <Form
                     className={classes.root}
@@ -212,15 +212,15 @@ const ProductFullDetail = props => {
                     <section className={classes.imageCarousel}>
                         <Carousel images={mediaGalleryEntries} />
                     </section>
-                    <div className="productFullInformation-block">
+                    <div className={classes.productFullInformationBlock}>
                         <section className={classes.title}>
                             <h1
                                 aria-live="polite"
                                 className={classes.productName}
                                 data-cy="ProductFullDetail-productName"
                             >
+                                <span>{product.sku} - </span>
                                 <span>{productDetails.name}</span>
-                                <div className="sku-value">{product.sku}</div>
                             </h1>
                             <p
                                 data-cy="ProductFullDetail-productPrice"

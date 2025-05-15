@@ -146,47 +146,6 @@ ol li {
 .item-price-H2J {
     @apply text-center text-[24px] text-[#000000] font-semibold mt-1;
 }
-/* .category-headerButtons-KKw {
-    @apply flex gap-4;
-} */
-/* .filterModalOpenButton-filterButton--Vx {
-    @apply !flex !rounded-[12px] !outline-none border border-[#BFC0BF] items-center;
-} */
-/* .filterModalOpenButton-filterButton--Vx .image-root-rpl {
-    @apply h-[16px];
-} */
-/*********Filters*********/
-/* .filterModal-header-agI h2 {
-    @apply font-bold text-[22px];
-} */
-/* .filterModal-header-agI button {
-    @apply outline-none;
-} */
-
-/* .filterModal-blocks-f6c .filterBlock-root-JGM {
-    @apply !border-t !border-[#e1e1e1] relative;
-} */
-/* .filterModal-blocks-f6c .filterBlock-root-JGM .filterBlock-header-w8l {
-    @apply text-[18px] font-semibold;
-} */
-/* .filterList-showMoreLessButton-9XU {
-    @apply text-[#01A0BE];
-} */
-/* .checkbox-icon-WcA svg {
-    @apply !stroke-[#003E6B];
-} */
-/* .currentFilters-root-NWY .currentFilters-item-ARp .currentFilter-root-eTO {
-    @apply bg-white text-[#003E6B] border border-[#003E6B] rounded-[20px] text-[14px] py-1 px-3;
-} */
-/* .currentFilters-root-NWY .currentFilters-item-ARp .trigger-root-Uef svg {
-    @apply !stroke-[#003E6B];
-} */
-/* .filterList-items-A2A > div > div > div {
-    @apply mb-[20px] !px-1;
-} */
-/* .filterList-items-A2A .checkbox-root-yYj {
-    @apply text-[#666] px-1;
-} */
 .linkButton-root-Bk1 {
     @apply text-[#01A0BE];
 }
@@ -199,30 +158,21 @@ ol li {
 .multi-slide-input-container {
     @apply !w-full;
 }
-/* .rangeSlider-thumbright-wt- {
-    @apply w-full right-[-4px];
-} */
-/* .rangeSlider-rangeslider-s2D {
-    @apply !bg-[#003E6B];
-} */
-/* .rangeSlider-thumb-kv7::-moz-range-thumb {
-    @apply !bg-[#01A0BE] !border-[#01A0BE] !w-[18px] !h-[18px];
-} */
 
 .main-page-dhh.max-w-site {
     @apply !max-w-full mx-auto -sm_px-[15px] md_px-[20px] max_px-10;
 }
 
 /********PDP Page***********/
-.productFullDetail-root-PD6 {
+/* .productFullDetail-root-PD6 {
     @apply !flex gap-10;
-}
-.pdp-container {
+} */
+/* .pdp-container {
     @apply w-full mx-auto py-[20px];
-}
-.productFullInformation-block {
+} */
+/* .productFullInformation-block {
     @apply bg-white rounded-r-[10px] py-[20px] pb-[30px] col-span-2;
-}
+} */
 .carousel-root-TMr {
     @apply !flex flex-col;
 }
@@ -247,33 +197,33 @@ ol li {
 .carousel-thumbnailList-vAo .thumbnail-root-kw8 .image-container-k-M img {
     @apply max-h-full w-auto max-w-full mix-blend-multiply;
 }
-.productFullDetail-title-tUS {
+/* .productFullDetail-title-tUS {
     @apply mx-0 pl-[40px] w-full flex-col flex items-start;
-}
-.productFullDetail-productName-EcX {
+} */
+/* .productFullDetail-productName-EcX {
     @apply !text-[38px] !font-bold text-[#111111] flex gap-5 items-center w-full;
-}
-.productFullDetail-productName-EcX .sku-value {
+} */
+/* .productFullDetail-productName-EcX .sku-value {
     @apply px-[15px] h-[34px] bg-[#EDF4D3] border border-[#57AC49] rounded-[6px] !text-[18px] !font-medium flex items-center text-[#212121];
-}
-.productFullDetail-productPrice-KHD {
+} */
+/* .productFullDetail-productPrice-KHD {
     @apply text-[24px] text-[#000000] font-medium;
-}
-.productFullDetail-productPrice-KHD span {
+} */
+/* .productFullDetail-productPrice-KHD span {
     @apply font-bold;
-}
-.option-root-pry {
+} */
+/* .option-root-pry {
     @apply mx-0 pl-[40px];
-}
+} */
 .option-selection-tLH {
     @apply mt-0 mb-4;
 }
-.option-root-pry .option-title-bCY {
+/* .option-root-pry .option-title-bCY {
     @apply hidden;
-}
-.option-selection-tLH dt {
+} */
+/* .option-selection-tLH dt {
     @apply indent-[-1000px] overflow-hidden h-[20px] flex;
-}
+} */
 .option-selection-tLH dt:before {
     @apply content-[attr(data-label)] text-[18px] font-medium text-[#000000] !indent-0;
 }
@@ -283,12 +233,12 @@ ol li {
 .tileList-root-j66 {
     @apply gap-1;
 }
-.productFullDetail-options-Vy7 .option-root-pry {
+/* .productFullDetail-options-Vy7 .option-root-pry {
     @apply border-none;
-}
-.productFullDetail-actions-6gY {
+} */
+/* .productFullDetail-actions-6gY {
     @apply flex !border-t-0 p-[40px] !mx-0;
-}
+} */
 .productFullDetail-quantity-wLh {
     @apply px-[40px] mx-0 border-b-0;
 }
