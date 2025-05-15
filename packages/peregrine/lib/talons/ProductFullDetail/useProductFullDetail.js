@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import { useMutation, useQuery } from '@apollo/client';
 import { useCartContext } from '@magento/peregrine/lib/context/cart';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
-
+import { generateUrl } from '@magento/peregrine/lib/util/imageUtils';
 import { appendOptionsToPayload } from '@magento/peregrine/lib/util/appendOptionsToPayload';
 import { findMatchingVariant } from '@magento/peregrine/lib/util/findMatchingProductVariant';
 import { isProductConfigurable } from '@magento/peregrine/lib/util/isProductConfigurable';
@@ -18,7 +18,7 @@ const INITIAL_OPTION_CODES = new Map();
 const INITIAL_OPTION_SELECTIONS = new Map();
 const OUT_OF_STOCK_CODE = 'OUT_OF_STOCK';
 const IN_STOCK_CODE = 'IN_STOCK';
-
+const SWATCH_WIDTH = 130;
 const deriveOptionCodesFromProduct = product => {
     // If this is a simple product it has no option codes.
     if (!isProductConfigurable(product)) {
@@ -868,9 +868,37 @@ export const useProductFullDetail = props => {
           return { error: "Size option not found in product data" };
         }
         
+        let finalStyle = undefined;
+       
+            if (selectedColor) {
+                const { thumbnail, value } = selectedColor?.swatch_data;
+       
+                let swatchValue = '';
+       
+                if (thumbnail) {
+                    const imagePath = generateUrl(thumbnail, 'image-swatch')(
+                        SWATCH_WIDTH
+                    );
+       
+                    swatchValue = `url("${imagePath}")`;
+                } else {
+                    swatchValue = value;
+                }
+       
+                // We really want to avoid specifying presentation within JS.
+                // Swatches are unusual in that their color is data, not presentation,
+                // but applying color *is* presentational.
+                // So we merely provide the color data here, and let the CSS decide
+                // how to use that color (e.g., background, border).
+                finalStyle = Object.assign({}, undefined, {
+                    '--venia-swatch-bg': swatchValue
+                });
+            }
+
         // Create result object with color information
         const result = {
             color: selectedColor,
+            swatchTile:finalStyle,
           sizes: {}
         };
         

@@ -59,6 +59,8 @@
     composes: flex-col from global;
     composes: leading-normal from global;
     composes: !mx-0 from global;
+    composes: !py-0 from global;
+    composes: !border-none from global;
     /* @apply py-xs; */
     grid-area: title;
 }
@@ -96,13 +98,23 @@
     composes: px-0 from global;
     composes: lg_m-0 from global;
     composes: lg_px-0 from global;
-    composes: lg_py-sm from global;
+    composes: lg_py-0 from global;
     composes: w-full from global;
 }
 
 .options {
     grid-area: options;
     composes: px-0 from global;
+}
+.options :global(.swatchList-root-SNJ){
+    @apply flex gap-4 flex-wrap my-5
+}
+.options :global(.swatch-root--kM){
+    @apply w-[130px] min-h-[80px] relative
+}
+.options :global(.swatch-root--kM:before){
+    @apply content-[attr(title)] w-full h-full p-3 text-white absolute left-0 top-0 text-left pr-10;
+    text-shadow:0px 0px 6px rgba(0, 0, 0, 0.5); 
 }
 
 .formErrors {
@@ -136,22 +148,39 @@
     grid-column: 1 / span 1;
     grid-row: fold / span 1;
 
-    composes: lg_border-t from global;
+    composes: lg_border-none from global;
     composes: lg_m-0 from global;
-    composes: lg_pl-sm from global;
-    composes: lg_pr-sm from global;
+    composes: lg_pl-0 from global;
+    composes: lg_pr-0 from global;
     composes: lg_self-stretch from global;
 }
 
 .descriptionTitle {
     composes: sectionTitle;
+    composes: border-2 from global;
+    composes: border-gray-300 from global;
+    composes: rounded-t-lg from global;
+    composes: !border-b-0 from global;
+    composes: w-[150px] from global;
+    composes: px-4 from global;
+    composes: py-2 from global;
+    composes: mb-[-2.5px] from global;
+    composes: bg-white from global;
+    composes: z-10 from global;
+    composes: relative from global;
+    composes: justify-center from global;
+    composes: text-lg from global;
+    composes: font-bold from global;
 }
 
+.description :global(.richContent-root-ggm){
+    @apply w-full border-2 border-gray-300 rounded-b-lg p-5 relative z-0 ;
+    border-top-right-radius: 10px; 
+}
 .details {
     composes: section;
     grid-column: 2 / span 1;
     grid-row: fold / span 1;
-
     composes: lg_border-t from global;
     composes: lg_m-0 from global;
     composes: lg_pl-sm from global;
@@ -214,7 +243,7 @@
     composes: w-full from global;
 }
 .actButton {
-    composes: mt-sm from global;
+    composes: mt-0 from global;
 }
 .pdpContainer{
     composes: w-full from global;
@@ -222,4 +251,49 @@
 }
 .productFullInformationBlock{
     @apply bg-white rounded-r-[10px] col-span-2;
+}
+
+.productGridTable{
+ @apply flex gap-0 items-start;
+}
+.productGridTable :global(ul) {
+    @apply flex flex-col w-full;
+}
+.productGridTable :global(ul:first-child) {
+    @apply max-w-[150px] min-w-[150px];
+}
+.productGridTable :global(ul:first-child li:nth-child(2)){
+    @apply !h-auto px-0 py-[12.5px]
+}
+.productGridTable :global(ul:nth-child(2)) {
+    @apply max-w-[180px] min-w-[180px] justify-start;
+}
+.productGridTable :global(ul:nth-child(2) li){
+    @apply justify-start
+}
+.productGridTable :global(ul:first-child li) {
+    @apply justify-start;
+}
+.productGridTable :global(ul li:first-child){
+    @apply font-semibold border-b-2 border-gray-300; 
+}
+.productGridTable :global(ul li:last-child) {
+    @apply border-t-2 border-gray-300; 
+}
+.productGridTable :global(ul li) {
+    @apply  px-3 h-[35px] bg-white flex items-center justify-center !text-[18px] text-[#171A1F];
+}
+.productGridTable :global(ul li input){
+    @apply w-full text-center border-none appearance-none h-[35px];
+    appearance: textfield;
+}
+.productGridTable :global(ul li input:focus){
+    @apply shadow-none outline-none
+}
+.productGridTable :global(ul li .swatch-root_selected-g8q){
+    @apply w-[130px] h-[80px] relative
+}
+.productGridTable :global(ul li .swatch-root_selected-g8q:before){
+    @apply content-[attr(title)] w-full h-full p-3 text-white absolute left-0 top-0 text-left pr-10 leading-[18px];
+    text-shadow:0px 0px 6px rgba(0, 0, 0, 0.5);
 }

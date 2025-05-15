@@ -22,11 +22,19 @@
     composes: leading-normal from global;
     composes: mt-0 from global;
     composes: text-colorDefault from global;
-    composes: indent-[-1000px] from global;
+    
     composes: overflow-hidden from global;
-    composes: h-[20px] from global; 
+    composes: h-[25px] from global; 
+}
+.selection :global(dd){
+    @apply text-lg;
 }
 
 .selectionLabel {
     composes: mr-xs from global;
+    composes: indent-[-1000px] from global;
+    composes: flex from global;
+}
+.selectionLabel:before{
+    @apply !content-["Color:"] text-lg font-bold !indent-0;
 }

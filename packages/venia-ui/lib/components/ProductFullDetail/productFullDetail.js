@@ -242,21 +242,48 @@ const ProductFullDetail = props => {
                         />
                         <section className={classes.options}>{options}</section>
 
-                        {isSignedIn &&
+                        {
                             sizesTable &&
                             <div
-                                            className="product-grid-table "
+                                            className={classes.productGridTable}
                                            
                                         >
                                             {/* Header row */}
                                             <ul>
                                                 <li>
-                                                    {productDetails.sku} -{' '}
-                                                    {sizesTable?.color?.label}
+                                                    Color
                                                 </li>
-                                                <li>PRICE</li>
-                                                <li>INVENTORY</li>
-                                                <li>ORDER QUANTITY</li>
+                                                <li>
+                                                    <button
+                                                        className='swatch-root_selected-g8q'
+                                                        style={sizesTable?.swatchTile}
+                                                        title={sizesTable?.color?.label}
+                                                        type="button"
+                                                        data-cy="Swatch-root"
+                                                    
+                                                        aria-label={sizesTable?.color?.label}
+                                                    >
+                                                        {/* <span>{sizesTable?.color?.label}</span> */}
+                                                    
+                                                    </button>
+{/* 
+                                                    <div className={classes.SelectSwatchImage}>
+ 
+                                                    </div> */}
+                                                </li>
+                                                <li>
+
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li>
+                                                    {/* {productDetails.sku} -{' '}
+                                                    {sizesTable?.color?.label} */}
+                                                </li>
+                                                <li>Qty Case</li>
+                                                <li>Price</li>
+                                                <li>Inventory</li>
+                                                <li>0</li>
                                             </ul>
 
                                             {/* Product rows */}
@@ -265,19 +292,12 @@ const ProductFullDetail = props => {
                                                     sizesTable?.sizes || {}
                                                 ).map(([size, details]) => (
                                                     <ul
-                                                        className="space-y-4"
                                                         key={size}
                                                     >
-                                                        <li className="border p-4 rounded-lg shadow-md">
+                                                        <li>
                                                             {size}
                                                         </li>
-                                                        <li className="border p-4 rounded-lg shadow-md">
-                                                            {details.price}
-                                                        </li>
-                                                        <li className="border p-4 rounded-lg shadow-md">
-                                                            {details.inventory}
-                                                        </li>
-                                                        <li className="border p-4 rounded-lg shadow-md">
+                                                        <li>
                                                             <input
                                                                 type="number"
                                                                 min="0"
@@ -289,9 +309,17 @@ const ProductFullDetail = props => {
                                                                             .value
                                                                     )
                                                                 }
+                                                                placeholder='0'
                                                                 className="w-16 p-1 border rounded"
                                                             />
                                                         </li>
+                                                        <li>
+                                                            {details.price}
+                                                        </li>
+                                                        <li>
+                                                            {details.inventory}
+                                                        </li>
+                                                        <li>0</li>
                                                     </ul>
                                                 ))}
                                         </div>
