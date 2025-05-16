@@ -193,6 +193,10 @@ export const useCategoryContent = props => {
         categoryData && categoryData.categories.items.length
             ? categoryData.categories.items[0].description
             : null;
+    const categoryBannerImage =
+        categoryData && categoryData.categories.items.length
+            ? categoryData.categories.items[0].image
+            : null;        
     const availableSortMethods = sortData
         ? sortData?.products?.sort_fields?.options
         : null;
@@ -220,6 +224,7 @@ export const useCategoryContent = props => {
         setFilterOptions,
         items,
         totalCount,
-        totalPagesFromData
+        totalPagesFromData,
+        categoryBannerImage
     };
 };

@@ -128,6 +128,7 @@ const GalleryItem = props => {
 
     return (
         <div data-cy="GalleryItem-root" className={classes.root} ref={itemRef}>
+            <div className='sku-value'>{item.sku}</div>
             <Link
                 aria-label={name}
                 onClick={handleLinkClick}
@@ -149,10 +150,6 @@ const GalleryItem = props => {
                 />
                 {ratingAverage}
             </Link>
-            <div className={classes.productInfo}>
-                <span>{item.sku}</span>
-                <span>{sizeRange}</span>
-            </div>
             <Link
                 onClick={handleLinkClick}
                 to={productLink}
@@ -161,7 +158,11 @@ const GalleryItem = props => {
             >
                 <span>{name}</span>
             </Link>
-            {/* <section className={classes.options}>{options}</section> */}
+            <section className={classes.options}>{options}</section>
+            <div className={classes.productInfo}>
+                <span>$0.00</span>
+                <span>{sizeRange}</span>
+            </div>
 
             {/* <div data-cy="GalleryItem-price" className={classes.price}>
                 <Price value={priceSourceValue} currencyCode={currencyCode} />

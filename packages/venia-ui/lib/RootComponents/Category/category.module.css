@@ -21,10 +21,10 @@
 .categoryTitle {
     composes: font-bold from global;
     composes: leading-snug from global;
-    composes: pb-[30px] from global;
+    composes: pb-[15px] from global;
     composes: text-colorDefault from global;
     composes: text-left from global;
-    composes: text-[32px] from global;
+    composes: text-[30px] from global;
 }
 
 .heading {
@@ -84,14 +84,51 @@
 
     composes: lg_flex from global;
     /* composes: flex-col  from global; */
-    composes: mt-[-78px] from global;
-    composes: gap-5 from global;
+    /* composes: mt-[-78px] from global; */
+    composes: gap-6 from global;
 }
 
 .sidebar {
     composes: -lg_!hidden from global;
     composes: lg_flex from global;
     composes: lg_self-start from global;
-    composes: lg_pt-16 from global;
+    /* composes: lg_pt-16 from global; */
     composes: lg_w-filterSidebarWidth from global;
+}
+.categoryPromoBanner{
+    composes: w-full from global;
+    composes: mb-7 from global;
+    composes: flex from global;
+    composes: gap-6 from global;
+    composes: -md_flex-wrap from global;
+}
+.categoryPromoBanner :global(> div){
+    @apply !relative w-full
+}
+/* .categoryPromoBanner :global(> div .cmsBlock-root-dCh){
+    @apply absolute w-full h-full left-0 top-0
+} */
+.categoryPromoBanner :global(> div:first-child){
+    @apply min-w-[60%];
+}
+.categoryPromoBanner :global(.row-contained-SFt){
+    @apply !mx-0
+}
+.categoryPromoBanner :global(.cmsBlock-root-dCh){
+    @apply !mx-0 !w-full
+}
+.categoryPromoBanner :global(figure picture){
+    @apply !my-0 w-full
+}
+.categoryPromoBanner :global(figure picture img){
+    @apply w-full !my-0
+}
+.categoryPromoBanner :global(.columnLine-root-MOz){
+    @apply w-full flex !gap-5
+}
+.categoryPromoBanner :global(.promotion-banner){
+    @apply w-full h-full bg-primary flex items-center justify-center text-white absolute top-0 left-0 -md_relative -md_h-[300px]
+}
+.categoryPromoBanner :global(.promotion-banner h2){
+    @apply capitalize text-2xl
 }

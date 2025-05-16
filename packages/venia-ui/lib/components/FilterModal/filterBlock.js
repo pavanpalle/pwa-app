@@ -1,7 +1,7 @@
 import React from 'react';
 import { arrayOf, shape, string, func, bool } from 'prop-types';
 import { useIntl } from 'react-intl';
-import { ChevronDown as ArrowDown, ChevronUp as ArrowUp } from 'react-feather';
+import { ChevronDown as ArrowDown, ChevronUp as ArrowUp, Plus, Minus } from 'react-feather';
 import { Form } from 'informed';
 
 import { useFilterBlock } from '@magento/peregrine/lib/talons/FilterModal';
@@ -32,7 +32,7 @@ const FilterBlock = props => {
         group
     });
     const { handleClick, isExpanded } = talonProps;
-    const iconSrc = isExpanded ? ArrowUp : ArrowDown;
+    const iconSrc = isExpanded ? Minus : Plus;
     const classes = useStyle(defaultClasses, props.classes);
 
     const itemAriaLabel = formatMessage(

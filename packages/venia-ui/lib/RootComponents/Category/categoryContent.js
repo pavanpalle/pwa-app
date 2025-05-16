@@ -23,6 +23,9 @@ import SortedByContainer, {
 import defaultClasses from './category.module.css';
 import NoProductsFound from './NoProductsFound';
 import categoryBg from './images/category-bg.png';
+import CmsBlock from '../../components/CmsBlock';
+import Image from '../../components/Image';
+import ResourceImage from '../../components/Image/resourceImage';
 
 const FilterModal = React.lazy(() => import('../../components/FilterModal'));
 const FilterSidebar = React.lazy(() =>
@@ -54,7 +57,8 @@ const CategoryContent = props => {
         setFilterOptions,
         items,
         totalCount,
-        totalPagesFromData
+        totalPagesFromData,
+        categoryBannerImage
     } = talonProps;
 
     const sidebarRef = useRef(null);
@@ -153,7 +157,7 @@ const CategoryContent = props => {
     ]);
 
     const categoryTitle = categoryName ? categoryName : <Shimmer width={5} />;
-
+    // const categoryImage = data?.category?.image;
     return (
         <Fragment>
             <div>
@@ -170,7 +174,15 @@ const CategoryContent = props => {
                     className={classes.root}
                     data-cy="CategoryContent-root"
                 >
-                    <div className={classes.categoryHeader}>
+                    
+                    <div className={classes.contentWrapper}>
+                        <div ref={sidebarRef} className={classes.sidebar}>
+                            <Suspense fallback={<FilterSidebarShimmer />}>
+                                {shouldRenderSidebarContent ? sidebar : null}
+                            </Suspense>
+                        </div>
+                        <div className={classes.categoryContent}>
+                            <div className={classes.categoryHeader}>
                         <h1 aria-live="polite" className={classes.title}>
                             <div
                                 className={classes.categoryTitle}
@@ -179,15 +191,20 @@ const CategoryContent = props => {
                                 <div>{categoryTitle}</div>
                             </div>
                         </h1>
+                         <div className={classes.categoryPromoBanner}>
+                            
+                                <div>{categoryBannerImage ? (
+                                    <ResourceImage
+                                        resource={categoryBannerImage}
+                                        alt={categoryName}
+                                        width={1000}
+                                        height={700}
+                                    />
+                                ) : null}</div>
+                                <div><CmsBlock identifiers="promotion-banner" /></div>
+                             </div>
                         {categoryDescriptionElement}
                     </div>
-                    <div className={classes.contentWrapper}>
-                        <div ref={sidebarRef} className={classes.sidebar}>
-                            <Suspense fallback={<FilterSidebarShimmer />}>
-                                {shouldRenderSidebarContent ? sidebar : null}
-                            </Suspense>
-                        </div>
-                        <div className={classes.categoryContent}>
                             <div className={classes.heading}>
                                 <div
                                     data-cy="CategoryContent-categoryInfo"

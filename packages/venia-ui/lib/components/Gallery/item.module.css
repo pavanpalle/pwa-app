@@ -58,7 +58,7 @@
 }
 
 .name {
-    composes: text-[21px] from global; 
+    composes: text-[16px] from global; 
     composes: leading-[25px] from global;
     composes: max-h-[50px] from global; 
     /* composes: font-semibold from global;  */
@@ -94,12 +94,25 @@
     composes: items-center from global;
     composes: justify-between from global;
     composes: w-full from global;
-    composes: text-[20px] from global;
+    composes: text-[19px] from global;
     composes: text-black from global;
     composes: mt-2 from global;
     composes: w-full from global;
-    composes: -sm_text-[16px] from global; 
+    composes: -sm_text-[16px] from global;
+    composes: text-black from global; 
 }
-.productInfo :global(span:first-child){
+/* .productInfo :global(span:first-child){
     @apply !font-bold !font-medium;
+} */
+.root :global(.swatchList-root-SNJ){
+    @apply w-full !gap-2 justify-start !flex
+}
+.root :global(.swatchList-root-SNJ button){
+    @apply !w-[20px] !min-w-[20px] !h-[20px]
+}
+.root :global(.swatchList-root-SNJ button.swatch-root_selected-g8q .swatch-checked-lTD){
+    @apply !border-primary
+}
+.root :global(.sku-value){
+    @apply text-[18px] font-bold
 }

@@ -297,3 +297,11 @@
     @apply content-[attr(title)] w-full h-full p-3 text-white absolute left-0 top-0 text-left pr-10 leading-[18px];
     text-shadow:0px 0px 6px rgba(0, 0, 0, 0.5);
 }
+.compareStyles{
+    composes: border-t-[15px] from global;
+    composes: border-primary from global;
+       width:calc(100% + 5rem);
+    composes: ml-[-2.5rem] from global;
+    composes: px-8 from global;
+    composes: py-5 from global;
+}

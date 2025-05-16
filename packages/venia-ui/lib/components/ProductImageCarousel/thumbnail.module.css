@@ -5,9 +5,9 @@
     composes: border from global;
     composes: border-solid from global;
     composes: border-strong from global;
-    composes: h-[0.875rem] from global;
+    composes: !h-[150px] from global;
     composes: rounded-full from global;
-    composes: w-[0.875rem] from global;
+    composes: !w-[120px] from global;
     box-shadow: 0 0 0 1px #ffffff;
 
     composes: lg_border-0 from global;

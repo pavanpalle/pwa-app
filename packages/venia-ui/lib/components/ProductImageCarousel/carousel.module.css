@@ -1,8 +1,9 @@
 .root {
     composes: lg_gap-sm from global;
-    composes: grid from global;
-    composes: grid-cols-auto from global;
-    composes: grid-rows-auto from global;
+    composes: flex from global;
+    /* composes: grid-cols-1 from global;
+    composes: grid-rows-auto from global; */
+    composes: flex-col from global;
     grid-template-areas:
         'main'
         'thumbs';
@@ -20,12 +21,17 @@
     composes: grid from global;
     grid-area: main;
     grid-template-columns: repeat(3, 1fr);
+    
 }
 
 .imageContainer {
     grid-area: 1 / 1 / 2 / 4;
+    composes: bg-[#EBEBEB] from global; 
+    composes: max-h-[560px] from global;
 }
-
+.imageContainer :global(img){
+    @apply mix-blend-multiply;
+}
 .currentImage {
     composes: block from global;
     composes: h-full from global;
@@ -81,10 +87,10 @@
 .thumbnailList {
     composes: content-stretch from global;
     composes: gap-xs from global;
-    composes: grid from global;
-    composes: grid-cols-carouselThumbnailList from global;
-    composes: grid-flow-col from global;
-    composes: justify-center from global;
+    composes: flex from global;
+    /* composes: grid-cols-carouselThumbnailList from global;
+    composes: grid-flow-col from global; */
+    composes: justify-start from global;
     composes: mt-xs from global;
     composes: z-foreground from global;
 

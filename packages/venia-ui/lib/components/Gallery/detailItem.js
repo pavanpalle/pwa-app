@@ -130,7 +130,7 @@ const DetailGalleryItem = props => {
     
     return (
         <div data-cy="GalleryItem-root" className={classes.root} ref={itemRef}>
-             <div className={classes.productInfo}>
+             <div className="sku-value">
                 <span>{item.sku}</span>
                
             </div>

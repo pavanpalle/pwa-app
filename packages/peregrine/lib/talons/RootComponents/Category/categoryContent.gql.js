@@ -26,6 +26,7 @@ export const GET_CATEGORY_CONTENT = gql`
                 name
                 description
                 url_key
+                image
                 url_path
             }
         }
