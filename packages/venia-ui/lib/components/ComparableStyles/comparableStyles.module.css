@@ -9,6 +9,7 @@
     composes: mx-sm from global;
     composes: px-0 from global;
     composes: py-xs from global;
+    composes: -lg_!mx-0 from global;
 }
 
 .sectionTitle {
@@ -28,6 +29,8 @@
     composes: leading-normal from global;
     @apply py-xs;
     grid-area: title;
+    composes: !mx-0 from global;
+    composes: !py-0 from global;
 }
 
 
@@ -42,10 +45,28 @@
 .galleryItems {
     composes: items from '~@magento/venia-ui/lib/components/Gallery/gallery.module.css';
     grid-template-columns: repeat(5, 1fr);
+    composes: gap-6 from global;
+    composes: -lg_!gap-4 from global;
 }
 .galleryItems :global(.item-price-H2J){
     @apply !font-normal !text-[20px];
 }
 .galleryItems :global(.swatchList-root-SNJ button){
     @apply !w-[55px] !h-[35px]
+}
+
+@media screen(-sm) {
+    .galleryItems {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media screen(md) {
+    .galleryItems {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+@media screen(2xl) {
+    .galleryItems {
+        grid-template-columns: repeat(6, 1fr);
+    }
 }

@@ -18,7 +18,7 @@
     composes: -xl_px-[10px] from global;
     composes: justify-center from global;
     composes: w-full from global;
-    @apply hover_bg-white;
+    @apply hover_bg-gray-200;
     @apply hover_text-primary;
     @apply hover_!no-underline;
 }
@@ -48,7 +48,7 @@
     @apply no-underline;
 }
 .megaMenuItem:hover{
-    @apply hover_bg-white;
+    @apply hover_bg-gray-200;
 }
 .megaMenuItem:hover :global(a){
     @apply text-primary;

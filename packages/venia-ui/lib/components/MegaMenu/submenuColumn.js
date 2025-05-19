@@ -47,7 +47,10 @@ const SubmenuColumn = props => {
                         className={isActive ? classes.linkActive : classes.link}
                         data-cy="MegaMenu-SubmenuColumn-link"
                         to={categoryUrl}
-                        onClick={onNavigate}
+                        onClick={() => {
+                            handleCloseSubMenu();
+                            onNavigate();
+                        }}
                     >
                         {name}
                     </Link>
@@ -55,7 +58,7 @@ const SubmenuColumn = props => {
             );
         });
 
-        children = <ul className={classes.submenuChild}>{childrenItems}</ul>;
+        children = <div className={classes.hoverSubMenu}><h3>{category.name}</h3><ul className={classes.submenuChild}>{childrenItems}</ul></div>;
     }
 
     // setting keyboardProps if category does not have any sub-category

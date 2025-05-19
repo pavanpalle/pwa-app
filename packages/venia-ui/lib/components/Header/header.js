@@ -34,15 +34,9 @@ const Header = props => {
         currentStoreName,
         currentStoreLogo,
         isUserSignedIn,
-        location
     } = useHeader();
 
-    const path = location.pathname;
-
-    const showAll =
-        path === '/' || (path !== '/headsweats' && path !== '/recover');
-    const showHeadsweats = path === '/headsweats';
-    const showRecover = path === '/recover';
+    
 
     const classes = useStyle(defaultClasses, props.classes);
     const rootClass = isSearchOpen ? classes.open : classes.open;
@@ -89,7 +83,6 @@ const Header = props => {
                         <NavTrigger />
                     </div>
                     <div className={classes.logosGroup}>
-                        {(showAll ) && (
                             <Link
                                 aria-label={title}
                                 to={resourceUrl('/')}
@@ -103,8 +96,6 @@ const Header = props => {
                                     currentStoreLogo={currentStoreLogo}
                                 />
                             </Link>
-                        )}
-                        {(showAll || showHeadsweats) && (
                             <Link
                                 aria-label={title}
                                 to={resourceUrl('/headsweats')}
@@ -117,8 +108,6 @@ const Header = props => {
                                     alt="Headsweats Logo"
                                 />
                             </Link>
-                        )}
-                        {(showAll || showRecover) && (
                             <Link
                                 aria-label={title}
                                 to={resourceUrl('/recover')}
@@ -131,7 +120,7 @@ const Header = props => {
                                     alt="Recover Logo"
                                 />
                             </Link>
-                        )}
+                       
                     </div>
                     {/* {searchBar} */}
                     {isUserSignedIn ? (

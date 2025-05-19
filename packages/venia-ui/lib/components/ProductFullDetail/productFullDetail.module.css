@@ -305,3 +305,10 @@
     composes: px-8 from global;
     composes: py-5 from global;
 }
+
+@media screen(-lg) {
+    .compareStyles{
+        width:calc(100% + 4rem);
+        composes: ml-[-2rem] from global;
+    }
+}
