@@ -61,8 +61,8 @@ const Pagination = props => {
                             onClick={handleNavForward}
                         >
                             <FormattedMessage
-                                id={'wishlist.loadMore'}
-                                defaultMessage={'Load more'}
+                                id={'pagination.loadMore'}
+                                defaultMessage={'Load More Products'}
                             />
                         </Button>
                     )}

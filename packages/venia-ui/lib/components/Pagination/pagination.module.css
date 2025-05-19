@@ -21,6 +21,12 @@
     @apply min-w-[20rem];
     composes: mx-auto from global;
     composes: my-md from global;
+    composes: !bg-primary from global;
+    composes: !rounded-md from global;
+    composes: !text-white from global;
+    composes: !text-lg from global;
+    composes: !font-bold from global;
+    composes: !capitalize from global;
 }
 .root :global(> button){
     @apply w-[30px] h-[30px] text-[20px] text-[#AAB4B2]
