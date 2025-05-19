@@ -34,7 +34,8 @@ const Category = props => {
         pageControl,
         sortProps,
         pageSize,
-        categoryNotFound
+        categoryNotFound,
+        handleLoadMore
     } = talonProps;
 
     const classes = useStyle(defaultClasses, props.classes);
@@ -70,6 +71,7 @@ const Category = props => {
                 pageControl={pageControl}
                 sortProps={sortProps}
                 pageSize={pageSize}
+                handleLoadMore={handleLoadMore}
             />
         </Fragment>
     );

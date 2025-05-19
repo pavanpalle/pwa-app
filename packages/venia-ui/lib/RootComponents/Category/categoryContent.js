@@ -1,18 +1,20 @@
+import { array, number, shape, string } from 'prop-types';
 import React, { Fragment, Suspense, useMemo, useRef } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { array, number, shape, string } from 'prop-types';
 
 import { useIsInViewport } from '@magento/peregrine/lib/hooks/useIsInViewport';
 import { useCategoryContent } from '@magento/peregrine/lib/talons/RootComponents/Category';
 
 import { useStyle } from '../../classify';
 import Breadcrumbs from '../../components/Breadcrumbs';
+import CmsBlock from '../../components/CmsBlock';
 import FilterModalOpenButton, {
     FilterModalOpenButtonShimmer
 } from '../../components/FilterModalOpenButton';
 import { FilterSidebarShimmer } from '../../components/FilterSidebar';
 import Gallery, { GalleryShimmer } from '../../components/Gallery';
 import { StoreTitle } from '../../components/Head';
+import ResourceImage from '../../components/Image/resourceImage';
 import Pagination from '../../components/Pagination';
 import ProductSort, { ProductSortShimmer } from '../../components/ProductSort';
 import RichContent from '../../components/RichContent';
@@ -22,10 +24,7 @@ import SortedByContainer, {
 } from '../../components/SortedByContainer';
 import defaultClasses from './category.module.css';
 import NoProductsFound from './NoProductsFound';
-import categoryBg from './images/category-bg.png';
-import CmsBlock from '../../components/CmsBlock';
-import Image from '../../components/Image';
-import ResourceImage from '../../components/Image/resourceImage';
+import Button from '../../components/Button';
 
 const FilterModal = React.lazy(() => import('../../components/FilterModal'));
 const FilterSidebar = React.lazy(() =>
@@ -39,7 +38,8 @@ const CategoryContent = props => {
         isLoading,
         pageControl,
         sortProps,
-        pageSize
+        pageSize,
+        handleLoadMore
     } = props;
     const [currentSort] = sortProps;
 
@@ -137,8 +137,11 @@ const CategoryContent = props => {
         );
 
         const pagination = totalPagesFromData ? (
-            <Pagination pageControl={pageControl} />
+            <Pagination pageControl={pageControl} handleLoadMore={handleLoadMore} type="loadMore"/>
         ) : null;
+
+
+         
 
         return (
             <Fragment>
@@ -146,15 +149,7 @@ const CategoryContent = props => {
                 <div className={classes.pagination}>{pagination}</div>
             </Fragment>
         );
-    }, [
-        categoryId,
-        classes.gallery,
-        classes.pagination,
-        isLoading,
-        items,
-        pageControl,
-        totalPagesFromData
-    ]);
+    }, [categoryId, classes, isLoading, items, pageControl, totalPagesFromData,handleLoadMore]);
 
     const categoryTitle = categoryName ? categoryName : <Shimmer width={5} />;
     // const categoryImage = data?.category?.image;

@@ -1,16 +1,15 @@
-import { useEffect, useMemo, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
 import { useLazyQuery, useQuery } from '@apollo/client';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 
-import mergeOperations from '../../../util/shallowMerge';
 import { useAppContext } from '../../../context/app';
 import { usePagination } from '../../../hooks/usePagination';
-import { useScrollTopOnChange } from '../../../hooks/useScrollTopOnChange';
 import { useSort } from '../../../hooks/useSort';
 import {
-    getFiltersFromSearch,
-    getFilterInput
+    getFilterInput,
+    getFiltersFromSearch
 } from '../../../talons/FilterModal/helpers';
+import mergeOperations from '../../../util/shallowMerge';
 
 import DEFAULT_OPERATIONS from './category.gql';
 
@@ -81,9 +80,12 @@ export const useCategory = props => {
         called: categoryCalled,
         loading: categoryLoading,
         error,
-        data
+        data,
+        fetchMore
     } = queryResponse;
     const { search } = useLocation();
+
+    console.log('data', data);
 
     const isBackgroundLoading = !!data && categoryLoading;
 
@@ -115,6 +117,39 @@ export const useCategory = props => {
         return typeMap;
     }, [introspectionData]);
 
+    const handleLoadMore = useCallback(
+        async newFilters => {
+           
+            await fetchMore({
+                variables: {
+                    currentPage: Number(currentPage),
+                    id: id,
+                    filters: newFilters,
+                    pageSize: Number(pageSize),
+                    sort: {
+                        [currentSort.sortAttribute]: currentSort.sortDirection
+                    }
+                },
+                updateQuery: (previousResult, { fetchMoreResult }) => {
+                    if (!fetchMoreResult) return previousResult;
+
+                    return {
+                        ...fetchMoreResult,
+                        products: {
+                            ...fetchMoreResult.products,
+                            items: [
+                                ...previousResult.products.items,
+                                ...fetchMoreResult.products.items
+                            ],
+                            page_info: fetchMoreResult.products.page_info
+                        }
+                    };
+                }
+            });
+        },
+        [currentPage, currentSort, fetchMore, id, pageSize]
+    );
+
     // Run the category query immediately and whenever its variable values change.
     useEffect(() => {
         // Wait until we have the type map to fetch product data.
@@ -134,23 +169,31 @@ export const useCategory = props => {
         // applied filters. Follow-up in PWA-404.
         newFilters['category_uid'] = { eq: id };
 
-        runQuery({
-            variables: {
-                currentPage: Number(currentPage),
-                id: id,
-                filters: newFilters,
-                pageSize: Number(pageSize),
-                sort: { [currentSort.sortAttribute]: currentSort.sortDirection }
-            }
-        });
+        if (Number(currentPage) === 1) {
+            runQuery({
+                variables: {
+                    currentPage: Number(currentPage),
+                    id: id,
+                    filters: newFilters,
+                    pageSize: Number(pageSize),
+                    sort: {
+                        [currentSort.sortAttribute]: currentSort.sortDirection
+                    }
+                }
+            });
+        } else {
+            handleLoadMore(newFilters);
+        }
     }, [
-        currentPage,
         currentSort,
         filterTypeMap,
         id,
         pageSize,
         runQuery,
-        search
+        search,
+        currentPage,
+        fetchMore,
+        handleLoadMore
     ]);
 
     const totalPagesFromData = data
@@ -190,6 +233,7 @@ export const useCategory = props => {
         ) {
             // The search term changed.
             setCurrentPage(1, true);
+
             // And update the ref.
             previousSearch.current = search;
             previousSort.current = currentSort;
@@ -212,7 +256,7 @@ export const useCategory = props => {
         (categoryLoading && !data) ||
         introspectionLoading;
 
-    useScrollTopOnChange(currentPage);
+    // useScrollTopOnChange(currentPage);
 
     return {
         error,
@@ -222,6 +266,7 @@ export const useCategory = props => {
         pageControl,
         sortProps,
         pageSize,
-        categoryNotFound
+        categoryNotFound,
+        handleLoadMore
     };
 };

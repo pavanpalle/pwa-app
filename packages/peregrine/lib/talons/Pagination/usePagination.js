@@ -1,7 +1,12 @@
 import { useCallback, useMemo } from 'react';
 
 export const usePagination = props => {
-    const { currentPage, setPage, totalPages, tileBuffer = 2 } = props;
+    const {
+        currentPage,
+        setPage,
+        totalPages,
+        tileBuffer = 2
+    } = props;
 
     const getLeadTile = useCallback(
         (currentPage, totalPages) => {
@@ -47,6 +52,7 @@ export const usePagination = props => {
     const handleNavForward = useCallback(() => {
         if (currentPage < totalPages) {
             setPage(currentPage + 1);
+           
         }
     }, [currentPage, setPage, totalPages]);
 

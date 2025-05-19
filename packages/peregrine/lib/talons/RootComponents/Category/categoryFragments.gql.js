@@ -147,6 +147,7 @@ export const ProductsFragment = gql`
     }
         page_info {
             total_pages
+            current_page
         }
         total_count
     }

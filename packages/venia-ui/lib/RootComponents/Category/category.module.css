@@ -102,6 +102,16 @@
     composes: gap-6 from global;
     composes: -md_flex-wrap from global;
 }
+
+.loadMore {
+    /* composes: root_lowPriority from '../Button/button.module.css'; */
+
+    @apply block;
+    @apply min-w-[20rem];
+    composes: mx-auto from global;
+    composes: my-md from global;
+}
+
 .categoryPromoBanner :global(> div){
     @apply !relative w-full
 }

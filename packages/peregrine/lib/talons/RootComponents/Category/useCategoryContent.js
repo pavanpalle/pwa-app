@@ -67,6 +67,7 @@ export const useCategoryContent = props => {
     };
 
     const [filterOptions, setFilterOptions] = useState();
+    
 
     const selectedFilters = useMemo(() => {
         const filters = {};

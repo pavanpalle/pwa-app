@@ -14,6 +14,14 @@
     composes: gap-0 from global;
 }
 
+.loadMore {
+    composes: root_lowPriority from '../Button/button.module.css';
+
+    @apply block;
+    @apply min-w-[20rem];
+    composes: mx-auto from global;
+    composes: my-md from global;
+}
 .root :global(> button){
     @apply w-[30px] h-[30px] text-[20px] text-[#AAB4B2]
 
