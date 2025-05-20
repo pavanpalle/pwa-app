@@ -39,10 +39,10 @@
     composes: relative from global;
     composes: z-10 from global;
 }
-.link:hover{
+.link:hover,.hoverSubMenuActive :global(.link){
     @apply bg-primary !text-white !no-underline;
 }
-.link:hover:after{
+.link:hover:after,.hoverSubMenuActive :global(.link:after){
     content: "";
     width: 0;
       height: 0;
@@ -70,6 +70,19 @@
 .submenuChildItem {
     composes: mb-0 from global;
 }
+
+.active {
+    composes: bg-red from global;
+     composes: underline from global;
+}
+
+.active :global(> a){
+    @apply bg-primary !text-white !no-underline;
+}
+
+
+
+
 .hoverSubMenu{
     composes: hidden from global;
     composes: absolute from global;
@@ -82,16 +95,34 @@
     composes: h-full from global;
     composes: -xl_pl-[330px] from global;
 }
-.hoverSubMenu :global(h3){
+
+.hoverSubMenuActive{
+    composes: flex from global;
+    composes: flex-col from global;
+    composes: absolute from global;
+    composes: pl-[26.5%] from global;
+    composes: top-0 from global;
+    composes: w-full from global;
+    composes: z-0 from global;
+    composes: py-3 from global;
+    composes: px-5 from global;
+    composes: h-full from global;
+    composes: -xl_pl-[330px] from global;
+}
+
+
+
+.hoverSubMenu :global(h3),.hoverSubMenuActive :global(h3){
     @apply text-xl font-avenirbold pb-3 border-b border-gray-200
 }
-.hoverSubMenu :global(ul){
+.hoverSubMenu :global(ul),.hoverSubMenuActive :global(ul){
     @apply grid grid-cols-3 gap-x-5 gap-y-1
 }
-.hoverSubMenu :global(ul li a:hover){
+.hoverSubMenu :global(ul li a:hover),.hoverSubMenuActive :global(ul li a:hover){
     @apply !bg-transparent !text-blue-600 !underline
 }
-.hoverSubMenu :global(ul li a:hover:after){
+.hoverSubMenu :global(ul li a:hover:after),.hoverSubMenuActive :global(ul li a:hover:after){
     @apply hidden
 }
+
 

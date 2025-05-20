@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
@@ -18,7 +18,10 @@ const SubmenuColumn = props => {
         category,
         categoryUrlSuffix,
         onNavigate,
-        handleCloseSubMenu
+        handleCloseSubMenu,
+        parentIndex,
+        isActive,
+        setActiveIndex
     } = props;
     const classes = useStyle(defaultClasses, props.classes);
 
@@ -26,6 +29,8 @@ const SubmenuColumn = props => {
         `/${category.url_path}${categoryUrlSuffix || ''}`
     );
     let children = null;
+
+    const childrenClasses = isActive?classes.hoverSubMenuActive:classes.hoverSubMenu
 
     if (category.children.length) {
         const childrenItems = category.children.map((subCategory, index) => {
@@ -58,14 +63,27 @@ const SubmenuColumn = props => {
             );
         });
 
-        children = <div className={classes.hoverSubMenu}><h3>{category.name}</h3><ul className={classes.submenuChild}>{childrenItems}</ul></div>;
+        children = (
+            <div className={childrenClasses}>
+                <h3>{category.name}</h3>
+                <ul className={classes.submenuChild}>{childrenItems}</ul>
+            </div>
+        );
     }
 
     // setting keyboardProps if category does not have any sub-category
     const keyboardProps = category.children.length ? {} : props.keyboardProps;
 
+    const subMenuColumnClass = isActive
+        ? [classes.submenuColumn, classes.active].join(' ')
+        : classes.submenuColumn;
+
     return (
-        <div className={classes.submenuColumn}>
+        <div
+            className={subMenuColumnClass}
+            onMouseEnter={() => setActiveIndex(parentIndex)}
+            onMouseLeave={() => setActiveIndex(0)}
+        >
             <Link
                 {...keyboardProps}
                 className={classes.link}
@@ -76,7 +94,6 @@ const SubmenuColumn = props => {
                     onNavigate();
                 }}
             >
-                {/* <div className='cat-thumb'><img alt={category?.name} src={category?.image} height={135} width={135}/></div> */}
                 <span className={classes.heading}>{category.name}</span>
             </Link>
             {children}

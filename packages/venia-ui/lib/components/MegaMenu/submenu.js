@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { useSubMenu } from '@magento/peregrine/lib/talons/MegaMenu/useSubMenu';
@@ -26,7 +26,8 @@ const Submenu = props => {
     } = props;
     const PADDING_OFFSET = 20;
     const classes = useStyle(defaultClasses, props.classes);
-
+    
+const [activeIndex, setActiveIndex] = useState(0);
     const talonProps = useSubMenu({
         isFocused,
         subMenuState,
@@ -51,10 +52,14 @@ const Submenu = props => {
                 categoryUrlSuffix={categoryUrlSuffix}
                 onNavigate={onNavigate}
                 handleCloseSubMenu={handleCloseSubMenu}
+                isActive={index === activeIndex}
+            setActiveIndex={setActiveIndex}
+                parentIndex={index}
             />
         );
     });
 
+    
     return (
         <div className={subMenuClassname}>
             <div
