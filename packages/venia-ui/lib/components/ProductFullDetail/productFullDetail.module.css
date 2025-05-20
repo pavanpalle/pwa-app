@@ -110,7 +110,7 @@
     @apply flex gap-4 flex-wrap my-5
 }
 .options :global(.swatch-root--kM){
-    @apply w-[130px] min-h-[80px] relative
+    @apply w-[130px] min-h-[80px] relative -sm_w-[calc(33.33%-15px)]
 }
 .options :global(.swatch-root--kM:before){
     @apply content-[attr(title)] w-full h-full p-3 text-white absolute left-0 top-0 text-left pr-10;
@@ -254,19 +254,19 @@
 }
 
 .productGridTable{
- @apply flex gap-0 items-start;
+ @apply flex gap-0 items-start -sm_flex-wrap;
 }
 .productGridTable :global(ul) {
-    @apply flex flex-col w-full;
+    @apply flex flex-col w-full -sm_mb-2;
 }
 .productGridTable :global(ul:first-child) {
-    @apply max-w-[150px] min-w-[150px];
+    @apply max-w-[150px] min-w-[150px] -sm_w-full -sm_max-w-full;
 }
 .productGridTable :global(ul:first-child li:nth-child(2)){
     @apply !h-auto px-0 py-[12.5px]
 }
 .productGridTable :global(ul:nth-child(2)) {
-    @apply max-w-[180px] min-w-[180px] justify-start;
+    @apply xl_max-w-[180px] xl_min-w-[180px] justify-start -sm_hidden md_!min-w-[120px] md_!max-w-[120px];
 }
 .productGridTable :global(ul:nth-child(2) li){
     @apply justify-start
@@ -281,30 +281,111 @@
     @apply border-t-2 border-gray-300; 
 }
 .productGridTable :global(ul li) {
-    @apply  px-3 h-[35px] bg-white flex items-center justify-center !text-[18px] text-[#171A1F];
+    @apply  px-3 h-[35px] bg-white flex items-center justify-center !text-[18px] text-[#171A1F] -sm_flex -sm_items-center -sm_justify-start -sm_empty_hidden;
+ }
+.productGridTable :global(ul li:before) {
+    @apply -sm_content-[""] -sm_w-[50%] -sm_justify-start -sm_min-w-[50%]
+}
+.productGridTable :global(ul:first-child li:before){
+    @apply !hidden
 }
 .productGridTable :global(ul li input){
-    @apply w-full text-center border-none appearance-none h-[35px];
+    @apply w-full text-center border-none appearance-none h-[35px] -sm_text-left;
     appearance: textfield;
 }
 .productGridTable :global(ul li input:focus){
     @apply shadow-none outline-none
 }
 .productGridTable :global(ul li .swatch-root_selected-g8q){
-    @apply w-[130px] h-[80px] relative
+    @apply w-[130px] h-[80px] relative -sm_w-full
 }
 .productGridTable :global(ul li .swatch-root_selected-g8q:before){
     @apply content-[attr(title)] w-full h-full p-3 text-white absolute left-0 top-0 text-left pr-10 leading-[18px];
     text-shadow:0px 0px 6px rgba(0, 0, 0, 0.5);
 }
+.productGridTable :global(ul li:nth-child(1):before) {
+    @apply -sm_content-["Size"] -sm_text-[16px] -sm_justify-start
+}
+.productGridTable :global(ul li:nth-child(2):before) {
+    @apply -sm_content-["QtyCase"] -sm_text-[16px] -sm_justify-start
+}
+.productGridTable :global(ul li:nth-child(3):before) {
+    @apply -sm_content-["Price"] -sm_text-[16px] -sm_justify-start
+}
+.productGridTable :global(ul li:nth-child(4):before) {
+    @apply -sm_content-["Inventory"] -sm_text-[16px] -sm_justify-start
+}
+
+.productDescBlock{
+    @apply mt-5
+}
+.productDescBlock :global(.react-tabs .react-tabs__tab-list){
+    @apply !flex gap-0 mb-[-2px]
+}
+.productDescBlock :global(.react-tabs .react-tabs__tab-list > li){
+    @apply px-6 py-2 border-2 border-gray-300 rounded-t-lg text-lg font-bold bg-[#f1f1f1] relative;
+}
+/* .productDescBlock :global(.react-tabs .react-tabs__tab-list > li:before){
+    @apply content-[""] w-[30px] h-[20px] bg-transparent rounded-bl-lg absolute bottom-[-3px] right-[-29px] z-[9] border-2 border-l-[#f1f1f1] border-b-[#f1f1f1] border-t-0 border-r-0
+}
+.productDescBlock :global(.react-tabs .react-tabs__tab-list > li:after){
+    @apply content-[""] w-[30px] h-[20px] bg-transparent rounded-bl-lg absolute bottom-[-2px] right-[-30px] z-[9] border-2 border-l-[#ccc] border-b-[#ccc] border-t-0 border-r-0
+} */
+.productDescBlock :global(.react-tabs .react-tabs__tab-list > li.react-tabs__tab--selected){
+    @apply border-b-white bg-white;
+}
+/* .productDescBlock :global(.react-tabs .react-tabs__tab-list > li.react-tabs__tab--selected:before){
+@apply content-[""] w-[30px] h-[20px] bg-transparent rounded-br-lg rounded-bl-none absolute bottom-[-3px] right-[-2px] z-[9] border-2 border-r-[#f1f1f1] border-b-[#f1f1f1] border-t-0 border-l-0
+}
+.productDescBlock :global(.react-tabs .react-tabs__tab-list > li.react-tabs__tab--selected:before){
+@apply content-[""] w-[30px] h-[20px] bg-transparent rounded-br-lg rounded-bl-none absolute bottom-[-2px] right-[-2px] z-[9] border-2 border-r-[#ccc] border-b-[#ccc] border-t-0 border-l-0
+} */
+
+.productDescBlock :global(.react-tabs .react-tabs__tab-list > li:last-child){
+    @apply ml-[-1px]
+}
+.productDescBlock :global(.react-tabs .react-tabs__tab-panel){
+    @apply p-6 border-2 border-gray-300 rounded-b-lg empty_hidden rounded-r-lg
+}
+.viewDescLink{
+    @apply flex justify-end text-lg -mb-7 text-primary font-bold
+}
+.viewDescLink:hover{
+    @apply underline
+}
+.customLinks{
+    @apply w-full flex items-center justify-between mt-5
+}
+.customLinks :global(ul){
+    @apply flex flex-col gap-1
+}
+.customLinks :global(ul li a){
+    @apply text-primary text-[18px] flex gap-2 items-center
+}
+.customLinks :global(ul li a:before){
+    @apply content-[""] w-[10px] h-[10px] border-2 border-transparent border-r-primary border-b-primary rotate-[-45deg]
+}
+.videoBtn{
+    @apply w-[100px] h-[60px] bg-primary rounded-md flex items-center justify-center relative
+}
+.videoBtn:before{
+    @apply content-[""] w-[40px] h-[40px] rounded-[20px] bg-white
+}
+.videoBtn:after{
+    @apply content-[""] w-0 h-0 border-t-[15px] border-t-transparent border-l-[15px] border-l-primary border-b-[15px] border-b-transparent absolute translate-x-[-50%] translate-y-[-50%] left-[52%] top-[50%]
+}
+
 .compareStyles{
     composes: border-t-[15px] from global;
     composes: border-primary from global;
        width:calc(100% + 5rem);
-    composes: ml-[-2.5rem] from global;
+    composes: xl_ml-[-2.5rem] from global;
     composes: px-8 from global;
     composes: py-5 from global;
 }
+/* .compareStyles :global(.companionStyles-root-prK .companionStyles-section-U-r){
+    @apply px-0 mx-0;
+} */
 
 @media screen(-lg) {
     .compareStyles{

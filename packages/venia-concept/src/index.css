@@ -131,7 +131,7 @@ ol li {
     @apply !w-full;
 } */
 
-.item-root-JAt .option-root-pry {
+/* .item-root-JAt .option-root-pry {
     @apply !px-0 !py-0 flex justify-center !border-b-0  overflow-hidden transition-all ease-in-out;
 }
 .item-root-JAt .option-root-pry button {
@@ -157,17 +157,17 @@ ol li {
 }
 .multi-slide-input-container {
     @apply !w-full;
-}
+}*/
 
 .main-page-dhh.max-w-site {
     @apply !max-w-full mx-auto -sm_px-[15px] md_px-[20px] max_px-10;
-}
+} 
 
 /********PDP Page***********/
 
-.productFullDetail-actButton-iym {
+/* .productFullDetail-actButton-iym {
     @apply !mt-0;
-}
+} */
 .addToListButton-root-zVe {
     @apply hidden;
 }

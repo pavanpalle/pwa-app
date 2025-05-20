@@ -4,7 +4,7 @@ import { arrayOf, bool, number, shape, string } from 'prop-types';
 import React, { Fragment, Suspense } from 'react';
 import { Info } from 'react-feather';
 import { FormattedMessage, useIntl } from 'react-intl';
-
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { useProductFullDetail } from '@magento/peregrine/lib/talons/ProductFullDetail/useProductFullDetail';
 import { isProductConfigurable } from '@magento/peregrine/lib/util/isProductConfigurable';
 import Price from '@magento/venia-ui/lib/components/Price';
@@ -40,6 +40,7 @@ const ERROR_FIELD_TO_MESSAGE_MAPPING = {
 };
 
 const ProductFullDetail = props => {
+    
     const { product } = props;
 
     const talonProps = useProductFullDetail({ product });
@@ -211,6 +212,14 @@ const ProductFullDetail = props => {
                 >
                     <section className={classes.imageCarousel}>
                         <Carousel images={mediaGalleryEntries} />
+                        <div className={classes.customLinks}>
+                            <ul>
+                                <li><a href="#">Download Images</a></li>
+                                <li><a href="#">Download Video</a></li>
+                                <li><a href="#">Email Page</a></li>
+                            </ul>
+                            <button type="button" className={classes.videoBtn}></button>
+                        </div>
                     </section>
                     <div className={classes.productFullInformationBlock}>
                         <section className={classes.title}>
@@ -222,7 +231,7 @@ const ProductFullDetail = props => {
                                 <span>{product.sku} - </span>
                                 <span>{productDetails.name}</span>
                             </h1>
-                            <p
+                            {/* <p
                                 data-cy="ProductFullDetail-productPrice"
                                 className={classes.productPrice}
                             >
@@ -231,7 +240,7 @@ const ProductFullDetail = props => {
                                     currencyCode={productDetails?.price?.currency}
                                     value={productDetails?.price?.value}
                                 />
-                            </p>
+                            </p> */}
                             {shortDescription}
                         </section>
                         <FormError
@@ -240,7 +249,9 @@ const ProductFullDetail = props => {
                             }}
                             errors={errors.get('form') || []}
                         />
-                        <section className={classes.options}>{options}</section>
+                        <section className={classes.options}>
+                            <a href="#descInfo" className={classes.viewDescLink}>View Description</a>
+                            {options}</section>
 
                         {
                             sizesTable &&
@@ -332,7 +343,23 @@ const ProductFullDetail = props => {
                                 <WishlistButton {...wishlistButtonProps} />
                             </Suspense>
                         </section>
-                        <section className={classes.description}>
+                        <section className={classes.productDescBlock} id="descInfo">
+                            <Tabs>
+                                <TabList>
+                                <Tab>Description</Tab>
+                                <Tab>Specs</Tab>
+                                </TabList>
+                            
+                                <TabPanel>
+                                <RichContent html={productDetails.description} />
+                                </TabPanel>
+                                <TabPanel>
+                                <h2>Specs content </h2>
+                                </TabPanel>
+                            </Tabs>
+                          </section>  
+
+                        {/* <section className={classes.description} id="descInfo">
                         <span
                             data-cy="ProductFullDetail-descriptionTitle"
                             className={classes.descriptionTitle}
@@ -343,8 +370,10 @@ const ProductFullDetail = props => {
                             />
                         </span>
                         <RichContent html={productDetails.description} />
-                    </section>
-                    <section className={classes.details}>
+                    </section> */}
+                    
+                    
+                    {/* <section className={classes.details}>
                         <span
                             data-cy="ProductFullDetail-detailsTitle"
                             className={classes.detailsTitle}
@@ -355,7 +384,7 @@ const ProductFullDetail = props => {
                             />
                         </span>
                        
-                    </section>
+                    </section> */}
                     
                     </div>
                     

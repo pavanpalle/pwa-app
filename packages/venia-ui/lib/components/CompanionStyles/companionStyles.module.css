@@ -6,7 +6,7 @@
 .section {
   
     composes: my-0 from global;
-    composes: mx-sm from global;
+    composes: mx-0 from global;
     composes: px-0 from global;
     composes: py-xs from global;
 }
@@ -35,11 +35,28 @@
     composes: font-semibold from global;
     composes: text-colorDefault from global;
 
-    composes: lg_font-bold from global;
-    composes: lg_text-xl from global;
+    composes: lg_font-avenirbold from global;
+    composes: lg_!text-2xl from global;
 }
 
 .galleryItems {
     composes: items from '~@magento/venia-ui/lib/components/Gallery/gallery.module.css';
-    grid-template-columns: repeat(5, 1fr);
+    composes: grid from global;
+    grid-template-columns: repeat(6, 1fr);
+}
+
+@media screen(-sm) {
+    .galleryItems {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media screen(md) {
+    .galleryItems {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+@media screen(2xl) {
+    .galleryItems {
+        grid-template-columns: repeat(6, 1fr);
+    }
 }

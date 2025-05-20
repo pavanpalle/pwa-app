@@ -32,14 +32,16 @@
     composes: lg_object-contain from global;
     composes: lg_rounded-sm from global;
     composes: lg_w-full from global;
+    composes: mix-blend-multiply from global;
 }
 
 /* For desktop mode where buttons are an image... */
 @media screen(lg) {
     .rootSelected {
         composes: root;
-
-        box-shadow: 0 0 10px 0 rgb(var(--venia-global-color-teal));
+        composes: !bg-gray-200 from global;
+        
+        /* box-shadow: 0 0 10px 0 rgb(var(--venia-global-color-teal)); */
     }
 
     .image {
