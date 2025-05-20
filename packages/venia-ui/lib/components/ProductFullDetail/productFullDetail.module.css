@@ -354,7 +354,7 @@
     @apply underline
 }
 .customLinks{
-    @apply w-full flex items-center justify-between mt-5
+    @apply w-full flex items-center justify-between mt-5 -sm_mb-5
 }
 .customLinks :global(ul){
     @apply flex flex-col gap-1
