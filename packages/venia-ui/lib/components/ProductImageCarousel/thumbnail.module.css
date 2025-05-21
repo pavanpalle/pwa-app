@@ -14,6 +14,8 @@
     composes: lg_h-auto from global;
     composes: lg_rounded-none from global;
     composes: lg_w-auto from global;
+    composes: -lg_!w-[15px] from global;
+    composes: -lg_!h-[15px] from global;
 }
 
 .rootSelected {

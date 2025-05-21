@@ -39,10 +39,10 @@
     composes: relative from global;
     composes: z-10 from global;
 }
-.link:hover,.hoverSubMenuActive :global(.link){
+.link:hover, .active :global(>.submenuColumn-link-PQ6){
     @apply bg-primary !text-white !no-underline;
 }
-.link:hover:after,.hoverSubMenuActive :global(.link:after){
+.link:hover:after, .active :global(>.submenuColumn-link-PQ6:after){
     content: "";
     width: 0;
       height: 0;
@@ -112,17 +112,22 @@
 
 
 
-.hoverSubMenu :global(h3),.hoverSubMenuActive :global(h3){
+.hoverSubMenu :global(h3), .hoverSubMenuActive :global(h3){
     @apply text-xl font-avenirbold pb-3 border-b border-gray-200
 }
-.hoverSubMenu :global(ul),.hoverSubMenuActive :global(ul){
+.hoverSubMenu :global(ul), .hoverSubMenuActive :global(ul){
     @apply grid grid-cols-3 gap-x-5 gap-y-1
 }
-.hoverSubMenu :global(ul li a:hover),.hoverSubMenuActive :global(ul li a:hover){
+.hoverSubMenu :global(ul li a:hover), .hoverSubMenuActive :global(ul li a:hover){
     @apply !bg-transparent !text-blue-600 !underline
 }
-.hoverSubMenu :global(ul li a:hover:after),.hoverSubMenuActive :global(ul li a:hover:after){
+.hoverSubMenu :global(ul li a:hover:after), .hoverSubMenuActive :global(ul li a:after){
     @apply hidden
 }
 
-
+.menFilter{
+    @apply w-full !flex !gap-10 items-center py-5 border-b border-gray-200 text-primary
+}
+.menFilter :global(li a){
+    @apply text-[18px]
+}

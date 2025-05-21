@@ -5,9 +5,10 @@
     composes: lg_flex from global;
     /* composes: lg_grid-flow-row from global; */
     composes: lg_items-start from global;
-    composes: lg_px-xs from global;
+    composes: -lg_px-xs from global;
     composes: lg_py-md from global;
     composes: gap-8 from global;
+    composes: -sm_!px-0 from global;
 }
 
 @media screen(lg) {
@@ -317,7 +318,7 @@
 }
 
 .productDescBlock{
-    @apply mt-5
+    @apply my-5
 }
 .productDescBlock :global(.react-tabs .react-tabs__tab-list){
     @apply !flex gap-0 mb-[-2px]
@@ -382,6 +383,7 @@
     composes: xl_ml-[-2.5rem] from global;
     composes: px-8 from global;
     composes: py-5 from global;
+    composes: -sm_!px-4 from global;
 }
 /* .compareStyles :global(.companionStyles-root-prK .companionStyles-section-U-r){
     @apply px-0 mx-0;
@@ -389,7 +391,13 @@
 
 @media screen(-lg) {
     .compareStyles{
-        width:calc(100% + 4rem);
-        composes: ml-[-2rem] from global;
+        width:calc(100% + 2rem);
+        composes: !ml-[-1rem] from global;
+    }
+}
+@media screen(lg) {
+    .compareStyles{
+        width:calc(100% + 2rem);
+        composes: !ml-[-1rem] from global;
     }
 }

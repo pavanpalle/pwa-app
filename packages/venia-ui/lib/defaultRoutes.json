@@ -108,5 +108,12 @@
         "path": "../WishlistPage",
         "authed": true,
         "redirectTo": "/sign-in"
+    },
+    {
+        "name": "AllCategoriesPage",
+        "pattern": "/all-categories",
+        "exact": true,
+        "path": "../AllCategoriesPage"
     }
+
 ]

@@ -66,6 +66,12 @@ const SubmenuColumn = props => {
         children = (
             <div className={childrenClasses}>
                 <h3>{category.name}</h3>
+                <ul className={classes.menFilter}>
+                    <li><a href="#">New</a></li>
+                    <li><a href="#">Sale</a></li>
+                    <li><a href="#">Value Basics</a></li>
+                    <li><a href="#">Discontinued</a></li>
+                </ul>
                 <ul className={classes.submenuChild}>{childrenItems}</ul>
             </div>
         );

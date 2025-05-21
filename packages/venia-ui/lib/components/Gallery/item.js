@@ -163,7 +163,7 @@ const GalleryItem = props => {
                 <span>$0.00</span>
                 <span>{sizeRange}</span>
             </div>
-
+            <span className="font-bold text-[15px]">Boxercraft</span>            
             {/* <div data-cy="GalleryItem-price" className={classes.price}>
                 <Price value={priceSourceValue} currencyCode={currencyCode} />
             </div> */}
@@ -172,6 +172,7 @@ const GalleryItem = props => {
                 {addButton}
                 {wishlistButton}
             </div>
+
         </div>
     );
 };
