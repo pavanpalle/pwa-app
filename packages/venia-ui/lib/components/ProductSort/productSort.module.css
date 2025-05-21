@@ -2,6 +2,7 @@
     composes: relative from global;
     composes: ml-2xs from global;
     composes: -sm_w-full from global;
+    composes: -sm_ml-0 from global;
 }
 
 .menu {
@@ -78,4 +79,9 @@
 
 .mobileText {
     composes: lg_hidden from global;
+    composes: text-[16px] from global;
+    composes: font-normal from global;
+}
+:global(label){
+    @apply mr-2 -lg_hidden
 }

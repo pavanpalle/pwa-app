@@ -178,7 +178,8 @@ const ProductSort = props => {
             className={classes.root}
             data-cy="ProductSort-root"
             aria-busy="false"
-        >
+        >   
+            <label>Sort By :</label>
             <Button
                 priority={'low'}
                 classes={{
@@ -198,10 +199,10 @@ const ProductSort = props => {
                 </span>
                 <span className={classes.desktopText}>
                     <span className={classes.sortText}>
-                        <FormattedMessage
+                        {/* <FormattedMessage
                             id={'productSort.sortByButton'}
                             defaultMessage={'Sort by :'}
-                        />
+                        /> */}
                         &nbsp;{currentSort.sortText}
                     </span>
                     <Icon

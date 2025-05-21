@@ -208,15 +208,16 @@ const CategoryContent = props => {
                              </div>
                         {categoryDescriptionElement}
                     </div>
-                    {productsPerPage}
                             <div className={classes.heading}>
                                 <div
                                     data-cy="CategoryContent-categoryInfo"
                                     className={classes.categoryInfo}
                                 >
-                                    {categoryResultsHeading}
+ 
                                 </div>
                                 <div className={classes.headerButtons}>
+                                    {productsPerPage}
+                                    {categoryResultsHeading}
                                     {maybeFilterButtons}
                                     {maybeSortButton}
                                 </div>

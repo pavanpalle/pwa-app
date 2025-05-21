@@ -2,6 +2,9 @@
     composes: relative from global;
     composes: ml-2xs from global;
     composes: -sm_w-full from global;
+    composes: gap-2 from global;
+    composes: -sm_ml-0 from global;
+    composes: -sm_mb-4 from global;
 }
 
 .menu {
@@ -13,7 +16,7 @@
     composes: border-subtle from global;
     composes: list-none from global;
     composes: mb-0 from global;
-    composes: min-w-[10rem] from global;
+    composes: min-w-[50px] from global;
     composes: mt-0.5 from global;
     composes: mx-0 from global;
     composes: right-0 from global;
@@ -78,4 +81,13 @@
 
 .mobileText {
     composes: lg_hidden from global;
+}
+:global(.fieldIcons-input-84o){
+    @apply w-[150px]
+}
+:global(.fieldIcons-input-84o > label){
+    @apply -lg_!flex
+}
+:global(.select-input-Y35){
+    @apply h-[48px] max-w-[70px] ml-3 -sm_max-w-[100px]
 }

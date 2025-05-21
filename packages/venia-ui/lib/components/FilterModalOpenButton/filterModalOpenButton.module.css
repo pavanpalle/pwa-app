@@ -6,7 +6,7 @@
     @apply lg_hidden;
     @apply text-[16px]; 
     @apply font-medium;
-    composes: -sm_w-[90%] from global;
+    composes: -sm_w-[100%] from global;
     composes: -sm_!min-w-[40%] from global;
     /* @apply !flex;  */
     @apply !rounded-[12px]; 
@@ -14,6 +14,7 @@
     @apply border; 
     @apply border-[#BFC0BF]; 
     @apply items-center;
+    @apply h-[48px];
 }
 .filterButton :global(.image-root-rpl){
     @apply h-[16px];

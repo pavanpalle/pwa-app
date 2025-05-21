@@ -36,8 +36,6 @@ const ProductPerPage = props => {
                            onSubmit={handleSubmit}
                            autoComplete="off"
                        >
-                           {({ handleSubmit }) => (
-                               <form className={classes.form} onSubmit={handleSubmit}>
                                    <Select
                                        field="products_per_page"
                                       
@@ -46,12 +44,10 @@ const ProductPerPage = props => {
                                         selectedValue={String(24)}
                                        label={formatMessage({
                                            id: 'productsPerPage.label',
-                                           defaultMessage: 'Products Per Page'
+                                           defaultMessage: 'Per page'
                                        })}
                                        data-cy="ProductsPerPage-select"
                                    />
-                               </form>
-                           )}
                        </Form>
                        </div>
        

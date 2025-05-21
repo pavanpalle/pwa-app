@@ -42,10 +42,10 @@
     composes: -sm_flex-col from global;
     composes: -sm_justify-end from global;
     composes: md_flex-wrap from global;
-    composes: md_max-w-[50%] from global;
+    composes: md_max-w-full from global;
     composes: md_ml-auto from global;
     composes: md_gap-2 from global;
-    composes: md_justify-end from global;
+    composes: md_justify-between from global;
 }
 
 .categoryContent {
@@ -72,11 +72,17 @@
     composes: flex from global;
     composes: justify-center from global;
     composes: pb-sm from global;
-    composes: w-auto from global;
-
-    composes: lg_justify-end from global;
+    composes: w-full from global;
+    composes: items-center from global;
+    composes: lg_justify-start from global;
     composes: lg_pb-0 from global;
-    composes: gap-4 from global; 
+    composes: gap-4 from global;
+    composes: -sm_grid from global;
+    composes: -sm_grid-cols-2 from global;
+    composes: -sm_gap-4 from global; 
+}
+.headerButtons :global(>div:nth-child(2)){
+    @apply ml-auto
 }
 
 .contentWrapper {
