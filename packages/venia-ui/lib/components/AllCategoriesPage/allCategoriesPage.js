@@ -108,58 +108,67 @@ const allCateogiesData = [
                 { title: "Crewneck", link: "/shop/fleece-sweatshirts/crewneck.html",},
                 { title: "Hoodie", link: "/shop/fleece-sweatshirts/hoodie.html",},
                 { title: "Full Zip", link: "/shop/fleece-sweatshirts/full-zip.html",},
-                { title: "", link: "/shop/fleece-sweatshirts/1-4-zip.html",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
+                { title: "1/4 Zip", link: "/shop/fleece-sweatshirts/1-4-zip.html",},
+                { title: "1/2 Zip", link: "/shop/fleece-sweatshirts/1-2-zip.html",},
+                { title: "Sweetpants", link: "/shop/fleece-sweatshirts/sweetpants.html",},
+                { title: "Jogger", link: "/shop/fleece-sweatshirts/jogger.html",},
+                { title: "Shorts", link: "/shop/fleece-sweatshirts/shorts.html",},
+                { title: "Women's", link: "/shop/fleece-sweatshirts/women-s.html",},
+                { title: "Youth", link: "/shop/fleece-sweatshirts/youth.html",},
+                { title: "Toddler", link: "/shop/fleece-sweatshirts/toddler.html",},
+                { title: "Blend", link: "/shop/fleece-sweatshirts/blend.html",},
+                { title: "Performance", link: "/shop/fleece-sweatshirts/performance.html",},
             ],
       },
       {
-        title: "T-Shirts",
-        link: "/shop/t-shirts.html",
+        title: "Flannel",
+        link: "/shop/flannel.html",
             subMenu: [
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
-                { title: "", link: "",},
+                { title: "Pants", link: "/shop/flannel/pants.html",},
+                { title: "Jogger", link: "/shop/flannel/jogger.html",},
+                { title: "Shorts", link: "/shop/flannel/shorts.html",},
+                { title: "Woven Shirts", link: "/shop/flannel/woven-shirts.html",},
+                { title: "Women's", link: "/shop/flannel/women-s.html",},
+                { title: "Youth", link: "/shop/flannel/youth.html",},
+                { title: "Sublimation", link: "/shop/flannel/sublimation.html",},
             ],
       },
     ],
   },
-  {
-    title: "About Us",
-    link: "/about",
-  },
+ 
 ];
+ 
 const AllCategoriesPage = () => {
+
+    console.log("allCateogiesData", allCateogiesData);
+
+
     return (
         <div>
             <h1>All Categories</h1>
+            {allCateogiesData.map((category, index) => (
+                <div key={index}>
+                    <h2>{category.title}</h2>
+                    {category.subMenu && (
+                        <ul>
+                            {category.subMenu.map((subCategory, subIndex) => (
+                                <li key={subIndex}>
+                                    <a href={subCategory.link}>{subCategory.title}</a>
+                                    {subCategory.subMenu && (
+                                        <ul>
+                                            {subCategory.subMenu.map((subSubCategory, subSubIndex) => (
+                                                <li key={subSubIndex}>
+                                                    <a href={subSubCategory.link}>{subSubCategory.title}</a>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
+            ))}
         </div>
     );
 };
