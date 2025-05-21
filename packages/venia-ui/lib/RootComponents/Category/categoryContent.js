@@ -137,7 +137,7 @@ const CategoryContent = props => {
         );
 
         const pagination = totalPagesFromData ? (
-            <Pagination pageControl={pageControl} handleLoadMore={handleLoadMore} type="loadMore"/>
+            <Pagination pageControl={pageControl} handleLoadMore={handleLoadMore} type="loadMore" isLoading={isLoading}/>
         ) : null;
 
 

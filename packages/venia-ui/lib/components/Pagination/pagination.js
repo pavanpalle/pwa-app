@@ -11,7 +11,7 @@ import defaultClasses from './pagination.module.css';
 import Tile from './tile';
 
 const Pagination = props => {
-    const { handleLoadMore, type } = props;
+    const { handleLoadMore, type,isLoading } = props;
     const { currentPage, setPage, totalPages } = props.pageControl;
     const { formatMessage } = useIntl();
     const classes = useStyle(defaultClasses, props.classes);
@@ -62,7 +62,7 @@ const Pagination = props => {
                         >
                             <FormattedMessage
                                 id={'pagination.loadMore'}
-                                defaultMessage={'Load More Products'}
+                                defaultMessage={isLoading?"Loading...":'Load More Products'}
                             />
                         </Button>
                     )}

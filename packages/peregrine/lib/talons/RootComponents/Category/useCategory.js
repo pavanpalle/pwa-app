@@ -1,5 +1,5 @@
 import { useLazyQuery, useQuery } from '@apollo/client';
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { useAppContext } from '../../../context/app';
@@ -42,7 +42,7 @@ export const useCategory = props => {
 
     const operations = mergeOperations(DEFAULT_OPERATIONS, props.operations);
     const { getCategoryQuery, getFilterInputsQuery } = operations;
-
+const [lastLoadedPage, setLastLoadedPage] = useState(0);
     const { data: pageSizeData } = useQuery(getPageSize, {
         fetchPolicy: 'cache-and-network',
         nextFetchPolicy: 'cache-first'
@@ -117,88 +117,333 @@ export const useCategory = props => {
         return typeMap;
     }, [introspectionData]);
 
-    const handleLoadMore = useCallback(
-        async newFilters => {
+//     const handleLoadMore = useCallback(
+//         async (currentPage,id,newFilters,pageSize,currentSort) => {
            
-            await fetchMore({
-                variables: {
-                    currentPage: Number(currentPage),
-                    id: id,
-                    filters: newFilters,
-                    pageSize: Number(pageSize),
-                    sort: {
-                        [currentSort.sortAttribute]: currentSort.sortDirection
-                    }
-                },
-                updateQuery: (previousResult, { fetchMoreResult }) => {
-                    if (!fetchMoreResult) return previousResult;
+//             await fetchMore({
+//                 variables: {
+//                     currentPage: Number(currentPage),
+//                     id: id,
+//                     filters: newFilters,
+//                     pageSize: Number(pageSize),
+//                     sort: {
+//                         [currentSort.sortAttribute]: currentSort.sortDirection
+//                     }
+//                 },
+//                 updateQuery: (previousResult, { fetchMoreResult }) => {
+//                     if (!fetchMoreResult) return previousResult;
 
-                    return {
-                        ...fetchMoreResult,
-                        products: {
-                            ...fetchMoreResult.products,
-                            items: [
-                                ...previousResult.products.items,
-                                ...fetchMoreResult.products.items
-                            ],
-                            page_info: fetchMoreResult.products.page_info
-                        }
-                    };
+//                     return {
+//                         ...fetchMoreResult,
+//                         products: {
+//                             ...fetchMoreResult.products,
+//                             items: [
+//                                 ...previousResult.products.items,
+//                                 ...fetchMoreResult.products.items
+//                             ],
+//                             page_info: fetchMoreResult.products.page_info
+//                         }
+//                     };
+//                 }
+//             });
+//         },
+//         [fetchMore]
+//     );
+
+//     // Run the category query immediately and whenever its variable values change.
+//     useEffect(() => {
+//         // Wait until we have the type map to fetch product data.
+//         if (!filterTypeMap.size || !pageSize) {
+//             return;
+//         }
+
+//         const filters = getFiltersFromSearch(search);
+
+//         // Construct the filter arg object.
+//         const newFilters = {};
+//         filters.forEach((values, key) => {
+//             newFilters[key] = getFilterInput(values, filterTypeMap.get(key));
+//         });
+
+//         // Use the category uid for the current category page regardless of the
+//         // applied filters. Follow-up in PWA-404.
+//         newFilters['category_uid'] = { eq: id };
+
+
+
+
+//       console.log('Variables:', {
+//     id,
+//     pageSize,
+//     currentPage,
+//     newFilters,
+//     sort: currentSort
+// });
+
+//         if (Number(currentPage) === 1) {
+//             runQuery({
+//                 variables: {
+//                     currentPage: Number(currentPage),
+//                     id: id,
+//                     filters: newFilters,
+//                     pageSize: Number(pageSize),
+//                     sort: {
+//                         [currentSort.sortAttribute]: currentSort.sortDirection
+//                     }
+//                 }
+//             });
+//         } else {
+//             handleLoadMore(currentPage,id,newFilters,pageSize,currentSort);
+//         }
+//     }, [
+//         currentSort,
+//         filterTypeMap,
+//         id,
+//         pageSize,
+//         runQuery,
+//         search,
+//         currentPage,
+//         fetchMore,
+//         handleLoadMore
+//     ]);
+
+const handleLoadMore = useCallback(
+    async (pageToFetch, id, newFilters, pageSize, currentSort) => {
+        await fetchMore({
+            variables: {
+                currentPage: Number(pageToFetch),
+                id: id,
+                filters: newFilters,
+                pageSize: Number(pageSize),
+                sort: {
+                    [currentSort.sortAttribute]: currentSort.sortDirection
                 }
-            });
-        },
-        [currentPage, currentSort, fetchMore, id, pageSize]
-    );
-
-    // Run the category query immediately and whenever its variable values change.
-    useEffect(() => {
-        // Wait until we have the type map to fetch product data.
-        if (!filterTypeMap.size || !pageSize) {
-            return;
-        }
-
-        const filters = getFiltersFromSearch(search);
-
-        // Construct the filter arg object.
-        const newFilters = {};
-        filters.forEach((values, key) => {
-            newFilters[key] = getFilterInput(values, filterTypeMap.get(key));
+            },
+            updateQuery: (previousResult, { fetchMoreResult }) => {
+                if (!fetchMoreResult) return previousResult;
+                return {
+                    ...fetchMoreResult,
+                    products: {
+                        ...fetchMoreResult.products,
+                        items: [
+                            ...previousResult.products.items,
+                            ...fetchMoreResult.products.items
+                        ],
+                        page_info: fetchMoreResult.products.page_info
+                    }
+                };
+            }
         });
+    },
+    [fetchMore]
+);
 
-        // Use the category uid for the current category page regardless of the
-        // applied filters. Follow-up in PWA-404.
-        newFilters['category_uid'] = { eq: id };
+// Run the category query immediately and whenever its variable values change.
+// useEffect(() => {
+//    if (!filterTypeMap.size || !pageSize) {
+//         return;
+//     }
+//     const filters = getFiltersFromSearch(search);
+//     // Construct the filter arg object.
+//     const newFilters = {};
+//     filters.forEach((values, key) => {
+//         newFilters[key] = getFilterInput(values, filterTypeMap.get(key));
+//     });
+//     // Use the category uid for the current category page regardless of the
+//     // applied filters. Follow-up in PWA-404.
+//     newFilters['category_uid'] = { eq: id };
 
-        if (Number(currentPage) === 1) {
-            runQuery({
-                variables: {
-                    currentPage: Number(currentPage),
-                    id: id,
-                    filters: newFilters,
-                    pageSize: Number(pageSize),
-                    sort: {
-                        [currentSort.sortAttribute]: currentSort.sortDirection
-                    }
-                }
-            });
-        } else {
-            handleLoadMore(newFilters);
-        }
-    }, [
-        currentSort,
-        filterTypeMap,
+//     const currentPageNum = Number(currentPage);
+//     const pageSizeNum = Number(pageSize);
+
+//     console.log('Variables:', {
+//         id,
+//         pageSize: pageSizeNum,
+//         currentPage: currentPageNum,
+//         newFilters,
+//         sort: currentSort
+//     });
+
+//    const loadData = async () => {
+//         // Initial load (no data loaded yet)
+//         if (lastLoadedPage === 0) {
+//             try {
+//                 // For any initial page, load with adjusted page size
+//                 const result = await runQuery({
+//                     variables: {
+//                         currentPage: 1,
+//                         id: id,
+//                         filters: newFilters,
+//                         pageSize: currentPageNum === 1 ? pageSizeNum : currentPageNum * pageSizeNum,
+//                         sort: {
+//                             [currentSort.sortAttribute]: currentSort.sortDirection
+//                         }
+//                     }
+//                 });
+                
+//                 // Check if the requested page is valid based on total count
+//                 const totalItems = result?.data?.products?.total_count || 0;
+//                 const totalPages = Math.ceil(totalItems / pageSizeNum);
+                
+//                 // If current page is beyond the total pages, adjust it
+//                 if (currentPageNum > totalPages && totalPages > 0) {
+//                     console.log(`Requested page ${currentPageNum} exceeds total pages ${totalPages}. Adjusting to last page.`);
+//                     // You might want to update UI state to show the last valid page
+//                     // setCurrentPage(totalPages); // Uncomment if you want to auto-adjust
+//                 }
+                
+//                 setLastLoadedPage(Math.min(currentPageNum, totalPages));
+//             } catch (error) {
+//                 console.error('Error loading products:', error);
+//             }
+//         }
+//         // When going back to an earlier page that we've already loaded data for
+//         else if (currentPageNum === 1 || currentPageNum < lastLoadedPage) {
+//             try {
+//                 await runQuery({
+//                     variables: {
+//                         currentPage: 1,
+//                         id: id,
+//                         filters: newFilters,
+//                         pageSize: currentPageNum === 1 ? pageSizeNum : currentPageNum * pageSizeNum,
+//                         sort: {
+//                             [currentSort.sortAttribute]: currentSort.sortDirection
+//                         }
+//                     }
+//                 });
+//                 setLastLoadedPage(currentPageNum);
+//             } catch (error) {
+//                 console.error('Error loading products:', error);
+//             }
+//         } 
+//         // If we're incrementing from a previously loaded page
+//         else if (currentPageNum > lastLoadedPage) {
+//             try {
+//                 // Load just the next page with handleLoadMore
+//                 await handleLoadMore(
+//                     currentPageNum, 
+//                     id, 
+//                     newFilters, 
+//                     pageSizeNum, 
+//                     currentSort
+//                 );
+//                 setLastLoadedPage(currentPageNum);
+//             } catch (error) {
+//                 console.error('Error loading more products:', error);
+//                 // If loading fails, don't update lastLoadedPage
+//             }
+//         }
+//     };
+
+//     loadData()
+    
+// }, [currentSort, filterTypeMap, id, pageSize, runQuery, search, currentPage, fetchMore, handleLoadMore, lastLoadedPage]);
+useEffect(() => {
+   if (!filterTypeMap.size || !pageSize) {
+        return;
+    }
+    const filters = getFiltersFromSearch(search);
+    // Construct the filter arg object.
+    const newFilters = {};
+    filters.forEach((values, key) => {
+        newFilters[key] = getFilterInput(values, filterTypeMap.get(key));
+    });
+    // Use the category uid for the current category page regardless of the
+    // applied filters. Follow-up in PWA-404.
+    newFilters['category_uid'] = { eq: id };
+
+    const currentPageNum = Number(currentPage);
+    const pageSizeNum = Number(pageSize);
+
+    console.log('Variables:', {
         id,
-        pageSize,
-        runQuery,
-        search,
-        currentPage,
-        fetchMore,
-        handleLoadMore
-    ]);
+        pageSize: pageSizeNum,
+        currentPage: currentPageNum,
+        newFilters,
+        sort: currentSort
+    });
 
-    const totalPagesFromData = data
-        ? data.products.page_info.total_pages
-        : null;
+   const loadData = async () => {
+        // Initial load (no data loaded yet)
+        if (lastLoadedPage === 0) {
+            try {
+                // For any initial page, load with adjusted page size
+                const result = await runQuery({
+                    variables: {
+                        currentPage: 1,
+                        id: id,
+                        filters: newFilters,
+                        pageSize: currentPageNum === 1 ? pageSizeNum : currentPageNum * pageSizeNum,
+                        sort: {
+                            [currentSort.sortAttribute]: currentSort.sortDirection
+                        }
+                    }
+                });
+                
+                // Check if the requested page is valid based on total count
+                const totalItems = result?.data?.products?.total_count || 0;
+                const totalPages = Math.ceil(totalItems / pageSizeNum);
+                
+                // If current page is beyond the total pages, adjust it
+                if (currentPageNum > totalPages && totalPages > 0) {
+                    console.log(`Requested page ${currentPageNum} exceeds total pages ${totalPages}. Adjusting to last page.`);
+                    // You might want to update UI state to show the last valid page
+                    // setCurrentPage(totalPages); // Uncomment if you want to auto-adjust
+                }
+                
+                setLastLoadedPage(Math.min(currentPageNum, totalPages));
+            } catch (error) {
+                console.error('Error loading products:', error);
+            }
+        }
+        // When going back to an earlier page that we've already loaded data for
+        else if (currentPageNum === 1 || currentPageNum < lastLoadedPage) {
+            try {
+                await runQuery({
+                    variables: {
+                        currentPage: 1,
+                        id: id,
+                        filters: newFilters,
+                        pageSize: currentPageNum === 1 ? pageSizeNum : currentPageNum * pageSizeNum,
+                        sort: {
+                            [currentSort.sortAttribute]: currentSort.sortDirection
+                        }
+                    }
+                });
+                setLastLoadedPage(currentPageNum);
+            } catch (error) {
+                console.error('Error loading products:', error);
+            }
+        } 
+        // If we're incrementing from a previously loaded page
+        else if (currentPageNum > lastLoadedPage) {
+            try {
+                // Load just the next page with handleLoadMore
+                await handleLoadMore(
+                    currentPageNum, 
+                    id, 
+                    newFilters, 
+                    pageSizeNum, 
+                    currentSort
+                );
+                setLastLoadedPage(currentPageNum);
+            } catch (error) {
+                console.error('Error loading more products:', error);
+                // If loading fails, don't update lastLoadedPage
+            }
+        }
+    };
+
+    loadData()
+    
+}, [currentSort, filterTypeMap, id, pageSize, runQuery, search, currentPage, fetchMore, handleLoadMore, lastLoadedPage]);
+    // const totalPagesFromData = data
+    //     ? data.products.page_info.total_pages
+    //     : null;
+
+    const totalPagesFromData = data?.products?.total_count
+    ? Math.ceil(data.products.total_count / pageSize)
+    : null;
 
     useEffect(() => {
         setTotalPages(totalPagesFromData);
@@ -212,6 +457,7 @@ export const useCategory = props => {
     useEffect(() => {
         if (error && !categoryLoading && !data && currentPage !== 1) {
             setCurrentPage(1);
+             setLastLoadedPage(0);
         }
     }, [currentPage, error, categoryLoading, setCurrentPage, data]);
 
@@ -233,6 +479,7 @@ export const useCategory = props => {
         ) {
             // The search term changed.
             setCurrentPage(1, true);
+             setLastLoadedPage(0);
 
             // And update the ref.
             previousSearch.current = search;
@@ -240,7 +487,18 @@ export const useCategory = props => {
         }
     }, [currentSort, previousSearch, search, setCurrentPage]);
 
-    const categoryData = categoryLoading && !data ? null : data;
+       const clonedData = data ? {
+    ...data,
+    products: {
+        ...data.products,
+        page_info: {
+            ...data.products.page_info,
+            current_page: currentPage,
+            total_pages: totalPagesFromData
+        }
+    }
+} : null;
+    const categoryData = categoryLoading && !data ? null : clonedData;
     const categoryNotFound =
         !categoryLoading && data && data.categories.items.length === 0;
     const metaDescription =
@@ -257,6 +515,9 @@ export const useCategory = props => {
         introspectionLoading;
 
     // useScrollTopOnChange(currentPage);
+
+
+
 
     return {
         error,
