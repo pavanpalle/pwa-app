@@ -1,6 +1,6 @@
 import { array, number, shape, string } from 'prop-types';
 import React, { Fragment, Suspense, useMemo, useRef } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { useIsInViewport } from '@magento/peregrine/lib/hooks/useIsInViewport';
 import { useCategoryContent } from '@magento/peregrine/lib/talons/RootComponents/Category';
@@ -16,6 +16,7 @@ import Gallery, { GalleryShimmer } from '../../components/Gallery';
 import { StoreTitle } from '../../components/Head';
 import ResourceImage from '../../components/Image/resourceImage';
 import Pagination from '../../components/Pagination';
+import ProductPerPage from '../../components/ProductPerPage';
 import ProductSort, { ProductSortShimmer } from '../../components/ProductSort';
 import RichContent from '../../components/RichContent';
 import Shimmer from '../../components/Shimmer';
@@ -24,12 +25,12 @@ import SortedByContainer, {
 } from '../../components/SortedByContainer';
 import defaultClasses from './category.module.css';
 import NoProductsFound from './NoProductsFound';
-import Button from '../../components/Button';
-
 const FilterModal = React.lazy(() => import('../../components/FilterModal'));
 const FilterSidebar = React.lazy(() =>
     import('../../components/FilterSidebar')
 );
+
+
 
 const CategoryContent = props => {
     const {
@@ -42,7 +43,7 @@ const CategoryContent = props => {
         handleLoadMore
     } = props;
     const [currentSort] = sortProps;
-
+ const { formatMessage } = useIntl();
     const talonProps = useCategoryContent({
         categoryId,
         data,
@@ -105,10 +106,17 @@ const CategoryContent = props => {
         <SortedByContainerShimmer />
     ) : null;
 
+
+     
+    
+            const productsPerPage =
+        totalCount > 0 ? (
+            <ProductPerPage/>
+        )  : null;
+            
     const categoryResultsHeading =
         totalCount > 0 ? (
             <div>
-                {' '}
                 <FormattedMessage
                     id={'categoryContent.resultCount'}
                     values={{
@@ -200,6 +208,7 @@ const CategoryContent = props => {
                              </div>
                         {categoryDescriptionElement}
                     </div>
+                    {productsPerPage}
                             <div className={classes.heading}>
                                 <div
                                     data-cy="CategoryContent-categoryInfo"
