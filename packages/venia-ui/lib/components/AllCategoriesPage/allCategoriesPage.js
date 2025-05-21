@@ -1,4 +1,6 @@
 import React from 'react';
+import { useStyle } from '../../classify';
+import defaultClasses from './allCategoriesPage.module.css';
 
 const allCateogiesData = [
   {
@@ -138,19 +140,16 @@ const allCateogiesData = [
  
 ];
  
-const AllCategoriesPage = () => {
-
-    console.log("allCateogiesData", allCateogiesData);
-
-
+const AllCategoriesPage = (props) => {
+    const classes = useStyle(defaultClasses, props.classes);
     return (
-        <div>
+        <div className={classes.root}>
             <h1>All Categories</h1>
             {allCateogiesData.map((category, index) => (
-                <div key={index}>
+                <div key={index} className={classes.allCategoriesBlock}>
                     <h2>{category.title}</h2>
                     {category.subMenu && (
-                        <ul>
+                        <ul className={classes.list}>
                             {category.subMenu.map((subCategory, subIndex) => (
                                 <li key={subIndex}>
                                     <a href={subCategory.link}>{subCategory.title}</a>

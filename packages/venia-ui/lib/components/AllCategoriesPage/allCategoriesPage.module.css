@@ -1,3 +1,27 @@
 .root{
-
+    @apply py-5 max-w-[80%] mx-auto 
+}
+:global(h1){
+    @apply text-2xl font-bold mb-2
+}
+.allCategoriesBlock{
+    @apply w-full my-2 
+}
+.allCategoriesBlock :global(h2){
+    @apply text-xl font-bold mb-2
+}
+.list{
+    @apply w-full grid grid-cols-5 gap-5 mb-5
+}
+.list :global(>li){
+    @apply flex flex-col mb-5
+}
+.list :global(>li>a){
+    @apply mb-2 text-lg font-bold bg-gray-200 px-3 py-1
+}
+.list :global(ul){
+    @apply flex flex-col gap-2
+}
+.list :global(ul>li>a:hover){
+    @apply text-blue-500 underline leading-[20px]
 }
