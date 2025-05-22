@@ -19,6 +19,7 @@ const INITIAL_OPTION_SELECTIONS = new Map();
 const OUT_OF_STOCK_CODE = 'OUT_OF_STOCK';
 const IN_STOCK_CODE = 'IN_STOCK';
 const SWATCH_WIDTH = 130;
+const IMAGE_WIDTH = 640;
 const deriveOptionCodesFromProduct = product => {
     // If this is a simple product it has no option codes.
     if (!isProductConfigurable(product)) {
@@ -1078,6 +1079,43 @@ export const useProductFullDetail = props => {
         }));
       };
 
+
+      function downloadImage(url) {
+  const a = document.createElement('a');
+  a.href = url;
+  console.log(url)
+  a.download = url.split('/').pop(); // filename
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+
+ const downloadAllProductImages= useCallback(async(product)=> {
+ 
+console.log("product",product);
+  const images = [];
+
+  if (product.image?.url) {
+    images.push(product.image.url);
+  }
+
+  if (product.media_gallery_entries?.length) {
+    product.media_gallery_entries.forEach(img => {
+      if (!img.disabled) {
+        const imagePath ='https://demoecommerce.sparity.com'+ generateUrl(img.file, 'image-product')(
+                        IMAGE_WIDTH
+                    );
+   
+        console.log("url",imagePath)
+        images.push(imagePath);
+      }
+    });
+  }
+console.log("images",images);
+  images.forEach(downloadImage);
+},[]);
+
     return {
         breadcrumbCategoryId,
         errorMessage: derivedErrorMessage,
@@ -1107,6 +1145,7 @@ export const useProductFullDetail = props => {
         sizesTable,
         quantities,
         handleQuantityChange,
-        isSignedIn
+        isSignedIn,
+        downloadAllProductImages
     };
 };
