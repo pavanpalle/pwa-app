@@ -111,7 +111,7 @@
     },
     {
         "name": "AllCategoriesPage",
-        "pattern": "/all-categories",
+        "pattern": "/productlanding",
         "exact": true,
         "path": "../AllCategoriesPage"
     }

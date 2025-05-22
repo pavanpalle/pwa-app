@@ -1,0 +1,1 @@
+export { useProductPerPage } from './useProductPerPage';

@@ -30,8 +30,6 @@ const FilterSidebar = React.lazy(() =>
     import('../../components/FilterSidebar')
 );
 
-
-
 const CategoryContent = props => {
     const {
         categoryId,
@@ -40,10 +38,11 @@ const CategoryContent = props => {
         pageControl,
         sortProps,
         pageSize,
-        handleLoadMore
+        handleLoadMore,
+        setPageSize
     } = props;
     const [currentSort] = sortProps;
- const { formatMessage } = useIntl();
+
     const talonProps = useCategoryContent({
         categoryId,
         data,
@@ -106,14 +105,15 @@ const CategoryContent = props => {
         <SortedByContainerShimmer />
     ) : null;
 
-
-     
-    
-            const productsPerPage =
+    const productsPerPage =
         totalCount > 0 ? (
-            <ProductPerPage/>
-        )  : null;
-            
+            <ProductPerPage
+                pageSize={pageSize}
+                setPageSize={setPageSize}
+                total_count={totalCount}
+            />
+        ) : null;
+
     const categoryResultsHeading =
         totalCount > 0 ? (
             <div>
@@ -139,17 +139,19 @@ const CategoryContent = props => {
         }
 
         const gallery = totalPagesFromData ? (
-            <Gallery items={items}  />
+            <Gallery items={items} />
         ) : (
             <GalleryShimmer items={items} />
         );
 
         const pagination = totalPagesFromData ? (
-            <Pagination pageControl={pageControl} handleLoadMore={handleLoadMore} type="loadMore" isLoading={isLoading}/>
+            <Pagination
+                pageControl={pageControl}
+                handleLoadMore={handleLoadMore}
+                type="loadMore"
+                isLoading={isLoading}
+            />
         ) : null;
-
-
-         
 
         return (
             <Fragment>
@@ -157,14 +159,22 @@ const CategoryContent = props => {
                 <div className={classes.pagination}>{pagination}</div>
             </Fragment>
         );
-    }, [categoryId, classes, isLoading, items, pageControl, totalPagesFromData,handleLoadMore]);
+    }, [
+        categoryId,
+        classes,
+        isLoading,
+        items,
+        pageControl,
+        totalPagesFromData,
+        handleLoadMore
+    ]);
 
     const categoryTitle = categoryName ? categoryName : <Shimmer width={5} />;
     // const categoryImage = data?.category?.image;
     return (
         <Fragment>
             <div>
-            {/* <div className="category-banner-block">
+                {/* <div className="category-banner-block">
                 <img src={categoryBg} 
                                            width={1000}
                                            height={90} 
@@ -177,7 +187,6 @@ const CategoryContent = props => {
                     className={classes.root}
                     data-cy="CategoryContent-root"
                 >
-                    
                     <div className={classes.contentWrapper}>
                         <div ref={sidebarRef} className={classes.sidebar}>
                             <Suspense fallback={<FilterSidebarShimmer />}>
@@ -186,35 +195,39 @@ const CategoryContent = props => {
                         </div>
                         <div className={classes.categoryContent}>
                             <div className={classes.categoryHeader}>
-                        <h1 aria-live="polite" className={classes.title}>
-                            <div
-                                className={classes.categoryTitle}
-                                data-cy="CategoryContent-categoryTitle"
-                            >
-                                <div>{categoryTitle}</div>
+                                <h1
+                                    aria-live="polite"
+                                    className={classes.title}
+                                >
+                                    <div
+                                        className={classes.categoryTitle}
+                                        data-cy="CategoryContent-categoryTitle"
+                                    >
+                                        <div>{categoryTitle}</div>
+                                    </div>
+                                </h1>
+                                <div className={classes.categoryPromoBanner}>
+                                    <div>
+                                        {categoryBannerImage ? (
+                                            <ResourceImage
+                                                resource={categoryBannerImage}
+                                                alt={categoryName}
+                                                width={1000}
+                                                height={700}
+                                            />
+                                        ) : null}
+                                    </div>
+                                    <div>
+                                        <CmsBlock identifiers="promotion-banner" />
+                                    </div>
+                                </div>
+                                {categoryDescriptionElement}
                             </div>
-                        </h1>
-                         <div className={classes.categoryPromoBanner}>
-                            
-                                <div>{categoryBannerImage ? (
-                                    <ResourceImage
-                                        resource={categoryBannerImage}
-                                        alt={categoryName}
-                                        width={1000}
-                                        height={700}
-                                    />
-                                ) : null}</div>
-                                <div><CmsBlock identifiers="promotion-banner" /></div>
-                             </div>
-                        {categoryDescriptionElement}
-                    </div>
                             <div className={classes.heading}>
                                 <div
                                     data-cy="CategoryContent-categoryInfo"
                                     className={classes.categoryInfo}
-                                >
- 
-                                </div>
+                                />
                                 <div className={classes.headerButtons}>
                                     {productsPerPage}
                                     {categoryResultsHeading}

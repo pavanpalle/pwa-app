@@ -22,6 +22,11 @@
 .list :global(ul){
     @apply flex flex-col gap-2
 }
+
+.list :global(ul>li>a){
+    @apply text-blue-500  leading-[20px]
+}
+
 .list :global(ul>li>a:hover){
     @apply text-blue-500 underline leading-[20px]
 }
