@@ -118,7 +118,14 @@ const Footer = props => {
                 </Link>
             </div> */}
             <div className={classes.footerBlock}>
+                <div className={classes.footerGrid}>
                 <CmsBlock identifiers="footer-links" />
+                <div className={classes.newletterSocial}>
+                <CmsBlock identifiers="footer-social-links" />
+                <Newsletter />
+                </div>
+                <CmsBlock identifiers="copyright-block" />
+            </div>
             </div>
         </footer>
     );

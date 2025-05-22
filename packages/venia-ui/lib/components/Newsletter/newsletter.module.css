@@ -3,17 +3,22 @@
     composes: gap-none from global;
     composes: grid from global;
     composes: items-start from global;
-    composes: max-w-[20rem] from global;
+    composes: w-full from global;
+    /* composes: max-w-[20rem] from global; */
     composes: mx-auto from global;
     composes: relative from global;
-
     composes: sm_col-span-3 from global;
+    composes: bg-white from global;
+    composes: mt-5 from global;
 }
 
 .form {
     composes: gap-y-xs from global;
-    composes: grid from global;
+    composes: flex from global;
     composes: relative from global;
+    composes: flex-col from global;
+    composes: w-full from global;
+
 }
 
 .form input {
@@ -38,17 +43,16 @@
 
 .buttonsContainer {
     composes: gap-sm from global;
-    composes: grid from global;
-    composes: grid-flow-row from global;
+    composes: flex from global;
+    composes: flex-col from global;
     composes: justify-center from global;
-    composes: mt-xs from global;
+    composes: mt-[10px] from global;
     composes: w-full from global;
-
     composes: md_hidden from global;
 }
 
 .title {
-    composes: block from global;
+    composes: hidden from global;
     composes: font-semibold from global;
     composes: mb-xs from global;
     composes: text-colorDefault from global;
@@ -56,24 +60,31 @@
 }
 
 .subscribe_link {
-    composes: absolute from global;
-    composes: bg-white from global;
+    composes: relative from global;
+    composes: bg-primary from global;
     composes: hidden from global;
-    composes: max-h-[35px] from global;
-    composes: px-3 from global;
+    composes: max-h-[50px] from global;
+    composes: px-0 from global;
     composes: py-0 from global;
     composes: right-1 from global;
-    composes: text-colorDefault from global;
+    composes: text-white from global;
     composes: top-0 from global;
-    composes: underline from global;
-    min-height: 35px;
-    transform: translateY(7%);
+    composes: no-underline from global;
+    composes: mx-0 from global;
+    min-height: 50px;
+    /* transform: translateY(7%); */
 
     composes: md_inline-block from global;
+    composes: rounded-md from global;
+    composes: text-xl from global;
+    composes: font-avenirbold from global;
+    composes: w-full from global;
+    composes: mt-2 from global;
 }
 
 .newsletter_text {
     composes: mb-sm from global;
+    composes: hidden from global;
 }
 
 .loadingContainer {
@@ -85,4 +96,10 @@
     composes: top-0 from global;
     composes: w-full from global;
     composes: z-mask from global;
+}
+.root :global(.field-input-HW6){
+    @apply h-[50px] w-full
+}
+.buttonsContainer :global(.button-root_normalPriority-c1Z){
+    @apply !w-full min-w-full h-[50px] bg-primary text-xl rounded-md !text-white
 }

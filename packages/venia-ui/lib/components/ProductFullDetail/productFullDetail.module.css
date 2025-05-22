@@ -348,10 +348,10 @@
 .customLinks :global(ul){
     @apply flex flex-col gap-1
 }
-.customLinks :global(ul li a){
+.customLinks :global(ul li button){
     @apply text-primary text-[18px] flex gap-2 items-center
 }
-.customLinks :global(ul li a:before){
+.customLinks :global(ul li button:before){
     @apply content-[""] w-[10px] h-[10px] border-2 border-transparent border-r-primary border-b-primary rotate-[-45deg]
 }
 .videoBtn{
@@ -367,7 +367,7 @@
 .compareStyles{
     composes: border-t-[15px] from global;
     composes: border-primary from global;
-    composes: xl_ml-[-2.5rem] from global;
+    composes: xl_!ml-[-2.5rem] from global;
     composes: px-8 from global;
     composes: py-5 from global;
     composes: -lg_!px-4 from global;
