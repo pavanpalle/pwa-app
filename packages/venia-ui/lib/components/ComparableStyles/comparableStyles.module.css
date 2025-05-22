@@ -46,7 +46,7 @@
     composes: items from '~@magento/venia-ui/lib/components/Gallery/gallery.module.css';
     grid-template-columns: repeat(6, 1fr);
     composes: gap-6 from global;
-    composes: -lg_!gap-4 from global;
+    composes: -xl_!gap-4 from global;
 }
 .galleryItems :global(.gallery-items-fmT){
     grid-template-columns: repeat(6, 1fr);

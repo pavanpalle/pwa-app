@@ -326,21 +326,9 @@
 .productDescBlock :global(.react-tabs .react-tabs__tab-list > li){
     @apply px-6 py-2 border-2 border-gray-300 rounded-t-lg text-lg font-bold bg-[#f1f1f1] relative;
 }
-/* .productDescBlock :global(.react-tabs .react-tabs__tab-list > li:before){
-    @apply content-[""] w-[30px] h-[20px] bg-transparent rounded-bl-lg absolute bottom-[-3px] right-[-29px] z-[9] border-2 border-l-[#f1f1f1] border-b-[#f1f1f1] border-t-0 border-r-0
-}
-.productDescBlock :global(.react-tabs .react-tabs__tab-list > li:after){
-    @apply content-[""] w-[30px] h-[20px] bg-transparent rounded-bl-lg absolute bottom-[-2px] right-[-30px] z-[9] border-2 border-l-[#ccc] border-b-[#ccc] border-t-0 border-r-0
-} */
 .productDescBlock :global(.react-tabs .react-tabs__tab-list > li.react-tabs__tab--selected){
     @apply border-b-white bg-white;
 }
-/* .productDescBlock :global(.react-tabs .react-tabs__tab-list > li.react-tabs__tab--selected:before){
-@apply content-[""] w-[30px] h-[20px] bg-transparent rounded-br-lg rounded-bl-none absolute bottom-[-3px] right-[-2px] z-[9] border-2 border-r-[#f1f1f1] border-b-[#f1f1f1] border-t-0 border-l-0
-}
-.productDescBlock :global(.react-tabs .react-tabs__tab-list > li.react-tabs__tab--selected:before){
-@apply content-[""] w-[30px] h-[20px] bg-transparent rounded-br-lg rounded-bl-none absolute bottom-[-2px] right-[-2px] z-[9] border-2 border-r-[#ccc] border-b-[#ccc] border-t-0 border-l-0
-} */
 
 .productDescBlock :global(.react-tabs .react-tabs__tab-list > li:last-child){
     @apply ml-[-1px]
@@ -379,25 +367,30 @@
 .compareStyles{
     composes: border-t-[15px] from global;
     composes: border-primary from global;
-       width:calc(100% + 5rem);
     composes: xl_ml-[-2.5rem] from global;
     composes: px-8 from global;
     composes: py-5 from global;
-    composes: -sm_!px-4 from global;
+    composes: -lg_!px-4 from global;
 }
 /* .compareStyles :global(.companionStyles-root-prK .companionStyles-section-U-r){
     @apply px-0 mx-0;
 } */
 
-@media screen(-lg) {
+@media screen(-lg){
     .compareStyles{
-        width:calc(100% + 2rem);
-        composes: !ml-[-1rem] from global;
+        width:calc(100% + 2.3rem);
+        composes: !ml-[-1.15rem] from global;
     }
 }
-@media screen(lg) {
+@media screen(xl) {
     .compareStyles{
-        width:calc(100% + 2rem);
-        composes: !ml-[-1rem] from global;
+        width:calc(100% + 2.5rem);
+        composes: !ml-[-1.25rem] from global;
+    }
+}
+@media screen(2xl) {
+    .compareStyles{
+        width:calc(100% + 5rem);
+        /* composes: !ml-[-2.5rem] from global; */
     }
 }

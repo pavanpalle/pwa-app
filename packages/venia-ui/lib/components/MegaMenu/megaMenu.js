@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useIsInViewport } from '@magento/peregrine/lib/hooks/useIsInViewport';
 import { useMegaMenu } from '@magento/peregrine/lib/talons/MegaMenu/useMegaMenu';
 import { useStyle } from '@magento/venia-ui/lib/classify';
-
+import { useLocation } from 'react-router-dom';
 import MegaMenuItem from './megaMenuItem';
 import defaultClasses from './megaMenu.module.css';
 
@@ -12,6 +12,8 @@ import defaultClasses from './megaMenu.module.css';
  * The MegaMenu component displays menu with categories on desktop devices
  */
 const MegaMenu = props => {
+    const location = useLocation();
+
     const mainNavRef = useRef(null);
 
     const {
@@ -68,11 +70,12 @@ const MegaMenu = props => {
               );
           })
         : null;
-
+    const pathClass = location.pathname
+    .replace(/^-|-$/g, '') || 'productlanding'; // trims leading/trailing hyphens and defaults to 'home'
     return (
         <nav
             ref={mainNavRef}
-            className={classes.megaMenu}
+            className={`${classes.megaMenu} ${location.pathname === '/productlanding' ? 'productlanding' :''}`}
             data-cy="MegaMenu-megaMenu"
             role="navigation"
             onFocus={handleSubMenuFocus}

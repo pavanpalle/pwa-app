@@ -121,6 +121,33 @@ ol li {
     @apply max-h-[360px];
 }
 
+
+/*******all categories Menu********/
+.productlanding .megaMenuItem-megaMenuItem-Hl7:first-child{
+    @apply bg-gray-200
+}
+.productlanding .megaMenuItem-megaMenuItem-Hl7:first-child > a{
+    @apply !text-primary
+}
+.productlanding .megaMenuItem-megaMenuItem-Hl7:first-child > a .megaMenuItem-arrowDown-Jo5 svg{
+    @apply !stroke-primary
+}
+.productlanding .megaMenuItem-megaMenuItem-Hl7:first-child .submenu-submenu_inactive-t7h{
+    @apply !flex !w-auto !max-w-[25%] !shadow-none
+}
+.productlanding .megaMenuItem-megaMenuItem-Hl7:first-child .submenu-submenu_inactive-t7h .submenuColumn-submenuColumn-KGn{
+    @apply !w-full
+}
+.productlanding .megaMenuItem-megaMenuItem-Hl7:first-child .submenu-submenu_inactive-t7h .submenuColumn-active-ueX .submenuColumn-hoverSubMenuActive-Kcb{
+    @apply hidden
+}
+.productlanding .megaMenuItem-megaMenuItem-Hl7:first-child .submenu-submenu_inactive-t7h .submenu-submenuItems-ORO{
+    @apply w-full mx-0;
+}
+.productlanding .megaMenuItem-megaMenuItem-Hl7:first-child .submenu-submenu_inactive-t7h .submenuColumn-submenuColumn-KGn:first-child > a{
+    @apply bg-gray-100 !text-black !no-underline
+}
+
 /*********Product List**********/
 .focus_shadow-inputFocus,
 .focus_enabled_shadow-radioFocus {

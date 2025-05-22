@@ -119,7 +119,7 @@ const MegaMenuItem = props => {
                     isActive ? classes.megaMenuLinkActive : classes.megaMenuLink
                 }
                 data-cy="MegaMenu-MegaMenuItem-link"
-                to={categoryUrl}
+                to={categoryUrl === '/shop.html' ? '/productlanding' :categoryUrl }
                 onClick={onNavigate}
             >
                 {category.name}

@@ -1,5 +1,5 @@
 .root{
-    @apply py-5 3xl_max-w-[80%] mx-auto -2xl_max-w-full
+    @apply py-5 ml-auto -2xl_max-w-full 2xl_w-[calc(100%-22%)]
 }
 :global(h1){
     @apply text-2xl font-bold mb-2
@@ -11,7 +11,7 @@
     @apply text-xl font-bold mb-2
 }
 .list{
-    @apply w-full grid 3xl_grid-cols-5 gap-5 mb-5 -sm_grid-cols-2 -sm_gap-3 -lg_grid-cols-3 xl_grid-cols-4
+    @apply w-full grid 3xl_grid-cols-4 gap-5 mb-5 -sm_grid-cols-2 -sm_gap-3 -lg_grid-cols-3 xl_grid-cols-4
 }
 .list :global(>li){
     @apply flex flex-col mb-5
@@ -24,7 +24,7 @@
 }
 
 .list :global(ul>li>a){
-    @apply text-blue-500  leading-[20px]
+    @apply text-blue-500 leading-[20px]
 }
 
 .list :global(ul>li>a:hover){

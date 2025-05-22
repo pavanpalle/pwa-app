@@ -45,6 +45,7 @@
     composes: md_max-w-full from global;
     composes: md_ml-auto from global;
     composes: md_gap-2 from global;
+    composes: -md_gap-y-1 from global;
     composes: md_justify-between from global;
 }
 
@@ -64,6 +65,7 @@
     composes: lg_text-left from global;
     composes: -sm_text-right from global;
     composes: -sm_max-w-full from global;
+    composes: -sm_my-0 from global;
 
 
 }
@@ -74,16 +76,17 @@
     composes: pb-sm from global;
     composes: w-full from global;
     composes: items-center from global;
-    composes: lg_justify-start from global;
+    composes: md_justify-between from global;
     composes: lg_pb-0 from global;
     composes: gap-4 from global;
     composes: -sm_grid from global;
     composes: -sm_grid-cols-2 from global;
     composes: -sm_gap-4 from global; 
+    composes: -sm_!gap-y-2 from global;
 }
-.headerButtons :global(>div:nth-child(2)){
+/* .headerButtons :global(>div:nth-child(2)){
     @apply ml-auto
-}
+} */
 
 .contentWrapper {
     composes: w-full from global;
@@ -115,7 +118,7 @@
     @apply block;
     @apply min-w-[20rem];
     composes: mx-auto from global;
-    composes: my-md from global;
+    composes: !my-0 from global;
 }
 
 .categoryPromoBanner :global(> div){
@@ -147,4 +150,7 @@
 }
 .categoryPromoBanner :global(.promotion-banner h2){
     @apply capitalize text-2xl
+}
+.filterGroup{
+    @apply  flex flex-row gap-3 -sm_col-span-2 
 }

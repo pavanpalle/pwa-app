@@ -20,7 +20,7 @@
     @apply block;
     @apply min-w-[20rem];
     composes: mx-auto from global;
-    composes: my-md from global;
+    composes: my-0 from global;
     composes: !bg-primary from global;
     composes: !rounded-md from global;
     composes: !text-white from global;

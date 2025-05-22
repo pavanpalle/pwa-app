@@ -231,8 +231,10 @@ const CategoryContent = props => {
                                 <div className={classes.headerButtons}>
                                     {productsPerPage}
                                     {categoryResultsHeading}
+                                    <div className={classes.filterGroup}>
                                     {maybeFilterButtons}
                                     {maybeSortButton}
+                                    </div>
                                 </div>
                                 {maybeSortContainer}
                             </div>

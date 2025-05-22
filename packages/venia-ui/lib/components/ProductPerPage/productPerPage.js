@@ -37,7 +37,7 @@ const ProductPerPage = props => {
                     initialValue={initialValues.product_list_limit} 
                     label={formatMessage({
                         id: 'productsPerPage.label',
-                        defaultMessage: 'Per page'
+                        defaultMessage: 'Products per page :'
                     })}
                     data-cy="ProductsPerPage-select"
                 />

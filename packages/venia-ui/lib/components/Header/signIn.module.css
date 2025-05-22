@@ -84,6 +84,9 @@
 :global(.signinFormContainer p){
     @apply text-[14px] text-[#525252] mb-[20px]
 }
+:global(.fieldIcons-input-84o){
+    @apply !w-auto
+}
 /* .signin-right-container{
     @apply w-full h-[100vh] relative flex items-center justify-center
 }

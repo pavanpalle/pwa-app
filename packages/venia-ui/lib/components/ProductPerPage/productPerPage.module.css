@@ -1,93 +1,28 @@
 .root {
     composes: relative from global;
-    composes: ml-2xs from global;
+    composes: ml-0 from global;
     composes: -sm_w-full from global;
     composes: gap-2 from global;
     composes: -sm_ml-0 from global;
-    composes: -sm_mb-4 from global;
+    /* composes: -sm_mb-4 from global; */
 }
 
-.menu {
-    composes: absolute from global;
-    composes: bg-clip-padding from global;
-    composes: bg-white from global;
-    composes: border from global;
-    composes: border-solid from global;
-    composes: border-subtle from global;
-    composes: list-none from global;
-    composes: mb-0 from global;
-    composes: min-w-[50px] from global;
-    composes: mt-0.5 from global;
-    composes: mx-0 from global;
-    composes: right-0 from global;
-    composes: rounded from global;
-    composes: shadow-menu from global;
-    composes: text-colorDefault from global;
-    composes: text-left from global;
-    composes: top-[110%] from global;
-    composes: z-menu from global;
+
+.root :global(.fieldIcons-input-84o){
+    @apply w-[150px] -sm_flex -sm_flex-col
 }
-
-.menuItem {
-    composes: border-b from global;
-    composes: border-solid from global;
-    composes: border-subtle from global;
-
-    composes: hover_bg-subtle from global;
-
-    composes: last_border-b-0 from global;
-}
-
-.sortButton {
-    /* TODO @TW: review (C2). This is fragile to extend. */
-    composes: root_lowPriority from '../../components/Button/button.module.css';
-
-    @apply min-w-[6.26rem];
-
-    /* composes: lg_border-2 from global;
-    composes: lg_border-gray-500 from global; */
-    composes: lg_font-normal from global;
-    composes: lg_normal-case from global;
-    /* composes: lg_rounded-input from global; */
-    composes: !border-[#BFC0BF] from global;
-    composes: !border from global;
-    composes: h-[48px] from global;
-    composes: !rounded-[12px] from global;
-    composes: -sm_w-full from global;
-}
-
-.desktopText {
-    composes: hidden from global;
-
-    composes: lg_inline-flex from global;
-}
-
-.sortText {
-    composes: leading-normal from global;
-    composes: text-colorDefault from global;
-}
-
-.desktopIconWrapper {
-    composes: root from '../Icon/icon.module.css';
-
-    transform: translateX(10px);
-}
-
-.desktopIcon {
-    composes: icon from '../Icon/icon.module.css';
-
-    composes: stroke-gray-500 from global;
-}
-
-.mobileText {
-    composes: lg_hidden from global;
-}
-:global(.fieldIcons-input-84o){
-    @apply w-[150px]
-}
-:global(.fieldIcons-input-84o > label){
+.root :global(.fieldIcons-input-84o > label){
     @apply -lg_!flex
 }
-:global(.select-input-Y35){
-    @apply h-[48px] max-w-[70px] ml-3 -sm_max-w-[100px]
+.root :global(.select-input-Y35){
+    @apply h-[48px] max-w-[110px] ml-3 -sm_max-w-full -sm_max-h-[48px] -sm_ml-0
+}
+.root :global(.fieldIcons-root-hxa){
+    @apply h-auto
+}
+.root :global(.fieldIcons-root-hxa label){
+    @apply -sm_ml-0 -sm_mr-auto -sm_mb-1 
+}
+.root :global(.fieldIcons-after-NCQ){
+    @apply h-[48px] -sm_mt-[30px]
 }

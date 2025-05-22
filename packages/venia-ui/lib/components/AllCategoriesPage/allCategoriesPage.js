@@ -3,6 +3,7 @@ import { useStyle } from '../../classify';
 import defaultClasses from './allCategoriesPage.module.css';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import Breadcrumbs from '../../components/Breadcrumbs';
 
 const AllCategoriesPage = props => {
     const { megaMenuData } = useAllCategoriesPage();
@@ -33,12 +34,13 @@ const AllCategoriesPage = props => {
 
     return (
         <div className={classes.root}>
-            <h1>
+        <Breadcrumbs categoryId={'NTg='} />
+                    {/* <h1>
                 <FormattedMessage
                     id={'AllCategoriesPage-heading'}
                     defaultMessage={'All Categories'}
                 />
-            </h1>
+            </h1> */}
 
             <div className={classes.allCategoriesBlock}>
                 <h2>{megaMenuData.name}</h2>
