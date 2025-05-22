@@ -72,8 +72,7 @@
 }
 
 .active {
-    composes: bg-red from global;
-     composes: underline from global;
+   
 }
 
 .active :global(> a){

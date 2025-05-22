@@ -2,7 +2,6 @@ import { useAllCategoriesPage } from '@magento/peregrine/lib/talons/AllCategorie
 import { useStyle } from '../../classify';
 import defaultClasses from './allCategoriesPage.module.css';
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 import Breadcrumbs from '../../components/Breadcrumbs';
 
 const AllCategoriesPage = props => {
@@ -14,7 +13,7 @@ const AllCategoriesPage = props => {
               return (
                   
                       <li key={category.uid}>
-                          <a href={category.url_path}>{category.name}</a>
+                          <span >{category.name}</span>
                           {category.children && (
                               <ul>
                                   {category.children.map(subSubCategory => (

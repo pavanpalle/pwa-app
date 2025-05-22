@@ -49,7 +49,7 @@ const Gallery = props => {
                     />
                 );
             }),
-        [items, storeConfig,from,remainingCount]
+        [items, from, storeConfig, remainingCount, isSignedIn]
     );
 
     return (

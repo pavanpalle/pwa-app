@@ -35,9 +35,11 @@
   "dependencies": {
     "@cardknox/react-ifields": "~2.2.62",
     "date-fns": "~4.1.0",
+    "file-saver": "~2.0.5",
     "informed": "~3.29.0",
     "jarallax": "~1.11.1",
     "jqwidgets-scripts": "~22.0.2",
+    "jszip": "~3.10.1",
     "load-google-maps-api": "~2.0.1",
     "lodash.escape": "~4.0.1",
     "lodash.over": "~4.7.0",

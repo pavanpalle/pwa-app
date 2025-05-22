@@ -25,6 +25,14 @@ export const ProductDetailsNoPriceFragment = gql`
             position
             disabled
             file
+            video_content {
+                            video_provider
+                            video_url
+                            video_title
+                            video_description
+                            video_metadata
+                            media_type
+                        }
         }
         meta_description
         name
@@ -90,6 +98,14 @@ export const ProductDetailsNoPriceFragment = gql`
                         file
                         label
                         position
+                        video_content {
+                            video_provider
+                            video_url
+                            video_title
+                            video_description
+                            video_metadata
+                            media_type
+                        }
                     }
                     sku
                     qty

@@ -16,7 +16,7 @@
 .list :global(>li){
     @apply flex flex-col mb-5
 }
-.list :global(>li>a){
+.list :global(>li>span){
     @apply mb-2 text-lg font-bold bg-gray-200 px-3 py-1
 }
 .list :global(ul){

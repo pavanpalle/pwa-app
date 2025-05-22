@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-literals */
 import { Form } from 'informed';
 import { arrayOf, bool, number, shape, string } from 'prop-types';
-import React, { Fragment, Suspense } from 'react';
+import React, { Fragment, Suspense, useRef } from 'react';
 import { Info } from 'react-feather';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -21,6 +21,7 @@ import { ProductOptionsShimmer } from '../ProductOptions';
 import RichContent from '../RichContent/richContent';
 import defaultClasses from './productFullDetail.module.css';
 import addCartIcon from './shopping-cart.png';
+import ProductVideoPlayer from '../ProductVideoPlayer';
 
 const WishlistButton = React.lazy(() => import('../Wishlist/AddToListButton'));
 const Options = React.lazy(() => import('../ProductOptions'));
@@ -40,7 +41,6 @@ const ERROR_FIELD_TO_MESSAGE_MAPPING = {
 };
 
 const ProductFullDetail = props => {
-    
     const { product } = props;
 
     const talonProps = useProductFullDetail({ product });
@@ -61,7 +61,17 @@ const ProductFullDetail = props => {
         getProductDetailsByColor,
         sizesTable,
         handleQuantityChange,
-        isSignedIn
+        isSignedIn,
+        downloadAllProductImages,
+        descriptionRef,
+        scrollToDescription,
+        hasVideo,
+        showVideo,
+        toggleVideo,
+        downloadStatus,
+        isDownloading,
+        downloadProgress,
+        downloadVideoWithProgress
     } = talonProps;
 
     const { formatMessage } = useIntl();
@@ -142,8 +152,6 @@ const ProductFullDetail = props => {
         }
     }
 
-    
-
     const cartCallToActionText =
         !isEverythingOutOfStock || !isOutOfStock ? (
             <FormattedMessage
@@ -197,9 +205,14 @@ const ProductFullDetail = props => {
         <RichContent html={productDetails.shortDescription.html} />
     ) : null;
 
-
-
-   
+    const showVideoPlayer = showVideo ? (
+        <ProductVideoPlayer
+            videoUrl={hasVideo?.video_content?.video_url}
+            controls={false}
+            isOpen={showVideo}
+            onCancel={toggleVideo}
+        />
+    ) : null;
 
     return (
         <Fragment>
@@ -214,11 +227,81 @@ const ProductFullDetail = props => {
                         <Carousel images={mediaGalleryEntries} />
                         <div className={classes.customLinks}>
                             <ul>
-                                <li><a href="#">Download Images</a></li>
-                                <li><a href="#">Download Video</a></li>
-                                <li><a href="#">Email Page</a></li>
+                                <li>
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            downloadAllProductImages(
+                                                product?.media_gallery_entries
+                                            );
+                                        }}
+                                    >
+                                        Download Images
+                                    </button>
+                                </li>
+                                {isDownloading && downloadStatus}
+                                {isDownloading && (
+                                    <div
+                                        style={{
+                                            width: '100%',
+                                            maxWidth: '400px',
+                                            marginTop: '10px'
+                                        }}
+                                    >
+                                        <div
+                                            style={{
+                                                height: '16px',
+                                                background: '#eee',
+                                                borderRadius: '8px',
+                                                overflow: 'hidden'
+                                            }}
+                                        >
+                                            <div
+                                                style={{
+                                                    width: `${downloadProgress}%`,
+                                                    height: '100%',
+                                                    background: '#4caf50',
+                                                    transition:
+                                                        'width 0.3s ease'
+                                                }}
+                                            />
+                                        </div>
+                                        <p
+                                            style={{
+                                                fontSize: '12px',
+                                                marginTop: '5px'
+                                            }}
+                                        >
+                                            {downloadProgress}%
+                                        </p>
+                                    </div>
+                                )}
+                                {hasVideo && (
+                                    <li>
+                                        <button
+                                            type="button"
+                                            onClick={()=>downloadVideoWithProgress(
+                                                hasVideo?.video_content
+                                                    ?.video_url,
+                                                hasVideo?.video_content
+                                                    ?.video_title
+                                            )}
+                                        >
+                                            Download Video
+                                        </button>
+                                    </li>
+                                )}
+                                <li>
+                                    <button>Email Page</button>
+                                </li>
                             </ul>
-                            <button type="button" className={classes.videoBtn}></button>
+                            {hasVideo ? (
+                                <button
+                                    type="button"
+                                    className={classes.videoBtn}
+                                    onClick={toggleVideo}
+                                />
+                            ) : null}
                         </div>
                     </section>
                     <div className={classes.productFullInformationBlock}>
@@ -249,115 +332,110 @@ const ProductFullDetail = props => {
                             }}
                             errors={errors.get('form') || []}
                         />
+                        {/* href="#descInfo" */}
                         <section className={classes.options}>
-                            <a href="#descInfo" className={classes.viewDescLink}>View Description</a>
-                            {options}</section>
+                            <a
+                                onClick={scrollToDescription}
+                                className={classes.viewDescLink}
+                            >
+                                View Description
+                            </a>
+                            {options}
+                        </section>
 
-                        {
-                            sizesTable &&
-                            <div
-                                            className={classes.productGridTable}
-                                           
+                        {sizesTable && (
+                            <div className={classes.productGridTable}>
+                                {/* Header row */}
+                                <ul>
+                                    <li>Color</li>
+                                    <li>
+                                        <button
+                                            className="swatch-root_selected-g8q"
+                                            style={sizesTable?.swatchTile}
+                                            title={sizesTable?.color?.label}
+                                            type="button"
+                                            data-cy="Swatch-root"
+                                            aria-label={
+                                                sizesTable?.color?.label
+                                            }
                                         >
-                                            {/* Header row */}
-                                            <ul>
-                                                <li>
-                                                    Color
-                                                </li>
-                                                <li>
-                                                    <button
-                                                        className='swatch-root_selected-g8q'
-                                                        style={sizesTable?.swatchTile}
-                                                        title={sizesTable?.color?.label}
-                                                        type="button"
-                                                        data-cy="Swatch-root"
-                                                    
-                                                        aria-label={sizesTable?.color?.label}
-                                                    >
-                                                        {/* <span>{sizesTable?.color?.label}</span> */}
-                                                    
-                                                    </button>
-{/* 
+                                            {/* <span>{sizesTable?.color?.label}</span> */}
+                                        </button>
+                                        {/* 
                                                     <div className={classes.SelectSwatchImage}>
  
                                                     </div> */}
-                                                </li>
-                                                <li>
-
-                                                </li>
-                                            </ul>
-                                            <ul>
-                                                <li>
-                                                    {/* {productDetails.sku} -{' '}
+                                    </li>
+                                    <li />
+                                </ul>
+                                <ul>
+                                    <li>
+                                        {/* {productDetails.sku} -{' '}
                                                     {sizesTable?.color?.label} */}
+                                    </li>
+                                    <li>Qty Case</li>
+                                    <li>Price</li>
+                                    <li>Inventory</li>
+                                    <li>0</li>
+                                </ul>
+
+                                {/* Product rows */}
+                                {sizesTable &&
+                                    Object.entries(sizesTable?.sizes || {}).map(
+                                        ([size, details]) => (
+                                            <ul key={size}>
+                                                <li>{size}</li>
+                                                <li>
+                                                    <input
+                                                        type="number"
+                                                        min="0"
+                                                        // value={quantities?.[details.sku] ?? 0}
+                                                        onChange={e =>
+                                                            handleQuantityChange(
+                                                                details.sku,
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                        placeholder="0"
+                                                        className="w-16 p-1 border rounded"
+                                                    />
                                                 </li>
-                                                <li>Qty Case</li>
-                                                <li>Price</li>
-                                                <li>Inventory</li>
+                                                <li>{details.price}</li>
+                                                <li>{details.inventory}</li>
                                                 <li>0</li>
                                             </ul>
+                                        )
+                                    )}
+                            </div>
+                        )}
 
-                                            {/* Product rows */}
-                                            {sizesTable &&
-                                                Object.entries(
-                                                    sizesTable?.sizes || {}
-                                                ).map(([size, details]) => (
-                                                    <ul
-                                                        key={size}
-                                                    >
-                                                        <li>
-                                                            {size}
-                                                        </li>
-                                                        <li>
-                                                            <input
-                                                                type="number"
-                                                                min="0"
-                                                                // value={quantities?.[details.sku] ?? 0}
-                                                                onChange={e =>
-                                                                    handleQuantityChange(
-                                                                        details.sku,
-                                                                        e.target
-                                                                            .value
-                                                                    )
-                                                                }
-                                                                placeholder='0'
-                                                                className="w-16 p-1 border rounded"
-                                                            />
-                                                        </li>
-                                                        <li>
-                                                            {details.price}
-                                                        </li>
-                                                        <li>
-                                                            {details.inventory}
-                                                        </li>
-                                                        <li>0</li>
-                                                    </ul>
-                                                ))}
-                                        </div>
-}
-
-                       
                         <section className={classes.actions}>
                             {cartActionContent}
                             <Suspense fallback={null}>
                                 <WishlistButton {...wishlistButtonProps} />
                             </Suspense>
                         </section>
-                        <section className={classes.productDescBlock} id="descInfo">
+                        <section
+                            className={classes.productDescBlock}
+                            id="descInfo"
+                            ref={descriptionRef}
+                        >
                             <Tabs>
                                 <TabList>
-                                <Tab>Description</Tab>
-                                <Tab>Specs</Tab>
+                                    <Tab>Description</Tab>
+                                    <Tab>Specs</Tab>
                                 </TabList>
-                            
+
                                 <TabPanel>
-                                <RichContent html={productDetails.description} />
+                                    <RichContent
+                                        html={productDetails.description}
+                                    />
                                 </TabPanel>
                                 <TabPanel>
-                                <h2>Specs content </h2>
+                                    <h2>Specs content </h2>
                                 </TabPanel>
                             </Tabs>
-                          </section>  
+                        </section>
 
                         {/* <section className={classes.description} id="descInfo">
                         <span
@@ -371,9 +449,8 @@ const ProductFullDetail = props => {
                         </span>
                         <RichContent html={productDetails.description} />
                     </section> */}
-                    
-                    
-                    {/* <section className={classes.details}>
+
+                        {/* <section className={classes.details}>
                         <span
                             data-cy="ProductFullDetail-detailsTitle"
                             className={classes.detailsTitle}
@@ -385,14 +462,16 @@ const ProductFullDetail = props => {
                         </span>
                        
                     </section> */}
-                    
                     </div>
-                    
-                   
-                  
                 </Form>
-                 <section className={classes.compareStyles}><ComparableStyles isSignedIn={isSignedIn}/></section>
-                <section className={classes.compareStyles}><CompanionStyles isSignedIn={isSignedIn}/></section>
+                {showVideoPlayer}
+
+                <section className={classes.compareStyles}>
+                    <ComparableStyles isSignedIn={isSignedIn} />
+                </section>
+                <section className={classes.compareStyles}>
+                    <CompanionStyles isSignedIn={isSignedIn} />
+                </section>
             </div>
         </Fragment>
     );

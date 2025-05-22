@@ -24,13 +24,13 @@ const Options = React.lazy(() => import('../ProductOptions'));
 
 // The placeholder image is 4:5, so we should make sure to size our product
 // images appropriately.
-const IMAGE_WIDTH = 300;
+const IMAGE_WIDTH = 320;
 const IMAGE_HEIGHT = 375;
 
 // Gallery switches from two columns to three at 640px.
 const IMAGE_WIDTHS = new Map()
     .set(640, IMAGE_WIDTH)
-    .set(UNCONSTRAINED_SIZE_KEY, 840);
+    .set(UNCONSTRAINED_SIZE_KEY, IMAGE_WIDTH);
 
 const GalleryItem = props => {
     const {
@@ -106,18 +106,18 @@ const GalleryItem = props => {
     );
     const currencyCode =
         price_range?.maximum_price?.final_price?.currency ||
-        item.price.regularPrice.amount.currency;
+        item?.price?.regularPrice?.amount?.currency;
 
     // fallback to regular price when final price is unavailable
     const priceSource =
         (price_range?.maximum_price?.final_price !== undefined &&
         price_range?.maximum_price?.final_price !== null
-            ? price_range.maximum_price.final_price
-            : item.prices.maximum.final) ||
+            ? price_range?.maximum_price?.final_price
+            : item?.prices?.maximum?.final) ||
         (price_range?.maximum_price?.regular_price !== undefined &&
         price_range?.maximum_price?.regular_price !== null
-            ? price_range.maximum_price.regular_price
-            : item.prices.maximum.regular);
+            ? price_range?.maximum_price?.regular_price
+            : item?.prices?.maximum?.regular);
     const priceSourceValue = priceSource.value || priceSource;
 
     // Hide the Rating component until it is updated with the new look and feel (PWA-2512).
@@ -160,13 +160,13 @@ const GalleryItem = props => {
             </Link>
             <section className={classes.options}>{options}</section>
             <div className={classes.productInfo}>
-                <span>$0.00</span>
+               <div data-cy="GalleryItem-price" className={classes.price}>
+                <Price value={priceSourceValue} currencyCode={currencyCode} />
+            </div>
                 <span>{sizeRange}</span>
             </div>
             <span className="font-bold text-[15px]">Boxercraft</span>            
-            {/* <div data-cy="GalleryItem-price" className={classes.price}>
-                <Price value={priceSourceValue} currencyCode={currencyCode} />
-            </div> */}
+            
 
             <div className={classes.actionsContainer}>
                 {addButton}

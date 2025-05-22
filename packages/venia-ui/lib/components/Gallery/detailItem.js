@@ -24,13 +24,13 @@ const Options = React.lazy(() => import('../ProductOptions'));
 
 // The placeholder image is 4:5, so we should make sure to size our product
 // images appropriately.
-const IMAGE_WIDTH = 300;
+const IMAGE_WIDTH = 320;
 const IMAGE_HEIGHT = 375;
 
 // Gallery switches from two columns to three at 640px.
 const IMAGE_WIDTHS = new Map()
     .set(640, IMAGE_WIDTH)
-    .set(UNCONSTRAINED_SIZE_KEY, 840);
+    .set(UNCONSTRAINED_SIZE_KEY, IMAGE_WIDTH);
 
 const DetailGalleryItem = props => {
     const {
