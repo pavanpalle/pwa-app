@@ -1,17 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-
-// Define available page size options
-export const PAGE_SIZE_OPTIONS = [
-    { value: '24', label: '24' },
-    { value: '36', label: '36' },
-    { value: '48', label: '48' }
-];
 
 export const DEFAULT_PAGE_SIZE = '24';
 
 export const useProductPerPage = (props) => {
-    const { total_count,pageSize, setPageSize } = props;
+    const { total_count, pageSize, setPageSize } = props;
 
     const history = useHistory();
     const location = useLocation();
@@ -19,14 +12,10 @@ export const useProductPerPage = (props) => {
     const urlParams = new URLSearchParams(location.search);
     const urlPageSize = urlParams.get('product_list_limit') || DEFAULT_PAGE_SIZE;
 
-   // const [pageSize, setPageSize] = useState(urlPageSize);
-
-    // 🆕 Dynamically build initialValues based on current URL
     const initialValues = {
         product_list_limit: urlPageSize
     };
 
-    // Sync state with URL on mount/location change
     useEffect(() => {
         const updatedUrlParams = new URLSearchParams(location.search);
         const newPageSize = updatedUrlParams.get('product_list_limit') || DEFAULT_PAGE_SIZE;
@@ -34,7 +23,7 @@ export const useProductPerPage = (props) => {
         if (pageSize !== newPageSize) {
             setPageSize(newPageSize);
         }
-    }, [location.search, pageSize]);
+    }, [location.search, pageSize, setPageSize]);
 
     const setProductsPerPage = (newSize) => {
         if (newSize === pageSize) return;
@@ -69,10 +58,18 @@ export const useProductPerPage = (props) => {
         setProductsPerPage(selectedValue);
     };
 
+    // 🔁 Dynamically generate options
+    const options = useMemo(() => [
+        { value: '24', label: '24' },
+        { value: '36', label: '36' },
+        { value: '48', label: '48' },
+        { value: String(total_count), label: 'View All' }
+    ], [total_count]);
+
     return {
         pageSize,
         initialValues,
-        options: PAGE_SIZE_OPTIONS,
+        options,
         handleSubmit,
         handleSelectionChange
     };
