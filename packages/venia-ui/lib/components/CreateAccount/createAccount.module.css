@@ -42,3 +42,15 @@
 .subscribe {
     composes: -ml-1.5 from global;
 }
+.checkboxList{
+    composes: flex from global;
+    composes: gap-3 from global;
+    composes: itesm-center from global;
+
+}
+.checkboxList :global(li){
+    @apply flex gap-2 items-center
+}
+.fieldRow{
+    @apply !items-start !w-full flex flex-col
+}
