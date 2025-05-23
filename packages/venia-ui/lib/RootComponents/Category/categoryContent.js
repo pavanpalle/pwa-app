@@ -207,7 +207,7 @@ const CategoryContent = props => {
                                     </div>
                                 </h1>
                                 <div className={classes.categoryPromoBanner}>
-                                    <div>
+                                    {/* <div>
                                         {categoryBannerImage ? (
                                             <ResourceImage
                                                 resource={categoryBannerImage}
@@ -219,9 +219,9 @@ const CategoryContent = props => {
                                     </div>
                                     <div>
                                         <CmsBlock identifiers="promotion-banner" />
-                                    </div>
+                                    </div> */}
+                                    {categoryDescriptionElement}
                                 </div>
-                                {categoryDescriptionElement}
                             </div>
                             <div className={classes.heading}>
                                 <div

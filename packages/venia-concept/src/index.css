@@ -190,32 +190,6 @@ ol li {
     @apply !max-w-full mx-auto -sm_px-[15px] md_px-[20px] max_px-10;
 } 
 
-/********PDP Page***********/
-
-/* .productFullDetail-actButton-iym {
-    @apply !mt-0;
-} */
-.addToListButton-root-zVe {
-    @apply hidden;
-}
-.button-root_highPriority-yQe {
-    @apply !bg-[#003E6B] !border-[#003E6B] h-[60px];
-}
-.button-root_highPriority-yQe .image-placeholder_layoutOnly-R0J {
-    @apply hidden;
-}
-.button-root_highPriority-yQe img {
-    @apply relative;
-}
-.swatch-root_selected-g8q {
-    @apply px-0;
-}
-.swatch-root_selected-g8q .swatch-checked-lTD svg {
-    @apply !hidden;
-}
-.swatch-root_selected-g8q .swatch-checked-lTD {
-    @apply w-full h-full border-[2px] border-[#01A0BE];
-}
 
 /************Cart Page**************/
 .cart-container {

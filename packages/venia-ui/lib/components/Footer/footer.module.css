@@ -237,5 +237,5 @@
     @apply !pt-0
 }
 .footerGrid :global(>div:nth-child(2) .footer-column){
-    @apply !w-full px-0 !min-w-full
+    @apply !w-full px-0 !min-w-full -sm_border-b-0
 }

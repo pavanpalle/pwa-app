@@ -13,7 +13,7 @@
 /* TODO @TW: review. This relies on custom prop to set color from JSX "style" prop. */
 .root_selected {
     composes: root;
-
+    composes: px-0 from global;
     background: linear-gradient(-45deg, rgba(0, 0, 0, 0.2), transparent),
         var(--venia-swatch-bg);
 }
@@ -30,6 +30,11 @@
     opacity: 1;
     transition-property: opacity;
     transition-duration: 256ms;
+    /* @apply w-full h-full border-[2px] border-[#01A0BE]; */
+}
+
+.checked :global(svg){
+    @apply !hidden;
 }
 
 .unchecked {

@@ -143,6 +143,18 @@
     composes: !mx-0 from global;
     composes: lg_border-b-0 from global;
 }
+.actions :global(.button-root_highPriority-yQe){
+   @apply !bg-[#003E6B] !border-[#003E6B] h-[60px]
+}
+.actions :global(.button-root_highPriority-yQe .image-placeholder_layoutOnly-R0J){
+    @apply hidden 
+}
+.actions :global(.button-root_highPriority-yQe img){
+    @apply relative
+}
+.actions :global(.addToListButton-root-zVe){
+    @apply !hidden
+}
 
 .description {
     composes: section;
@@ -291,7 +303,7 @@
     @apply !hidden
 }
 .productGridTable :global(ul li input){
-    @apply w-full text-center border-none appearance-none h-[35px] -sm_text-left;
+    @apply w-full text-center border border-gray-200 appearance-none h-[25px] -sm_text-left w-[70px] max-w-full;
     appearance: textfield;
 }
 .productGridTable :global(ul li input:focus){

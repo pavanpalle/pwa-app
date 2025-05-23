@@ -18,6 +18,7 @@
     composes: relative from global;
     composes: flex-col from global;
     composes: w-full from global;
+    composes: -sm_px-4 from global;
 
 }
 
@@ -66,7 +67,7 @@
     composes: max-h-[50px] from global;
     composes: px-0 from global;
     composes: py-0 from global;
-    composes: right-1 from global;
+    composes: right-0 from global;
     composes: text-white from global;
     composes: top-0 from global;
     composes: no-underline from global;

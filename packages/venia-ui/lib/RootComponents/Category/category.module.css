@@ -106,7 +106,7 @@
 }
 .categoryPromoBanner{
     composes: w-full from global;
-    composes: mb-7 from global;
+    /* composes: mb-7 from global; */
     composes: flex from global;
     composes: gap-6 from global;
     composes: -md_flex-wrap from global;
@@ -121,20 +121,26 @@
     composes: !my-0 from global;
 }
 
-.categoryPromoBanner :global(> div){
+/* .categoryPromoBanner :global(> div){
     @apply !relative w-full
-}
+} */
 /* .categoryPromoBanner :global(> div .cmsBlock-root-dCh){
     @apply absolute w-full h-full left-0 top-0
 } */
-.categoryPromoBanner :global(> div:first-child){
+/* .categoryPromoBanner :global(> div:first-child){
     @apply min-w-[60%];
-}
+} */
+ .categoryPromoBanner :global(.richContent-root-ggm){
+    @apply w-full
+ }
 .categoryPromoBanner :global(.row-contained-SFt){
-    @apply !mx-0
+    @apply !mx-0 !w-full min-w-full mb-5
 }
-.categoryPromoBanner :global(.cmsBlock-root-dCh){
+/* .categoryPromoBanner :global(.cmsBlock-root-dCh){
     @apply !mx-0 !w-full
+} */
+.categoryPromoBanner :global(.columnLine-root-MOz .pagebuilder-column:first-child){
+    @apply !w-[65%]
 }
 .categoryPromoBanner :global(figure picture){
     @apply !my-0 w-full
@@ -145,12 +151,7 @@
 .categoryPromoBanner :global(.columnLine-root-MOz){
     @apply w-full flex !gap-5
 }
-.categoryPromoBanner :global(.promotion-banner){
-    @apply w-full h-full bg-primary flex items-center justify-center text-white absolute top-0 left-0 -md_relative -md_h-[300px]
-}
-.categoryPromoBanner :global(.promotion-banner h2){
-    @apply capitalize text-2xl
-}
+
 .filterGroup{
     @apply  flex flex-row gap-3 -sm_col-span-2 
 }

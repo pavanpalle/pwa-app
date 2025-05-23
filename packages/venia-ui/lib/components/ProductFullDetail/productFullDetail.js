@@ -376,7 +376,7 @@ const ProductFullDetail = props => {
                                     <li>Qty Case</li>
                                     <li>Price</li>
                                     <li>Inventory</li>
-                                    <li>0</li>
+                                    <li></li>
                                 </ul>
 
                                 {/* Product rows */}
@@ -402,7 +402,13 @@ const ProductFullDetail = props => {
                                                 </li>
                                                 <li>{details.price}</li>
                                                 <li>{details.inventory}</li>
-                                                <li>0</li>
+                                                <li><input
+                                                        type="number"
+                                                        min="0"
+                                                        // value={quantities?.[details.sku] ?? 0}
+                                                        placeholder="0"
+                                                        className="w-16 p-1 border rounded"
+                                                    /></li>
                                             </ul>
                                         )
                                     )}
